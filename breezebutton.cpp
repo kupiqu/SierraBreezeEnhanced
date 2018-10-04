@@ -400,12 +400,20 @@ namespace Breeze
                             << QPointF( 14, 8 ) );
 
                     } else {
-
-                        painter->drawLine( 4, 5, 14, 5 );
-                        painter->drawPolyline( QPolygonF()
-                            << QPointF( 4, 13 )
-                            << QPointF( 9, 8 )
-                            << QPointF( 14, 13 ) );
+                        if (!d || d->internalSettings()->macOSButtons()) {
+                            painter->drawLine( 4, 5, 14, 5 );
+                            painter->drawPolyline( QPolygonF()
+                                << QPointF( 4, 13 )
+                                << QPointF( 9, 8 )
+                                << QPointF( 14, 13 ) );
+                        }
+                        else { // make it smaller
+                            painter->drawLine( 5, 5, 13, 5 );
+                            painter->drawPolyline( QPolygonF()
+                                << QPointF( 5, 12 )
+                                << QPointF( 9, 8 )
+                                << QPointF( 13, 12 ) );
+                        }
                     }
 
                     break;
@@ -423,15 +431,28 @@ namespace Breeze
                     painter->setPen( pen );
                     painter->setBrush( Qt::NoBrush );
 
-                    painter->drawPolyline( QPolygonF()
-                        << QPointF( 4, 5 )
-                        << QPointF( 9, 10 )
-                        << QPointF( 14, 5 ) );
+                    if (!d || d->internalSettings()->macOSButtons()) {
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 4, 5 )
+                            << QPointF( 9, 10 )
+                            << QPointF( 14, 5 ) );
 
-                    painter->drawPolyline( QPolygonF()
-                        << QPointF( 4, 9 )
-                        << QPointF( 9, 14 )
-                        << QPointF( 14, 9 ) );
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 4, 9 )
+                            << QPointF( 9, 14 )
+                            << QPointF( 14, 9 ) );
+                    }
+                    else { // make it smaller
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 5, 5 )
+                            << QPointF( 9, 9 )
+                            << QPointF( 13, 5 ) );
+
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 5, 9 )
+                            << QPointF( 9, 13 )
+                            << QPointF( 13, 9 ) );
+                    }
                     break;
 
                 }
@@ -447,15 +468,28 @@ namespace Breeze
                     painter->setPen( pen );
                     painter->setBrush( Qt::NoBrush );
 
-                    painter->drawPolyline( QPolygonF()
-                        << QPointF( 4, 9 )
-                        << QPointF( 9, 4 )
-                        << QPointF( 14, 9 ) );
+                    if (!d || d->internalSettings()->macOSButtons()) {
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 4, 9 )
+                            << QPointF( 9, 4 )
+                            << QPointF( 14, 9 ) );
 
-                    painter->drawPolyline( QPolygonF()
-                        << QPointF( 4, 13 )
-                        << QPointF( 9, 8 )
-                        << QPointF( 14, 13 ) );
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 4, 13 )
+                            << QPointF( 9, 8 )
+                            << QPointF( 14, 13 ) );
+                    }
+                    else { // make it smaller
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 5, 9 )
+                            << QPointF( 9, 5 )
+                            << QPointF( 13, 9 ) );
+
+                        painter->drawPolyline( QPolygonF()
+                            << QPointF( 5, 13 )
+                            << QPointF( 9, 9 )
+                            << QPointF( 13, 13 ) );
+                    }
                     break;
                 }
 
