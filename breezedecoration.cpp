@@ -564,6 +564,8 @@ namespace Breeze
 
         // draw caption
         QFont f; f.fromString(m_internalSettings->titleBarFont());
+        // KDE needs this FIXME: Why?
+        QFontDatabase fd; f.setStyleName(fd.styleString(f));
         painter->setFont(f);
         painter->setPen( fontColor() );
         const auto cR = captionRect();

@@ -1,3 +1,4 @@
 V5.13
 ---------
- * First veersion, made out of Breeze 5.13 and BreezeBlurred with new options.
+ * First version, made out of Breeze 5.13 and BreezeBlurred with new options.
+ * Set the font style name for KDE to render it correctly. I don't know why KDE needs that while LXQt doesn't.
