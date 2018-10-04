@@ -35,5 +35,7 @@ After the intallation, restart KWin by logging out and in. Then, BreezeEnhanced 
 ## Screenshots:
 
 ![Settings](screenshots/Settings.png?raw=true "Settings")
+
 ![Buttons](screenshots/Buttons.png?raw=true "Buttons")
+
 ![Animation](screenshots/Animation.gif?raw=true "Animation")
