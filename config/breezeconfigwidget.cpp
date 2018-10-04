@@ -53,8 +53,7 @@ namespace Breeze
         connect( m_ui.drawBorderOnMaximizedWindows, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawSizeGrip, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawBackgroundGradient, SIGNAL(clicked()), SLOT(updateChanged()) );
-        m_ui.drawTitleBarSeparator->hide();
-        connect( m_ui.drawTitleBarSeparator, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.macOSButtons, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.opacitySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
         connect( m_ui.gradientSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
 
@@ -94,7 +93,7 @@ namespace Breeze
         m_ui.drawBackgroundGradient->setChecked( m_internalSettings->drawBackgroundGradient() );
         m_ui.animationsEnabled->setChecked( m_internalSettings->animationsEnabled() );
         m_ui.animationsDuration->setValue( m_internalSettings->animationsDuration() );
-        m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
+        m_ui.macOSButtons->setChecked( m_internalSettings->macOSButtons() );
         m_ui.opacitySpinBox->setValue( m_internalSettings->backgroundOpacity() );
         m_ui.gradientSpinBox->setValue( m_internalSettings->backgroundGradientIntensity() );
 
@@ -139,7 +138,7 @@ namespace Breeze
         m_internalSettings->setDrawBackgroundGradient( m_ui.drawBackgroundGradient->isChecked() );
         m_internalSettings->setAnimationsEnabled( m_ui.animationsEnabled->isChecked() );
         m_internalSettings->setAnimationsDuration( m_ui.animationsDuration->value() );
-        m_internalSettings->setDrawTitleBarSeparator(m_ui.drawTitleBarSeparator->isChecked());
+        m_internalSettings->setMacOSButtons(m_ui.macOSButtons->isChecked());
         m_internalSettings->setBackgroundOpacity(m_ui.opacitySpinBox->value());
         m_internalSettings->setBackgroundGradientIntensity(m_ui.gradientSpinBox->value());
 
@@ -194,7 +193,7 @@ namespace Breeze
         m_ui.drawBackgroundGradient->setChecked( m_internalSettings->drawBackgroundGradient() );
         m_ui.animationsEnabled->setChecked( m_internalSettings->animationsEnabled() );
         m_ui.animationsDuration->setValue( m_internalSettings->animationsDuration() );
-        m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
+        m_ui.macOSButtons->setChecked( m_internalSettings->macOSButtons() );
         m_ui.opacitySpinBox->setValue( m_internalSettings->backgroundOpacity() );
         m_ui.gradientSpinBox->setValue( m_internalSettings->backgroundGradientIntensity() );
 
@@ -221,7 +220,7 @@ namespace Breeze
         bool modified( false );
         QFont f; f.fromString( m_internalSettings->titleBarFont() );
 
-        if (m_ui.drawTitleBarSeparator->isChecked() != m_internalSettings->drawTitleBarSeparator()) modified = true;
+        if (m_ui.macOSButtons->isChecked() != m_internalSettings->macOSButtons()) modified = true;
         if( m_ui.titleAlignment->currentIndex() != m_internalSettings->titleAlignment() ) modified = true;
         else if( m_ui.buttonSize->currentIndex() != m_internalSettings->buttonSize() ) modified = true;
         else if( m_ui.outlineCloseButton->isChecked() != m_internalSettings->outlineCloseButton() ) modified = true;

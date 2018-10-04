@@ -155,17 +155,24 @@
         </property>
        </spacer>
       </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="opaqueTitleBar">
-        <property name="text">
-         <string>Opaque window title bar</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="0">
        <widget class="QCheckBox" name="hideTitleBar">
         <property name="text">
          <string>Hide window title bar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="opaqueTitleBar">
+        <property name="text">
+         <string>Opaque title bar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="flatTitleBar">
+        <property name="text">
+         <string>Flat title bar</string>
         </property>
        </widget>
       </item>

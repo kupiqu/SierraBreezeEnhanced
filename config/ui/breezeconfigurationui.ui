@@ -137,9 +137,9 @@
         </widget>
        </item>
        <item row="8" column="0" colspan="3">
-        <widget class="QCheckBox" name="drawTitleBarSeparator">
+        <widget class="QCheckBox" name="macOSButtons">
          <property name="text">
-          <string>Draw separator between Title Bar and Window</string>
+          <string>macOS-like buttons</string>
          </property>
         </widget>
        </item>

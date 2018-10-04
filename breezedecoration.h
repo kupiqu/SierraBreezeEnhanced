@@ -99,6 +99,7 @@ namespace Breeze
 
         inline bool hideTitleBar() const;
         inline bool opaqueTitleBar() const;
+        inline bool flatTitleBar() const;
         //@}
 
         public Q_SLOTS:
@@ -200,6 +201,9 @@ namespace Breeze
 
     bool Decoration::opaqueTitleBar() const
     { return m_internalSettings->opaqueTitleBar(); }
+
+    bool Decoration::flatTitleBar() const
+    { return m_internalSettings->flatTitleBar(); }
 
 }
 

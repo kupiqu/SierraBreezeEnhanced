@@ -60,6 +60,7 @@ namespace Breeze
             if( exception.mask() & BorderSize ) configuration->setBorderSize( exception.borderSize() );
             configuration->setHideTitleBar( exception.hideTitleBar() );
             configuration->setOpaqueTitleBar( exception.opaqueTitleBar() );
+            configuration->setFlatTitleBar( exception.flatTitleBar() );
 
             // append to exceptions
             _exceptions.append( configuration );
@@ -98,7 +99,7 @@ namespace Breeze
     {
 
         // list of items to be written
-        QStringList keys = { "Enabled", "ExceptionPattern", "ExceptionType", "HideTitleBar", "OpaqueTitleBar", "Mask", "BorderSize"};
+        QStringList keys = { "Enabled", "ExceptionPattern", "ExceptionType", "HideTitleBar", "OpaqueTitleBar", "FlatTitleBar", "Mask", "BorderSize"};
 
         // write all items
         foreach( auto key, keys )
