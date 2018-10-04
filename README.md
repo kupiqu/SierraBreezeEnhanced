@@ -23,7 +23,7 @@ Needless to say, the main work behind BreezeEnhanced is the Breeze KWin decorati
 
 The version number in the file NEWS shows the main version of KWin that is required for the compilation. *Compilation should not be done against other versions of KWin!*.
 
-Open a terminal inside the the source directory and do:
+Open a terminal inside the source directory and do:
 ```sh
 mkdir build && cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DKDE_INSTALL_LIBDIR=lib -DBUILD_TESTING=OFF -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
