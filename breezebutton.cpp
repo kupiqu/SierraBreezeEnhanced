@@ -181,6 +181,17 @@ namespace Breeze
             pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
 
             auto d = qobject_cast<Decoration*>( decoration() );
+            bool isInactive(d && !d->client().data()->isActive()
+                            && !isHovered() && !isPressed()
+                            && m_animation->state() != QPropertyAnimation::Running);
+            QColor inactiveCol(Qt::gray);
+            if (isInactive)
+            {
+                int gray = qGray(d->titleBarColor().rgb());
+                if (gray <= 200) gray += 55;
+                else gray -= 55;
+                inactiveCol = QColor(gray, gray, gray);
+            }
 
             switch( type() )
             {
@@ -188,19 +199,20 @@ namespace Breeze
                 case DecorationButtonType::Close:
                 {
                     if (!d || d->internalSettings()->macOSButtons()) {
-                        int a = (d && !d->client().data()->isActive())
-                                ? qRound(200.0 * (1.0 - m_animation->currentValue().toReal()))
-                                : 255;
                         QLinearGradient grad(QPointF(9, 2), QPointF(9, 16));
                         if (d && qGray(d->titleBarColor().rgb()) > 100)
                         {
-                            grad.setColorAt(0, QColor(255, 92, 87, a));
-                            grad.setColorAt(1, QColor(233, 84, 79, a));
+                            grad.setColorAt(0, isInactive ? inactiveCol
+                                                          : QColor(255, 92, 87));
+                            grad.setColorAt(1, isInactive ? inactiveCol
+                                                          : QColor(233, 84, 79));
                         }
                         else
                         {
-                            grad.setColorAt(0, QColor(250, 100, 102, a));
-                            grad.setColorAt(1, QColor(230, 92, 94, a));
+                            grad.setColorAt(0, isInactive ? inactiveCol
+                                                          : QColor(250, 100, 102));
+                            grad.setColorAt(1, isInactive ? inactiveCol
+                                                          : QColor(230, 92, 94));
                         }
                         painter->setBrush( QBrush(grad) );
                         painter->setPen( Qt::NoPen );
@@ -235,23 +247,28 @@ namespace Breeze
                 case DecorationButtonType::Maximize:
                 {
                     if (!d || d->internalSettings()->macOSButtons()) {
-                        int a = (d && !d->client().data()->isActive())
-                                ? qRound(200.0 * (1.0 - m_animation->currentValue().toReal()))
-                                : 255;
                         QLinearGradient grad(QPointF(9, 2), QPointF(9, 16));
                         if (d && qGray(d->titleBarColor().rgb()) > 100)
                         {
-                            grad.setColorAt(0, isChecked() ? QColor(67, 198, 176, a)
-                                                           : QColor(40, 211, 63, a));
-                            grad.setColorAt(1, isChecked() ? QColor(60, 178, 159, a)
-                                                           : QColor(36, 191, 57, a));
+                            grad.setColorAt(0, isChecked() ? isInactive ? inactiveCol
+                                                                        : QColor(67, 198, 176)
+                                                           : isInactive ? inactiveCol
+                                                                        : QColor(40, 211, 63));
+                            grad.setColorAt(1, isChecked() ? isInactive ? inactiveCol
+                                                                        : QColor(60, 178, 159)
+                                                           : isInactive ? inactiveCol
+                                                                        : QColor(36, 191, 57));
                         }
                         else
                         {
-                            grad.setColorAt(0, isChecked() ? QColor(67, 198, 176, a)
-                                                        : QColor(124, 198, 67, a));
-                            grad.setColorAt(1, isChecked() ? QColor(60, 178, 159, a)
-                                                        : QColor(111, 178, 60, a));
+                            grad.setColorAt(0, isChecked() ? isInactive ? inactiveCol
+                                                                        : QColor(67, 198, 176)
+                                                           : isInactive ? inactiveCol
+                                                                        : QColor(124, 198, 67));
+                            grad.setColorAt(1, isChecked() ? isInactive ? inactiveCol
+                                                                        : QColor(60, 178, 159)
+                                                           : isInactive ? inactiveCol
+                                                                        : QColor(111, 178, 60));
                         }
                         painter->setBrush( QBrush(grad) );
                         painter->setPen( Qt::NoPen );
@@ -292,19 +309,20 @@ namespace Breeze
                 case DecorationButtonType::Minimize:
                 {
                     if (!d || d->internalSettings()->macOSButtons()) {
-                        int a = (d && !d->client().data()->isActive())
-                                ? qRound(200.0 * (1.0 - m_animation->currentValue().toReal()))
-                                : 255;
                         QLinearGradient grad(QPointF(9, 2), QPointF(9, 16));
                         if (d && qGray(d->titleBarColor().rgb()) > 100)
                         { // yellow isn't good with light backgrounds
-                            grad.setColorAt(0, QColor(243, 176, 43, a));
-                            grad.setColorAt(1, QColor(223, 162, 39, a));
+                            grad.setColorAt(0, isInactive ? inactiveCol
+                                                          : QColor(243, 176, 43));
+                            grad.setColorAt(1, isInactive ? inactiveCol
+                                                          : QColor(223, 162, 39));
                         }
                         else
                         {
-                            grad.setColorAt(0, QColor(237, 198, 81, a));
-                            grad.setColorAt(1, QColor(217, 181, 74, a));
+                            grad.setColorAt(0, isInactive ? inactiveCol
+                                                          : QColor(237, 198, 81));
+                            grad.setColorAt(1, isInactive ? inactiveCol
+                                                          : QColor(217, 181, 74));
                         }
                         painter->setBrush( QBrush(grad) );
                         painter->setPen( Qt::NoPen );
@@ -609,10 +627,8 @@ namespace Breeze
                     else
                         col = QColor(227, 185, 59);
                 }
-                if (col.isValid()) {
-                    if (!d->client().data()->isActive()) col.setAlpha(200);
+                if (col.isValid())
                     return col;
-                }
                 else return KColorUtils::mix( d->titleBarColor(), d->fontColor(), 0.3 );
 
             } else if( ( type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove ) && isChecked() ) {
@@ -643,10 +659,9 @@ namespace Breeze
                     else
                         col = QColor(227, 191, 78);
                 }
-                if (col.isValid()) {
-                    if (!d->client().data()->isActive()) col.setAlpha(200);
+                if (col.isValid())
                     return col;
-                } else {
+                else {
 
                     col = d->fontColor();
                     col.setAlpha( col.alpha()*m_opacity );
@@ -678,17 +693,9 @@ namespace Breeze
                     else
                         col = QColor(227, 191, 78);
                 }
-                if (col.isValid()) {
-                    if (!d->client().data()->isActive()) col.setAlpha(200);
+                if (col.isValid())
                     return col;
-                }
                 else return d->fontColor();
-
-            } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
-
-                QColor col(240, 96, 97);
-                if (!d->client().data()->isActive()) col.setAlpha(200);
-                return col;
 
             } else {
 

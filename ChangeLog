@@ -4,3 +4,4 @@ V5.13
  * Set the font style name for KDE to render it correctly. I don't know why KDE needs that while LXQt doesn't.
  * Added an option for not using macOS-like buttons.
  * Added flatness to the exception list.
+ * Made inactive macOS-like buttons gray.
