@@ -226,8 +226,8 @@ namespace Breeze
                         painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
-                        painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 12 ) );
-                        painter->drawLine( QPointF( 6, 12 ), QPointF( 12, 6 ) );
+                        painter->drawLine( QPointF( 5, 5 ), QPointF( 13, 13 ) );
+                        painter->drawLine( QPointF( 5, 13 ), QPointF( 13, 5 ) );
                     }
                     break;
                 }
@@ -277,14 +277,11 @@ namespace Breeze
                         painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
-                        if (isChecked()) {
-                            painter->drawPolyline(QPolygonF()
-                                                  << QPointF(6, 7) << QPointF(6, 12) << QPointF(11, 12));
-                            painter->drawLine(QPointF(7, 11), QPointF(12, 6));
-                        }
+                        painter->drawPolyline(QPolygonF()
+                                                << QPointF(5, 8) << QPointF(5, 13) << QPointF(10, 13));
+                        if (isChecked())
+                            painter->drawRect(QRectF(8.0, 5.0, 5.0, 5.0));
                         else {
-                            painter->drawPolyline(QPolygonF()
-                                                  << QPointF(5, 8) << QPointF(5, 13) << QPointF(10, 13));
                             painter->drawPolyline(QPolygonF()
                                                   << QPointF(8, 5) << QPointF(13, 5) << QPointF(13, 10));
                         }
