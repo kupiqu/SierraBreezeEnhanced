@@ -9,7 +9,7 @@ BreezeEnhanced is a fork of KDE Breeze decoration with the following changes:
  * A very mild light line is added to the top of title-bar (especially for dark color schemes) and the separator between title-bar and window is removed.
  * By default, the close, minimize and maximize buttons are macOS-like and their sizes change on mouse-over when animation is enabled.
  * The spacing between buttons is configurable.
- * Opaqueness  and flatness are added to the exception list properties.
+ * Opaqueness, opacity override and flatness are added to the exception list properties.
  * Title-bar font is set indpendent from the KDE font settings (for use outside KDE).
 
 Please note that BreezeEnhanced is not related to the Breeze widget style. In fact, it is made to match various themes of the [Kvantum](https://github.com/tsujan/Kvantum) widget style but it works with all styles.

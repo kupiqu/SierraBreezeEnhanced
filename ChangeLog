@@ -6,3 +6,4 @@ V5.13
  * Added flatness to the exception list.
  * Made inactive macOS-like buttons gray.
  * Added a setting for button spacing.
+ * Added opacity override to the exception dialog.

@@ -136,6 +136,10 @@
        <default>false</default>
     </entry>
 
+    <entry name="OpacityOverride" type = "Int">
+       <default>-1</default>
+    </entry>
+
     <!-- flat title bar -->
     <entry name="FlatTitleBar" type = "Bool">
        <default>false</default>

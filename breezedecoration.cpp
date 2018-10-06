@@ -497,8 +497,12 @@ namespace Breeze
         {
 
             QColor titleBarColor( this->titleBarColor() );
-            if( !opaqueTitleBar() )
-                titleBarColor.setAlpha( qRound((qreal)m_internalSettings->backgroundOpacity() * (qreal)2.55) );
+            if( !opaqueTitleBar() ) {
+                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride()
+                                                                   : m_internalSettings->backgroundOpacity();
+                a =  qBound(0, a, 100);
+                titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
+            }
 
             QLinearGradient gradient( 0, 0, 0, titleRect.height() );
             QColor lightCol( titleBarColor.lighter( 130 + m_internalSettings->backgroundGradientIntensity() ) );
@@ -512,8 +516,12 @@ namespace Breeze
         } else {
 
             QColor titleBarColor = this->titleBarColor();
-            if( !opaqueTitleBar() )
-                titleBarColor.setAlpha( qRound((qreal)m_internalSettings->backgroundOpacity() * (qreal)2.55) );
+            if( !opaqueTitleBar() ) {
+                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride()
+                                                                   : m_internalSettings->backgroundOpacity();
+                a =  qBound(0, a, 100);
+                titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
+            }
 
             QLinearGradient gradient( 0, 0, 0, titleRect.height() );
             QColor lightCol( titleBarColor.lighter( 130 ) );
