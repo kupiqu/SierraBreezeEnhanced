@@ -383,8 +383,8 @@ namespace Breeze
         if( !m_leftButtons->buttons().isEmpty() )
         {
 
-            // spacing
-            m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            // spacing (use our own spacing instead of s->smallSpacing()*Metrics::TitleBar_ButtonSpacing)
+            m_leftButtons->setSpacing(m_internalSettings->buttonSpacing());
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
@@ -407,8 +407,8 @@ namespace Breeze
         if( !m_rightButtons->buttons().isEmpty() )
         {
 
-            // spacing
-            m_rightButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            // spacing (use our own spacing instead of s->smallSpacing()*Metrics::TitleBar_ButtonSpacing)
+            m_rightButtons->setSpacing(m_internalSettings->buttonSpacing());
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;

@@ -5,3 +5,4 @@ V5.13
  * Added an option for not using macOS-like buttons.
  * Added flatness to the exception list.
  * Made inactive macOS-like buttons gray.
+ * Added a setting for button spacing.
