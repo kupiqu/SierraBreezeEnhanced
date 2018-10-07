@@ -188,7 +188,10 @@ namespace Breeze
             if (isInactive)
             {
                 int gray = qGray(d->titleBarColor().rgb());
-                if (gray <= 200) gray += 55;
+                if (gray <= 200) {
+                    gray += 55;
+                    gray = qMax(115, gray); // because the symbols will be black
+                }
                 else gray -= 55;
                 inactiveCol = QColor(gray, gray, gray);
             }
