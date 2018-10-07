@@ -169,8 +169,24 @@ namespace Breeze
         // render background
         const QColor backgroundColor( this->backgroundColor() );
 
+        auto d = qobject_cast<Decoration*>( decoration() );
+        bool isInactive(d && !d->client().data()->isActive()
+                        && !isHovered() && !isPressed()
+                        && m_animation->state() != QPropertyAnimation::Running);
+        QColor inactiveCol(Qt::gray);
+        if (isInactive)
+        {
+            int gray = qGray(d->titleBarColor().rgb());
+            if (gray <= 200) {
+                gray += 55;
+                gray = qMax(gray, 115);
+            }
+            else gray -= 45;
+            inactiveCol = QColor(gray, gray, gray);
+        }
+
         // render mark
-        const QColor foregroundColor( this->foregroundColor() );
+        const QColor foregroundColor( this->foregroundColor(inactiveCol) );
         if( foregroundColor.isValid() )
         {
 
@@ -179,22 +195,6 @@ namespace Breeze
             pen.setCapStyle( Qt::RoundCap );
             pen.setJoinStyle( Qt::MiterJoin );
             pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
-
-            auto d = qobject_cast<Decoration*>( decoration() );
-            bool isInactive(d && !d->client().data()->isActive()
-                            && !isHovered() && !isPressed()
-                            && m_animation->state() != QPropertyAnimation::Running);
-            QColor inactiveCol(Qt::gray);
-            if (isInactive)
-            {
-                int gray = qGray(d->titleBarColor().rgb());
-                if (gray <= 200) {
-                    gray += 55;
-                    gray = qMax(115, gray); // because the symbols will be black
-                }
-                else gray -= 55;
-                inactiveCol = QColor(gray, gray, gray);
-            }
 
             switch( type() )
             {
@@ -766,20 +766,26 @@ namespace Breeze
     }
 
     //__________________________________________________________________
-    QColor Button::foregroundColor() const
+    QColor Button::foregroundColor(const QColor& inactiveCol) const
     {
         auto d = qobject_cast<Decoration*>( decoration() );
         if(!d || d->internalSettings()->macOSButtons()) {
             QColor col;
-            if (d && qGray(d->titleBarColor().rgb()) > 100)
-                col = QColor(250, 250, 250);
-            else
-                col = QColor(40, 40, 40);
             if (d && !d->client().data()->isActive()
                 && !isHovered() && !isPressed()
                 && m_animation->state() != QPropertyAnimation::Running)
             {
-                col.setAlpha(180);
+                int v = qGray(inactiveCol.rgb());
+                if (v > 127) v -= 127;
+                else v += 128;
+                col = QColor(v, v, v);
+            }
+            else
+            {
+                if (d && qGray(d->titleBarColor().rgb()) > 100)
+                    col = QColor(250, 250, 250);
+                else
+                    col = QColor(40, 40, 40);
             }
             return col;
         }
