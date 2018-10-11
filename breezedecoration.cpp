@@ -640,6 +640,7 @@ namespace Breeze
 
         }
 
+        // this would be ugly
         /*const QColor outlineColor( this->outlineColor() );
         if( !c->isShaded() && outlineColor.isValid() )
         {
