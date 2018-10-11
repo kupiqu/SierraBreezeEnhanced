@@ -10,7 +10,10 @@ include(FeatureSummary)
 
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_SOURCE_DIR}/cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules")
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_SOURCE_DIR}/cmake)
+
 include(ECMInstallIcons)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -52,9 +55,11 @@ endif()
 ################# configuration #################
 configure_file(config-breeze.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-breeze.h )
 
+################# includes #################
+add_subdirectory(libbreezecommon)
+
 ################# newt target #################
 ### plugin classes
-# set(breezedecoration_SRCS
 set(breezeenhanced_SRCS
     breezebutton.cpp
     breezedecoration.cpp
@@ -62,12 +67,10 @@ set(breezeenhanced_SRCS
     breezesettingsprovider.cpp
     breezesizegrip.cpp)
 
-# kconfig_add_kcfg_files(breezedecoration_SRCS breezesettings.kcfgc)
 kconfig_add_kcfg_files(breezeenhanced_SRCS breezesettings.kcfgc)
 
 ### config classes
 ### they are kept separately because they might move in a separate library in the future
-# set(breezedecoration_config_SRCS
 set(breezeenhanced_config_SRCS
     config/breezeconfigwidget.cpp
     config/breezedetectwidget.cpp
@@ -77,7 +80,6 @@ set(breezeenhanced_config_SRCS
     config/breezeitemmodel.cpp
 )
 
-# set(breezedecoration_config_PART_FORMS
 set(breezeenhanced_config_PART_FORMS
    config/ui/breezeconfigurationui.ui
    config/ui/breezedetectwidget.ui
@@ -85,26 +87,21 @@ set(breezeenhanced_config_PART_FORMS
    config/ui/breezeexceptionlistwidget.ui
 )
 
-# ki18n_wrap_ui(breezedecoration_config_PART_FORMS_HEADERS ${breezedecoration_config_PART_FORMS})
 ki18n_wrap_ui(breezeenhanced_config_PART_FORMS_HEADERS ${breezeenhanced_config_PART_FORMS})
 
 ### build library
-# add_library(breezedecoration MODULE
-    # ${breezedecoration_SRCS}
-    # ${breezedecoration_config_SRCS}
-    # ${breezedecoration_config_PART_FORMS_HEADERS})
 add_library(breezeenhanced MODULE
     ${breezeenhanced_SRCS}
     ${breezeenhanced_config_SRCS}
     ${breezeenhanced_config_PART_FORMS_HEADERS})
 
-# target_link_libraries(breezedecoration
 target_link_libraries(breezeenhanced
     PUBLIC
         Qt5::Core
         Qt5::Gui
         Qt5::DBus
     PRIVATE
+        breezeenhancedcommon5
         KDecoration2::KDecoration
         KF5::ConfigCore
         KF5::CoreAddons
@@ -114,7 +111,6 @@ target_link_libraries(breezeenhanced
         KF5::WindowSystem)
 
 if(BREEZE_HAVE_X11)
-  # target_link_libraries(breezedecoration
   target_link_libraries(breezeenhanced
     PUBLIC
       Qt5::X11Extras
