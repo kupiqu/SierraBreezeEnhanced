@@ -819,9 +819,9 @@ namespace Breeze
 
             return d->titleBarColor();
 
-        } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
+        /*} else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
 
-            return d->titleBarColor();
+            return d->titleBarColor();*/
 
         } else if( ( type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove ) && isChecked() ) {
 
@@ -1001,18 +1001,18 @@ namespace Breeze
 
                 if( type() == DecorationButtonType::Close )
                 {
-                    if( d->internalSettings()->outlineCloseButton() )
+                    /*if( d->internalSettings()->outlineCloseButton() )
                     {
 
                         return KColorUtils::mix( d->fontColor(), c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter(), m_opacity );
 
-                    } else {
+                    } else {*/
 
                         QColor color( c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter() );
                         color.setAlpha( color.alpha()*m_opacity );
                         return color;
 
-                    }
+                    //}
 
                 } else {
 
@@ -1027,9 +1027,9 @@ namespace Breeze
                 if( type() == DecorationButtonType::Close ) return c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter();
                 else return d->fontColor();
 
-            } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
+            /*} else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
 
-                return d->fontColor();
+                return d->fontColor();*/
 
             } else {
 
