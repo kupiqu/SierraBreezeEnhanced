@@ -163,7 +163,8 @@ namespace Breeze
         painter->translate( geometry().topLeft() );
 
         const qreal width( m_iconSize.width() );
-        painter->scale( width/20, width/20 );
+        const qreal pScale = width/20;
+        painter->scale( pScale, pScale );
         painter->translate( 1, 1 );
 
         // render background
@@ -194,7 +195,6 @@ namespace Breeze
             QPen pen( foregroundColor );
             pen.setCapStyle( Qt::RoundCap );
             pen.setJoinStyle( Qt::MiterJoin );
-            pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
 
             switch( type() )
             {
@@ -238,6 +238,7 @@ namespace Breeze
                             painter->setBrush( backgroundColor );
                             painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                         }
+                        pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
                         painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
@@ -294,16 +295,25 @@ namespace Breeze
                             painter->setBrush( backgroundColor );
                             painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                         }
-                        painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
+                        // make the horizontal and vertical lines as sharp as possible
+                        pen.setWidthF(qMax(static_cast<qreal>(1.0), 20/width));
+                        painter->setPen(pen);
+                        painter->setRenderHints(QPainter::Antialiasing, false);
+                        const qreal x = static_cast<qreal>(qRound(5 * pScale)) / pScale;
+                        const qreal y = static_cast<qreal>(qRound(9 * pScale)) / pScale;
                         painter->drawPolyline(QPolygonF()
-                                                << QPointF(5, 8) << QPointF(5, 13) << QPointF(10, 13));
+                                        << QPointF(x, y)
+                                        << QPointF(x, static_cast<qreal>(18)-x)
+                                        << QPointF(static_cast<qreal>(18)-y, static_cast<qreal>(18)-x));
                         if (isChecked())
-                            painter->drawRect(QRectF(8.0, 5.0, 5.0, 5.0));
+                            painter->drawRect(QRectF(y, x, static_cast<qreal>(18)-x-y, static_cast<qreal>(18)-x-y));
                         else {
                             painter->drawPolyline(QPolygonF()
-                                                  << QPointF(8, 5) << QPointF(13, 5) << QPointF(13, 10));
+                                            << QPointF(y, x)
+                                            << QPointF(static_cast<qreal>(18)-x, x)
+                                            << QPointF(static_cast<qreal>(18)-x, static_cast<qreal>(18)-y));
                         }
                     }
                     break;
@@ -348,10 +358,15 @@ namespace Breeze
                             painter->setBrush( backgroundColor );
                             painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                         }
-                        painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
-                        painter->drawLine( QPointF( 5, 9 ), QPointF( 13, 9 ) );
+                        // make the horizontal line as sharp as possible
+                        pen.setWidthF(qMax(static_cast<qreal>(1.0), 20/width));
+                        painter->setPen(pen);
+                        painter->setRenderHints(QPainter::Antialiasing, false);
+                        const qreal x = static_cast<qreal>(qRound(5 * pScale)) / pScale;
+                        const qreal y = static_cast<qreal>(qRound(9 * pScale)) / pScale;
+                        painter->drawLine(QPointF(x, y), QPointF(static_cast<qreal>(18)-x, y));
                     }
                     break;
                 }
@@ -420,7 +435,7 @@ namespace Breeze
                                 }
 
                             } else {
-
+                                pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
                                 painter->drawPolygon( QPolygonF()
                                     << QPointF( 6.5, 8.5 )
                                     << QPointF( 12, 3 )
@@ -479,6 +494,7 @@ namespace Breeze
                             painter->setBrush( backgroundColor );
                             painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                         }
+                        pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
                         painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
@@ -544,6 +560,7 @@ namespace Breeze
                             painter->setBrush( backgroundColor );
                             painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                         }
+                        pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
                         painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
@@ -617,6 +634,7 @@ namespace Breeze
                             painter->setBrush( backgroundColor );
                             painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                         }
+                        pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
                         painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
@@ -686,13 +704,16 @@ namespace Breeze
                             painter->setBrush( backgroundColor );
                             painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                         }
-                        painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
+                        // make the horizontal lines as sharp as possible
+                        pen.setWidthF(qMax(static_cast<qreal>(1.0), 20/width));
+                        painter->setPen(pen);
+                        painter->setRenderHints(QPainter::Antialiasing, false);
                         if (macOSBtn) {
-                            painter->drawLine( QPointF( 4.5, 6 ), QPointF( 13.5, 6 ) );
+                            painter->drawLine( QPointF( 4.5, 5 ), QPointF( 13.5, 5 ) );
                             painter->drawLine( QPointF( 4.5, 9 ), QPointF( 13.5, 9 ) );
-                            painter->drawLine( QPointF( 4.5, 12 ), QPointF( 13.5, 12 ) );
+                            painter->drawLine( QPointF( 4.5, 13 ), QPointF( 13.5, 13 ) );
                         }
                         else {
                             painter->drawLine( QPointF( 3.5, 5 ), QPointF( 14.5, 5 ) );
@@ -742,6 +763,7 @@ namespace Breeze
                             painter->setBrush( backgroundColor );
                             painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                         }
+                        pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
                         painter->setPen( pen );
                         painter->setBrush( Qt::NoBrush );
 
