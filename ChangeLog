@@ -1,6 +1,7 @@
 V5.14
 ---------
  * Upgraded for Breeze 5.14 with its new shadows.
+ * Applied the upstream patch https://phabricator.kde.org/D16596.
 
 V5.13
 ---------
