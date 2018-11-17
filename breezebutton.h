@@ -118,6 +118,7 @@ namespace Breeze
         //@{
         QColor foregroundColor(const QColor& inactiveCol) const;
         QColor backgroundColor() const;
+        QColor autoColor() const;
         //@}
 
         Flag m_flag = FlagNone;

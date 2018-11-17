@@ -1,15 +1,15 @@
 [Desktop Entry]
-Exec=kcmshell5 breezeenhancedconfig
+Exec=kcmshell5 sierrabreezeenhancedconfig
 Icon=preferences-system-windows
 Type=Service
 X-KDE-ServiceTypes=KCModule
 
-X-KDE-Library=org.kde.kdecoration2/breezeenhanced
+X-KDE-Library=org.kde.kdecoration2/sierrabreezeenhanced
 X-KDE-PluginKeyword=kcmodule
 X-KDE-ParentApp=kcontrol
 X-KDE-Weight=60
-X-KDE-PluginInfo-Name=BreezeEnhanced
+X-KDE-PluginInfo-Name=SierraBreezeEnhanced
 
-Name=BreezeEnhanced
+Name=SierraBreezeEnhanced
 Comment=Modify the appearance of window decorations
-X-KDE-Keywords=breezeenhanced,decoration
+X-KDE-Keywords=sierrabreezeenhanced,decoration

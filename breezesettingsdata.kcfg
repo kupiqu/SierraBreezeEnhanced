@@ -93,10 +93,6 @@
         <default>false</default>
     </entry>
 
-    <entry name="MacOSButtons" type = "Bool">
-        <default>true</default>
-    </entry>
-
     <entry name="BackgroundOpacity" type = "Int">
         <default>100</default>
     </entry>

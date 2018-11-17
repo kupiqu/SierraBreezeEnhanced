@@ -1,3 +1,12 @@
+V0.1@5.14
+---------
+ * First version of the fork (arguably more minimalistic and informative behavior):
+   - non-gray colors do not change.
+   - active window: show symbol on hovering.
+   - inactive window: always show symbol, show ring color on hovering.
+   - application menu button is considered special and stays as in vanilla breeze.
+   - no more option for non macOS-like buttons as it doesn't apply anymore.
+
 V5.14
 ---------
  * Upgraded for Breeze 5.14 with its new shadows.
