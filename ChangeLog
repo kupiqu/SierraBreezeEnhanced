@@ -1,3 +1,8 @@
+V0.1.1@5.14
+---------
+
+* Symbol properties (line colors and width) now apply to the menu button
+
 V0.1@5.14
 ---------
  * First version of the fork (arguably more minimalistic and informative behavior):
