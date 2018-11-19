@@ -481,9 +481,18 @@ namespace Breeze
 
                 case DecorationButtonType::ApplicationMenu:
                 {
+                    if ( isInactive )
+                    {
+                      painter->setPen( hint_pen );
+                    }
+                    else
+                    {
+                      painter->setPen( pen );
+                    }
                     painter->drawLine( QPointF( 3.5, 5 ), QPointF( 14.5, 5 ) );
                     painter->drawLine( QPointF( 3.5, 9 ), QPointF( 14.5, 9 ) );
                     painter->drawLine( QPointF( 3.5, 13 ), QPointF( 14.5, 13 ) );
+                    painter->setPen( pen );
                     break;
                 }
 
@@ -543,9 +552,9 @@ namespace Breeze
         if (d && !d->client().data()->isActive())
         {
           if (qGray(d->titleBarColor().rgb()) > 100)
-            col = QColor(41, 43, 50, 200);
+            col = QColor(34, 45, 50, 200);
           else
-            col = QColor(214, 212, 205, 200);
+            col = QColor(250, 251, 252, 200);
         }
         return col;
     }
@@ -559,17 +568,14 @@ namespace Breeze
             && !isHovered() && !isPressed()
             && m_animation->state() != QPropertyAnimation::Running)
         {
-            int v = qGray(inactiveCol.rgb());
-            if (v > 127) v -= 127;
-            else v += 128;
-            col = QColor(v, v, v);
+            col = inactiveCol;
         }
         else
         {
             if (d && qGray(d->titleBarColor().rgb()) > 100)
-                col = QColor(250, 250, 250);
+                col = QColor(34, 45, 50, 200);
             else
-                col = QColor(40, 40, 40);
+                col = QColor(250, 251, 252, 200);
         }
         return col;
     }
