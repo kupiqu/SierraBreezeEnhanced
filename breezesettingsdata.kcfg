@@ -93,6 +93,16 @@
         <default>false</default>
     </entry>
 
+    <!-- decoration style -->
+    <entry name="DecorationStyle" type="Enum">
+      <choices>
+        <choice name="ActiveVsInactiveStyle" />
+        <choice name="ActiveStyle" />
+        <choice name="InactiveStyle" />
+      </choices>
+      <default>ActiveVsInactiveStyle</default>
+    </entry>
+
     <entry name="BackgroundOpacity" type = "Int">
         <default>100</default>
     </entry>

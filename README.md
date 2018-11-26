@@ -9,6 +9,7 @@ SierraBreezeEnhanced is a fork of BreezeEnhanced decoration with the following c
  * inactive window: always show symbol, show ring color on hovering.
  * application menu button is considered special and stays as in vanilla breeze.
  * no more option for non macOS-like buttons as it doesn't apply anymore.
+ * added, however, an option to either choose active vs. inactive style (default), always active style (also for non-active windows), or inactive style (also for the active window).
 
 ## Credits:
 

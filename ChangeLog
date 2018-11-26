@@ -1,33 +1,26 @@
+V0.2
+---------
+
+* Added settings option for decoration style:
+  - distinct decoration for active and inactive windows (default).
+  - use the active decoration also for inactive windows.
+  - use the inactive decoration also for the active window.
+
 V0.1.2
 ---------
 
-Fixed version numbering
+* Fixed version numbering.
 
 V0.1.1
 ---------
 
-* Symbol properties (line colors and width) now apply to the menu button
+* Symbol properties (line colors and width) now apply to the menu button.
 
 V0.1
 ---------
  * First version of the fork (arguably more minimalistic and informative behavior):
-   - non-gray colors do not change.
-   - active window: show symbol on hovering.
-   - inactive window: always show symbol, show ring color on hovering.
-   - application menu button is considered special and stays as in vanilla breeze.
-   - no more option for non macOS-like buttons as it doesn't apply anymore.
-
-V5.14
----------
- * Upgraded for Breeze 5.14 with its new shadows.
- * Applied the upstream patch https://phabricator.kde.org/D16596.
-
-V5.13
----------
- * First version, made out of Breeze 5.13 and BreezeBlurred with new options.
- * Set the font style name for KDE to render it correctly. I don't know why KDE needs that while LXQt doesn't.
- * Added an option for not using macOS-like buttons.
- * Added flatness to the exception list.
- * Made inactive macOS-like buttons gray.
- * Added a setting for button spacing.
- * Added opacity override to the exception dialog.
+  - non-gray colors do not change.
+  - active window: show symbol on hovering.
+  - inactive window: always show symbol, show ring color on hovering.
+  - application menu button is considered special and stays as in vanilla breeze.
+  - no more option for non macOS-like buttons as it doesn't apply anymore.

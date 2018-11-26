@@ -166,6 +166,17 @@ namespace Breeze
 
         auto d = qobject_cast<Decoration*>( decoration() );
         bool isInactive(d && !d->client().data()->isActive());
+        bool invertSymbolColors = false;
+
+        bool useAlwaysActiveStyle( d && d->internalSettings()->decorationStyle() == 1 );
+        bool useAlwaysInactiveStyle( d && d->internalSettings()->decorationStyle() == 2 );
+        if ( useAlwaysActiveStyle )
+            isInactive = false;
+        else if ( useAlwaysInactiveStyle ) {
+            isInactive = true;
+            invertSymbolColors = true;
+        }
+
         const QColor inactiveCol = "transparent"; // no color
 
         // render mark
@@ -179,7 +190,7 @@ namespace Breeze
             pen.setJoinStyle( Qt::MiterJoin );
             pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
-            const QColor hover_hint_color( this->autoColor() );
+            const QColor hover_hint_color( this->autoColor( invertSymbolColors ) );
             QPen hint_pen(hover_hint_color);
             hint_pen.setJoinStyle( Qt::MiterJoin );
             hint_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -481,7 +492,7 @@ namespace Breeze
 
                 case DecorationButtonType::ApplicationMenu:
                 {
-                    if ( isInactive )
+                  if ( isInactive || ( useAlwaysActiveStyle && d && !d->client().data()->isActive() ) )
                     {
                       painter->setPen( hint_pen );
                     }
@@ -545,11 +556,11 @@ namespace Breeze
     }
 
     //__________________________________________________________________
-    QColor Button::autoColor() const
+    QColor Button::autoColor( bool invertSymbolColors ) const
     {
         auto d = qobject_cast<Decoration*>( decoration() );
         QColor col;
-        if (d && !d->client().data()->isActive())
+        if ( ( d && !d->client().data()->isActive() ) || invertSymbolColors )
         {
           if (qGray(d->titleBarColor().rgb()) > 100)
             col = QColor(34, 45, 50, 200);
