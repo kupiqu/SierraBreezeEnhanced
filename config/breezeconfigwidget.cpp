@@ -52,13 +52,15 @@ namespace Breeze
         connect( m_ui.drawBorderOnMaximizedWindows, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawSizeGrip, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawBackgroundGradient, SIGNAL(clicked()), SLOT(updateChanged()) );
-        connect( m_ui.decorationStyle, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
+        connect( m_ui.buttonStyle, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.opacitySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
         connect( m_ui.gradientSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
+        connect( m_ui.drawTitleBarSeparator, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.matchColorForTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
 
         connect( m_ui.fontComboBox, &QFontComboBox::currentFontChanged, [this] { updateChanged(); } );
         connect( m_ui.fontSizeSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
-        connect( m_ui.boldCheckBox, &QCheckBox::stateChanged, [this] { updateChanged(); } );
+        connect( m_ui.weightComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [this] { updateChanged(); } );
         connect( m_ui.italicCheckBox, &QCheckBox::stateChanged, [this] { updateChanged(); } );
 
         // track animations changes
@@ -69,6 +71,7 @@ namespace Breeze
         connect( m_ui.shadowSize, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.shadowStrength, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.shadowColor, SIGNAL(changed(QColor)), SLOT(updateChanged()) );
+        connect( m_ui.shadowInactive, SIGNAL(clicked()), SLOT(updateChanged()) );
 
         // track exception changes
         connect( m_ui.exceptions, SIGNAL(changed(bool)), SLOT(updateChanged()) );
@@ -92,9 +95,11 @@ namespace Breeze
         m_ui.drawBackgroundGradient->setChecked( m_internalSettings->drawBackgroundGradient() );
         m_ui.animationsEnabled->setChecked( m_internalSettings->animationsEnabled() );
         m_ui.animationsDuration->setValue( m_internalSettings->animationsDuration() );
-        m_ui.decorationStyle->setCurrentIndex ( m_internalSettings->decorationStyle() );
+        m_ui.buttonStyle->setCurrentIndex ( m_internalSettings->buttonStyle() );
         m_ui.opacitySpinBox->setValue( m_internalSettings->backgroundOpacity() );
         m_ui.gradientSpinBox->setValue( m_internalSettings->backgroundGradientIntensity() );
+        m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
+        m_ui.matchColorForTitleBar->setChecked( m_internalSettings->matchColorForTitleBar() );
 
         QString fontStr = m_internalSettings->titleBarFont();
         if (fontStr.isEmpty())
@@ -102,7 +107,27 @@ namespace Breeze
         QFont f; f.fromString( fontStr );
         m_ui.fontComboBox->setCurrentFont( f );
         m_ui.fontSizeSpinBox->setValue( f.pointSize() );
-        m_ui.boldCheckBox->setChecked( f.bold() );
+        int w = f.weight();
+        switch (w) {
+            case QFont::Medium:
+                m_ui.weightComboBox->setCurrentIndex(1);
+                break;
+            case QFont::DemiBold:
+                m_ui.weightComboBox->setCurrentIndex(2);
+                break;
+            case QFont::Bold:
+                m_ui.weightComboBox->setCurrentIndex(3);
+                break;
+            case QFont::ExtraBold:
+                m_ui.weightComboBox->setCurrentIndex(4);
+                break;
+            case QFont::Black:
+                m_ui.weightComboBox->setCurrentIndex(5);
+                break;
+            default:
+                m_ui.weightComboBox->setCurrentIndex(0);
+                break;
+        }
         m_ui.italicCheckBox->setChecked( f.italic() );
 
         // load shadows
@@ -111,6 +136,7 @@ namespace Breeze
 
         m_ui.shadowStrength->setValue( qRound(qreal(m_internalSettings->shadowStrength()*100)/255 ) );
         m_ui.shadowColor->setColor( m_internalSettings->shadowColor() );
+        m_ui.shadowInactive->setChecked( m_internalSettings->shadowInactive() );
 
         // load exceptions
         ExceptionList exceptions;
@@ -137,19 +163,42 @@ namespace Breeze
         m_internalSettings->setDrawBackgroundGradient( m_ui.drawBackgroundGradient->isChecked() );
         m_internalSettings->setAnimationsEnabled( m_ui.animationsEnabled->isChecked() );
         m_internalSettings->setAnimationsDuration( m_ui.animationsDuration->value() );
-        m_internalSettings->setDecorationStyle( m_ui.decorationStyle->currentIndex() );
+        m_internalSettings->setButtonStyle( m_ui.buttonStyle->currentIndex() );
         m_internalSettings->setBackgroundOpacity(m_ui.opacitySpinBox->value());
         m_internalSettings->setBackgroundGradientIntensity(m_ui.gradientSpinBox->value());
+        m_internalSettings->setDrawTitleBarSeparator(m_ui.drawTitleBarSeparator->isChecked());
+        m_internalSettings->setMatchColorForTitleBar( m_ui.matchColorForTitleBar->isChecked() );
 
         QFont f = m_ui.fontComboBox->currentFont();
         f.setPointSize(m_ui.fontSizeSpinBox->value());
-        f.setBold(m_ui.boldCheckBox->isChecked());
+        int indx = m_ui.weightComboBox->currentIndex();
+        switch (indx) {
+            case 1:
+                f.setWeight(QFont::Medium);
+                break;
+            case 2:
+                f.setWeight(QFont::DemiBold);
+                break;
+            case 3:
+                f.setWeight(QFont::Bold);
+                break;
+            case 4:
+                f.setWeight(QFont::ExtraBold);
+                break;
+            case 5:
+                f.setWeight(QFont::Black);
+                break;
+            default:
+                f.setBold(false);
+                break;
+        }
         f.setItalic(m_ui.italicCheckBox->isChecked());
         m_internalSettings->setTitleBarFont(f.toString());
 
         m_internalSettings->setShadowSize( m_ui.shadowSize->currentIndex() );
         m_internalSettings->setShadowStrength( qRound( qreal(m_ui.shadowStrength->value()*255)/100 ) );
         m_internalSettings->setShadowColor( m_ui.shadowColor->color() );
+        m_internalSettings->setShadowInactive( m_ui.shadowInactive->isChecked() );
 
         // save configuration
         m_internalSettings->save();
@@ -191,21 +240,45 @@ namespace Breeze
         m_ui.drawBorderOnMaximizedWindows->setChecked( m_internalSettings->drawBorderOnMaximizedWindows() );
         m_ui.drawSizeGrip->setChecked( m_internalSettings->drawSizeGrip() );
         m_ui.drawBackgroundGradient->setChecked( m_internalSettings->drawBackgroundGradient() );
+        m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
+        m_ui.matchColorForTitleBar->setChecked( m_internalSettings->matchColorForTitleBar() );
+
         m_ui.animationsEnabled->setChecked( m_internalSettings->animationsEnabled() );
         m_ui.animationsDuration->setValue( m_internalSettings->animationsDuration() );
-        m_ui.decorationStyle->setCurrentIndex( m_internalSettings->decorationStyle() );
+        m_ui.buttonStyle->setCurrentIndex( m_internalSettings->buttonStyle() );
         m_ui.opacitySpinBox->setValue( m_internalSettings->backgroundOpacity() );
         m_ui.gradientSpinBox->setValue( m_internalSettings->backgroundGradientIntensity() );
 
         QFont f; f.fromString("Sans,11,-1,5,50,0,0,0,0,0");
         m_ui.fontComboBox->setCurrentFont( f );
         m_ui.fontSizeSpinBox->setValue( f.pointSize() );
-        m_ui.boldCheckBox->setChecked( f.bold() );
+        int w = f.weight();
+        switch (w) {
+            case QFont::Medium:
+                m_ui.weightComboBox->setCurrentIndex(1);
+                break;
+            case QFont::DemiBold:
+                m_ui.weightComboBox->setCurrentIndex(2);
+                break;
+            case QFont::Bold:
+                m_ui.weightComboBox->setCurrentIndex(3);
+                break;
+            case QFont::ExtraBold:
+                m_ui.weightComboBox->setCurrentIndex(4);
+                break;
+            case QFont::Black:
+                m_ui.weightComboBox->setCurrentIndex(5);
+                break;
+            default:
+                m_ui.weightComboBox->setCurrentIndex(0);
+                break;
+        }
         m_ui.italicCheckBox->setChecked( f.italic() );
 
         m_ui.shadowSize->setCurrentIndex( m_internalSettings->shadowSize() );
         m_ui.shadowStrength->setValue( qRound(qreal(m_internalSettings->shadowStrength()*100)/255 ) );
         m_ui.shadowColor->setColor( m_internalSettings->shadowColor() );
+        m_ui.shadowInactive->setChecked( m_internalSettings->shadowInactive() );
 
     }
 
@@ -226,14 +299,15 @@ namespace Breeze
         else if( m_ui.drawBorderOnMaximizedWindows->isChecked() !=  m_internalSettings->drawBorderOnMaximizedWindows() ) modified = true;
         else if( m_ui.drawSizeGrip->isChecked() !=  m_internalSettings->drawSizeGrip() ) modified = true;
         else if( m_ui.drawBackgroundGradient->isChecked() !=  m_internalSettings->drawBackgroundGradient() ) modified = true;
-        else if( m_ui.decorationStyle->currentIndex() != m_internalSettings->decorationStyle() ) modified = true;
+        else if( m_ui.buttonStyle->currentIndex() != m_internalSettings->buttonStyle() ) modified = true;
         else if( m_ui.opacitySpinBox->value() != m_internalSettings->backgroundOpacity() ) modified = true;
         else if( m_ui.gradientSpinBox->value() != m_internalSettings->backgroundGradientIntensity() ) modified = true;
+        else if (m_ui.drawTitleBarSeparator->isChecked() != m_internalSettings->drawTitleBarSeparator()) modified = true;
+        else if ( m_ui.matchColorForTitleBar->isChecked() != m_internalSettings->matchColorForTitleBar() ) modified = true;
 
-        // font
+        // font (also see below)
         else if( m_ui.fontComboBox->currentFont().toString() != f.family() ) modified = true;
         else if( m_ui.fontSizeSpinBox->value() != f.pointSize() ) modified = true;
-        else if( m_ui.boldCheckBox->isChecked() != f.bold() ) modified = true;
         else if( m_ui.italicCheckBox->isChecked() != f.italic() ) modified = true;
 
         // animations
@@ -244,9 +318,34 @@ namespace Breeze
         else if( m_ui.shadowSize->currentIndex() !=  m_internalSettings->shadowSize() ) modified = true;
         else if( qRound( qreal(m_ui.shadowStrength->value()*255)/100 ) != m_internalSettings->shadowStrength() ) modified = true;
         else if( m_ui.shadowColor->color() != m_internalSettings->shadowColor() ) modified = true;
+        else if( m_ui.shadowInactive->isChecked() != m_internalSettings->shadowInactive() ) modified = true;
 
         // exceptions
         else if( m_ui.exceptions->isChanged() ) modified = true;
+        else {
+            int indx = m_ui.weightComboBox->currentIndex();
+            switch (indx) {
+                case 1:
+                    if (f.weight() != QFont::Medium) modified = true;
+                    break;
+                case 2:
+                    if (f.weight() != QFont::DemiBold) modified = true;
+                    break;
+                case 3:
+                    if (f.weight() != QFont::Bold) modified = true;
+                    break;
+                case 4:
+                    if (f.weight() != QFont::ExtraBold) modified = true;
+                    break;
+                case 5:
+                    if (f.weight() != QFont::Black) modified = true;
+                    break;
+                default:
+                    if (f.bold()) modified = true;
+                    break;
+            }
+        }
+
 
         setChanged( modified );
 

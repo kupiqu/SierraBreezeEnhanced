@@ -28,6 +28,10 @@
        <default>35, 38, 41</default>
     </entry>
 
+    <entry name="ShadowInactive" type = "Bool">
+      <default>true</default>
+    </entry>
+
     <!-- close button -->
     <entry name="OutlineCloseButton" type = "Bool">
         <default>true</default>
@@ -93,8 +97,8 @@
         <default>false</default>
     </entry>
 
-    <!-- decoration style -->
-    <entry name="DecorationStyle" type="Enum">
+    <!-- button style -->
+    <entry name="ButtonStyle" type="Enum">
       <choices>
         <choice name="ActiveVsInactiveStyle" />
         <choice name="ActiveStyle" />
@@ -109,7 +113,7 @@
 
     <!-- size grip -->
     <entry name="DrawBackgroundGradient" type = "Bool">
-        <default>true</default>
+        <default>false</default>
     </entry>
 
     <entry name="BackgroundGradientIntensity" type = "Int">
@@ -120,6 +124,11 @@
 
     <!-- size grip -->
     <entry name="DrawSizeGrip" type = "Bool">
+      <default>false</default>
+    </entry>
+
+    <!-- match colors -->
+    <entry name="matchColorForTitleBar" type = "Bool">
       <default>false</default>
     </entry>
 
@@ -144,11 +153,6 @@
 
     <entry name="OpacityOverride" type = "Int">
        <default>-1</default>
-    </entry>
-
-    <!-- flat title bar -->
-    <entry name="FlatTitleBar" type = "Bool">
-       <default>false</default>
     </entry>
 
     <!-- window specific settings -->

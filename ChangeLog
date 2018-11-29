@@ -1,3 +1,11 @@
+V0.3
+---------
+
+* added option to display small shadows for inactive windows as a way to make the active window more salient wrt others (issue #4).
+* ported Match Title Bar Color from Sierra Breeze. It matches the "BackgroundNormal" color under "Windows" section of the color scheme. Title Bar Text Color is manipulated to guarantee visibility (issue #5).
+* ported Font Weight Combobox from Breeze Enhanced.
+* other minor fixes and code clean-up.
+
 V0.2
 ---------
 

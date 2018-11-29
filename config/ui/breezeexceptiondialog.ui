@@ -169,13 +169,6 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QCheckBox" name="flatTitleBar">
-        <property name="text">
-         <string>Flat title bar</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>

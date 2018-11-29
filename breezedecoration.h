@@ -99,7 +99,7 @@ namespace Breeze
 
         inline bool hideTitleBar() const;
         inline bool opaqueTitleBar() const;
-        inline bool flatTitleBar() const;
+        inline bool matchColorForTitleBar() const;
         //@}
 
         public Q_SLOTS:
@@ -122,6 +122,7 @@ namespace Breeze
         void createButtons();
         void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
         void createShadow();
+        void updateShadow();
 
         //*@name border size
         //@{
@@ -202,9 +203,8 @@ namespace Breeze
     bool Decoration::opaqueTitleBar() const
     { return m_internalSettings->opaqueTitleBar(); }
 
-    bool Decoration::flatTitleBar() const
-    { return m_internalSettings->flatTitleBar(); }
-
+    bool Decoration::matchColorForTitleBar() const
+    { return m_internalSettings->matchColorForTitleBar(); }
 }
 
 #endif

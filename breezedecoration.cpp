@@ -154,6 +154,7 @@ namespace Breeze
     static int g_shadowStrength = 255;
     static QColor g_shadowColor = Qt::black;
     static QSharedPointer<KDecoration2::DecorationShadow> g_sShadow;
+    static bool g_shadowInactiveEnabled = true;
 
     //________________________________________________________________
     Decoration::Decoration(QObject *parent, const QVariantList &args)
@@ -220,16 +221,29 @@ namespace Breeze
     //________________________________________________________________
     QColor Decoration::fontColor() const
     {
-
         auto c = client().data();
-        if( m_animation->state() == QPropertyAnimation::Running )
-        {
-            return KColorUtils::mix(
-                c->color( ColorGroup::Inactive, ColorRole::Foreground ),
-                c->color( ColorGroup::Active, ColorRole::Foreground ),
-                m_opacity );
-        } else return  c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground );
 
+        if ( !matchColorForTitleBar() ) {
+            if( m_animation->state() == QPropertyAnimation::Running ) {
+                return KColorUtils::mix(
+                        c->color( ColorGroup::Inactive, ColorRole::Foreground ),
+                        c->color( ColorGroup::Active, ColorRole::Foreground ),
+                        m_opacity );
+            }
+            else {
+                return  c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground );
+            }
+        }
+        else {
+            const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
+            const QColor darkTextColor = QColor(34, 45, 50);
+            const QColor lightTextColor = QColor(250, 251, 252);
+
+            if ( qGray(matchedTitleBarColor.rgb()) >= 100 )
+                return darkTextColor;
+            else
+                return lightTextColor;
+        }
     }
 
     //________________________________________________________________
@@ -276,6 +290,7 @@ namespace Breeze
         );
 
         connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateAnimationState);
+        connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::createShadow);
         connect(c, &KDecoration2::DecoratedClient::widthChanged, this, &Decoration::updateTitleBar);
         connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateTitleBar);
         //connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::setOpaque);
@@ -317,6 +332,92 @@ namespace Breeze
             update();
 
         }
+    }
+
+    //________________________________________________________________
+    void Decoration::updateShadow()
+    {
+        CompositeShadowParams params = lookupShadowParams(Breeze::InternalSettings::ShadowSmall);
+
+        auto c = client().data();
+        if ( g_shadowInactiveEnabled || c->isActive() )
+            params = lookupShadowParams(g_shadowSizeEnum);
+
+        if ( params.isNone() ) {
+            g_sShadow.clear();
+            setShadow(g_sShadow);
+            return;
+        }
+
+        auto withOpacity = [](const QColor &color, qreal opacity) -> QColor {
+            QColor c(color);
+            c.setAlphaF(opacity);
+            return c;
+        };
+
+        // In order to properly render a box shadow with a given radius `shadowSize`,
+        // the box size should be at least `2 * QSize(shadowSize, shadowSize)`.
+        const int shadowSize = qMax(params.shadow1.radius, params.shadow2.radius);
+        const QRect box(shadowSize, shadowSize, 2 * shadowSize + 1, 2 * shadowSize + 1);
+        const QRect rect = box.adjusted(-shadowSize, -shadowSize, shadowSize, shadowSize);
+
+        QImage shadow(rect.size(), QImage::Format_ARGB32_Premultiplied);
+        shadow.fill(Qt::transparent);
+
+        QPainter painter(&shadow);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        const qreal strength = static_cast<qreal>(g_shadowStrength) / 255.0;
+
+        // Draw the "shape" shadow.
+        BoxShadowHelper::boxShadow(
+            &painter,
+            box,
+            params.shadow1.offset,
+            params.shadow1.radius,
+            withOpacity(g_shadowColor, params.shadow1.opacity * strength));
+
+        // Draw the "contrast" shadow.
+        BoxShadowHelper::boxShadow(
+            &painter,
+            box,
+            params.shadow2.offset,
+            params.shadow2.radius,
+            withOpacity(g_shadowColor, params.shadow2.opacity * strength));
+
+        // Mask out inner rect.
+        const QMargins padding = QMargins(
+            shadowSize - Metrics::Shadow_Overlap - params.offset.x(),
+            shadowSize - Metrics::Shadow_Overlap - params.offset.y(),
+            shadowSize - Metrics::Shadow_Overlap + params.offset.x(),
+            shadowSize - Metrics::Shadow_Overlap + params.offset.y());
+        const QRect innerRect = rect - padding;
+
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(Qt::black);
+        painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+        painter.drawRoundedRect(
+            innerRect,
+            Metrics::Frame_FrameRadius + 0.5,
+            Metrics::Frame_FrameRadius + 0.5);
+
+        // Draw outline.
+        painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
+        painter.setBrush(Qt::NoBrush);
+        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        painter.drawRoundedRect(
+            innerRect,
+            Metrics::Frame_FrameRadius - 0.5,
+            Metrics::Frame_FrameRadius - 0.5);
+
+        painter.end();
+
+        g_sShadow = QSharedPointer<KDecoration2::DecorationShadow>::create();
+        g_sShadow->setPadding(padding);
+        g_sShadow->setInnerShadowRect(QRect(shadow.rect().center(), QSize(1, 1)));
+        g_sShadow->setShadow(shadow);
+
+        setShadow(g_sShadow);
     }
 
     //________________________________________________________________
@@ -522,6 +623,9 @@ namespace Breeze
         auto c = client().data();
         auto s = settings();
 
+        const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
+        const QColor titleBarColor = ( matchColorForTitleBar() ? matchedTitleBarColor : this->titleBarColor() );
+
         // paint background
         if( !c->isShaded() )
         {
@@ -530,8 +634,8 @@ namespace Breeze
             painter->setRenderHint(QPainter::Antialiasing);
             painter->setPen(Qt::NoPen);
 
-            if (m_windowColor.rgb() != this->titleBarColor().rgb() ) {
-                m_windowColor = this->titleBarColor();
+            if (m_windowColor.rgb() != titleBarColor.rgb() ) {
+                m_windowColor = titleBarColor;
                 m_windowColor.setAlpha( m_opacityValue );
             }
 
@@ -567,6 +671,8 @@ namespace Breeze
     void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     {
         const auto c = client().data();
+        const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
+        QColor titleBarColor = ( matchColorForTitleBar() ? matchedTitleBarColor : this->titleBarColor() );
         const QRect titleRect(QPoint(0, 0), QSize(size().width(), borderTop()));
 
         if ( !titleRect.intersects(repaintRegion) ) return;
@@ -575,13 +681,10 @@ namespace Breeze
         painter->setPen(Qt::NoPen);
 
         // render a linear gradient on title area and draw a light border at the top
-        if( m_internalSettings->drawBackgroundGradient() && !flatTitleBar() )
+        if( m_internalSettings->drawBackgroundGradient() )
         {
-
-            QColor titleBarColor( this->titleBarColor() );
             if( !opaqueTitleBar() ) {
-                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride()
-                                                                   : m_internalSettings->backgroundOpacity();
+                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
                 a =  qBound(0, a, 100);
                 titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
             }
@@ -597,10 +700,8 @@ namespace Breeze
 
         } else {
 
-            QColor titleBarColor = this->titleBarColor();
             if( !opaqueTitleBar() ) {
-                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride()
-                                                                   : m_internalSettings->backgroundOpacity();
+                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
                 a =  qBound(0, a, 100);
                 titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
             }
@@ -640,8 +741,7 @@ namespace Breeze
 
         }
 
-        // this would be ugly
-        /*const QColor outlineColor( this->outlineColor() );
+        const QColor outlineColor( this->outlineColor() );
         if( !c->isShaded() && outlineColor.isValid() )
         {
             // outline
@@ -649,7 +749,7 @@ namespace Breeze
             painter->setBrush( Qt::NoBrush );
             painter->setPen( outlineColor );
             painter->drawLine( titleRect.bottomLeft(), titleRect.bottomRight() );
-        }*/
+        }
 
         painter->restore();
 
@@ -659,6 +759,7 @@ namespace Breeze
         QFontDatabase fd; f.setStyleName(fd.styleString(f));
         painter->setFont(f);
         painter->setPen( fontColor() );
+
         const auto cR = captionRect();
         const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
         painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
@@ -747,92 +848,19 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::createShadow()
     {
-        if (!g_sShadow
-                ||g_shadowSizeEnum != m_internalSettings->shadowSize()
+        if ( !g_sShadow
+                || g_shadowSizeEnum != m_internalSettings->shadowSize()
                 || g_shadowStrength != m_internalSettings->shadowStrength()
-                || g_shadowColor != m_internalSettings->shadowColor())
+                || g_shadowColor != m_internalSettings->shadowColor()
+                || g_shadowInactiveEnabled != m_internalSettings->shadowInactive() )
         {
             g_shadowSizeEnum = m_internalSettings->shadowSize();
             g_shadowStrength = m_internalSettings->shadowStrength();
             g_shadowColor = m_internalSettings->shadowColor();
-
-            const CompositeShadowParams params = lookupShadowParams(g_shadowSizeEnum);
-            if (params.isNone()) {
-                g_sShadow.clear();
-                setShadow(g_sShadow);
-                return;
-            }
-
-            auto withOpacity = [](const QColor &color, qreal opacity) -> QColor {
-                QColor c(color);
-                c.setAlphaF(opacity);
-                return c;
-            };
-
-            // In order to properly render a box shadow with a given radius `shadowSize`,
-            // the box size should be at least `2 * QSize(shadowSize, shadowSize)`.
-            const int shadowSize = qMax(params.shadow1.radius, params.shadow2.radius);
-            const QRect box(shadowSize, shadowSize, 2 * shadowSize + 1, 2 * shadowSize + 1);
-            const QRect rect = box.adjusted(-shadowSize, -shadowSize, shadowSize, shadowSize);
-
-            QImage shadow(rect.size(), QImage::Format_ARGB32_Premultiplied);
-            shadow.fill(Qt::transparent);
-
-            QPainter painter(&shadow);
-            painter.setRenderHint(QPainter::Antialiasing);
-
-            const qreal strength = static_cast<qreal>(g_shadowStrength) / 255.0;
-
-            // Draw the "shape" shadow.
-            BoxShadowHelper::boxShadow(
-                &painter,
-                box,
-                params.shadow1.offset,
-                params.shadow1.radius,
-                withOpacity(g_shadowColor, params.shadow1.opacity * strength));
-
-            // Draw the "contrast" shadow.
-            BoxShadowHelper::boxShadow(
-                &painter,
-                box,
-                params.shadow2.offset,
-                params.shadow2.radius,
-                withOpacity(g_shadowColor, params.shadow2.opacity * strength));
-
-            // Mask out inner rect.
-            const QMargins padding = QMargins(
-                shadowSize - Metrics::Shadow_Overlap - params.offset.x(),
-                shadowSize - Metrics::Shadow_Overlap - params.offset.y(),
-                shadowSize - Metrics::Shadow_Overlap + params.offset.x(),
-                shadowSize - Metrics::Shadow_Overlap + params.offset.y());
-            const QRect innerRect = rect - padding;
-
-            painter.setPen(Qt::NoPen);
-            painter.setBrush(Qt::black);
-            painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
-            painter.drawRoundedRect(
-                innerRect,
-                Metrics::Frame_FrameRadius + 0.5,
-                Metrics::Frame_FrameRadius + 0.5);
-
-            // Draw outline.
-            painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
-            painter.setBrush(Qt::NoBrush);
-            painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-            painter.drawRoundedRect(
-                innerRect,
-                Metrics::Frame_FrameRadius - 0.5,
-                Metrics::Frame_FrameRadius - 0.5);
-
-            painter.end();
-
-            g_sShadow = QSharedPointer<KDecoration2::DecorationShadow>::create();
-            g_sShadow->setPadding(padding);
-            g_sShadow->setInnerShadowRect(QRect(shadow.rect().center(), QSize(1, 1)));
-            g_sShadow->setShadow(shadow);
+            g_shadowInactiveEnabled = m_internalSettings->shadowInactive();
         }
 
-        setShadow(g_sShadow);
+        updateShadow();
     }
 
     //_________________________________________________________________
