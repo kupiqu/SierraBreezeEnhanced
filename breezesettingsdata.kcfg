@@ -28,8 +28,8 @@
        <default>35, 38, 41</default>
     </entry>
 
-    <entry name="ShadowInactive" type = "Bool">
-      <default>true</default>
+    <entry name="SmallShadowsInactiveWindows" type = "Bool">
+      <default>false</default>
     </entry>
 
     <!-- close button -->
@@ -107,10 +107,6 @@
       <default>ActiveVsInactiveStyle</default>
     </entry>
 
-    <entry name="BackgroundOpacity" type = "Int">
-        <default>100</default>
-    </entry>
-
     <!-- size grip -->
     <entry name="DrawBackgroundGradient" type = "Bool">
         <default>false</default>
@@ -128,7 +124,7 @@
     </entry>
 
     <!-- match colors -->
-    <entry name="matchColorForTitleBar" type = "Bool">
+    <entry name="MatchColorForTitleBar" type = "Bool">
       <default>false</default>
     </entry>
 
@@ -148,7 +144,11 @@
 
     <!-- opaque title bar -->
     <entry name="OpaqueTitleBar" type = "Bool">
-       <default>false</default>
+       <default>true</default>
+    </entry>
+
+    <entry name="BackgroundOpacity" type = "Int">
+      <default>100</default>
     </entry>
 
     <entry name="OpacityOverride" type = "Int">

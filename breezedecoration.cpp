@@ -154,7 +154,7 @@ namespace Breeze
     static int g_shadowStrength = 255;
     static QColor g_shadowColor = Qt::black;
     static QSharedPointer<KDecoration2::DecorationShadow> g_sShadow;
-    static bool g_shadowInactiveEnabled = true;
+    static bool g_smallShadowsInactiveWindows = false;
 
     //________________________________________________________________
     Decoration::Decoration(QObject *parent, const QVariantList &args)
@@ -340,7 +340,7 @@ namespace Breeze
         CompositeShadowParams params = lookupShadowParams(Breeze::InternalSettings::ShadowSmall);
 
         auto c = client().data();
-        if ( g_shadowInactiveEnabled || c->isActive() )
+        if ( !g_smallShadowsInactiveWindows || c->isActive() )
             params = lookupShadowParams(g_shadowSizeEnum);
 
         if ( params.isNone() ) {
@@ -484,8 +484,6 @@ namespace Breeze
         // size grip
         if( hasNoBorders() && m_internalSettings->drawSizeGrip() ) createSizeGrip();
         else deleteSizeGrip();
-
-        m_opacityValue = m_internalSettings->backgroundOpacity() * 2.55;
     }
 
     //________________________________________________________________
@@ -633,13 +631,21 @@ namespace Breeze
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
             painter->setPen(Qt::NoPen);
+            painter->setBrush( c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame ) );
 
-            if (m_windowColor.rgb() != titleBarColor.rgb() ) {
-                m_windowColor = titleBarColor;
-                m_windowColor.setAlpha( m_opacityValue );
+            if ( matchColorForTitleBar() || !opaqueTitleBar() ) {
+
+                if ( m_windowColor.rgb() != titleBarColor.rgb() )
+                    m_windowColor = titleBarColor;
+
+                if ( !opaqueTitleBar() ) {
+                  int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
+                  a =  qBound(0, a, 100);
+                  m_windowColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
+                }
+
+                painter->setBrush( m_windowColor );
             }
-
-            painter->setBrush( m_windowColor );
 
             // clip away the top part
             if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
@@ -683,7 +689,7 @@ namespace Breeze
         // render a linear gradient on title area and draw a light border at the top
         if( m_internalSettings->drawBackgroundGradient() )
         {
-            if( !opaqueTitleBar() ) {
+            if ( !opaqueTitleBar() ) {
                 int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
                 a =  qBound(0, a, 100);
                 titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
@@ -700,20 +706,13 @@ namespace Breeze
 
         } else {
 
-            if( !opaqueTitleBar() ) {
+            if ( !opaqueTitleBar() ) {
                 int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
                 a =  qBound(0, a, 100);
                 titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
             }
 
-            QLinearGradient gradient( 0, 0, 0, titleRect.height() );
-            QColor lightCol( titleBarColor.lighter( 130 ) );
-            gradient.setColorAt(0.0, lightCol );
-            gradient.setColorAt(0.99 / static_cast<qreal>(titleRect.height()), lightCol );
-            gradient.setColorAt(1.0 / static_cast<qreal>(titleRect.height()), titleBarColor );
-            gradient.setColorAt(1.0, titleBarColor);
-
-            painter->setBrush( gradient );
+            painter->setBrush( titleBarColor );
 
         }
 
@@ -852,12 +851,12 @@ namespace Breeze
                 || g_shadowSizeEnum != m_internalSettings->shadowSize()
                 || g_shadowStrength != m_internalSettings->shadowStrength()
                 || g_shadowColor != m_internalSettings->shadowColor()
-                || g_shadowInactiveEnabled != m_internalSettings->shadowInactive() )
+                || g_smallShadowsInactiveWindows != m_internalSettings->smallShadowsInactiveWindows() )
         {
             g_shadowSizeEnum = m_internalSettings->shadowSize();
             g_shadowStrength = m_internalSettings->shadowStrength();
             g_shadowColor = m_internalSettings->shadowColor();
-            g_shadowInactiveEnabled = m_internalSettings->shadowInactive();
+            g_smallShadowsInactiveWindows = m_internalSettings->smallShadowsInactiveWindows();
         }
 
         updateShadow();

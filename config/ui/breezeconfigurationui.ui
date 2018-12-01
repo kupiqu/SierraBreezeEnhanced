@@ -257,11 +257,18 @@
          </widget>
        </item>
        <item row="10" column="0" colspan="3">
+         <widget class="QCheckBox" name="opaqueTitleBar">
+           <property name="text">
+             <string>Opaque title bar</string>
+           </property>
+         </widget>
+       </item>
+       <item row="11" column="0" colspan="3">
         <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,1">
          <item row="0" column="0">
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>Opacity:</string>
+            <string>Background opacity:</string>
            </property>
           </widget>
          </item>
@@ -396,7 +403,7 @@
          </item>
         </layout>
        </item>
-       <item row="11" column="0" colspan="3">
+       <item row="12" column="0" colspan="3">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -580,9 +587,9 @@
         <widget class="KColorButton" name="shadowColor"/>
        </item>
        <item row="3" column="0" colspan="3">
-         <widget class="QCheckBox" name="shadowInactive">
+         <widget class="QCheckBox" name="smallShadowsInactiveWindows">
            <property name="text">
-             <string>Enable shadows on inactive windows</string>
+             <string>Small shadows on inactive windows</string>
            </property>
          </widget>
        </item>
@@ -645,6 +652,7 @@
   <tabstop>drawBackgroundGradient</tabstop>
   <tabstop>drawSizeGrip</tabstop>
   <tabstop>drawTitleBarSeparator</tabstop>
+  <tabstop>opaqueTitleBar</tabstop>
   <tabstop>animationsEnabled</tabstop>
   <tabstop>animationsDuration</tabstop>
   <tabstop>shadowSize</tabstop>
@@ -716,6 +724,38 @@
      <y>57</y>
     </hint>
    </hints>
+  </connection>
+  <connection>
+    <sender>opaqueTitleBar</sender>
+    <signal>toggled(bool)</signal>
+    <receiver>opacitySpinBox</receiver>
+    <slot>setDisabled(bool)</slot>
+    <hints>
+      <hint type="sourcelabel">
+        <x>222</x>
+        <y>160</y>
+      </hint>
+      <hint type="destinationlabel">
+        <x>166</x>
+        <y>188</y>
+      </hint>
+    </hints>
+  </connection>
+  <connection>
+    <sender>opaqueTitleBar</sender>
+    <signal>toggled(bool)</signal>
+    <receiver>label_6</receiver>
+    <slot>setDisabled(bool)</slot>
+    <hints>
+      <hint type="sourcelabel">
+        <x>222</x>
+        <y>160</y>
+      </hint>
+      <hint type="destinationlabel">
+        <x>64</x>
+        <y>57</y>
+      </hint>
+    </hints>
   </connection>
  </connections>
 </ui>

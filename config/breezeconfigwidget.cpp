@@ -51,6 +51,7 @@ namespace Breeze
         connect( m_ui.btnSpacingSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
         connect( m_ui.drawBorderOnMaximizedWindows, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawSizeGrip, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.opaqueTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawBackgroundGradient, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.buttonStyle, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.opacitySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
@@ -71,7 +72,7 @@ namespace Breeze
         connect( m_ui.shadowSize, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.shadowStrength, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.shadowColor, SIGNAL(changed(QColor)), SLOT(updateChanged()) );
-        connect( m_ui.shadowInactive, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.smallShadowsInactiveWindows, SIGNAL(clicked()), SLOT(updateChanged()) );
 
         // track exception changes
         connect( m_ui.exceptions, SIGNAL(changed(bool)), SLOT(updateChanged()) );
@@ -92,6 +93,7 @@ namespace Breeze
         m_ui.btnSpacingSpinBox->setValue( m_internalSettings->buttonSpacing() );
         m_ui.drawBorderOnMaximizedWindows->setChecked( m_internalSettings->drawBorderOnMaximizedWindows() );
         m_ui.drawSizeGrip->setChecked( m_internalSettings->drawSizeGrip() );
+        m_ui.opaqueTitleBar->setChecked( m_internalSettings->opaqueTitleBar() );
         m_ui.drawBackgroundGradient->setChecked( m_internalSettings->drawBackgroundGradient() );
         m_ui.animationsEnabled->setChecked( m_internalSettings->animationsEnabled() );
         m_ui.animationsDuration->setValue( m_internalSettings->animationsDuration() );
@@ -136,7 +138,7 @@ namespace Breeze
 
         m_ui.shadowStrength->setValue( qRound(qreal(m_internalSettings->shadowStrength()*100)/255 ) );
         m_ui.shadowColor->setColor( m_internalSettings->shadowColor() );
-        m_ui.shadowInactive->setChecked( m_internalSettings->shadowInactive() );
+        m_ui.smallShadowsInactiveWindows->setChecked( m_internalSettings->smallShadowsInactiveWindows() );
 
         // load exceptions
         ExceptionList exceptions;
@@ -160,6 +162,7 @@ namespace Breeze
         m_internalSettings->setButtonSpacing( m_ui.btnSpacingSpinBox->value() );
         m_internalSettings->setDrawBorderOnMaximizedWindows( m_ui.drawBorderOnMaximizedWindows->isChecked() );
         m_internalSettings->setDrawSizeGrip( m_ui.drawSizeGrip->isChecked() );
+        m_internalSettings->setOpaqueTitleBar( m_ui.opaqueTitleBar->isChecked() );
         m_internalSettings->setDrawBackgroundGradient( m_ui.drawBackgroundGradient->isChecked() );
         m_internalSettings->setAnimationsEnabled( m_ui.animationsEnabled->isChecked() );
         m_internalSettings->setAnimationsDuration( m_ui.animationsDuration->value() );
@@ -198,7 +201,7 @@ namespace Breeze
         m_internalSettings->setShadowSize( m_ui.shadowSize->currentIndex() );
         m_internalSettings->setShadowStrength( qRound( qreal(m_ui.shadowStrength->value()*255)/100 ) );
         m_internalSettings->setShadowColor( m_ui.shadowColor->color() );
-        m_internalSettings->setShadowInactive( m_ui.shadowInactive->isChecked() );
+        m_internalSettings->setSmallShadowsInactiveWindows( m_ui.smallShadowsInactiveWindows->isChecked() );
 
         // save configuration
         m_internalSettings->save();
@@ -239,6 +242,7 @@ namespace Breeze
         m_ui.btnSpacingSpinBox->setValue( m_internalSettings->buttonSpacing() );
         m_ui.drawBorderOnMaximizedWindows->setChecked( m_internalSettings->drawBorderOnMaximizedWindows() );
         m_ui.drawSizeGrip->setChecked( m_internalSettings->drawSizeGrip() );
+        m_ui.opaqueTitleBar->setChecked( m_internalSettings->opaqueTitleBar() );
         m_ui.drawBackgroundGradient->setChecked( m_internalSettings->drawBackgroundGradient() );
         m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
         m_ui.matchColorForTitleBar->setChecked( m_internalSettings->matchColorForTitleBar() );
@@ -278,7 +282,7 @@ namespace Breeze
         m_ui.shadowSize->setCurrentIndex( m_internalSettings->shadowSize() );
         m_ui.shadowStrength->setValue( qRound(qreal(m_internalSettings->shadowStrength()*100)/255 ) );
         m_ui.shadowColor->setColor( m_internalSettings->shadowColor() );
-        m_ui.shadowInactive->setChecked( m_internalSettings->shadowInactive() );
+        m_ui.smallShadowsInactiveWindows->setChecked( m_internalSettings->smallShadowsInactiveWindows() );
 
     }
 
@@ -298,6 +302,7 @@ namespace Breeze
         else if( m_ui.btnSpacingSpinBox->value() != m_internalSettings->buttonSpacing() ) modified = true;
         else if( m_ui.drawBorderOnMaximizedWindows->isChecked() !=  m_internalSettings->drawBorderOnMaximizedWindows() ) modified = true;
         else if( m_ui.drawSizeGrip->isChecked() !=  m_internalSettings->drawSizeGrip() ) modified = true;
+        else if( m_ui.opaqueTitleBar->isChecked() !=  m_internalSettings->opaqueTitleBar() ) modified = true;
         else if( m_ui.drawBackgroundGradient->isChecked() !=  m_internalSettings->drawBackgroundGradient() ) modified = true;
         else if( m_ui.buttonStyle->currentIndex() != m_internalSettings->buttonStyle() ) modified = true;
         else if( m_ui.opacitySpinBox->value() != m_internalSettings->backgroundOpacity() ) modified = true;
@@ -318,7 +323,7 @@ namespace Breeze
         else if( m_ui.shadowSize->currentIndex() !=  m_internalSettings->shadowSize() ) modified = true;
         else if( qRound( qreal(m_ui.shadowStrength->value()*255)/100 ) != m_internalSettings->shadowStrength() ) modified = true;
         else if( m_ui.shadowColor->color() != m_internalSettings->shadowColor() ) modified = true;
-        else if( m_ui.shadowInactive->isChecked() != m_internalSettings->shadowInactive() ) modified = true;
+        else if( m_ui.smallShadowsInactiveWindows->isChecked() != m_internalSettings->smallShadowsInactiveWindows() ) modified = true;
 
         // exceptions
         else if( m_ui.exceptions->isChanged() ) modified = true;

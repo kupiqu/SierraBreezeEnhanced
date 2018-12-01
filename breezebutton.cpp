@@ -158,6 +158,11 @@ namespace Breeze
 
         painter->setRenderHints( QPainter::Antialiasing );
 
+        /*
+        scale painter so that its window matches QRect( -1, -1, 20, 20 )
+        this makes all further rendering and scaling simpler
+        all further rendering is preformed inside QRect( 0, 0, 18, 18 )
+        */
         painter->translate( geometry().topLeft() );
 
         const qreal width( m_iconSize.width() );
@@ -345,7 +350,7 @@ namespace Breeze
                   painter->setPen( Qt::NoPen );
                 }
                 qreal r = static_cast<qreal>(7)
-                  + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 if ( isHovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
