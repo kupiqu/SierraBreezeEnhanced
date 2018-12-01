@@ -631,21 +631,22 @@ namespace Breeze
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
             painter->setPen(Qt::NoPen);
-            painter->setBrush( c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame ) );
 
-            if ( matchColorForTitleBar() || !opaqueTitleBar() ) {
-
-                if ( m_windowColor.rgb() != titleBarColor.rgb() )
-                    m_windowColor = titleBarColor;
-
-                if ( !opaqueTitleBar() ) {
-                  int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
-                  a =  qBound(0, a, 100);
-                  m_windowColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
-                }
-
-                painter->setBrush( m_windowColor );
+            if ( matchColorForTitleBar() ) {
+                m_windowColor = titleBarColor;
             }
+            else {
+                m_windowColor = c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame );
+            }
+
+
+            if ( !opaqueTitleBar() ) {
+              int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
+              a =  qBound(0, a, 100);
+              m_windowColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
+            }
+
+            painter->setBrush( m_windowColor );
 
             // clip away the top part
             if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
