@@ -72,7 +72,10 @@ namespace Breeze
         connect( m_ui.shadowSize, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.shadowStrength, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.shadowColor, SIGNAL(changed(QColor)), SLOT(updateChanged()) );
-        connect( m_ui.smallShadowsInactiveWindows, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.specificShadowsInactiveWindows, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.shadowSizeInactiveWindows, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
+        connect( m_ui.shadowStrengthInactiveWindows, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
+        connect( m_ui.shadowColorInactiveWindows, SIGNAL(changed(QColor)), SLOT(updateChanged()) );
 
         // track exception changes
         connect( m_ui.exceptions, SIGNAL(changed(bool)), SLOT(updateChanged()) );
@@ -135,10 +138,13 @@ namespace Breeze
         // load shadows
         if( m_internalSettings->shadowSize() <= InternalSettings::ShadowVeryLarge ) m_ui.shadowSize->setCurrentIndex( m_internalSettings->shadowSize() );
         else m_ui.shadowSize->setCurrentIndex( InternalSettings::ShadowLarge );
-
         m_ui.shadowStrength->setValue( qRound(qreal(m_internalSettings->shadowStrength()*100)/255 ) );
         m_ui.shadowColor->setColor( m_internalSettings->shadowColor() );
-        m_ui.smallShadowsInactiveWindows->setChecked( m_internalSettings->smallShadowsInactiveWindows() );
+        m_ui.specificShadowsInactiveWindows->setChecked( m_internalSettings->specificShadowsInactiveWindows() );
+        if( m_internalSettings->shadowSizeInactiveWindows() <= InternalSettings::ShadowVeryLargeInactiveWindows ) m_ui.shadowSizeInactiveWindows->setCurrentIndex( m_internalSettings->shadowSizeInactiveWindows() );
+        else m_ui.shadowSizeInactiveWindows->setCurrentIndex( InternalSettings::ShadowLargeInactiveWindows );
+        m_ui.shadowStrengthInactiveWindows->setValue( qRound(qreal(m_internalSettings->shadowStrengthInactiveWindows()*100)/255 ) );
+        m_ui.shadowColorInactiveWindows->setColor( m_internalSettings->shadowColorInactiveWindows() );
 
         // load exceptions
         ExceptionList exceptions;
@@ -201,7 +207,10 @@ namespace Breeze
         m_internalSettings->setShadowSize( m_ui.shadowSize->currentIndex() );
         m_internalSettings->setShadowStrength( qRound( qreal(m_ui.shadowStrength->value()*255)/100 ) );
         m_internalSettings->setShadowColor( m_ui.shadowColor->color() );
-        m_internalSettings->setSmallShadowsInactiveWindows( m_ui.smallShadowsInactiveWindows->isChecked() );
+        m_internalSettings->setSpecificShadowsInactiveWindows( m_ui.specificShadowsInactiveWindows->isChecked() );
+        m_internalSettings->setShadowSizeInactiveWindows( m_ui.shadowSizeInactiveWindows->currentIndex() );
+        m_internalSettings->setShadowStrengthInactiveWindows( qRound( qreal(m_ui.shadowStrengthInactiveWindows->value()*255)/100 ) );
+        m_internalSettings->setShadowColorInactiveWindows( m_ui.shadowColorInactiveWindows->color() );
 
         // save configuration
         m_internalSettings->save();
@@ -282,7 +291,10 @@ namespace Breeze
         m_ui.shadowSize->setCurrentIndex( m_internalSettings->shadowSize() );
         m_ui.shadowStrength->setValue( qRound(qreal(m_internalSettings->shadowStrength()*100)/255 ) );
         m_ui.shadowColor->setColor( m_internalSettings->shadowColor() );
-        m_ui.smallShadowsInactiveWindows->setChecked( m_internalSettings->smallShadowsInactiveWindows() );
+        m_ui.specificShadowsInactiveWindows->setChecked( m_internalSettings->specificShadowsInactiveWindows() );
+        m_ui.shadowSizeInactiveWindows->setCurrentIndex( m_internalSettings->shadowSizeInactiveWindows() );
+        m_ui.shadowStrengthInactiveWindows->setValue( qRound(qreal(m_internalSettings->shadowStrengthInactiveWindows()*100)/255 ) );
+        m_ui.shadowColorInactiveWindows->setColor( m_internalSettings->shadowColorInactiveWindows() );
 
     }
 
@@ -323,7 +335,10 @@ namespace Breeze
         else if( m_ui.shadowSize->currentIndex() !=  m_internalSettings->shadowSize() ) modified = true;
         else if( qRound( qreal(m_ui.shadowStrength->value()*255)/100 ) != m_internalSettings->shadowStrength() ) modified = true;
         else if( m_ui.shadowColor->color() != m_internalSettings->shadowColor() ) modified = true;
-        else if( m_ui.smallShadowsInactiveWindows->isChecked() != m_internalSettings->smallShadowsInactiveWindows() ) modified = true;
+        else if( m_ui.specificShadowsInactiveWindows->isChecked() != m_internalSettings->specificShadowsInactiveWindows() ) modified = true;
+        else if( m_ui.shadowSizeInactiveWindows->currentIndex() !=  m_internalSettings->shadowSizeInactiveWindows() ) modified = true;
+        else if( qRound( qreal(m_ui.shadowStrengthInactiveWindows->value()*255)/100 ) != m_internalSettings->shadowStrengthInactiveWindows() ) modified = true;
+        else if( m_ui.shadowColorInactiveWindows->color() != m_internalSettings->shadowColorInactiveWindows() ) modified = true;
 
         // exceptions
         else if( m_ui.exceptions->isChanged() ) modified = true;
