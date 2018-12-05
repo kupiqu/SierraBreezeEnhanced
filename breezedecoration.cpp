@@ -749,7 +749,7 @@ namespace Breeze
         painter->setPen(Qt::NoPen);
 
         // render a linear gradient on title area and draw a light border at the top
-        if( m_internalSettings->drawBackgroundGradient() )
+        if( drawBackgroundGradient() )
         {
             if ( !opaqueTitleBar() ) {
                 int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
@@ -758,7 +758,8 @@ namespace Breeze
             }
 
             QLinearGradient gradient( 0, 0, 0, titleRect.height() );
-            QColor lightCol( titleBarColor.lighter( 130 + m_internalSettings->backgroundGradientIntensity() ) );
+            int b = m_internalSettings->gradientOverride() > -1 ? m_internalSettings->gradientOverride() : m_internalSettings->backgroundGradientIntensity();
+            QColor lightCol( titleBarColor.lighter( 130 + b ) );
             gradient.setColorAt(0.0, lightCol );
             gradient.setColorAt(0.99 / static_cast<qreal>(titleRect.height()), lightCol );
             gradient.setColorAt(1.0 / static_cast<qreal>(titleRect.height()), titleBarColor.lighter( 100 + m_internalSettings->backgroundGradientIntensity() ) );

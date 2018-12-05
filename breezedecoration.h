@@ -100,6 +100,7 @@ namespace Breeze
         inline bool hideTitleBar() const;
         inline bool opaqueTitleBar() const;
         inline bool matchColorForTitleBar() const;
+        inline bool drawBackgroundGradient() const;
         //@}
 
         public Q_SLOTS:
@@ -204,6 +205,9 @@ namespace Breeze
 
     bool Decoration::matchColorForTitleBar() const
     { return m_internalSettings->matchColorForTitleBar(); }
+
+    bool Decoration::drawBackgroundGradient() const
+    { return m_internalSettings->drawBackgroundGradient(); }
 }
 
 #endif

@@ -1,8 +1,9 @@
-V0.4 (WIP)
+V0.4
 ---------
 
-* Specific shadow properties for inactive windows (Done)
-* Option to override gradients and matchTitleBar behavior for specific applications
+* Option to override matchTitleBar behavior for specific applications (especially useful for applications such as konsole and qView)
+* Option to override gradients for specific applications
+* Specific shadow properties for inactive windows
 
 V0.3.2
 ---------
