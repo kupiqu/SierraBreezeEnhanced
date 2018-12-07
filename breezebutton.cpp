@@ -175,8 +175,8 @@ namespace Breeze
         bool useInactiveButtonStyle( d && d->internalSettings()->buttonStyle() == 2 );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
-        const QColor darkSymbolColor( ( useInactiveButtonStyle && inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
-        const QColor lightSymbolColor( ( useInactiveButtonStyle && inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+        const QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+        const QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
         // symbols color
 
