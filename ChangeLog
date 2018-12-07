@@ -1,3 +1,10 @@
+V0.4.1
+---------
+
+* Dim inactive window to make them less salient under certain circumstances (issue #11):
+   - Dim title of inactive windows under matchTitleBar option
+   - Dim buttons of inactive windows under (inactive button style && matchTitleBar) options
+
 V0.4
 ---------
 

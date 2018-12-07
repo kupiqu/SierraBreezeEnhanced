@@ -258,10 +258,11 @@ namespace Breeze
         }
         else {
             const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
-            const QColor darkTextColor = QColor(34, 45, 50);
-            const QColor lightTextColor = QColor(250, 251, 252);
 
-            if ( qGray(matchedTitleBarColor.rgb()) >= 100 )
+            const QColor darkTextColor( !c->isActive() ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+            const QColor lightTextColor( !c->isActive() ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+
+            if ( qGray(matchedTitleBarColor.rgb()) > 128 )
                 return darkTextColor;
             else
                 return lightTextColor;
