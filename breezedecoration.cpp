@@ -423,8 +423,8 @@ namespace Breeze
             painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
             painter.drawRoundedRect(
                 innerRect,
-                Metrics::Frame_FrameRadius + 0.5,
-                Metrics::Frame_FrameRadius + 0.5);
+                m_internalSettings->cornerRadius() + 0.5,
+                m_internalSettings->cornerRadius() + 0.5);
 
             // Draw outline.
             painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
@@ -432,8 +432,8 @@ namespace Breeze
             painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
             painter.drawRoundedRect(
                 innerRect,
-                Metrics::Frame_FrameRadius - 0.5,
-                Metrics::Frame_FrameRadius - 0.5);
+                m_internalSettings->cornerRadius() - 0.5,
+                m_internalSettings->cornerRadius() - 0.5);
         }
         else {
             const qreal strength = static_cast<qreal>(g_shadowStrengthInactiveWindows) / 255.0;
@@ -459,8 +459,8 @@ namespace Breeze
             painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
             painter.drawRoundedRect(
                 innerRect,
-                Metrics::Frame_FrameRadius + 0.5,
-                Metrics::Frame_FrameRadius + 0.5);
+                m_internalSettings->cornerRadius() + 0.5,
+                m_internalSettings->cornerRadius() + 0.5);
 
             // Draw outline.
             painter.setPen(withOpacity(g_shadowColorInactiveWindows, 0.2 * strength));
@@ -468,8 +468,8 @@ namespace Breeze
             painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
             painter.drawRoundedRect(
                 innerRect,
-                Metrics::Frame_FrameRadius - 0.5,
-                Metrics::Frame_FrameRadius - 0.5);
+                m_internalSettings->cornerRadius() - 0.5,
+                m_internalSettings->cornerRadius() - 0.5);
         }
 
         painter.end();
@@ -713,7 +713,7 @@ namespace Breeze
             // clip away the top part
             if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
 
-            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect(), Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
             else painter->drawRect( rect() );
 
             painter->restore();
@@ -788,7 +788,7 @@ namespace Breeze
 
         } else if( c->isShaded() ) {
 
-            painter->drawRoundedRect(titleRect, Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            painter->drawRoundedRect(titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
         } else {
 
@@ -796,11 +796,11 @@ namespace Breeze
 
             // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
             painter->drawRoundedRect(titleRect.adjusted(
-                isLeftEdge() ? -Metrics::Frame_FrameRadius:0,
-                isTopEdge() ? -Metrics::Frame_FrameRadius:0,
-                isRightEdge() ? Metrics::Frame_FrameRadius:0,
-                Metrics::Frame_FrameRadius),
-                Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+                isLeftEdge() ? -m_internalSettings->cornerRadius():0,
+                isTopEdge() ? -m_internalSettings->cornerRadius():0,
+                isRightEdge() ? m_internalSettings->cornerRadius():0,
+                m_internalSettings->cornerRadius()),
+                m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
         }
 

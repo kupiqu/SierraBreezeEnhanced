@@ -104,6 +104,11 @@
         <default>6</default>
     </entry>
 
+    <!-- corner radius -->
+    <entry name="CornerRadius" type = "Int">
+      <default>3</default>
+    </entry>
+
     <!-- maximized windows -->
     <entry name="DrawBorderOnMaximizedWindows" type = "Bool">
         <default>false</default>
