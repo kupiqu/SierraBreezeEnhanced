@@ -41,10 +41,11 @@ namespace Breeze
         Frame_FrameRadius = 3,
 
         //* titlebar metrics, in units of small spacing
-        TitleBar_TopMargin = 2,
-        TitleBar_BottomMargin = 2,
-        TitleBar_SideMargin = 2,
-        TitleBar_ButtonSpacing = 2,
+        // defaulting now to small spacing
+        TitleBar_TopMargin = 1, // 2,
+        TitleBar_BottomMargin = 1, // 2,
+        TitleBar_SideMargin = 1, // 2,
+        TitleBar_ButtonSpacing = 1, // 2,
 
         // shadow dimensions (pixels)
         Shadow_Overlap = 3,
