@@ -1,7 +1,4 @@
 ################# dependencies #################
-### FFTW
-find_package(FFTW REQUIRED)
-
 ### Qt/KDE
 find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets)
 
@@ -10,7 +7,7 @@ configure_file(config-breezecommon.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-br
 
 ################# breezestyle target #################
 set(sierrabreezeenhancedcommon_LIB_SRCS
-    breezeboxshadowhelper.cpp
+    breezeboxshadowrenderer.cpp
 )
 
 add_library(sierrabreezeenhancedcommon5 ${sierrabreezeenhancedcommon_LIB_SRCS})
@@ -22,9 +19,7 @@ generate_export_header(sierrabreezeenhancedcommon5
 target_link_libraries(sierrabreezeenhancedcommon5
     PUBLIC
         Qt5::Core
-        Qt5::Gui
-    PRIVATE
-        ${FFTW_LIBRARIES})
+        Qt5::Gui)
 
 set_target_properties(sierrabreezeenhancedcommon5 PROPERTIES
     VERSION ${PROJECT_VERSION}
