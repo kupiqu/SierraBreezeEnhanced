@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>362</width>
-    <height>321</height>
+    <width>539</width>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <string>Window Identification</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0">
+      <item row="0" column="0" alignment="Qt::AlignLeft">
        <widget class="QLabel" name="label">
         <property name="text">
          <string>&amp;Matching window property: </string>
@@ -33,7 +33,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="1" column="0" alignment="Qt::AlignLeft">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Regular expression &amp;to match: </string>
@@ -163,11 +163,11 @@
        </widget>
       </item>
       <item row="2" column="0">
-        <widget class="QCheckBox" name="matchColorForTitleBar">
-          <property name="text">
-            <string>Match Title Bar's and Window's color</string>
-          </property>
-        </widget>
+       <widget class="QCheckBox" name="matchColorForTitleBar">
+        <property name="text">
+         <string>Match Title Bar's and Window's color</string>
+        </property>
+       </widget>
       </item>
       <item row="3" column="0">
        <widget class="QCheckBox" name="drawBackgroundGradient">
@@ -367,36 +367,36 @@
    </hints>
   </connection>
   <connection>
-    <sender>drawBackgroundGradient</sender>
-    <signal>toggled(bool)</signal>
-    <receiver>gradientOverrideLabel</receiver>
-    <slot>setEnabled(bool)</slot>
-    <hints>
-      <hint type="sourcelabel">
-        <x>104</x>
-        <y>202</y>
-      </hint>
-      <hint type="destinationlabel">
-        <x>82</x>
-        <y>229</y>
-      </hint>
-    </hints>
+   <sender>drawBackgroundGradient</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>gradientOverrideLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>104</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>82</x>
+     <y>229</y>
+    </hint>
+   </hints>
   </connection>
   <connection>
-    <sender>drawBackgroundGradient</sender>
-    <signal>toggled(bool)</signal>
-    <receiver>gradientOverrideLabelSpinBox</receiver>
-    <slot>setEnabled(bool)</slot>
-    <hints>
-      <hint type="sourcelabel">
-        <x>104</x>
-        <y>202</y>
-      </hint>
-      <hint type="destinationlabel">
-        <x>166</x>
-        <y>229</y>
-      </hint>
-    </hints>
+   <sender>drawBackgroundGradient</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>gradientOverrideLabelSpinBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>104</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>166</x>
+     <y>229</y>
+    </hint>
+   </hints>
   </connection>
   <connection>
    <sender>opaqueTitleBar</sender>
