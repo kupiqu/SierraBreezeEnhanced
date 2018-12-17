@@ -138,9 +138,9 @@ namespace Breeze
         if (type() == DecorationButtonType::Menu)
         {
 
-            const QRectF iconRect( geometry().topLeft(), 0.7*m_iconSize );
+            const QRectF iconRect( geometry().topLeft(), 0.8*m_iconSize );
             const qreal width( m_iconSize.width() );
-            painter->translate( 0.15*width, 0.15*width );
+            painter->translate( 0.1*width, 0.1*width );
             decoration()->client().data()->icon().paint(painter, iconRect.toRect());
 
         } else {
