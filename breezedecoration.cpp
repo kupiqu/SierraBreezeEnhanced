@@ -740,7 +740,7 @@ namespace Breeze
         painter->save();
         painter->setPen(Qt::NoPen);
 
-        // render a linear gradient on title area and draw a light border at the top
+        // render a linear gradient on title area
         if( drawBackgroundGradient() )
         {
             if ( !opaqueTitleBar() ) {
@@ -751,11 +751,24 @@ namespace Breeze
 
             QLinearGradient gradient( 0, 0, 0, titleRect.height() );
             int b = m_internalSettings->gradientOverride() > -1 ? m_internalSettings->gradientOverride() : m_internalSettings->backgroundGradientIntensity();
-            QColor lightCol( titleBarColor.lighter( 130 + b ) );
-            gradient.setColorAt(0.0, lightCol );
-            gradient.setColorAt(0.99 / static_cast<qreal>(titleRect.height()), lightCol );
-            gradient.setColorAt(1.0 / static_cast<qreal>(titleRect.height()), titleBarColor.lighter( 100 + m_internalSettings->backgroundGradientIntensity() ) );
-            gradient.setColorAt(1.0, titleBarColor);
+            b =  qBound(0, b, 100);
+
+            if ( qGray(titleBarColor.rgb()) > 128 ) {
+                gradient.setColorAt(0.0, titleBarColor.darker( 100 + b ) );
+                gradient.setColorAt(0.75, titleBarColor.darker( 100 + qRound(static_cast<qreal>(b) * (qreal)0.2) ) );
+                gradient.setColorAt(0.86, titleBarColor.darker( 100 + qRound(static_cast<qreal>(b) * (qreal)0.1) ) );
+                gradient.setColorAt(0.93, titleBarColor.darker( 100 + qRound(static_cast<qreal>(b) * (qreal)0.05) ) );
+                gradient.setColorAt(0.97, titleBarColor.darker( 100 + qRound(static_cast<qreal>(b) * (qreal)0.01) ) );
+                gradient.setColorAt(0.99, titleBarColor);
+            }
+            else {
+                gradient.setColorAt(0.0, titleBarColor.lighter( 100 + b ) );
+                gradient.setColorAt(0.75, titleBarColor.lighter( 100 + qRound(static_cast<qreal>(b) * (qreal)0.2) ) );
+                gradient.setColorAt(0.86, titleBarColor.lighter( 100 + qRound(static_cast<qreal>(b) * (qreal)0.1) ) );
+                gradient.setColorAt(0.93, titleBarColor.lighter( 100 + qRound(static_cast<qreal>(b) * (qreal)0.05) ) );
+                gradient.setColorAt(0.97, titleBarColor.lighter( 100 + qRound(static_cast<qreal>(b) * (qreal)0.01) ) );
+                gradient.setColorAt(0.99, titleBarColor);
+            }
 
             painter->setBrush(gradient);
 

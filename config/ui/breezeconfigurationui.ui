@@ -26,7 +26,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -991,20 +991,20 @@
    </hints>
   </connection>
   <connection>
-    <sender>specificShadowsInactiveWindows</sender>
-    <signal>toggled(bool)</signal>
-    <receiver>shadowColorInactiveWindows</receiver>
-    <slot>setEnabled(bool)</slot>
-    <hints>
-      <hint type="sourcelabel">
-        <x>222</x>
-        <y>160</y>
-      </hint>
-      <hint type="destinationlabel">
-        <x>166</x>
-        <y>188</y>
-      </hint>
-    </hints>
+   <sender>specificShadowsInactiveWindows</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>shadowColorInactiveWindows</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>222</x>
+     <y>160</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>166</x>
+     <y>188</y>
+    </hint>
+   </hints>
   </connection>
   <connection>
    <sender>specificShadowsInactiveWindows</sender>
