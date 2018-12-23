@@ -149,8 +149,8 @@ namespace Breeze
 
             if ( d && d->internalSettings()->buttonStyle() == 3 )
                 drawIconBreezeStyle( painter );
-            // else if ( d && d->internalSettings()->buttonStyle() == 4 )
-            //     drawIconAdwaitaStyle( painter );
+            else if ( d && d->internalSettings()->buttonStyle() == 4 )
+                drawIconAdwaitaStyle( painter );
             else
                 drawIcon( painter );
 
@@ -762,6 +762,176 @@ namespace Breeze
                         QPointF( 4, 13 ),
                         QPointF( 9, 8 ),
                         QPointF( 14, 13 ) });
+                    break;
+                }
+
+
+                case DecorationButtonType::ApplicationMenu:
+                {
+                    painter->drawLine( QPointF( 3.5, 5 ), QPointF( 14.5, 5 ) );
+                    painter->drawLine( QPointF( 3.5, 9 ), QPointF( 14.5, 9 ) );
+                    painter->drawLine( QPointF( 3.5, 13 ), QPointF( 14.5, 13 ) );
+                    break;
+                }
+
+                case DecorationButtonType::ContextHelp:
+                {
+                    QPainterPath path;
+                    path.moveTo( 5, 6 );
+                    path.arcTo( QRectF( 5, 3.5, 8, 5 ), 180, -180 );
+                    path.cubicTo( QPointF(12.5, 9.5), QPointF( 9, 7.5 ), QPointF( 9, 11.5 ) );
+                    painter->drawPath( path );
+
+                    painter->drawPoint( 9, 15 );
+
+                    break;
+                }
+
+                default: break;
+
+            }
+
+        }
+
+    }
+
+    //__________________________________________________________________
+    void Button::drawIconAdwaitaStyle( QPainter *painter ) const
+    {
+
+        painter->setRenderHints( QPainter::Antialiasing );
+
+        /*
+        scale painter so that its window matches QRect( -1, -1, 20, 20 )
+        this makes all further rendering and scaling simpler
+        all further rendering is preformed inside QRect( 0, 0, 18, 18 )
+        */
+        painter->translate( geometry().topLeft() );
+
+        const qreal width( m_iconSize.width() );
+        painter->scale( width/20, width/20 );
+        painter->translate( 1, 1 );
+
+        // render background
+        const QColor backgroundColor( this->backgroundColor() );
+        if( backgroundColor.isValid() )
+        {
+            painter->setPen( Qt::NoPen );
+            painter->setBrush( backgroundColor );
+            painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
+        }
+
+        // render mark
+        const QColor foregroundColor( this->foregroundColor() );
+        if( foregroundColor.isValid() )
+        {
+
+            // setup painter
+            QPen pen( foregroundColor );
+            pen.setJoinStyle( Qt::MiterJoin );
+            pen.setWidthF( 2.0*qMax((qreal)1.0, 20/width ) );
+
+            painter->setPen( pen );
+            painter->setBrush( Qt::NoBrush );
+
+            switch( type() )
+            {
+
+                case DecorationButtonType::Close:
+                {
+                    painter->drawLine( QPointF( 5, 5 ), QPointF( 13, 13 ) );
+                    painter->drawLine( 13, 5, 5, 13 );
+                    break;
+                }
+
+                case DecorationButtonType::Maximize:
+                {
+                    if( isChecked() )
+                        painter->drawRect( 7, 7, 4, 4 );
+                    else
+                        painter->drawRect( 5, 5, 8, 8 );
+                    break;
+                }
+
+                case DecorationButtonType::Minimize:
+                {
+                    painter->drawLine( QPointF( 5, 12 ), QPointF( 12, 12 ) );
+                    break;
+                }
+
+                case DecorationButtonType::OnAllDesktops:
+                {
+                    painter->setPen( Qt::NoPen );
+                    painter->setBrush( foregroundColor );
+
+                    QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                    if( isChecked()) {
+                        painter->drawEllipse( c, 9.0, 9.0 );
+                        painter->setBrush( backgroundColor );
+                        painter->drawEllipse( c, 2.0, 2.0 );
+                    }
+                    else
+                        painter->drawEllipse( c, 4.0, 4.0 );
+                    break;
+                }
+
+                case DecorationButtonType::Shade:
+                {
+
+                    if (isChecked())
+                    {
+
+                        painter->drawLine( 5, 6, 13, 6 );
+                        QPainterPath path;
+                        path.moveTo(9, 13);
+                        path.lineTo(4, 9);
+                        path.lineTo(14, 9);
+                        painter->fillPath(path, QBrush(foregroundColor));
+
+
+                    } else {
+
+                        painter->drawLine( 5, 6, 13, 6 );
+                        QPainterPath path;
+                        path.moveTo(9, 9);
+                        path.lineTo(4, 13);
+                        path.lineTo(14, 13);
+                        painter->fillPath(path, QBrush(foregroundColor));
+
+                    }
+
+                    break;
+
+                }
+
+                case DecorationButtonType::KeepBelow:
+                {
+
+                    painter->setPen( Qt::NoPen );
+                    painter->setBrush( foregroundColor );
+
+                    QPainterPath path;
+                    path.moveTo(9, 14);
+                    path.lineTo(4, 6);
+                    path.lineTo(14, 6);
+                    painter->fillPath(path, QBrush(foregroundColor));
+
+                    break;
+
+                }
+
+                case DecorationButtonType::KeepAbove:
+                {
+
+                    painter->setPen( Qt::NoPen );
+                    painter->setBrush( foregroundColor );
+
+                    QPainterPath path;
+                    path.moveTo(9, 5);
+                    path.lineTo(4, 13);
+                    path.lineTo(14, 13);
+                    painter->fillPath(path, QBrush(foregroundColor));
+
                     break;
                 }
 
