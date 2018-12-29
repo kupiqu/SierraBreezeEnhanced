@@ -131,6 +131,9 @@
         <choice name="InactiveStyle" />
         <choice name="BreezeStyle" />
         <choice name="AdwaitaStyle" />
+        <choice name="DarkAuroraeStyle" />
+        <choice name="ActiveDarkAuroraeStyle" />
+        <choice name="InactiveDarkAuroraeStyle" />
       </choices>
       <default>ActiveVsInactiveStyle</default>
     </entry>
