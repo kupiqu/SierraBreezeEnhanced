@@ -277,14 +277,26 @@ namespace Breeze
 
                   // two triangles
                   QPainterPath path1, path2;
-                  path1.moveTo(5, 13);
-                  path1.lineTo(11, 13);
-                  path1.lineTo(5, 7);
+                  if( isChecked() )
+                  {
+                      path1.moveTo(8.5, 9.5);
+                      path1.lineTo(2.5, 9.5);
+                      path1.lineTo(8.5, 15.5);
 
-                  path2.moveTo(13, 5);
-                  path2.lineTo(7, 5);
-                  path2.lineTo(13, 11);
+                      path2.moveTo(9.5, 8.5);
+                      path2.lineTo(15.5, 8.5);
+                      path2.lineTo(9.5, 2.5);
+                  }
+                  else
+                  {
+                      path1.moveTo(5, 13);
+                      path1.lineTo(11, 13);
+                      path1.lineTo(5, 7);
 
+                      path2.moveTo(13, 5);
+                      path2.lineTo(7, 5);
+                      path2.lineTo(13, 11);
+                  }
 
                   painter->fillPath(path1, QBrush(symbolColor));
                   painter->fillPath(path2, QBrush(symbolColor));
