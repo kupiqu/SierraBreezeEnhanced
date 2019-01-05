@@ -387,7 +387,7 @@ namespace Breeze
 
             case DecorationButtonType::Shade:
             {
-                const QColor button_color = QColor(135, 206, 249);
+                const QColor button_color = QColor(204, 176, 213);
 
                 QPen button_pen( button_color );
                 button_pen.setJoinStyle( Qt::MiterJoin );
@@ -489,7 +489,7 @@ namespace Breeze
 
             case DecorationButtonType::KeepAbove:
             {
-                const QColor button_color = QColor(204, 176, 213);
+                const QColor button_color = QColor(135, 206, 249);
 
                 QPen button_pen( button_color );
                 button_pen.setJoinStyle( Qt::MiterJoin );
@@ -1204,7 +1204,7 @@ namespace Breeze
 
             case DecorationButtonType::Shade:
             {
-                const QColor button_color = QColor(135, 206, 249);
+                const QColor button_color = QColor(204, 176, 213);
 
                 QPen button_pen( button_color );
                 button_pen.setJoinStyle( Qt::MiterJoin );
@@ -1290,7 +1290,7 @@ namespace Breeze
 
             case DecorationButtonType::KeepAbove:
             {
-                const QColor button_color = QColor(204, 176, 213);
+                const QColor button_color = QColor(135, 206, 249);
 
                 QPen button_pen( button_color );
                 button_pen.setJoinStyle( Qt::MiterJoin );
