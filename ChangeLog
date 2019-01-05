@@ -1,3 +1,16 @@
+V0.4.5
+---------
+
+* Scale icon size to resemble buttons size
+* Shadow intrinsics as in vanilla breeze
+* Automatic gradient direction and smoother appearance
+* Added a new restore symbol
+* Added (actually recovered) vanilla breeze button style
+* Added button style similar to adwaita/materia
+* Added Dark-Aurorae button style (with new checked alldesktop symbol)
+* Exchange colors between keepabove and shade
+
+
 V0.4.4
 ---------
 
