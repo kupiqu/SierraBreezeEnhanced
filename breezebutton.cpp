@@ -1186,7 +1186,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( !isChecked() && ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) )
                 {
                   painter->setPen( symbol_pen );
 
@@ -1198,6 +1198,20 @@ namespace Breeze
                   painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
                   painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
                   painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                }
+                else if ( isChecked() && ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) )
+                {
+                  painter->setPen( symbol_pen );
+
+                  painter->drawLine( QPointF( 5, 5 ), QPointF( 11, 5 ) );
+                  painter->drawLine( QPointF( 11, 5 ), QPointF( 11, 11 ) );
+                  painter->drawLine( QPointF( 5, 5 ), QPointF( 5, 11 ) );
+                  painter->drawLine( QPointF( 5, 11 ), QPointF( 11, 11 ) );
+
+                  painter->drawLine( QPointF( 7, 7 ), QPointF( 13, 7 ) );
+                  painter->drawLine( QPointF( 13, 7 ), QPointF( 13, 13 ) );
+                  painter->drawLine( QPointF( 7, 7 ), QPointF( 7, 13 ) );
+                  painter->drawLine( QPointF( 7, 13 ), QPointF( 13, 13 ) );
                 }
                 break;
             }
