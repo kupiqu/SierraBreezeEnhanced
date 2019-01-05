@@ -17,7 +17,7 @@ SierraBreezeEnhanced is strongly based on BreezeEnhanced and SierraBreeze.
 
 ## Installation
 
-The version number in the file NEWS shows the main version of KWin that is required for the compilation. *Compilation should not be done against other versions of KWin!*.
+*Compilation should not be done against versions of KWin < 5.14.*
 
 Open a terminal inside the source directory and do:
 ```sh
