@@ -79,7 +79,7 @@
           <choice name="BorderVeryHuge" />
           <choice name="BorderOversized" />
       </choices>
-      <default>BorderNoSides</default>
+      <default>BorderNone</default>
     </entry>
 
     <!-- title alignment -->
@@ -189,6 +189,11 @@
     <entry name="OpacityOverride" type = "Int">
        <default>-1</default>
     </entry>
+
+    <!-- dialogs -->
+    ￼	<entry name="IsDialog" type = "Bool">
+￼	       <default>false</default>
+￼	    </entry>
 
     <!-- window specific settings -->
     <entry name="ExceptionType" type="Enum">

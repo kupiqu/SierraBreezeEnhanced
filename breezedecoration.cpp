@@ -113,12 +113,12 @@ namespace
             ShadowParams(QPoint(0, -4), 16, 0.3)),
         // Large
         CompositeShadowParams(
-            QPoint(0, 18),
+            QPoint(0, 12),
             ShadowParams(QPoint(0, 0), 48, 0.8),
             ShadowParams(QPoint(0, -6), 24, 0.2)),
         // Very large
         CompositeShadowParams(
-            QPoint(0, 26),
+            QPoint(0, 16),
             ShadowParams(QPoint(0, 0), 64, 0.7),
             ShadowParams(QPoint(0, -8), 32, 0.1))
     };
@@ -576,10 +576,10 @@ namespace Breeze
         int extBottom = 0;
         if( hasNoBorders() )
         {
-            extSides = extSize;
-            extBottom = extSize;
+            if( !isMaximizedHorizontally() ) extSides = extSize;
+            if( !isMaximizedVertically() ) extBottom = extSize;
 
-        } else if( hasNoSideBorders() ) {
+        } else if( hasNoSideBorders() && !isMaximizedHorizontally() ) {
 
             extSides = extSize;
 

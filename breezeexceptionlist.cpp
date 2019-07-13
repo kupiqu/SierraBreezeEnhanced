@@ -64,6 +64,7 @@ namespace Breeze
             configuration->setDrawBackgroundGradient( exception.drawBackgroundGradient() );
             configuration->setGradientOverride( exception.gradientOverride() );
             configuration->setMatchColorForTitleBar( exception.matchColorForTitleBar() );
+            configuration->setIsDialog( exception.isDialog() );
 
             // append to exceptions
             _exceptions.append( configuration );
@@ -102,7 +103,7 @@ namespace Breeze
     {
 
         // list of items to be written
-        QStringList keys = { "Enabled", "ExceptionPattern", "ExceptionType", "HideTitleBar", "OpaqueTitleBar", "OpacityOverride", "Mask", "BorderSize", "MatchColorForTitleBar", "DrawBackgroundGradient", "GradientOverride"};
+        QStringList keys = { "Enabled", "ExceptionPattern", "ExceptionType", "HideTitleBar", "IsDialog", "OpaqueTitleBar", "OpacityOverride", "Mask", "BorderSize", "MatchColorForTitleBar", "DrawBackgroundGradient", "GradientOverride"};
 
         // write all items
         foreach( auto key, keys )

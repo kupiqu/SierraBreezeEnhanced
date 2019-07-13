@@ -1,3 +1,9 @@
+V0.4.6
+---------
+
+* Changes to be in sync with upstream Breeze
+* Added the checkbox "Only for dialogs" to the exception dialog to support separate settings for dialogs (Ported from BreezeEnhanced).
+
 V0.4.5
 ---------
 

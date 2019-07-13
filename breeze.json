@@ -11,6 +11,7 @@
     "org.kde.kdecoration2": {
         "blur": true,
         "defaultTheme": "SierraBreezeEnhanced",
-        "kcmodule": true
+        "kcmodule": true,
+        "recommendedBorderSize": "None"
     }
 }

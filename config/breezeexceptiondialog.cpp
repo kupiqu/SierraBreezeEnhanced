@@ -65,6 +65,7 @@ namespace Breeze
         connect( m_ui.opaqueTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
         m_ui.opacityOverrideLabelSpinBox->setSpecialValueText(tr("None"));
         connect( m_ui.opacityOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
+        connect( m_ui.isDialog, SIGNAL(clicked()), SLOT(updateChanged()) );
 
         // hide detection dialog on non X11 platforms
         #if BREEZE_HAVE_X11
@@ -91,6 +92,7 @@ namespace Breeze
         m_ui.gradientOverrideLabelSpinBox->setValue( m_exception->gradientOverride() );
         m_ui.opaqueTitleBar->setChecked( m_exception->opaqueTitleBar() );
         m_ui.opacityOverrideLabelSpinBox->setValue( m_exception->opacityOverride() );
+        m_ui.isDialog->setChecked( m_exception->isDialog() );
 
         // mask
         for( CheckBoxMap::iterator iter = m_checkboxes.begin(); iter != m_checkboxes.end(); ++iter )
@@ -112,6 +114,7 @@ namespace Breeze
         m_exception->setGradientOverride( m_ui.gradientOverrideLabelSpinBox->value() );
         m_exception->setOpaqueTitleBar( m_ui.opaqueTitleBar->isChecked() );
         m_exception->setOpacityOverride( m_ui.opacityOverrideLabelSpinBox->value() );
+        m_exception->setIsDialog( m_ui.isDialog->isChecked() );
 
         // mask
         unsigned int mask = None;
@@ -137,6 +140,7 @@ namespace Breeze
         else if( m_exception->gradientOverride() != m_ui.gradientOverrideLabelSpinBox->value() ) modified = true;
         else if( m_exception->opaqueTitleBar() != m_ui.opaqueTitleBar->isChecked() ) modified = true;
         else if( m_exception->opacityOverride() != m_ui.opacityOverrideLabelSpinBox->value() ) modified = true;
+        else if( m_exception->isDialog() != m_ui.isDialog->isChecked() ) modified = true;
         else
         {
             // check mask
