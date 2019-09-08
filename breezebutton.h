@@ -116,11 +116,13 @@ namespace Breeze
         void drawIconBreezeStyle( QPainter *) const;
         void drawIconAdwaitaStyle( QPainter *) const;
         void drawIconDarkAuroraeStyle( QPainter *) const;
+        void drawIconSymbolStyle( QPainter *) const;
 
         //*@name colors
         //@{
         QColor foregroundColor() const;
         QColor backgroundColor() const;
+        QColor mixColors(const QColor&, const QColor&, qreal) const;
         QColor autoColor( const bool, const bool, const bool, const bool, const QColor, const QColor ) const;
         //@}
 

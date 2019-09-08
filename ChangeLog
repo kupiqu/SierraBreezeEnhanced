@@ -1,3 +1,10 @@
+V0.4.7
+---------
+
+* Added a new style
+* Added `Button horizontal padding` in the settings: when using "high" value of corner radius it may be useful to move the buttons a little bit more toward the inside.
+* Aligned a few items in the General tab of the Settings
+
 V0.4.6
 ---------
 
