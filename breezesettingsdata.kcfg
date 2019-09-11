@@ -109,6 +109,10 @@
         <default>6</default>
     </entry>
 
+    <entry name="ButtonHPadding" type = "Int">
+       <default>5</default>
+    </entry>
+
     <!-- corner radius -->
     <entry name="CornerRadius" type = "Int">
       <default>3</default>

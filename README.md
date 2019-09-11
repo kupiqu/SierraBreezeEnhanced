@@ -10,6 +10,7 @@ SierraBreezeEnhanced is a fork of BreezeEnhanced decoration with the following c
  * application menu button is considered special and stays as in vanilla breeze.
  * no more option for non macOS-like buttons as it doesn't apply anymore.
  * added, however, an option to either choose active vs. inactive style (default), always active style (also for non-active windows), or inactive style (also for the active window).
+ * horizontal padding to better adjust the button position in case of use of rounded corners.
 
 ## Credits:
 
@@ -42,3 +43,4 @@ sudo apt install sierrabreezeenhanced
 
 ![Active Buttons](screenshots/ActiveButtons.gif?raw=true "Active Buttons")
 ![Inactive Buttons](screenshots/InactiveButtons.gif?raw=true "Inactive Buttons")
+![Inactive Buttons](screenshots/symbol-style.gif?raw=true "Symbol Style")

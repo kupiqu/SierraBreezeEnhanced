@@ -625,7 +625,8 @@ namespace Breeze
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
+            // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
+            const int hPadding = m_internalSettings->buttonHPadding();
             if( isLeftEdge() )
             {
                 // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
@@ -649,7 +650,8 @@ namespace Breeze
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
+            // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
+            const int hPadding = m_internalSettings->buttonHPadding();
             if( isRightEdge() )
             {
 
