@@ -43,4 +43,3 @@ sudo apt install sierrabreezeenhanced
 
 ![Active Buttons](screenshots/ActiveButtons.gif?raw=true "Active Buttons")
 ![Inactive Buttons](screenshots/InactiveButtons.gif?raw=true "Inactive Buttons")
-![Inactive Buttons](screenshots/symbol-style.gif?raw=true "Symbol Style")
