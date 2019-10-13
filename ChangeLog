@@ -1,3 +1,8 @@
+V0.4.8
+---------
+
+Changing "blur" to false in breeze.json as explained in pull request #32
+
 V0.4.7
 ---------
 
