@@ -9,7 +9,7 @@
         ]
     },
     "org.kde.kdecoration2": {
-        "blur": false,
+        "blur": true,
         "defaultTheme": "SierraBreezeEnhanced",
         "kcmodule": true,
         "recommendedBorderSize": "None"
