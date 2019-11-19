@@ -249,30 +249,21 @@ namespace Breeze
         const QColor darkTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(81, 102, 107) : QColor(34, 45, 50) );
         const QColor lightTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        if ( !matchColorForTitleBar() ) {
-            // if( m_animation->state() == QPropertyAnimation::Running ) {
-            //     return KColorUtils::mix(
-            //             c->color( ColorGroup::Inactive, ColorRole::Foreground ),
-            //             c->color( ColorGroup::Active, ColorRole::Foreground ),
-            //             m_opacity );
-            // }
-            // else {
-            //     return  c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground );
-            // }
-            const QColor titleBarColor ( this->titleBarColor() );
-            if ( qGray(titleBarColor.rgb()) > 128 )
-                return darkTextColor;
-            else
-                return lightTextColor;
-        }
-        else {
-            const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
+        const QColor titleBarColor ( matchColorForTitleBar() ? c->palette().color(QPalette::Window) : this->titleBarColor());
 
-            if ( qGray(matchedTitleBarColor.rgb()) > 128 )
-                return darkTextColor;
-            else
-                return lightTextColor;
-        }
+        uint r = qRed(titleBarColor.rgb());
+        uint g = qGreen(titleBarColor.rgb());
+        uint b = qBlue(titleBarColor.rgb());
+
+        // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+        // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+        // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+        qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+        if ( colorConditional > 186 || g > 186 ) // ( colorConditional > 186 ) // if ( colorConditional > 150 )
+            return darkTextColor;
+        else
+            return lightTextColor;
+
     }
 
     //________________________________________________________________

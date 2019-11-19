@@ -205,9 +205,9 @@ namespace Breeze
 
             case DecorationButtonType::Close:
             {
-                const QColor button_color = QColor(242, 80, 86);
+                const QColor button_color = QColor(252, 87, 83);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(223, 71, 68) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -227,7 +227,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -246,9 +246,9 @@ namespace Breeze
 
             case DecorationButtonType::Maximize:
             {
-                const QColor button_color = QColor(19, 209, 61);
+                const QColor button_color = QColor(51, 199, 72);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(39, 170, 53) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -268,7 +268,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -310,9 +310,9 @@ namespace Breeze
 
             case DecorationButtonType::Minimize:
             {
-                const QColor button_color = QColor(252, 190, 7);
+                const QColor button_color = QColor(253, 188, 64);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(222, 159, 52) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -332,7 +332,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -351,7 +351,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(125, 209, 200);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(108, 179, 174) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -371,7 +371,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -391,7 +391,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(204, 176, 213);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(172, 149, 179) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -411,7 +411,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -448,7 +448,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(255, 137, 241);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(192, 104, 180) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -468,7 +468,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -493,7 +493,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(135, 206, 249);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(118, 178, 218) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -513,7 +513,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -542,7 +542,7 @@ namespace Breeze
                 const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
                 QColor menuSymbolColor;
-                if ( qGray(titleBarColor.rgb()) > 128 )
+                if ( qGray(titleBarColor.rgb()) > 192 )
                     menuSymbolColor = darkSymbolColor;
                 else
                     menuSymbolColor = lightSymbolColor;
@@ -564,7 +564,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(102, 156, 246);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(79, 120, 192) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -584,7 +584,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -1023,9 +1023,9 @@ namespace Breeze
 
             case DecorationButtonType::Close:
             {
-                const QColor button_color = QColor(242, 80, 86);
+                const QColor button_color = QColor(252, 87, 83);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(223, 71, 68) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1045,7 +1045,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -1064,9 +1064,9 @@ namespace Breeze
 
             case DecorationButtonType::Maximize:
             {
-                const QColor button_color = QColor(19, 209, 61);
+                const QColor button_color = QColor(51, 199, 72);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(39, 170, 53) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1086,7 +1086,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -1120,9 +1120,9 @@ namespace Breeze
 
             case DecorationButtonType::Minimize:
             {
-                const QColor button_color = QColor(252, 190, 7);
+                const QColor button_color = QColor(253, 188, 64);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(222, 159, 52) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1142,7 +1142,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -1161,7 +1161,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(125, 209, 200);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(108, 179, 174) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1181,7 +1181,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -1222,7 +1222,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(204, 176, 213);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(172, 149, 179) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1242,7 +1242,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -1265,7 +1265,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(255, 137, 241);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(192, 104, 180) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1285,7 +1285,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -1308,7 +1308,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(135, 206, 249);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(118, 178, 218) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1328,7 +1328,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -1355,7 +1355,16 @@ namespace Breeze
                 const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
                 QColor menuSymbolColor;
-                if ( qGray(titleBarColor.rgb()) > 128 )
+
+                uint r = qRed(titleBarColor.rgb());
+                uint g = qGreen(titleBarColor.rgb());
+                uint b = qBlue(titleBarColor.rgb());
+
+                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                if ( colorConditional > 186 || g > 186 ) // ( colorConditional > 186 ) // if ( colorConditional > 150 )
                     menuSymbolColor = darkSymbolColor;
                 else
                     menuSymbolColor = lightSymbolColor;
@@ -1377,7 +1386,7 @@ namespace Breeze
             {
                 const QColor button_color = QColor(102, 156, 246);
 
-                QPen button_pen( button_color );
+                QPen button_pen( QColor(79, 120, 192) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1397,7 +1406,7 @@ namespace Breeze
                 {
                   // filled
                   painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
+                  painter->setPen( button_pen );
                 }
                 qreal r = static_cast<qreal>(7)
                           + static_cast<qreal>(2) * m_animation->currentValue().toReal();
@@ -1450,7 +1459,7 @@ namespace Breeze
         // // symbols color
 
         // QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, isMatchTitleBarColor, darkSymbolColor, lightSymbolColor ) );
-        
+
         // don't really want to invest time to update autoColor to deal with inactiveWindow=True and qGray(titleBarColor.rgb()) > 128
         // which is causing lightSymbolColor to be used on inactive windows... Therefore, alway use darkSymbolColor.
 
@@ -1479,7 +1488,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                
+
                 button_color.setAlpha( 255 );
                 QColor mycolor = this->mixColors(button_color, symbolColor, m_opacity);
                 symbol_pen.setColor(mycolor);
@@ -1487,13 +1496,13 @@ namespace Breeze
                 // it's a cross
                 painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 12 ) );
                 painter->drawLine( QPointF( 6, 12 ), QPointF( 12, 6 ) );
-                  
+
                 break;
             }
 
             case DecorationButtonType::Maximize:
             {
-                QColor button_color = QColor(19, 209, 61);
+                QColor button_color = QColor(39, 170, 53);
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -1533,13 +1542,13 @@ namespace Breeze
 
                 painter->fillPath(path1, QBrush(mycolor));
                 painter->fillPath(path2, QBrush(mycolor));
-                
+
                 break;
             }
 
             case DecorationButtonType::Minimize:
             {
-                QColor button_color = QColor(252, 190, 7);
+                QColor button_color = QColor(222, 159, 52);
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -1549,7 +1558,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                
+
                 button_color.setAlpha( 255 );
                 QColor mycolor = this->mixColors(button_color, symbolColor, m_opacity);
                 symbol_pen.setColor(mycolor);
@@ -1562,7 +1571,7 @@ namespace Breeze
 
             case DecorationButtonType::OnAllDesktops:
             {
-                QColor button_color = QColor(125, 209, 200);
+                QColor button_color = QColor(108, 179, 174);
                 if ( !isChecked() )
                     button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
@@ -1573,7 +1582,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                
+
                 button_color.setAlpha( 255 );
                 QColor mycolor = symbolColor;
                 if ( !isChecked() )
@@ -1589,7 +1598,7 @@ namespace Breeze
 
             case DecorationButtonType::Shade:
             {
-                QColor button_color = QColor(204, 176, 213);
+                QColor button_color = QColor(172, 149, 179);
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -1599,7 +1608,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                
+
                 button_color.setAlpha( 255 );
                 QColor mycolor = this->mixColors(button_color, symbolColor, m_opacity);
                 symbol_pen.setColor(mycolor);
@@ -1627,14 +1636,14 @@ namespace Breeze
                     path.lineTo(13, 12);
                     painter->fillPath(path, QBrush(mycolor));
                 }
-                
+
                 break;
 
             }
 
             case DecorationButtonType::KeepBelow:
-            {   
-                QColor button_color = QColor(255, 137, 241);
+            {
+                QColor button_color = QColor(192, 104, 180);
                 if ( !isChecked() )
                     button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
@@ -1645,7 +1654,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                
+
                 button_color.setAlpha( 255 );
                 QColor mycolor = symbolColor;
                 if ( !isChecked() )
@@ -1658,14 +1667,14 @@ namespace Breeze
                 path.lineTo(5, 6);
                 path.lineTo(13, 6);
                 painter->fillPath(path, QBrush(mycolor));
-                
+
                 break;
 
             }
 
             case DecorationButtonType::KeepAbove:
             {
-                QColor button_color = QColor(135, 206, 249);
+                QColor button_color = QColor(118, 178, 218);
                 if ( !isChecked() )
                     button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
@@ -1676,7 +1685,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                
+
                 button_color.setAlpha( 255 );
                 QColor mycolor = symbolColor;
                 if ( !isChecked() )
@@ -1689,7 +1698,7 @@ namespace Breeze
                 path.lineTo(5, 12);
                 path.lineTo(13, 12);
                 painter->fillPath(path, QBrush(mycolor));
-                
+
                 break;
             }
 
@@ -1702,7 +1711,16 @@ namespace Breeze
                 const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
                 QColor menuSymbolColor;
-                if ( qGray(titleBarColor.rgb()) > 128 )
+
+                uint r = qRed(titleBarColor.rgb());
+                uint g = qGreen(titleBarColor.rgb());
+                uint b = qBlue(titleBarColor.rgb());
+
+                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                if ( colorConditional > 186 || g > 186 ) // ( colorConditional > 186 ) // if ( colorConditional > 150 )
                     menuSymbolColor = darkSymbolColor;
                 else
                     menuSymbolColor = lightSymbolColor;
@@ -1722,7 +1740,7 @@ namespace Breeze
 
             case DecorationButtonType::ContextHelp:
             {
-                QColor button_color = QColor(102, 156, 246);
+                QColor button_color = QColor(79, 120, 192);
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -1732,7 +1750,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                
+
                 button_color.setAlpha( 255 );
                 QColor mycolor = this->mixColors(button_color, symbolColor, m_opacity);
                 symbol_pen.setColor(mycolor);
@@ -1744,7 +1762,7 @@ namespace Breeze
                 path.cubicTo( QPointF(11, 9), QPointF( 9, 6 ), QPointF( 9, 10 ) );
                 painter->drawPath( path );
                 painter->drawPoint( 9, 13 );
-                
+
                 break;
             }
 
@@ -1891,7 +1909,15 @@ namespace Breeze
 
             const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
-            if ( qGray(titleBarColor.rgb()) > 128 )
+            uint r = qRed(titleBarColor.rgb());
+            uint g = qGreen(titleBarColor.rgb());
+            uint b = qBlue(titleBarColor.rgb());
+
+            // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+            // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+            // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+            qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+            if ( colorConditional > 186 || g > 186 ) // ( colorConditional > 186 ) // if ( colorConditional > 150 )
                 col = darkSymbolColor;
             else
                 col = lightSymbolColor;
