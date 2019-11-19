@@ -2,9 +2,10 @@ V0.5.0
 ---------
 
 * Arguably better switch between light and dark colors
-* Outline filled rings (issue 23)
-*
-*
+* Added border lines (Not done yet - wip to fix issue 12)
+* Added outline to filled rings (fixes issue 23)
+* Added new Symbol Style Minimal (monocolor; fixes issue 28)
+* Some minor improvements to Gnome Style
 
 V0.4.10
 ---------

@@ -117,6 +117,7 @@ namespace Breeze
         void drawIconAdwaitaStyle( QPainter *) const;
         void drawIconDarkAuroraeStyle( QPainter *) const;
         void drawIconSymbolStyle( QPainter *) const;
+        void drawIconSymbolStyleMinimal( QPainter *) const;
 
         //*@name colors
         //@{
