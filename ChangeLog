@@ -1,3 +1,9 @@
+V0.4.10
+---------
+
+Full consistency between buttons and foreground text colors
+* Particularly useful when using kwin auto titlebars colors https://github.com/ArturGaspar/kwin_auto_titlebar_colours
+
 V0.4.9
 ---------
 
