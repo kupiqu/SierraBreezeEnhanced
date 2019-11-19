@@ -16,6 +16,25 @@ SierraBreezeEnhanced is a fork of BreezeEnhanced decoration with the following c
 
 SierraBreezeEnhanced is strongly based on BreezeEnhanced and SierraBreeze.
 
+## Build dependencies
+
+### Ubuntu
+``` shell
+sudo apt install build-essential libkf5config-dev libkdecorations2-dev libqt5x11extras5-dev qtdeclarative5-dev extra-cmake-modules libkf5guiaddons-dev libkf5configwidgets-dev libkf5windowsystem-dev libkf5coreaddons-dev gettext
+```
+
+### Arch Linux
+``` shell
+sudo pacman -S kdecoration qt5-declarative qt5-x11extras    # Decoration
+sudo pacman -S cmake extra-cmake-modules                    # Installation
+```
+
+### Fedora
+``` shell
+sudo dnf install cmake extra-cmake-modules
+sudo dnf install "cmake(Qt5Core)" "cmake(Qt5Gui)" "cmake(Qt5DBus)" "cmake(Qt5X11Extras)" "cmake(KF5GuiAddons)" "cmake(KF5WindowSystem)" "cmake(KF5I18n)" "cmake(KDecoration2)" "cmake(KF5CoreAddons)" "cmake(KF5ConfigWidgets)"
+```
+
 ## Installation
 
 *Compilation should not be done against versions of KWin < 5.14.*
