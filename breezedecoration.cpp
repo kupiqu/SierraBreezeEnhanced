@@ -681,20 +681,18 @@ namespace Breeze
             painter->fillRect(rect(), Qt::transparent);
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
-            painter->setPen(Qt::NoPen);
 
             if ( matchColorForTitleBar() ) {
                 m_windowColor = titleBarColor;
             }
             else {
-                m_windowColor = c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame );
+                m_windowColor = c->isActive() ? titleBarColor : c->color( ColorGroup::Inactive, ColorRole::Frame );
             }
 
-
             if ( !opaqueTitleBar() ) {
-              int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
-              a =  qBound(0, a, 100);
-              m_windowColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
+                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
+                a =  qBound(0, a, 100);
+                m_windowColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
             }
 
             painter->setBrush( m_windowColor );
@@ -716,8 +714,8 @@ namespace Breeze
             else painter->drawRect( rect().adjusted( 1.5, 1.5, -1.5, -1.5 ) );
 
             QColor borderColor3( c->isActive() ?
-                c->color( ColorGroup::Active, ColorRole::TitleBar ):
-                c->color( ColorGroup::Inactive, ColorRole::Frame ) );
+               titleBarColor :
+               c->color( ColorGroup::Inactive, ColorRole::Frame ) );
             QPen border_pen3( borderColor3 );
             border_pen3.setWidthF( 0.5 );
             painter->setPen(border_pen3);
@@ -748,8 +746,8 @@ namespace Breeze
             else painter->drawRect( rect().adjusted( 1.5, 1.5, -1.5, -1.5 ) );
 
             QColor borderColor3( c->isActive() ?
-                c->color( ColorGroup::Active, ColorRole::TitleBar ):
-                c->color( ColorGroup::Inactive, ColorRole::Frame ) );
+               titleBarColor :
+               c->color( ColorGroup::Inactive, ColorRole::Frame ) );
             QPen border_pen3( borderColor3 );
             border_pen3.setWidthF( 0.5 );
             painter->setPen(border_pen3);
