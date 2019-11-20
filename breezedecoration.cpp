@@ -738,12 +738,14 @@ namespace Breeze
             QPen border_pen1( QColor(81, 102, 107) );
             border_pen1.setWidthF( 2 );
             painter->setPen(border_pen1);
-            painter->drawRect( rect().adjusted( 1, 1, -1, -1 ) );
+            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect().adjusted( 1, 1, -1, -1 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            else painter->drawRect( rect().adjusted( 1, 1, -1, -1 ) );
 
             QPen border_pen2( QColor(255, 255, 0) );
             border_pen2.setWidthF( 0.5 );
             painter->setPen(border_pen2);
-            painter->drawRect( rect().adjusted( 1.5, 1.5, -1.5, -1.5 ) );
+            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect().adjusted( 1.5, 1.5, -1.5, -1.5 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            else painter->drawRect( rect().adjusted( 1.5, 1.5, -1.5, -1.5 ) );
 
             QColor borderColor3( c->isActive() ?
                 c->color( ColorGroup::Active, ColorRole::TitleBar ):
@@ -751,7 +753,8 @@ namespace Breeze
             QPen border_pen3( borderColor3 );
             border_pen3.setWidthF( 0.5 );
             painter->setPen(border_pen3);
-            painter->drawRect( rect().adjusted( 2, 2, -2, -2 ) );
+            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect().adjusted( 2, 2, -2, -2 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            else painter->drawRect( rect().adjusted( 2, 2, -2, -2 ) );
 
             painter->restore();
         }
