@@ -58,6 +58,15 @@ sudo apt update
 sudo apt install sierrabreezeenhanced
 ```
 
+### openSUSE package
+
+Users of openSUSE Tumbleweed/Leap can add this repo and install the package by:
+
+```sh
+sudo zypper ar obs://home:trmdi trmdi
+sudo zypper in SierraBreezeEnhanced
+```
+
 ## Screenshots:
 
 ![Active Buttons](screenshots/ActiveButtons.gif?raw=true "Active Buttons")
