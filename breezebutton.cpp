@@ -209,7 +209,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(252, 87, 83);
 
-                //QPen button_pen( QColor(223, 71, 68) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -251,7 +250,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(51, 199, 72);
 
-                //QPen button_pen( QColor(39, 170, 53) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -316,7 +314,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(253, 188, 64);
 
-                //QPen button_pen( QColor(222, 159, 52) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -356,7 +353,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(125, 209, 200);
 
-                //QPen button_pen( QColor(108, 179, 174) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -397,7 +393,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(204, 176, 213);
 
-                //QPen button_pen( QColor(172, 149, 179) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -455,7 +450,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(255, 137, 241);
 
-                //QPen button_pen( QColor(192, 104, 180) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -501,7 +495,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(135, 206, 249);
 
-                //QPen button_pen( QColor(118, 178, 218) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -573,7 +566,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(102, 156, 246);
 
-                //QPen button_pen( QColor(79, 120, 192) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -1361,7 +1353,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(252, 87, 83);
 
-                //QPen button_pen( QColor(223, 71, 68) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -1403,7 +1394,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(51, 199, 72);
 
-                //QPen button_pen( QColor(39, 170, 53) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -1460,7 +1450,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(253, 188, 64);
 
-                //QPen button_pen( QColor(222, 159, 52) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -1500,7 +1489,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(125, 209, 200);
 
-                //QPen button_pen( QColor(108, 179, 174) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -1562,7 +1550,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(204, 176, 213);
 
-                //QPen button_pen( QColor(172, 149, 179) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -1606,7 +1593,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(255, 137, 241);
 
-                //QPen button_pen( QColor(192, 104, 180) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -1650,7 +1636,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(135, 206, 249);
 
-                //QPen button_pen( QColor(118, 178, 218) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
@@ -1729,7 +1714,6 @@ namespace Breeze
             {
                 const QColor button_color = QColor(102, 156, 246);
 
-                //QPen button_pen( QColor(79, 120, 192) );
                 QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
