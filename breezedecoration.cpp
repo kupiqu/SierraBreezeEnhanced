@@ -700,27 +700,9 @@ namespace Breeze
             // clip away the top part
             // if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
 
-            QPen border_pen1( QColor(81, 102, 107) );
-            border_pen1.setWidthF( 2 );
+            QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
-            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect().adjusted( 1, 1, -1, -1 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
-            else painter->drawRect( rect().adjusted( 1, 1, -1, -1 ) );
-
-            QColor borderColor2(  );
-            QPen border_pen2( QColor(255, 255, 0) );
-            border_pen2.setWidthF( 0.5 );
-            painter->setPen(border_pen2);
-            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect().adjusted( 1.5, 1.5, -1.5, -1.5 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
-            else painter->drawRect( rect().adjusted( 1.5, 1.5, -1.5, -1.5 ) );
-
-            QColor borderColor3( c->isActive() ?
-               titleBarColor :
-               c->color( ColorGroup::Inactive, ColorRole::Frame ) );
-            QPen border_pen3( borderColor3 );
-            border_pen3.setWidthF( 0.5 );
-            painter->setPen(border_pen3);
-            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect().adjusted( 2, 2, -2, -2 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
-            else painter->drawRect( rect().adjusted( 2, 2, -2, -2 ) );
+            painter->drawRoundedRect(rect().adjusted( 0, 0, -1, -1 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
             painter->restore();
         }
@@ -733,26 +715,9 @@ namespace Breeze
             painter->setRenderHint(QPainter::Antialiasing, false);
             painter->setBrush( Qt::NoBrush );
 
-            QPen border_pen1( QColor(81, 102, 107) );
-            border_pen1.setWidthF( 2 );
+            QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
-            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect().adjusted( 1, 1, -1, -1 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
-            else painter->drawRect( rect().adjusted( 1, 1, -1, -1 ) );
-
-            QPen border_pen2( QColor(255, 255, 0) );
-            border_pen2.setWidthF( 0.5 );
-            painter->setPen(border_pen2);
-            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect().adjusted( 1.5, 1.5, -1.5, -1.5 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
-            else painter->drawRect( rect().adjusted( 1.5, 1.5, -1.5, -1.5 ) );
-
-            QColor borderColor3( c->isActive() ?
-               titleBarColor :
-               c->color( ColorGroup::Inactive, ColorRole::Frame ) );
-            QPen border_pen3( borderColor3 );
-            border_pen3.setWidthF( 0.5 );
-            painter->setPen(border_pen3);
-            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect().adjusted( 2, 2, -2, -2 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
-            else painter->drawRect( rect().adjusted( 2, 2, -2, -2 ) );
+            painter->drawRoundedRect(rect().adjusted( 0, 0, -1, -1 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
             painter->restore();
         }
@@ -826,7 +791,7 @@ namespace Breeze
 
             painter->drawRoundedRect(titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
-        } else {
+        } /*else {
 
             painter->setClipRect(titleRect, Qt::IntersectClip);
 
@@ -838,7 +803,7 @@ namespace Breeze
                 m_internalSettings->cornerRadius()),
                 m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
-        }
+        }*/
 
         const QColor outlineColor( this->outlineColor() );
         if( !c->isShaded() && outlineColor.isValid() )
