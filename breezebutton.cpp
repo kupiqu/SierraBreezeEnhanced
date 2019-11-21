@@ -209,7 +209,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(252, 87, 83);
 
-                QPen button_pen( QColor(223, 71, 68) );
+                //QPen button_pen( QColor(223, 71, 68) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -250,7 +251,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(51, 199, 72);
 
-                QPen button_pen( QColor(39, 170, 53) );
+                //QPen button_pen( QColor(39, 170, 53) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -314,7 +316,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(253, 188, 64);
 
-                QPen button_pen( QColor(222, 159, 52) );
+                //QPen button_pen( QColor(222, 159, 52) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -353,7 +356,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(125, 209, 200);
 
-                QPen button_pen( QColor(108, 179, 174) );
+                //QPen button_pen( QColor(108, 179, 174) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -393,7 +397,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(204, 176, 213);
 
-                QPen button_pen( QColor(172, 149, 179) );
+                //QPen button_pen( QColor(172, 149, 179) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -450,7 +455,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(255, 137, 241);
 
-                QPen button_pen( QColor(192, 104, 180) );
+                //QPen button_pen( QColor(192, 104, 180) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -495,7 +501,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(135, 206, 249);
 
-                QPen button_pen( QColor(118, 178, 218) );
+                //QPen button_pen( QColor(118, 178, 218) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -566,7 +573,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(102, 156, 246);
 
-                QPen button_pen( QColor(79, 120, 192) );
+                //QPen button_pen( QColor(79, 120, 192) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1353,7 +1361,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(252, 87, 83);
 
-                QPen button_pen( QColor(223, 71, 68) );
+                //QPen button_pen( QColor(223, 71, 68) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1394,7 +1403,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(51, 199, 72);
 
-                QPen button_pen( QColor(39, 170, 53) );
+                //QPen button_pen( QColor(39, 170, 53) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1450,7 +1460,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(253, 188, 64);
 
-                QPen button_pen( QColor(222, 159, 52) );
+                //QPen button_pen( QColor(222, 159, 52) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1489,7 +1500,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(125, 209, 200);
 
-                QPen button_pen( QColor(108, 179, 174) );
+                //QPen button_pen( QColor(108, 179, 174) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1550,7 +1562,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(204, 176, 213);
 
-                QPen button_pen( QColor(172, 149, 179) );
+                //QPen button_pen( QColor(172, 149, 179) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1593,7 +1606,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(255, 137, 241);
 
-                QPen button_pen( QColor(192, 104, 180) );
+                //QPen button_pen( QColor(192, 104, 180) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1636,7 +1650,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(135, 206, 249);
 
-                QPen button_pen( QColor(118, 178, 218) );
+                //QPen button_pen( QColor(118, 178, 218) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1714,7 +1729,8 @@ namespace Breeze
             {
                 const QColor button_color = QColor(102, 156, 246);
 
-                QPen button_pen( QColor(79, 120, 192) );
+                //QPen button_pen( QColor(79, 120, 192) );
+                QPen button_pen( button_color.darker( 150 ) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1806,7 +1822,7 @@ namespace Breeze
 
             case DecorationButtonType::Close:
             {
-                QColor button_color = QColor( 242, 80, 86 );
+                QColor button_color = QColor(252, 87, 83);
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -1818,7 +1834,7 @@ namespace Breeze
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
-                QColor mycolor = this->mixColors(button_color, symbolColor, m_opacity);
+                QColor mycolor = this->mixColors(button_color.darker( 100 ), symbolColor, m_opacity);
                 symbol_pen.setColor(mycolor);
                 painter->setPen( symbol_pen );
                 // it's a cross
@@ -1830,7 +1846,7 @@ namespace Breeze
 
             case DecorationButtonType::Maximize:
             {
-                QColor button_color = QColor(39, 170, 53);
+                QColor button_color = QColor(51, 199, 72);
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -1843,7 +1859,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
 
                 button_color.setAlpha( 255 );
-                QColor mycolor = this->mixColors(button_color, symbolColor, m_opacity);
+                QColor mycolor = this->mixColors(button_color.darker( 100 ), symbolColor, m_opacity);
 
                 // two triangles
                 QPainterPath path1, path2;
@@ -1876,7 +1892,7 @@ namespace Breeze
 
             case DecorationButtonType::Minimize:
             {
-                QColor button_color = QColor(222, 159, 52);
+                QColor button_color = QColor(253, 188, 64);
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -1888,7 +1904,7 @@ namespace Breeze
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
-                QColor mycolor = this->mixColors(button_color, symbolColor, m_opacity);
+                QColor mycolor = this->mixColors(button_color.darker( 100 ), symbolColor, m_opacity);
                 symbol_pen.setColor(mycolor);
                 painter->setPen( symbol_pen );
                 // it's a horizontal line
@@ -1899,7 +1915,7 @@ namespace Breeze
 
             case DecorationButtonType::OnAllDesktops:
             {
-                QColor button_color = QColor(108, 179, 174);
+                QColor button_color = QColor(125, 209, 200);
                 if ( !isChecked() )
                     button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
@@ -1914,7 +1930,7 @@ namespace Breeze
                 button_color.setAlpha( 255 );
                 QColor mycolor = symbolColor;
                 if ( !isChecked() )
-                    mycolor = this->mixColors(button_color, symbolColor, m_opacity);
+                    mycolor = this->mixColors(button_color.darker( 100 ), symbolColor, m_opacity);
                 symbol_pen.setColor(mycolor);
                 // painter->setPen( symbol_pen );
                 painter->setPen( Qt::NoPen );
@@ -1926,7 +1942,7 @@ namespace Breeze
 
             case DecorationButtonType::Shade:
             {
-                QColor button_color = QColor(172, 149, 179);
+                QColor button_color = QColor(204, 176, 213);
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -1938,7 +1954,7 @@ namespace Breeze
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
-                QColor mycolor = this->mixColors(button_color, symbolColor, m_opacity);
+                QColor mycolor = this->mixColors(button_color.darker( 100 ), symbolColor, m_opacity);
                 symbol_pen.setColor(mycolor);
                 painter->setPen( symbol_pen );
                 // it's a triangle with a dash
@@ -1971,7 +1987,7 @@ namespace Breeze
 
             case DecorationButtonType::KeepBelow:
             {
-                QColor button_color = QColor(192, 104, 180);
+                QColor button_color = QColor(255, 137, 241);
                 if ( !isChecked() )
                     button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
@@ -1986,7 +2002,7 @@ namespace Breeze
                 button_color.setAlpha( 255 );
                 QColor mycolor = symbolColor;
                 if ( !isChecked() )
-                    mycolor = this->mixColors(button_color, symbolColor, m_opacity);
+                    mycolor = this->mixColors(button_color.darker (125), symbolColor, m_opacity);
                 painter->setPen( Qt::NoPen );
 
                 // it's a downward pointing triangle
@@ -2002,7 +2018,7 @@ namespace Breeze
 
             case DecorationButtonType::KeepAbove:
             {
-                QColor button_color = QColor(118, 178, 218);
+                QColor button_color = QColor(135, 206, 249);
                 if ( !isChecked() )
                     button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
@@ -2017,7 +2033,7 @@ namespace Breeze
                 button_color.setAlpha( 255 );
                 QColor mycolor = symbolColor;
                 if ( !isChecked() )
-                    mycolor = this->mixColors(button_color, symbolColor, m_opacity);
+                    mycolor = this->mixColors(button_color.darker( 100 ), symbolColor, m_opacity);
                 painter->setPen( Qt::NoPen );
 
                 // it's a upward pointing triangle
@@ -2068,7 +2084,7 @@ namespace Breeze
 
             case DecorationButtonType::ContextHelp:
             {
-                QColor button_color = QColor(79, 120, 192);
+                QColor button_color =QColor(102, 156, 246);
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -2080,7 +2096,7 @@ namespace Breeze
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
-                QColor mycolor = this->mixColors(button_color, symbolColor, m_opacity);
+                QColor mycolor = this->mixColors(button_color.darker( 100 ), symbolColor, m_opacity);
                 symbol_pen.setColor(mycolor);
                 painter->setPen( symbol_pen );
                 // it's a question mark
