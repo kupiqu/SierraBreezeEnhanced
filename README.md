@@ -48,6 +48,12 @@ sudo make install
 ```
 After the intallation, restart KWin by logging out and in. Then, SierraBreezeEnhanced will appear in *System Settings &rarr; Application Style &rarr; Window Decorations*.
 
+Alternatively install from script (which does the above):
+```sh
+chmod +x install.sh
+./install.sh
+```
+
 ### Ubuntu PPA
 
 Users of Ubuntu based distros (such as KDE Neon) can add the PPA and install the package by:
