@@ -60,6 +60,7 @@ namespace Breeze
         connect( m_ui.opacitySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
         connect( m_ui.gradientSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
         connect( m_ui.drawTitleBarSeparator, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.hideTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.matchColorForTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
 
         connect( m_ui.fontComboBox, &QFontComboBox::currentFontChanged, [this] { updateChanged(); } );
@@ -110,6 +111,7 @@ namespace Breeze
         m_ui.opacitySpinBox->setValue( m_internalSettings->backgroundOpacity() );
         m_ui.gradientSpinBox->setValue( m_internalSettings->backgroundGradientIntensity() );
         m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
+        m_ui.hideTitleBar->setChecked( m_internalSettings->hideTitleBar() );
         m_ui.matchColorForTitleBar->setChecked( m_internalSettings->matchColorForTitleBar() );
 
         QString fontStr = m_internalSettings->titleBarFont();
@@ -185,6 +187,7 @@ namespace Breeze
         m_internalSettings->setBackgroundOpacity(m_ui.opacitySpinBox->value());
         m_internalSettings->setBackgroundGradientIntensity(m_ui.gradientSpinBox->value());
         m_internalSettings->setDrawTitleBarSeparator(m_ui.drawTitleBarSeparator->isChecked());
+        m_internalSettings->setHideTitleBar( m_ui.hideTitleBar->isChecked() );
         m_internalSettings->setMatchColorForTitleBar( m_ui.matchColorForTitleBar->isChecked() );
 
         QFont f = m_ui.fontComboBox->currentFont();
@@ -265,6 +268,7 @@ namespace Breeze
         m_ui.opaqueTitleBar->setChecked( m_internalSettings->opaqueTitleBar() );
         m_ui.drawBackgroundGradient->setChecked( m_internalSettings->drawBackgroundGradient() );
         m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
+        m_ui.hideTitleBar->setChecked( m_internalSettings->hideTitleBar() );
         m_ui.matchColorForTitleBar->setChecked( m_internalSettings->matchColorForTitleBar() );
 
         m_ui.animationsEnabled->setChecked( m_internalSettings->animationsEnabled() );
@@ -334,6 +338,7 @@ namespace Breeze
         else if( m_ui.opacitySpinBox->value() != m_internalSettings->backgroundOpacity() ) modified = true;
         else if( m_ui.gradientSpinBox->value() != m_internalSettings->backgroundGradientIntensity() ) modified = true;
         else if (m_ui.drawTitleBarSeparator->isChecked() != m_internalSettings->drawTitleBarSeparator()) modified = true;
+        else if ( m_ui.hideTitleBar->isChecked() != m_internalSettings->hideTitleBar() ) modified = true;
         else if ( m_ui.matchColorForTitleBar->isChecked() != m_internalSettings->matchColorForTitleBar() ) modified = true;
 
         // font (also see below)

@@ -113,7 +113,7 @@
          </property>
         </widget>
        </item>
-       <item row="26" column="1" colspan="9">
+       <item row="27" column="1" colspan="9">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -207,14 +207,14 @@
          </item>
         </widget>
        </item>
-       <item row="22" column="1" colspan="9">
+       <item row="23" column="1" colspan="9">
         <widget class="QCheckBox" name="drawTitleBarSeparator">
          <property name="text">
           <string>Draw separator between Title Bar and Window</string>
          </property>
         </widget>
        </item>
-       <item row="23" column="1" colspan="9">
+       <item row="24" column="1" colspan="9">
         <widget class="QCheckBox" name="opaqueTitleBar">
          <property name="text">
           <string>Opaque title bar</string>
@@ -222,7 +222,7 @@
         </widget>
        </item>
 
-         <item row="24" column="1">
+         <item row="25" column="1">
           <widget class="QLabel" name="label_6">
            <property name="text">
             <string>Background opacity:</string>
@@ -232,7 +232,7 @@
            </property>
           </widget>
          </item>
-         <item row="24" column="8">
+         <item row="25" column="8">
           <widget class="QSpinBox" name="opacitySpinBox">
            <property name="suffix">
             <string> %</string>
@@ -243,7 +243,7 @@
           </widget>
          </item>
 
-       <item row="21" column="1" colspan="9">
+       <item row="22" column="1" colspan="10">
         <widget class="QCheckBox" name="drawSizeGrip">
          <property name="text">
           <string>Add handle to resize windows with no border</string>
@@ -274,28 +274,35 @@
          </item>
         </widget>
        </item>
-       <item row="5" column="1" colspan="9">
+       <item row="5" column="1" colspan="10">
+         <widget class="QCheckBox" name="hideTitleBar">
+           <property name="text">
+             <string>Hide Title Bar</string>
+           </property>
+         </widget>
+       </item>
+       <item row="6" column="1" colspan="10">
         <widget class="QCheckBox" name="matchColorForTitleBar">
          <property name="text">
           <string>Match Title Bar's and Window's color</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="1" colspan="9">
+       <item row="7" column="1" colspan="10">
         <widget class="QCheckBox" name="outlineCloseButton">
          <property name="text">
           <string>Draw a circle around close button (Plasma style only)</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="1" colspan="9">
+       <item row="8" column="1" colspan="10">
         <widget class="QCheckBox" name="drawBorderOnMaximizedWindows">
          <property name="text">
           <string>Allow resizing maximized windows from window edges</string>
          </property>
         </widget>
        </item>
-       <item row="9" column="1" colspan="9">
+       <item row="10" column="1" colspan="10">
         <widget class="QCheckBox" name="drawBackgroundGradient">
          <property name="text">
           <string>Draw window background gradient</string>
@@ -303,7 +310,7 @@
         </widget>
        </item>
 
-         <item row="12" column="1">
+         <item row="13" column="1">
           <widget class="QLabel" name="label_7">
            <property name="enabled">
             <bool>false</bool>
@@ -316,7 +323,7 @@
            </property>
           </widget>
          </item>
-         <item row="12" column="8">
+         <item row="13" column="8">
           <widget class="QSpinBox" name="gradientSpinBox">
            <property name="enabled">
             <bool>false</bool>
@@ -349,7 +356,7 @@
           </widget>
          </item>
 
-       <item row="25" column="1" colspan="9">
+       <item row="26" column="1" colspan="9">
         <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0,0,0">
          <item row="3" column="0" colspan="7" alignment="Qt::AlignLeft">
           <widget class="QGroupBox" name="groupBox">
@@ -440,14 +447,14 @@
         </layout>
        </item>
 
-         <item row="8" column="1">
+         <item row="9" column="1">
           <widget class="QLabel" name="cornerRadiusLabel">
            <property name="text">
             <string>Corner radius:</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="8">
+         <item row="9" column="8">
           <widget class="QSpinBox" name="cornerRadiusSpinBox">
            <property name="suffix">
             <string> px</string>
