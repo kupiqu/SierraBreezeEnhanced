@@ -791,7 +791,7 @@ namespace Breeze
 
             painter->drawRoundedRect(titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
-        } /*else {
+        } else if ( !hasBorders() ){
 
             painter->setClipRect(titleRect, Qt::IntersectClip);
 
@@ -803,7 +803,7 @@ namespace Breeze
                 m_internalSettings->cornerRadius()),
                 m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
-        }*/
+        }
 
         const QColor outlineColor( this->outlineColor() );
         if( !c->isShaded() && outlineColor.isValid() )
