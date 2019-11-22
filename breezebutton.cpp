@@ -1150,10 +1150,11 @@ namespace Breeze
 
           button_color.setAlpha( 255 );
           QColor mycolor = symbolColor;
-          if ( !isChecked() )
+          if ( isChecked() && !isHovered() )
+            mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
+          else
             mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
           symbol_pen.setColor(mycolor);
-          // painter->setPen( symbol_pen );
           painter->setPen( Qt::NoPen );
           painter->setBrush(QBrush(mycolor));
           painter->drawEllipse( QRectF( 6, 6, 6, 6 ) );
@@ -1222,7 +1223,9 @@ namespace Breeze
 
           button_color.setAlpha( 255 );
           QColor mycolor = symbolColor;
-          if ( !isChecked() )
+          if ( isChecked() && !isHovered() )
+            mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
+          else
             mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
           painter->setPen( Qt::NoPen );
 
@@ -1253,7 +1256,9 @@ namespace Breeze
 
           button_color.setAlpha( 255 );
           QColor mycolor = symbolColor;
-          if ( !isChecked() )
+          if ( isChecked() && !isHovered() )
+            mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
+          else
             mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
           painter->setPen( Qt::NoPen );
 
@@ -1776,20 +1781,7 @@ namespace Breeze
         painter->translate( 1, 1 );
 
         auto d = qobject_cast<Decoration*>( decoration() );
-        // bool inactiveWindow( d && !d->client().data()->isActive() );
-        // bool useActiveButtonStyle( d && d->internalSettings()->buttonStyle() == 1 );
-        // bool useInactiveButtonStyle( d && d->internalSettings()->buttonStyle() == 2 );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
-
-        // const QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
-        // const QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
-
-        // // symbols color
-
-        // QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, isMatchTitleBarColor, darkSymbolColor, lightSymbolColor ) );
-
-        // don't really want to invest time to update autoColor to deal with inactiveWindow=True and qGray(titleBarColor.rgb()) > 128
-        // which is causing lightSymbolColor to be used on inactive windows... Therefore, alway use darkSymbolColor.
 
         const QColor darkSymbolColor = QColor(34, 45, 50);
         const QColor lightSymbolColor = QColor(250, 251, 252);
