@@ -1,3 +1,12 @@
+V0.6.0
+---------
+
+* Enabled option to hide title bar
+* Nicer hide title bar behavior (it actually keeps a title bar as minimalistic as it can be to save vertical space; thought for laptops using window appMenu and window buttons in a latte panel)
+* Fixed issue in Symbol Style Minimal
+* Improved outer ring contrast
+* Fixed issue with titlebar color (issue #36)
+
 V0.5.3
 ---------
 
