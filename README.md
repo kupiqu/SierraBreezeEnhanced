@@ -73,6 +73,19 @@ sudo zypper ar obs://home:trmdi trmdi
 sudo zypper in SierraBreezeEnhanced
 ```
 
+## Uninstall
+
+Run the uninstall script
+```sh
+chmod +x uninstall.sh
+./uninstall.sh
+```
+or manually if previously ran the install script
+```sh
+cd build
+sudo make uninstall
+```
+
 ## Screenshots:
 
 ![Active Buttons](screenshots/ActiveButtons.gif?raw=true "Active Buttons")
