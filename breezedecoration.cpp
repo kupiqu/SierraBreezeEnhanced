@@ -215,8 +215,9 @@ namespace Breeze
     {
 
         auto c = client().data();
-        if( hideTitleBar() ) return c->color( ColorGroup::Inactive, ColorRole::TitleBar );
-        else if( m_animation->state() == QPropertyAnimation::Running )
+        // if( hideTitleBar() ) return c->color( ColorGroup::Inactive, ColorRole::TitleBar );
+        // else if( m_animation->state() == QPropertyAnimation::Running )
+        if( m_animation->state() == QPropertyAnimation::Running )
         {
             return KColorUtils::mix(
                 c->color( ColorGroup::Inactive, ColorRole::TitleBar ),
@@ -700,7 +701,7 @@ namespace Breeze
             painter->restore();
         }
 
-        if( !hideTitleBar() ) paintTitleBar(painter, repaintRegion);
+        paintTitleBar(painter, repaintRegion);
 
         if ( hasBorders() ) // && !s->isAlphaChannelSupported() )
         {
@@ -810,20 +811,22 @@ namespace Breeze
 
         painter->restore();
 
-        // draw caption
-        QFont f; f.fromString(m_internalSettings->titleBarFont());
-        // KDE needs this FIXME: Why?
-        QFontDatabase fd; f.setStyleName(fd.styleString(f));
-        painter->setFont(f);
-        painter->setPen( fontColor() );
+        if( !hideTitleBar() ) {
+          // draw caption
+          QFont f; f.fromString(m_internalSettings->titleBarFont());
+          // KDE needs this FIXME: Why?
+          QFontDatabase fd; f.setStyleName(fd.styleString(f));
+          painter->setFont(f);
+          painter->setPen( fontColor() );
 
-        const auto cR = captionRect();
-        const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
-        painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
+          const auto cR = captionRect();
+          const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
+          painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
 
-        // draw all buttons
-        m_leftButtons->paint(painter, repaintRegion);
-        m_rightButtons->paint(painter, repaintRegion);
+          // draw all buttons
+          m_leftButtons->paint(painter, repaintRegion);
+          m_rightButtons->paint(painter, repaintRegion);
+        }
     }
 
     //________________________________________________________________
