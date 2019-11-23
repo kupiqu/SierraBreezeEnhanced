@@ -210,7 +210,7 @@ namespace Breeze
             case DecorationButtonType::Close:
             {
                 const QColor button_color = QColor(252, 87, 83);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(110) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
