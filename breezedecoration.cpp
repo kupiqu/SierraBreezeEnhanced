@@ -673,7 +673,7 @@ namespace Breeze
         auto s = settings();
 
         const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
-        const QColor titleBarColor = ( matchColorForTitleBar() ? matchedTitleBarColor : this->titleBarColor() );
+        QColor titleBarColor = ( matchColorForTitleBar() ? matchedTitleBarColor : this->titleBarColor() );
 
         // paint background
         if( !c->isShaded() )
@@ -682,20 +682,13 @@ namespace Breeze
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
 
-            if ( matchColorForTitleBar() ) {
-                m_windowColor = titleBarColor;
-            }
-            else {
-                m_windowColor = c->isActive() ? titleBarColor : c->color( ColorGroup::Inactive, ColorRole::Frame );
-            }
-
             if ( !opaqueTitleBar() ) {
                 int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
                 a =  qBound(0, a, 100);
-                m_windowColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
+                titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
             }
 
-            painter->setBrush( m_windowColor );
+            painter->setBrush( titleBarColor );
 
             // clip away the top part
             // if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);

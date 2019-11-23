@@ -153,9 +153,6 @@ namespace Breeze
 
         //* active state change opacity
         qreal m_opacity = 0;
-
-        QColor m_windowColor;
-
     };
 
     bool Decoration::hasBorders() const
