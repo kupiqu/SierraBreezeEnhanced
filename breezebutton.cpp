@@ -109,7 +109,6 @@ namespace Breeze
                 break;
 
                 default: break;
-
             }
 
             return b;
@@ -192,6 +191,9 @@ namespace Breeze
         const QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
         const QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
+        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+
         // symbols color
 
         QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, isMatchTitleBarColor, darkSymbolColor, lightSymbolColor ) );
@@ -208,8 +210,7 @@ namespace Breeze
             case DecorationButtonType::Close:
             {
                 const QColor button_color = QColor(252, 87, 83);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -249,8 +250,7 @@ namespace Breeze
             case DecorationButtonType::Maximize:
             {
                 const QColor button_color = QColor(51, 199, 72);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -313,8 +313,7 @@ namespace Breeze
             case DecorationButtonType::Minimize:
             {
                 const QColor button_color = QColor(253, 188, 64);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -352,8 +351,7 @@ namespace Breeze
             case DecorationButtonType::OnAllDesktops:
             {
                 const QColor button_color = QColor(125, 209, 200);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -392,8 +390,7 @@ namespace Breeze
             case DecorationButtonType::Shade:
             {
                 const QColor button_color = QColor(204, 176, 213);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -449,8 +446,7 @@ namespace Breeze
             case DecorationButtonType::KeepBelow:
             {
                 const QColor button_color = QColor(255, 137, 241);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -494,8 +490,7 @@ namespace Breeze
             case DecorationButtonType::KeepAbove:
             {
                 const QColor button_color = QColor(135, 206, 249);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -537,17 +532,19 @@ namespace Breeze
 
             case DecorationButtonType::ApplicationMenu:
             {
-                auto d = qobject_cast<Decoration*>( decoration() );
-
-                const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-
-                const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
-
                 QColor menuSymbolColor;
-                if ( qGray(titleBarColor.rgb()) > 192 )
-                    menuSymbolColor = darkSymbolColor;
+
+                uint r = qRed(titleBarColor.rgb());
+                uint g = qGreen(titleBarColor.rgb());
+                uint b = qBlue(titleBarColor.rgb());
+                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                if ( colorConditional > 186 || g > 186 )
+                  menuSymbolColor = darkSymbolColor;
                 else
-                    menuSymbolColor = lightSymbolColor;
+                  menuSymbolColor = lightSymbolColor;
 
                 QPen menuSymbol_pen( menuSymbolColor );
                 menuSymbol_pen.setJoinStyle( Qt::MiterJoin );
@@ -565,8 +562,7 @@ namespace Breeze
             case DecorationButtonType::ContextHelp:
             {
                 const QColor button_color = QColor(102, 156, 246);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -607,7 +603,6 @@ namespace Breeze
             }
 
             default: break;
-
         }
     }
 
@@ -807,7 +802,6 @@ namespace Breeze
                 }
 
                 default: break;
-
             }
 
         }
@@ -977,7 +971,6 @@ namespace Breeze
                 }
 
                 default: break;
-
             }
 
         }
@@ -1005,18 +998,16 @@ namespace Breeze
 
         auto d = qobject_cast<Decoration*>( decoration() );
 
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
+        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
         const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
-
-        QColor symbolColor;
-        QColor symbolBgdColor;
-
         uint r = qRed(titleBarColor.rgb());
         uint g = qGreen(titleBarColor.rgb());
         uint b = qBlue(titleBarColor.rgb());
+
+        QColor symbolColor;
+        QColor symbolBgdColor;
 
         // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
         // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
@@ -1341,6 +1332,9 @@ namespace Breeze
         const QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
         const QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
+        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+
         // symbols color
 
         QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, isMatchTitleBarColor, darkSymbolColor, lightSymbolColor ) );
@@ -1357,8 +1351,7 @@ namespace Breeze
             case DecorationButtonType::Close:
             {
                 const QColor button_color = QColor(252, 87, 83);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1398,8 +1391,7 @@ namespace Breeze
             case DecorationButtonType::Maximize:
             {
                 const QColor button_color = QColor(51, 199, 72);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1454,8 +1446,7 @@ namespace Breeze
             case DecorationButtonType::Minimize:
             {
                 const QColor button_color = QColor(253, 188, 64);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1493,8 +1484,7 @@ namespace Breeze
             case DecorationButtonType::OnAllDesktops:
             {
                 const QColor button_color = QColor(125, 209, 200);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1554,8 +1544,7 @@ namespace Breeze
             case DecorationButtonType::Shade:
             {
                 const QColor button_color = QColor(204, 176, 213);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1597,8 +1586,7 @@ namespace Breeze
             case DecorationButtonType::KeepBelow:
             {
                 const QColor button_color = QColor(255, 137, 241);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1640,8 +1628,7 @@ namespace Breeze
             case DecorationButtonType::KeepAbove:
             {
                 const QColor button_color = QColor(135, 206, 249);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1681,18 +1668,11 @@ namespace Breeze
 
             case DecorationButtonType::ApplicationMenu:
             {
-                auto d = qobject_cast<Decoration*>( decoration() );
-
-                const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-
-                const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
-
                 QColor menuSymbolColor;
 
                 uint r = qRed(titleBarColor.rgb());
                 uint g = qGreen(titleBarColor.rgb());
                 uint b = qBlue(titleBarColor.rgb());
-
                 // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
                 // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
                 // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
@@ -1718,8 +1698,7 @@ namespace Breeze
             case DecorationButtonType::ContextHelp:
             {
                 const QColor button_color = QColor(102, 156, 246);
-
-                QPen button_pen( button_color.darker( 150 ) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
@@ -1760,7 +1739,6 @@ namespace Breeze
             }
 
             default: break;
-
         }
     }
 
@@ -1786,6 +1764,9 @@ namespace Breeze
         const QColor darkSymbolColor = QColor(34, 45, 50);
         const QColor lightSymbolColor = QColor(250, 251, 252);
         QColor symbolColor = darkSymbolColor;
+
+        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
         // symbols pen
 
@@ -1978,7 +1959,7 @@ namespace Breeze
                 button_color.setAlpha( 255 );
                 QColor mycolor = symbolColor;
                 if ( !isChecked() )
-                    mycolor = this->mixColors(button_color.darker (125), symbolColor, m_opacity);
+                    mycolor = this->mixColors(button_color.darker (100), symbolColor, m_opacity);
                 painter->setPen( Qt::NoPen );
 
                 // it's a downward pointing triangle
@@ -2024,18 +2005,11 @@ namespace Breeze
 
             case DecorationButtonType::ApplicationMenu:
             {
-                auto d = qobject_cast<Decoration*>( decoration() );
-
-                const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-
-                const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
-
                 QColor menuSymbolColor;
 
                 uint r = qRed(titleBarColor.rgb());
                 uint g = qGreen(titleBarColor.rgb());
                 uint b = qBlue(titleBarColor.rgb());
-
                 // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
                 // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
                 // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
@@ -2108,8 +2082,8 @@ namespace Breeze
         int dirv =  sv > ev ? -1 : 1;
 
         return QColor::fromHsv( sh + dirh * progress * hr,
-                                  ss + dirs * progress * sr,
-                                  sv + dirv * progress * vr);
+                                ss + dirs * progress * sr,
+                                sv + dirv * progress * vr );
     }
 
     //__________________________________________________________________
@@ -2226,7 +2200,6 @@ namespace Breeze
             auto d = qobject_cast<Decoration*>( decoration() );
 
             const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-
             const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
             uint r = qRed(titleBarColor.rgb());
