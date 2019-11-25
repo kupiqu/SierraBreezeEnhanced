@@ -57,7 +57,7 @@ namespace Breeze
         for( CheckBoxMap::iterator iter = m_checkboxes.begin(); iter != m_checkboxes.end(); ++iter )
         { connect( iter.value(), SIGNAL(clicked()), SLOT(updateChanged()) ); }
 
-        connect( m_ui.hideTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.hideTitleBar, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.matchColorForTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawBackgroundGradient, SIGNAL(clicked()), SLOT(updateChanged()) );
         m_ui.gradientOverrideLabelSpinBox->setSpecialValueText(tr("None"));
@@ -86,7 +86,7 @@ namespace Breeze
         m_ui.exceptionType->setCurrentIndex(m_exception->exceptionType() );
         m_ui.exceptionEditor->setText( m_exception->exceptionPattern() );
         m_ui.borderSizeComboBox->setCurrentIndex( m_exception->borderSize() );
-        m_ui.hideTitleBar->setChecked( m_exception->hideTitleBar() );
+        m_ui.hideTitleBar->setCurrentIndex( m_exception->hideTitleBar() );
         m_ui.matchColorForTitleBar->setChecked( m_exception->matchColorForTitleBar() );
         m_ui.drawBackgroundGradient->setChecked( m_exception->drawBackgroundGradient() );
         m_ui.gradientOverrideLabelSpinBox->setValue( m_exception->gradientOverride() );
@@ -108,7 +108,7 @@ namespace Breeze
         m_exception->setExceptionType( m_ui.exceptionType->currentIndex() );
         m_exception->setExceptionPattern( m_ui.exceptionEditor->text() );
         m_exception->setBorderSize( m_ui.borderSizeComboBox->currentIndex() );
-        m_exception->setHideTitleBar( m_ui.hideTitleBar->isChecked() );
+        m_exception->setHideTitleBar( m_ui.hideTitleBar->currentIndex() );
         m_exception->setMatchColorForTitleBar( m_ui.matchColorForTitleBar->isChecked() );
         m_exception->setDrawBackgroundGradient( m_ui.drawBackgroundGradient->isChecked() );
         m_exception->setGradientOverride( m_ui.gradientOverrideLabelSpinBox->value() );
@@ -134,7 +134,7 @@ namespace Breeze
         if( m_exception->exceptionType() != m_ui.exceptionType->currentIndex() ) modified = true;
         else if( m_exception->exceptionPattern() != m_ui.exceptionEditor->text() ) modified = true;
         else if( m_exception->borderSize() != m_ui.borderSizeComboBox->currentIndex() ) modified = true;
-        else if( m_exception->hideTitleBar() != m_ui.hideTitleBar->isChecked() ) modified = true;
+        else if( m_exception->hideTitleBar() != m_ui.hideTitleBar->currentIndex() ) modified = true;
         else if( m_exception->matchColorForTitleBar() != m_ui.matchColorForTitleBar->isChecked() ) modified = true;
         else if( m_exception->drawBackgroundGradient() != m_ui.drawBackgroundGradient->isChecked() ) modified = true;
         else if( m_exception->gradientOverride() != m_ui.gradientOverrideLabelSpinBox->value() ) modified = true;
