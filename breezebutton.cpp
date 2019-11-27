@@ -210,9 +210,9 @@ namespace Breeze
             case DecorationButtonType::Close:
             {
                 const QColor button_color = QColor(252, 87, 83);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(175) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
                 {
@@ -250,9 +250,9 @@ namespace Breeze
             case DecorationButtonType::Maximize:
             {
                 const QColor button_color = QColor(51, 199, 72);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(175) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
                 {
@@ -313,9 +313,9 @@ namespace Breeze
             case DecorationButtonType::Minimize:
             {
                 const QColor button_color = QColor(253, 188, 64);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(130) : button_color.darker(190) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
                 {
@@ -351,9 +351,9 @@ namespace Breeze
             case DecorationButtonType::OnAllDesktops:
             {
                 const QColor button_color = QColor(125, 209, 200);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(120) : button_color.darker(200) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
@@ -390,9 +390,9 @@ namespace Breeze
             case DecorationButtonType::Shade:
             {
                 const QColor button_color = QColor(204, 176, 213);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
@@ -446,9 +446,9 @@ namespace Breeze
             case DecorationButtonType::KeepBelow:
             {
                 const QColor button_color = QColor(255, 137, 241);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(120) : button_color.darker(175) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
@@ -490,9 +490,9 @@ namespace Breeze
             case DecorationButtonType::KeepAbove:
             {
                 const QColor button_color = QColor(135, 206, 249);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
@@ -562,9 +562,9 @@ namespace Breeze
             case DecorationButtonType::ContextHelp:
             {
                 const QColor button_color = QColor(102, 156, 246);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(120) : button_color.darker(175) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
@@ -1353,7 +1353,7 @@ namespace Breeze
                 const QColor button_color = QColor(252, 87, 83);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
                 {
@@ -1391,9 +1391,9 @@ namespace Breeze
             case DecorationButtonType::Maximize:
             {
                 const QColor button_color = QColor(51, 199, 72);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(175) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
                 {
@@ -1446,9 +1446,9 @@ namespace Breeze
             case DecorationButtonType::Minimize:
             {
                 const QColor button_color = QColor(253, 188, 64);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(130) : button_color.darker(190) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
                 {
@@ -1484,9 +1484,9 @@ namespace Breeze
             case DecorationButtonType::OnAllDesktops:
             {
                 const QColor button_color = QColor(125, 209, 200);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(120) : button_color.darker(200) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
@@ -1544,9 +1544,9 @@ namespace Breeze
             case DecorationButtonType::Shade:
             {
                 const QColor button_color = QColor(204, 176, 213);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
@@ -1586,9 +1586,9 @@ namespace Breeze
             case DecorationButtonType::KeepBelow:
             {
                 const QColor button_color = QColor(255, 137, 241);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(120) : button_color.darker(175) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
@@ -1628,9 +1628,9 @@ namespace Breeze
             case DecorationButtonType::KeepAbove:
             {
                 const QColor button_color = QColor(135, 206, 249);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(125) : button_color.darker(200) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
@@ -1698,9 +1698,9 @@ namespace Breeze
             case DecorationButtonType::ContextHelp:
             {
                 const QColor button_color = QColor(102, 156, 246);
-                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(120) : button_color.darker(175) );
+                QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
-                button_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+                button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
                 {
