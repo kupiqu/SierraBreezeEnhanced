@@ -37,17 +37,17 @@
         <widget class="QComboBox" name="buttonStyle">
          <item>
           <property name="text">
-           <string>Active vs. Inactive</string>
+           <string>SBE Style</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Always Active</string>
+           <string>Active SBE</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Always Inactive</string>
+           <string>Inactive SBE</string>
           </property>
          </item>
          <item>
@@ -59,6 +59,11 @@
           <property name="text">
            <string>Gnome Style</string>
           </property>
+         </item>
+         <item>
+           <property name="text">
+             <string>macOS Style</string>
+           </property>
          </item>
          <item>
           <property name="text">
@@ -77,12 +82,12 @@
          </item>
          <item>
           <property name="text">
-           <string>Symbol Style</string>
+           <string>Symbol Style (Color)</string>
           </property>
          </item>
          <item>
            <property name="text">
-             <string>Symbol Style (Minimal)</string>
+             <string>Symbol Style (Monochrome)</string>
            </property>
          </item>
         </widget>

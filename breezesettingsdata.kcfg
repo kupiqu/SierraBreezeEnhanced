@@ -130,16 +130,17 @@
     <!-- button style -->
     <entry name="ButtonStyle" type="Enum">
       <choices>
-        <choice name="ActiveVsInactiveStyle" />
-        <choice name="ActiveStyle" />
-        <choice name="InactiveStyle" />
-        <choice name="BreezeStyle" />
-        <choice name="AdwaitaStyle" />
+        <choice name="SBEstyle" />
+        <choice name="ActiveSBE" />
+        <choice name="InactiveSBE" />
+        <choice name="PlasmaStyle" />
+        <choice name="GnomeStyle" />
+        <choice name="macOSstyle" />
         <choice name="DarkAuroraeStyle" />
-        <choice name="ActiveDarkAuroraeStyle" />
-        <choice name="InactiveDarkAuroraeStyle" />
+        <choice name="ActiveDarkAurorae" />
+        <choice name="InactiveDarkAurorae" />
       </choices>
-      <default>ActiveVsInactiveStyle</default>
+      <default>SBEstyle</default>
     </entry>
 
     <!-- size grip -->
