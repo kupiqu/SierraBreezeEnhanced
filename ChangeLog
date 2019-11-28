@@ -1,3 +1,16 @@
+
+V0.7.0
+---------
+
+* Rearranged button styles
+* Added macOS styles (Sierra and Dark Aurorae symbols)
+* macOS Dark Aurorae is new default
+* Adapted traffic colors (more similar to macOS Catalina)
+* Thinner ring borders (more similar to macOS Catalina)
+* Added Dark Aurorae symbol styles (color and monochrome)
+* Checked buttons now occupy all available space (including that of animation)
+* Many minor fixes and improved consistency
+
 V0.6.3
 ---------
 

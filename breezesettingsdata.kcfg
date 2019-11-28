@@ -130,17 +130,22 @@
     <!-- button style -->
     <entry name="ButtonStyle" type="Enum">
       <choices>
-        <choice name="SBEstyle" />
-        <choice name="ActiveSBE" />
-        <choice name="InactiveSBE" />
-        <choice name="PlasmaStyle" />
-        <choice name="GnomeStyle" />
-        <choice name="macOSstyle" />
-        <choice name="DarkAuroraeStyle" />
-        <choice name="ActiveDarkAurorae" />
-        <choice name="InactiveDarkAurorae" />
+        <choice name="plasma" />
+        <choice name="gnome" />
+        <choice name="macSierra" />
+        <choice name="macDarkAurorae" />
+        <choice name="sbeSierra" />
+        <choice name="sbeSierraActive" />
+        <choice name="sbeSierraInactive" />
+        <choice name="sbeDarkAurorae" />
+        <choice name="sbeDarkAuroraeActive" />
+        <choice name="sbeDarkAuroraeInactive" />
+        <choice name="sierraColorSymbols" />
+        <choice name="darkAuroraeColorSymbols" />
+        <choice name="sierraMonochromeSymbols" />
+        <choice name="darkAuroraeMonochromeSymbols" />
       </choices>
-      <default>SBEstyle</default>
+      <default>macDarkAurorae</default>
     </entry>
 
     <!-- size grip -->

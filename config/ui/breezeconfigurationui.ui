@@ -37,57 +37,72 @@
         <widget class="QComboBox" name="buttonStyle">
          <item>
           <property name="text">
-           <string>SBE Style</string>
+           <string>Plasma</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Active SBE</string>
+           <string>Gnome</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Inactive SBE</string>
+           <string>mac Sierra</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Plasma Style</string>
+           <string>mac Dark Aurorae</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Gnome Style</string>
+           <string>SBE Sierra</string>
           </property>
          </item>
          <item>
            <property name="text">
-             <string>macOS Style</string>
+             <string>SBE Sierra Active</string>
            </property>
          </item>
          <item>
           <property name="text">
-           <string>Dark Aurorae Style</string>
+           <string>SBE Sierra Inactive</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Active Dark Aurorae</string>
+           <string>SBE Dark Aurorae</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Inactive Dark Aurorae</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Symbol Style (Color)</string>
+           <string>SBE Dark Aurorae Active</string>
           </property>
          </item>
          <item>
            <property name="text">
-             <string>Symbol Style (Monochrome)</string>
+             <string>SBE Dark Aurorae Inactive</string>
+           </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Sierra Color Symbols</string>
+          </property>
+         </item>
+         <item>
+           <property name="text">
+             <string>Dark Aurorae Color Symbols</string>
+           </property>
+         </item>
+         <item>
+           <property name="text">
+             <string>Sierra Monochrome Symbols</string>
+           </property>
+         </item>
+         <item>
+           <property name="text">
+             <string>Dark Aurorae Monochrome Symbols</string>
            </property>
          </item>
         </widget>
