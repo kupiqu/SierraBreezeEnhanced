@@ -83,6 +83,7 @@ namespace Breeze
         //@{
         QColor titleBarColor() const;
         QColor outlineColor() const;
+        QColor rawTitleBarColor() const;
         QColor fontColor() const;
         //@}
 

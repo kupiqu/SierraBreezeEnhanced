@@ -191,7 +191,7 @@ namespace Breeze
         painter->translate( 1, 1 );
 
         // render background
-        const QColor backgroundColor( this->backgroundColor() );
+        QColor backgroundColor( this->backgroundColor() );
         if( backgroundColor.isValid() )
         {
             painter->setPen( Qt::NoPen );
@@ -200,7 +200,7 @@ namespace Breeze
         }
 
         // render mark
-        const QColor foregroundColor( this->foregroundColor() );
+        QColor foregroundColor( this->foregroundColor() );
         if( foregroundColor.isValid() )
         {
 
@@ -393,7 +393,7 @@ namespace Breeze
         painter->translate( 1, 1 );
 
         // render background
-        const QColor backgroundColor( this->backgroundColor() );
+        QColor backgroundColor( this->backgroundColor() );
         if( backgroundColor.isValid() )
         {
             painter->setPen( Qt::NoPen );
@@ -402,7 +402,7 @@ namespace Breeze
         }
 
         // render mark
-        const QColor foregroundColor( this->foregroundColor() );
+        QColor foregroundColor( this->foregroundColor() );
         if( foregroundColor.isValid() )
         {
 
@@ -565,11 +565,11 @@ namespace Breeze
         bool inactiveWindow( d && !d->client().data()->isActive() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
-        const QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
-        const QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+        QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+        QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
         // symbols color
 
@@ -965,11 +965,11 @@ namespace Breeze
         bool inactiveWindow( d && !d->client().data()->isActive() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
-        const QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
-        const QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+        QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+        QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
         // symbols color
 
@@ -1371,11 +1371,11 @@ namespace Breeze
         bool useInactiveButtonStyle( d && d->internalSettings()->buttonStyle() == 6 );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
-        const QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
-        const QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+        QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+        QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
         // symbols color
 
@@ -1546,7 +1546,7 @@ namespace Breeze
 
             case DecorationButtonType::OnAllDesktops:
             {
-                const QColor button_color = QColor(125, 209, 200);
+                QColor button_color = QColor(125, 209, 200);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -1593,7 +1593,7 @@ namespace Breeze
 
             case DecorationButtonType::Shade:
             {
-                const QColor button_color = QColor(204, 176, 213);
+                QColor button_color = QColor(204, 176, 213);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -1657,7 +1657,7 @@ namespace Breeze
 
             case DecorationButtonType::KeepBelow:
             {
-                const QColor button_color = QColor(255, 137, 241);
+                QColor button_color = QColor(255, 137, 241);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -1709,7 +1709,7 @@ namespace Breeze
 
             case DecorationButtonType::KeepAbove:
             {
-                const QColor button_color = QColor(135, 206, 249);
+                QColor button_color = QColor(135, 206, 249);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -1789,7 +1789,7 @@ namespace Breeze
 
             case DecorationButtonType::ContextHelp:
             {
-                const QColor button_color = QColor(102, 156, 246);
+                QColor button_color = QColor(102, 156, 246);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -1865,11 +1865,11 @@ namespace Breeze
         bool useInactiveButtonStyle( d && d->internalSettings()->buttonStyle() == 9 );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
-        const QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
-        const QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+        QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+        QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
         // symbols color
 
@@ -2033,7 +2033,7 @@ namespace Breeze
 
             case DecorationButtonType::OnAllDesktops:
             {
-                const QColor button_color = QColor(125, 209, 200);
+                QColor button_color = QColor(125, 209, 200);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -2101,7 +2101,7 @@ namespace Breeze
 
             case DecorationButtonType::Shade:
             {
-                const QColor button_color = QColor(204, 176, 213);
+                QColor button_color = QColor(204, 176, 213);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -2159,7 +2159,7 @@ namespace Breeze
 
             case DecorationButtonType::KeepBelow:
             {
-                const QColor button_color = QColor(255, 137, 241);
+                QColor button_color = QColor(255, 137, 241);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -2209,7 +2209,7 @@ namespace Breeze
 
             case DecorationButtonType::KeepAbove:
             {
-                const QColor button_color = QColor(135, 206, 249);
+                QColor button_color = QColor(135, 206, 249);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -2287,7 +2287,7 @@ namespace Breeze
 
             case DecorationButtonType::ContextHelp:
             {
-                const QColor button_color = QColor(102, 156, 246);
+                QColor button_color = QColor(102, 156, 246);
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
@@ -2359,12 +2359,12 @@ namespace Breeze
         auto d = qobject_cast<Decoration*>( decoration() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
-        const QColor darkSymbolColor = QColor(34, 45, 50);
-        const QColor lightSymbolColor = QColor(250, 251, 252);
+        QColor darkSymbolColor = QColor(34, 45, 50);
+        QColor lightSymbolColor = QColor(250, 251, 252);
         QColor symbolColor = darkSymbolColor;
 
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
         // symbols pen
 
@@ -2713,12 +2713,12 @@ namespace Breeze
         auto d = qobject_cast<Decoration*>( decoration() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
-        const QColor darkSymbolColor = QColor(34, 45, 50);
-        const QColor lightSymbolColor = QColor(250, 251, 252);
+        QColor darkSymbolColor = QColor(34, 45, 50);
+        QColor lightSymbolColor = QColor(250, 251, 252);
         QColor symbolColor = darkSymbolColor;
 
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
         // symbols pen
 
@@ -3062,14 +3062,14 @@ namespace Breeze
         painter->scale( width/20, width/20 );
         painter->translate( 1, 1 );
 
-        const QColor darkSymbolColor = QColor(34, 45, 50);
-        const QColor lightSymbolColor = QColor(250, 251, 252);
+        QColor darkSymbolColor = QColor(34, 45, 50);
+        QColor lightSymbolColor = QColor(250, 251, 252);
 
         auto d = qobject_cast<Decoration*>( decoration() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
         uint r = qRed(titleBarColor.rgb());
         uint g = qGreen(titleBarColor.rgb());
         uint b = qBlue(titleBarColor.rgb());
@@ -3433,14 +3433,14 @@ namespace Breeze
         painter->scale( width/20, width/20 );
         painter->translate( 1, 1 );
 
-        const QColor darkSymbolColor = QColor(34, 45, 50);
-        const QColor lightSymbolColor = QColor(250, 251, 252);
+        QColor darkSymbolColor = QColor(34, 45, 50);
+        QColor lightSymbolColor = QColor(250, 251, 252);
 
         auto d = qobject_cast<Decoration*>( decoration() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
         uint r = qRed(titleBarColor.rgb());
         uint g = qGreen(titleBarColor.rgb());
         uint b = qBlue(titleBarColor.rgb());
@@ -3813,8 +3813,8 @@ namespace Breeze
     {
         auto d = qobject_cast<Decoration*>( decoration() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
-        const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
         if( !d ) {
 
@@ -3921,8 +3921,8 @@ namespace Breeze
         {
             auto d = qobject_cast<Decoration*>( decoration() );
 
-            const QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-            const QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+            QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
+            QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
 
             uint r = qRed(titleBarColor.rgb());
             uint g = qGreen(titleBarColor.rgb());

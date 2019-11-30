@@ -213,28 +213,44 @@ namespace Breeze
     //________________________________________________________________
     QColor Decoration::titleBarColor() const
     {
+        QColor titleBarColor( this->rawTitleBarColor() );
+        QColor outlineColor( this->outlineColor() );
 
-        auto c = client().data();
-        // if( hideTitleBar() ) return c->color( ColorGroup::Inactive, ColorRole::TitleBar );
-        // else if( m_animation->state() == QPropertyAnimation::Running )
-        if( m_animation->state() == QPropertyAnimation::Running )
+        auto c( client().data() );
+        if ( drawBackgroundGradient() && c->isActive() )
         {
-            return KColorUtils::mix(
-                c->color( ColorGroup::Inactive, ColorRole::TitleBar ),
-                c->color( ColorGroup::Active, ColorRole::TitleBar ),
-                m_opacity );
-        } else return c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar );
-
+            if ( qGray(titleBarColor.rgb()) > 69 ) {
+                if ( outlineColor.isValid() )
+                    titleBarColor = titleBarColor.darker(115);
+            }
+            else {
+                if ( outlineColor.isValid() )
+                    titleBarColor = titleBarColor.darker(180);
+            }
+        }
+        else if ( outlineColor.isValid() && !c->isActive() )
+        {
+            if ( qGray(titleBarColor.rgb()) > 69 )
+                titleBarColor = titleBarColor.darker(110);
+            else
+                titleBarColor = titleBarColor.darker(130);
+        }
+        else if ( outlineColor.isValid() )
+        {
+            if ( qGray(titleBarColor.rgb()) > 69 )
+                titleBarColor = titleBarColor.darker(115);
+            else
+                titleBarColor = titleBarColor.darker(150);
+        }
+        return titleBarColor;
     }
 
     //________________________________________________________________
     QColor Decoration::outlineColor() const
     {
-
-        const auto c( client().data() );
         if( !m_internalSettings->drawTitleBarSeparator() ) return QColor();
 
-        const QColor titleBarColor ( matchColorForTitleBar() ? c->palette().color(QPalette::Window) : this->titleBarColor());
+        QColor titleBarColor ( rawTitleBarColor() );
 
         uint r = qRed(titleBarColor.rgb());
         uint g = qGreen(titleBarColor.rgb());
@@ -242,29 +258,52 @@ namespace Breeze
 
         qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
 
-        QColor color;
+        QColor outlineColor;
+        auto c( client().data() );
         if ( c->isActive() ) {
           if ( colorConditional > 69 ) // 255 -186
-            color = titleBarColor.darker(140);
+            outlineColor = titleBarColor.darker(140);
           else
-            color = titleBarColor.lighter(180);
+            outlineColor = titleBarColor.lighter(180);
         }
         else {
           if ( colorConditional > 69 ) // 255 -186
-            color = titleBarColor.darker(120);
+            outlineColor = titleBarColor.darker(120);
           else
-            color = titleBarColor.lighter(140);
+            outlineColor = titleBarColor.lighter(140);
         }
 
         if( m_animation->state() == QPropertyAnimation::Running )
         {
-            // QColor color( c->palette().color( QPalette::Highlight ) );
-            color.setAlpha( color.alpha()*m_opacity );
-            return color;
+            // QColor outlineColor( c->palette().color( QPalette::Highlight ) );
+            outlineColor.setAlpha( outlineColor.alpha()*m_opacity );
+            return outlineColor;
         }
-        else return color;
-        // else if( c->isActive() ) return color; // c->palette().color( QPalette::Highlight );
+        else return outlineColor;
+        // else if( c->isActive() ) return outlineColor; // c->palette().color( QPalette::Highlight );
         // else return QColor();
+    }
+
+    //________________________________________________________________
+    QColor Decoration::rawTitleBarColor() const
+    {
+        auto c = client().data();
+        QColor titleBarColor;
+
+        if ( !matchColorForTitleBar() ) {
+            if( m_animation->state() == QPropertyAnimation::Running )
+            {
+                titleBarColor = KColorUtils::mix(
+                    c->color( ColorGroup::Inactive, ColorRole::TitleBar ),
+                    c->color( ColorGroup::Active, ColorRole::TitleBar ),
+                    m_opacity );
+            } else titleBarColor = c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar );
+        }
+        else {
+          titleBarColor = c->palette().color(QPalette::Window);
+        }
+        titleBarColor.setAlpha(titleBarAlpha());
+        return titleBarColor;
     }
 
     //________________________________________________________________
@@ -272,10 +311,10 @@ namespace Breeze
     {
         auto c = client().data();
 
-        const QColor darkTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(81, 102, 107) : QColor(34, 45, 50) );
-        const QColor lightTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+        QColor darkTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+        QColor lightTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        const QColor titleBarColor ( matchColorForTitleBar() ? c->palette().color(QPalette::Window) : this->titleBarColor());
+        QColor titleBarColor = this->titleBarColor();
 
         uint r = qRed(titleBarColor.rgb());
         uint g = qGreen(titleBarColor.rgb());
@@ -356,10 +395,10 @@ namespace Breeze
         auto s = settings();
         auto c = client().data();
         const bool maximized = isMaximized();
-        const int width =  maximized ? c->width() : c->width() - 2*s->largeSpacing()*Metrics::TitleBar_SideMargin;
-        const int height = maximized ? borderTop() : borderTop() - s->smallSpacing()*Metrics::TitleBar_TopMargin;
-        const int x = maximized ? 0 : s->largeSpacing()*Metrics::TitleBar_SideMargin;
-        const int y = maximized ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
+        int width =  maximized ? c->width() : c->width() - 2*s->largeSpacing()*Metrics::TitleBar_SideMargin;
+        int height = maximized ? borderTop() : borderTop() - s->smallSpacing()*Metrics::TitleBar_TopMargin;
+        int x = maximized ? 0 : s->largeSpacing()*Metrics::TitleBar_SideMargin;
+        int y = maximized ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
         setTitleBar(QRect(x, y, width, height));
     }
 
@@ -535,7 +574,6 @@ namespace Breeze
                 case KDecoration2::BorderSize::Huge: return baseSize*5;
                 case KDecoration2::BorderSize::VeryHuge: return baseSize*6;
                 case KDecoration2::BorderSize::Oversized: return baseSize*10;
-
             }
 
         }
@@ -568,9 +606,9 @@ namespace Breeze
         auto s = settings();
 
         // left, right and bottom borders
-        const int left   = isLeftEdge() ? 0 : borderSize();
-        const int right  = isRightEdge() ? 0 : borderSize();
-        const int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize(true);
+        int left   = isLeftEdge() ? 0 : borderSize();
+        int right  = isRightEdge() ? 0 : borderSize();
+        int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize(true);
 
         int top = 0;
         if( hideTitleBar() ) top = bottom;
@@ -593,7 +631,7 @@ namespace Breeze
         setBorders(QMargins(left, top, right, bottom));
 
         // extended sizes
-        const int extSize = s->largeSpacing();
+        int extSize = s->largeSpacing();
         int extSides = 0;
         int extBottom = 0;
         if( hasNoBorders() )
@@ -698,9 +736,7 @@ namespace Breeze
         auto c = client().data();
         auto s = settings();
 
-        const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
-        QColor titleBarColor = ( matchColorForTitleBar() ? matchedTitleBarColor : this->titleBarColor() );
-        titleBarColor.setAlpha(titleBarAlpha());
+        QColor titleBarColor = this->titleBarColor();
 
         // paint background
         if( !c->isShaded() )
@@ -744,11 +780,9 @@ namespace Breeze
         const QRect titleRect(QPoint(0, 0), QSize(size().width(), borderTop()));
         if ( !titleRect.intersects(repaintRegion) ) return;
 
-        const auto c = client().data();
-        const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
-        QColor titleBarColor = ( matchColorForTitleBar() ? matchedTitleBarColor : this->titleBarColor() );
-        titleBarColor.setAlpha(titleBarAlpha());
-        const QColor outlineColor( this->outlineColor() );
+        auto c = client().data();
+        QColor outlineColor( this->outlineColor() );
+        QColor titleBarColor = this->titleBarColor();
 
         painter->save();
         painter->setPen(Qt::NoPen);
@@ -756,23 +790,18 @@ namespace Breeze
         // render a linear gradient on title area
         if ( drawBackgroundGradient() && c->isActive() )
         {
-            if ( outlineColor.isValid() )
-                titleBarColor = titleBarColor.darker(115);
-
             QLinearGradient gradient( 0, 0, 0, titleRect.height() );
-            int b = m_internalSettings->gradientOverride() > -1 ? m_internalSettings->gradientOverride() : m_internalSettings->backgroundGradientIntensity();
-            b =  qBound(0, b, 100);
+              int b = m_internalSettings->gradientOverride() > -1 ? m_internalSettings->gradientOverride() : m_internalSettings->backgroundGradientIntensity();
+            if ( qGray(titleBarColor.rgb()) > 69 )
+                b =  qBound(0, b, 100);
+            else
+                b =  qBound(0, 2*b, 100);
             gradient.setColorAt(0.0, titleBarColor.lighter( 100 + b));
             gradient.setColorAt(1.0, titleBarColor);
             painter->setBrush(gradient);
         }
-        else if ( outlineColor.isValid() && !c->isActive() )
-            painter->setBrush( titleBarColor.darker(110) );
-        else if ( outlineColor.isValid() )
-            painter->setBrush( titleBarColor.darker(115) );
         else
             painter->setBrush( titleBarColor );
-
 
         auto s = settings();
         if( isMaximized() || !s->isAlphaChannelSupported() || drawBackgroundGradient() || outlineColor.isValid() )
@@ -801,11 +830,7 @@ namespace Breeze
             else
               pen.setWidthF( 1.5 );
             painter->setPen( pen );
-
-            if ( !matchColorForTitleBar() )
-              painter->drawLine( titleRect.bottomLeft() + QPoint(borderSize() + 1, 0), titleRect.bottomRight() - QPoint(borderSize(), 0) );
-            else
-              painter->drawLine( titleRect.bottomLeft(), titleRect.bottomRight() );
+            painter->drawLine( titleRect.bottomLeft() + QPoint(borderSize() + 1, 0), titleRect.bottomRight() - QPoint(borderSize(), 0) );
         }
 
         painter->restore();
