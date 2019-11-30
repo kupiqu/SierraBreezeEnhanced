@@ -231,15 +231,40 @@ namespace Breeze
     QColor Decoration::outlineColor() const
     {
 
-        auto c( client().data() );
+        const auto c( client().data() );
         if( !m_internalSettings->drawTitleBarSeparator() ) return QColor();
+
+        const QColor titleBarColor ( matchColorForTitleBar() ? c->palette().color(QPalette::Window) : this->titleBarColor());
+
+        uint r = qRed(titleBarColor.rgb());
+        uint g = qGreen(titleBarColor.rgb());
+        uint b = qBlue(titleBarColor.rgb());
+
+        qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+
+        QColor color;
+        if ( c->isActive() ) {
+          if ( colorConditional > 69 ) // 255 -186
+            color = titleBarColor.darker(140);
+          else
+            color = titleBarColor.lighter(180);
+        }
+        else {
+          if ( colorConditional > 69 ) // 255 -186
+            color = titleBarColor.darker(120);
+          else
+            color = titleBarColor.lighter(140);
+        }
+
         if( m_animation->state() == QPropertyAnimation::Running )
         {
-            QColor color( c->palette().color( QPalette::Highlight ) );
+            // QColor color( c->palette().color( QPalette::Highlight ) );
             color.setAlpha( color.alpha()*m_opacity );
             return color;
-        } else if( c->isActive() ) return c->palette().color( QPalette::Highlight );
-        else return QColor();
+        }
+        else return color;
+        // else if( c->isActive() ) return color; // c->palette().color( QPalette::Highlight );
+        // else return QColor();
     }
 
     //________________________________________________________________
@@ -558,7 +583,7 @@ namespace Breeze
             // padding below
             // extra pixel is used for the active window outline
             const int baseSize = s->smallSpacing();
-            top += baseSize*Metrics::TitleBar_BottomMargin + 1;
+            top += baseSize*Metrics::TitleBar_BottomMargin; // + 1;
 
             // padding above
             top += baseSize*TitleBar_TopMargin;
@@ -675,6 +700,7 @@ namespace Breeze
 
         const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
         QColor titleBarColor = ( matchColorForTitleBar() ? matchedTitleBarColor : this->titleBarColor() );
+        titleBarColor.setAlpha(titleBarAlpha());
 
         // paint background
         if( !c->isShaded() )
@@ -682,12 +708,6 @@ namespace Breeze
             painter->fillRect(rect(), Qt::transparent);
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
-
-            if ( !opaqueTitleBar() ) {
-                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
-                a =  qBound(0, a, 100);
-                titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
-            }
 
             painter->setBrush( titleBarColor );
 
@@ -721,74 +741,46 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     {
+        const QRect titleRect(QPoint(0, 0), QSize(size().width(), borderTop()));
+        if ( !titleRect.intersects(repaintRegion) ) return;
+
         const auto c = client().data();
         const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
         QColor titleBarColor = ( matchColorForTitleBar() ? matchedTitleBarColor : this->titleBarColor() );
-        const QRect titleRect(QPoint(0, 0), QSize(size().width(), borderTop()));
-
-        if ( !titleRect.intersects(repaintRegion) ) return;
+        titleBarColor.setAlpha(titleBarAlpha());
+        const QColor outlineColor( this->outlineColor() );
 
         painter->save();
         painter->setPen(Qt::NoPen);
 
         // render a linear gradient on title area
-        if( drawBackgroundGradient() )
+        if ( drawBackgroundGradient() && c->isActive() )
         {
-            if ( !opaqueTitleBar() ) {
-                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
-                a =  qBound(0, a, 100);
-                titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
-            }
+            if ( outlineColor.isValid() )
+                titleBarColor = titleBarColor.darker(115);
 
             QLinearGradient gradient( 0, 0, 0, titleRect.height() );
             int b = m_internalSettings->gradientOverride() > -1 ? m_internalSettings->gradientOverride() : m_internalSettings->backgroundGradientIntensity();
             b =  qBound(0, b, 100);
-
-            if ( qGray(titleBarColor.rgb()) > 128 ) {
-                gradient.setColorAt(0.0, titleBarColor.darker( 100 + b ) );
-                gradient.setColorAt(0.75, titleBarColor.darker( 100 + qRound(static_cast<qreal>(b) * (qreal)0.2) ) );
-                gradient.setColorAt(0.86, titleBarColor.darker( 100 + qRound(static_cast<qreal>(b) * (qreal)0.1) ) );
-                gradient.setColorAt(0.93, titleBarColor.darker( 100 + qRound(static_cast<qreal>(b) * (qreal)0.05) ) );
-                gradient.setColorAt(0.97, titleBarColor.darker( 100 + qRound(static_cast<qreal>(b) * (qreal)0.01) ) );
-                gradient.setColorAt(0.99, titleBarColor);
-            }
-            else {
-                gradient.setColorAt(0.0, titleBarColor.lighter( 100 + b ) );
-                gradient.setColorAt(0.75, titleBarColor.lighter( 100 + qRound(static_cast<qreal>(b) * (qreal)0.2) ) );
-                gradient.setColorAt(0.86, titleBarColor.lighter( 100 + qRound(static_cast<qreal>(b) * (qreal)0.1) ) );
-                gradient.setColorAt(0.93, titleBarColor.lighter( 100 + qRound(static_cast<qreal>(b) * (qreal)0.05) ) );
-                gradient.setColorAt(0.97, titleBarColor.lighter( 100 + qRound(static_cast<qreal>(b) * (qreal)0.01) ) );
-                gradient.setColorAt(0.99, titleBarColor);
-            }
-
+            gradient.setColorAt(0.0, titleBarColor.lighter( 100 + b));
+            gradient.setColorAt(1.0, titleBarColor);
             painter->setBrush(gradient);
-
-        } else {
-
-            if ( !opaqueTitleBar() ) {
-                int a = m_internalSettings->opacityOverride() > -1 ? m_internalSettings->opacityOverride() : m_internalSettings->backgroundOpacity();
-                a =  qBound(0, a, 100);
-                titleBarColor.setAlpha( qRound(static_cast<qreal>(a) * (qreal)2.55) );
-            }
-
+        }
+        else if ( outlineColor.isValid() && !c->isActive() )
+            painter->setBrush( titleBarColor.darker(110) );
+        else if ( outlineColor.isValid() )
+            painter->setBrush( titleBarColor.darker(115) );
+        else
             painter->setBrush( titleBarColor );
 
-        }
 
         auto s = settings();
-        if( isMaximized() || !s->isAlphaChannelSupported() )
-        {
-
+        if( isMaximized() || !s->isAlphaChannelSupported() || drawBackgroundGradient() || outlineColor.isValid() )
             painter->drawRect(titleRect);
-
-        } else if( c->isShaded() ) {
-
+        else if( c->isShaded() )
             painter->drawRoundedRect(titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
-
-        } else if ( !hasBorders() ){
-
+        else if ( !hasBorders() ) {
             painter->setClipRect(titleRect, Qt::IntersectClip);
-
             // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
             painter->drawRoundedRect(titleRect.adjusted(
                 isLeftEdge() ? -m_internalSettings->cornerRadius():0,
@@ -796,17 +788,24 @@ namespace Breeze
                 isRightEdge() ? m_internalSettings->cornerRadius():0,
                 m_internalSettings->cornerRadius()),
                 m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
-
         }
 
-        const QColor outlineColor( this->outlineColor() );
-        if( !c->isShaded() && outlineColor.isValid() )
+        if( !c->isShaded() && !hideTitleBar() && outlineColor.isValid() )
         {
             // outline
             painter->setRenderHint( QPainter::Antialiasing, false );
             painter->setBrush( Qt::NoBrush );
-            painter->setPen( outlineColor );
-            painter->drawLine( titleRect.bottomLeft(), titleRect.bottomRight() );
+            QPen pen(outlineColor);
+            if ( c->isActive() )
+              pen.setWidthF( 2 );
+            else
+              pen.setWidthF( 1.5 );
+            painter->setPen( pen );
+
+            if ( !matchColorForTitleBar() )
+              painter->drawLine( titleRect.bottomLeft() + QPoint(borderSize() + 1, 0), titleRect.bottomRight() - QPoint(borderSize(), 0) );
+            else
+              painter->drawLine( titleRect.bottomLeft(), titleRect.bottomRight() );
         }
 
         painter->restore();
