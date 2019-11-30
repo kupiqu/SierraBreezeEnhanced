@@ -103,6 +103,20 @@ namespace Breeze
         inline bool drawBackgroundGradient() const;
         //@}
 
+        //*@Decoration has a hovered button
+        //@{
+        bool m_buttonHovered = false;
+        bool buttonHovered() const
+        { return m_buttonHovered; }
+
+        signals:
+        void buttonHoveredChanged ();
+
+        public Q_SLOTS:
+        void setButtonHovered ( bool value );
+        //@}
+
+
         public Q_SLOTS:
         void init() override;
 

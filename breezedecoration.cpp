@@ -293,6 +293,14 @@ namespace Breeze
     }
 
     //________________________________________________________________
+    void Decoration::setButtonHovered( bool value )
+    {
+        if( m_buttonHovered == value ) return;
+        m_buttonHovered = value;
+        emit buttonHoveredChanged();
+    }
+
+    //________________________________________________________________
     void Decoration::init()
     {
         auto c = client().data();

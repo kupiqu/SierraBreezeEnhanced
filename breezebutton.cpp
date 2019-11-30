@@ -55,6 +55,8 @@ namespace Breeze
         connect(decoration->client().data(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
         connect(decoration->settings().data(), &KDecoration2::DecorationSettings::reconfigured, this, &Button::reconfigure);
         connect( this, &KDecoration2::DecorationButton::hoveredChanged, this, &Button::updateAnimationState );
+        connect( this, &KDecoration2::DecorationButton::hoveredChanged, decoration, &Decoration::setButtonHovered);
+        connect (decoration, &Decoration::buttonHoveredChanged, [&](){ update(); });
 
         reconfigure();
 
@@ -581,6 +583,8 @@ namespace Breeze
         symbol_pen.setJoinStyle( Qt::MiterJoin );
         symbol_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
 
+        bool hovered = isHovered() || d->buttonHovered();
+
         switch( type() )
         {
 
@@ -606,7 +610,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() )
+                if ( hovered )
                 {
                   painter->setPen( symbol_pen );
                   // it's a cross
@@ -638,7 +642,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() )
+                if ( hovered )
                 {
                   painter->setPen( Qt::NoPen );
 
@@ -693,7 +697,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() )
+                if ( hovered )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawLine( QPointF( 5, 9 ), QPointF( 13, 9 ) );
@@ -728,7 +732,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() )
+                if ( hovered || isChecked() )
                 {
                   painter->setPen( Qt::NoPen );
                   painter->setBrush(QBrush(symbolColor));
@@ -776,7 +780,7 @@ namespace Breeze
                     painter->fillPath(path, QBrush(symbolColor));
 
                 }
-                else if ( isHovered() ) {
+                else if ( hovered ) {
                     painter->setPen( symbol_pen );
                     painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 6 ) );
                     painter->setPen( Qt::NoPen );
@@ -817,7 +821,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() )
+                if ( hovered || isChecked() )
                 {
                   painter->setPen( Qt::NoPen );
 
@@ -858,7 +862,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() )
+                if ( hovered || isChecked() )
                 {
                   painter->setPen( Qt::NoPen );
 
@@ -927,7 +931,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() )
+                if ( hovered || isChecked() )
                 {
                   painter->setPen( symbol_pen );
                   QPainterPath path;
