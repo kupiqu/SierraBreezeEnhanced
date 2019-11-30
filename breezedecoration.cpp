@@ -552,13 +552,13 @@ namespace Breeze
                 case InternalSettings::BorderNone: return 0;
                 case InternalSettings::BorderNoSides: return bottom ? qMax(4, baseSize) : 0;
                 default:
-                case InternalSettings::BorderTiny: return bottom ? qMax(4, baseSize) : baseSize;
-                case InternalSettings::BorderNormal: return baseSize*2;
-                case InternalSettings::BorderLarge: return baseSize*3;
-                case InternalSettings::BorderVeryLarge: return baseSize*4;
-                case InternalSettings::BorderHuge: return baseSize*5;
-                case InternalSettings::BorderVeryHuge: return baseSize*6;
-                case InternalSettings::BorderOversized: return baseSize*10;
+                case InternalSettings::BorderTiny: return 1;
+                case InternalSettings::BorderNormal: return bottom ? qMax(4, baseSize) : baseSize;
+                case InternalSettings::BorderLarge: return baseSize*2;
+                case InternalSettings::BorderVeryLarge: return baseSize*3;
+                case InternalSettings::BorderHuge: return baseSize*4;
+                case InternalSettings::BorderVeryHuge: return baseSize*5;
+                case InternalSettings::BorderOversized: return baseSize*6;
             }
 
         } else {
@@ -567,15 +567,14 @@ namespace Breeze
                 case KDecoration2::BorderSize::None: return 0;
                 case KDecoration2::BorderSize::NoSides: return bottom ? qMax(4, baseSize) : 0;
                 default:
-                case KDecoration2::BorderSize::Tiny: return bottom ? qMax(4, baseSize) : baseSize;
-                case KDecoration2::BorderSize::Normal: return baseSize*2;
-                case KDecoration2::BorderSize::Large: return baseSize*3;
-                case KDecoration2::BorderSize::VeryLarge: return baseSize*4;
-                case KDecoration2::BorderSize::Huge: return baseSize*5;
-                case KDecoration2::BorderSize::VeryHuge: return baseSize*6;
-                case KDecoration2::BorderSize::Oversized: return baseSize*10;
+                case KDecoration2::BorderSize::Tiny: return 1;
+                case KDecoration2::BorderSize::Normal: return bottom ? qMax(4, baseSize) : baseSize;
+                case KDecoration2::BorderSize::Large: return baseSize*2;
+                case KDecoration2::BorderSize::VeryLarge: return baseSize*3;
+                case KDecoration2::BorderSize::Huge: return baseSize*4;
+                case KDecoration2::BorderSize::VeryHuge: return baseSize*5;
+                case KDecoration2::BorderSize::Oversized: return baseSize*6;
             }
-
         }
     }
 
@@ -621,10 +620,10 @@ namespace Breeze
             // padding below
             // extra pixel is used for the active window outline
             const int baseSize = s->smallSpacing();
-            top += baseSize*Metrics::TitleBar_BottomMargin; // + 1;
+            top += baseSize*Metrics::TitleBar_BottomMargin + m_internalSettings->buttonPadding(); // + 1;
 
             // padding above
-            top += baseSize*TitleBar_TopMargin;
+            top += baseSize*TitleBar_TopMargin + m_internalSettings->buttonPadding();
 
         }
 
@@ -663,7 +662,7 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::updateButtonsGeometry()
     {
-        const auto s = settings();
+        auto s = settings();
 
         // adjust button position
         const int bHeight = captionHeight() + (isTopEdge() ? s->smallSpacing()*Metrics::TitleBar_TopMargin:0);
@@ -686,7 +685,7 @@ namespace Breeze
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = m_internalSettings->buttonHPadding();
+            const int hPadding = m_internalSettings->buttonPadding();
             if( isLeftEdge() )
             {
                 // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
@@ -711,7 +710,7 @@ namespace Breeze
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = m_internalSettings->buttonHPadding();
+            const int hPadding = m_internalSettings->buttonPadding();
             if( isRightEdge() )
             {
 
@@ -743,8 +742,6 @@ namespace Breeze
         {
             painter->fillRect(rect(), Qt::transparent);
             painter->save();
-            painter->setRenderHint(QPainter::Antialiasing);
-
             painter->setBrush( titleBarColor );
 
             // clip away the top part
@@ -871,7 +868,7 @@ namespace Breeze
 
     //________________________________________________________________
     int Decoration::captionHeight() const
-    { return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing()*(Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin ) - 1; }
+        { return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing()*(Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin ); }
 
     //________________________________________________________________
     QPair<QRect,Qt::Alignment> Decoration::captionRect() const

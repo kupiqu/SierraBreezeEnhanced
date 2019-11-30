@@ -79,7 +79,7 @@
           <choice name="BorderVeryHuge" />
           <choice name="BorderOversized" />
       </choices>
-      <default>BorderNone</default>
+      <default>BorderTiny</default>
     </entry>
 
     <!-- title alignment -->
@@ -106,16 +106,16 @@
     </entry>
 
     <entry name="ButtonSpacing" type = "Int">
-        <default>6</default>
+        <default>2</default>
     </entry>
 
-    <entry name="ButtonHPadding" type = "Int">
-       <default>5</default>
+    <entry name="ButtonPadding" type = "Int">
+       <default>4</default>
     </entry>
 
     <!-- corner radius -->
     <entry name="CornerRadius" type = "Int">
-      <default>3</default>
+      <default>0</default>
     </entry>
 
     <!-- maximized windows -->
@@ -124,7 +124,7 @@
     </entry>
 
     <entry name="DrawTitleBarSeparator" type = "Bool">
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <!-- button style -->
@@ -150,7 +150,7 @@
 
     <!-- size grip -->
     <entry name="DrawBackgroundGradient" type = "Bool">
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <entry name="BackgroundGradientIntensity" type = "Int">
@@ -187,6 +187,7 @@
        <choices>
          <choice name="Never" />
          <choice name="MaximizedWindows" />
+         <choice name="AnyMaximization" />
          <choice name="Always" />
        </choices>
        <default>Never</default>
