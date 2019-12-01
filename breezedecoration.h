@@ -42,6 +42,7 @@ namespace KDecoration2
 namespace Breeze
 {
     class SizeGrip;
+    class Button;
     class Decoration : public KDecoration2::Decoration
     {
         Q_OBJECT
@@ -103,6 +104,20 @@ namespace Breeze
         inline bool matchColorForTitleBar() const;
         inline bool drawBackgroundGradient() const;
         //@}
+
+        //*@Decoration has a hovered button
+        //@{
+        bool m_buttonHovered = false;
+        bool buttonHovered() const
+        { return m_buttonHovered; }
+
+        signals:
+        void buttonHoveredChanged ( Button *b );
+
+        public Q_SLOTS:
+        void setButtonHovered ( bool value, Button *b );
+        //@}
+
 
         public Q_SLOTS:
         void init() override;
