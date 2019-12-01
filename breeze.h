@@ -38,7 +38,7 @@ namespace Breeze
     {
 
         //* corner radius (pixels)
-        Frame_FrameRadius = 3,
+        Frame_FrameRadius = 0,
 
         //* titlebar metrics, in units of small spacing
         // defaulting now to small spacing

@@ -59,6 +59,7 @@ namespace Breeze
 
         connect( m_ui.hideTitleBar, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.matchColorForTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.drawTitleBarSeparator, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawBackgroundGradient, SIGNAL(clicked()), SLOT(updateChanged()) );
         m_ui.gradientOverrideLabelSpinBox->setSpecialValueText(tr("None"));
         connect( m_ui.opacityOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
@@ -88,6 +89,7 @@ namespace Breeze
         m_ui.borderSizeComboBox->setCurrentIndex( m_exception->borderSize() );
         m_ui.hideTitleBar->setCurrentIndex( m_exception->hideTitleBar() );
         m_ui.matchColorForTitleBar->setChecked( m_exception->matchColorForTitleBar() );
+        m_ui.drawTitleBarSeparator->setChecked( m_exception->drawTitleBarSeparator() );
         m_ui.drawBackgroundGradient->setChecked( m_exception->drawBackgroundGradient() );
         m_ui.gradientOverrideLabelSpinBox->setValue( m_exception->gradientOverride() );
         m_ui.opaqueTitleBar->setChecked( m_exception->opaqueTitleBar() );
@@ -110,6 +112,7 @@ namespace Breeze
         m_exception->setBorderSize( m_ui.borderSizeComboBox->currentIndex() );
         m_exception->setHideTitleBar( m_ui.hideTitleBar->currentIndex() );
         m_exception->setMatchColorForTitleBar( m_ui.matchColorForTitleBar->isChecked() );
+        m_exception->setDrawTitleBarSeparator( m_ui.drawTitleBarSeparator->isChecked() );
         m_exception->setDrawBackgroundGradient( m_ui.drawBackgroundGradient->isChecked() );
         m_exception->setGradientOverride( m_ui.gradientOverrideLabelSpinBox->value() );
         m_exception->setOpaqueTitleBar( m_ui.opaqueTitleBar->isChecked() );
@@ -136,6 +139,7 @@ namespace Breeze
         else if( m_exception->borderSize() != m_ui.borderSizeComboBox->currentIndex() ) modified = true;
         else if( m_exception->hideTitleBar() != m_ui.hideTitleBar->currentIndex() ) modified = true;
         else if( m_exception->matchColorForTitleBar() != m_ui.matchColorForTitleBar->isChecked() ) modified = true;
+        else if( m_exception->drawTitleBarSeparator() != m_ui.drawTitleBarSeparator->isChecked() ) modified = true;
         else if( m_exception->drawBackgroundGradient() != m_ui.drawBackgroundGradient->isChecked() ) modified = true;
         else if( m_exception->gradientOverride() != m_ui.gradientOverrideLabelSpinBox->value() ) modified = true;
         else if( m_exception->opaqueTitleBar() != m_ui.opaqueTitleBar->isChecked() ) modified = true;

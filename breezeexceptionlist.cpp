@@ -59,6 +59,7 @@ namespace Breeze
             // propagate all features found in mask to the output configuration
             if( exception.mask() & BorderSize ) configuration->setBorderSize( exception.borderSize() );
             configuration->setHideTitleBar( exception.hideTitleBar() );
+            configuration->setDrawTitleBarSeparator( exception.drawTitleBarSeparator() );
             configuration->setOpaqueTitleBar( exception.opaqueTitleBar() );
             configuration->setOpacityOverride( exception.opacityOverride() );
             configuration->setDrawBackgroundGradient( exception.drawBackgroundGradient() );
@@ -103,7 +104,7 @@ namespace Breeze
     {
 
         // list of items to be written
-        QStringList keys = { "Enabled", "ExceptionPattern", "ExceptionType", "HideTitleBar", "IsDialog", "OpaqueTitleBar", "OpacityOverride", "Mask", "BorderSize", "MatchColorForTitleBar", "DrawBackgroundGradient", "GradientOverride"};
+        QStringList keys = { "Enabled", "ExceptionPattern", "ExceptionType", "HideTitleBar", "DrawTitleBarSeparator", "IsDialog", "OpaqueTitleBar", "OpacityOverride", "Mask", "BorderSize", "MatchColorForTitleBar", "DrawBackgroundGradient", "GradientOverride"};
 
         // write all items
         foreach( auto key, keys )

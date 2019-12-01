@@ -2,8 +2,10 @@ V0.7.1
 ---------
 
 * Improved Behavior of TitleBar Gradient and Line Separation
+* Added line separation override
 * Button padding applies both horizontally and vertically (nice method to adjust title bar height)
 * Tiny border reduces now to window outline, all other borders move accordingly, normal is prev tiny, big is prev normal, etc.
+* Added hide title bar option under any maximization, including V/H
 
 
 V0.7.0

@@ -759,7 +759,7 @@ namespace Breeze
         if ( hasBorders() ) // && !s->isAlphaChannelSupported() )
         {
             painter->save();
-            painter->setRenderHint(QPainter::Antialiasing, false);
+            // painter->setRenderHint(QPainter::Antialiasing, false);
             painter->setBrush( Qt::NoBrush );
 
             QPen border_pen1( titleBarColor.darker( 125 ) );
@@ -801,10 +801,8 @@ namespace Breeze
             painter->setBrush( titleBarColor );
 
         auto s = settings();
-        if( isMaximized() || !s->isAlphaChannelSupported() || drawBackgroundGradient() || outlineColor.isValid() )
+        if( !s->isAlphaChannelSupported() )
             painter->drawRect(titleRect);
-        else if( c->isShaded() )
-            painter->drawRoundedRect(titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
         else if ( !hasBorders() ) {
             painter->setClipRect(titleRect, Qt::IntersectClip);
             // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
@@ -815,11 +813,13 @@ namespace Breeze
                 m_internalSettings->cornerRadius()),
                 m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
         }
+        else
+            painter->drawRoundedRect(titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
         if( !c->isShaded() && !hideTitleBar() && outlineColor.isValid() )
         {
             // outline
-            painter->setRenderHint( QPainter::Antialiasing, false );
+            // painter->setRenderHint( QPainter::Antialiasing, false );
             painter->setBrush( Qt::NoBrush );
             QPen pen(outlineColor);
             if ( c->isActive() )
@@ -868,7 +868,7 @@ namespace Breeze
 
     //________________________________________________________________
     int Decoration::captionHeight() const
-        { return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing()*(Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin ); }
+    { return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing()*(Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin ); }
 
     //________________________________________________________________
     QPair<QRect,Qt::Alignment> Decoration::captionRect() const

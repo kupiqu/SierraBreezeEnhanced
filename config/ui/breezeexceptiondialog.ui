@@ -142,58 +142,37 @@
         </item>
        </widget>
       </item>
-      <item row="7" column="0">
-￼	       <widget class="QCheckBox" name="isDialog">
-￼	        <property name="text">
-￼	         <string>Only for dialogs</string>
-￼	        </property>
-￼	       </widget>
-￼	      </item>
-￼	      <!--<item row="7" column="0" colspan="2">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>-->
-      <item row="1" column="0" alignment="Qt::AlignLeft">
-         <widget class="QLabel" name="label_3">
-           <property name="text">
-             <string>Hide window title bar:</string>
-           </property>
-           <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-           <property name="buddy">
-             <cstring>hideTitleBar</cstring>
-           </property>
-         </widget>
-       </item>
-       <item row="1" column="1" colspan="2">
-         <widget class="QComboBox" name="hideTitleBar">
-         <item>
+      <item row="1" column="0">
+        <widget class="QLabel" name="hideTitleBarCheckBox">
           <property name="text">
-           <string>Never</string>
+            <string>Hide window title bar:</string>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Maximized Windows</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Always</string>
-          </property>
-         </item>
         </widget>
-       </item>
+      </item>
+      <item row="1" column="1" colspan="2">
+        <widget class="QComboBox" name="hideTitleBar">
+        <item>
+         <property name="text">
+          <string>Never</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Maximized Windows</string>
+         </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Any Maximization</string>
+          </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Always</string>
+         </property>
+        </item>
+       </widget>
+      </item>
       <item row="2" column="0">
        <widget class="QCheckBox" name="matchColorForTitleBar">
         <property name="text">
@@ -271,13 +250,20 @@
        </layout>
       </item>
       <item row="5" column="0">
+        <widget class="QCheckBox" name="drawTitleBarSeparator">
+          <property name="text">
+            <string>Draw separator between Title Bar and Window</string>
+          </property>
+        </widget>
+      </item>
+      <item row="6" column="0">
        <widget class="QCheckBox" name="opaqueTitleBar">
         <property name="text">
          <string>Opaque title bar</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0" colspan="2">
+      <item row="7" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <spacer name="horizontalSpacer_3">
@@ -333,6 +319,26 @@
         </item>
        </layout>
       </item>
+      <item row="8" column="0">
+￼	       <widget class="QCheckBox" name="isDialog">
+￼	        <property name="text">
+￼	         <string>Only for dialogs</string>
+￼	        </property>
+￼	       </widget>
+￼	      </item>
+￼	      <!--<item row="9" column="0" colspan="2">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>-->
      </layout>
     </widget>
    </item>

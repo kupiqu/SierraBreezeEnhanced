@@ -196,7 +196,7 @@ namespace Breeze
     { return (client().data()->isMaximizedVertically() || client().data()->adjacentScreenEdges().testFlag( Qt::BottomEdge ) ) && !m_internalSettings->drawBorderOnMaximizedWindows(); }
 
     bool Decoration::hideTitleBar() const
-    { return m_internalSettings->hideTitleBar() == 2 || ( m_internalSettings->hideTitleBar() == 1 && client().data()->isMaximized() ); }
+    { return m_internalSettings->hideTitleBar() == 3 || ( m_internalSettings->hideTitleBar() == 1 && client().data()->isMaximized() ) || ( m_internalSettings->hideTitleBar() == 2 && ( client().data()->isMaximized() || client().data()->isMaximizedVertically()  || client().data()->isMaximizedHorizontally()) ); }
 
     int Decoration::titleBarAlpha() const
     {

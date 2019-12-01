@@ -107,7 +107,7 @@
          </item>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="4" column="1" alignment="Qt::AlignLeft">
         <widget class="QLabel" name="buttonPaddingLabel">
          <property name="text">
           <string>Button padding:</string>
@@ -318,6 +318,11 @@
           <property name="text">
            <string>Maximized Windows</string>
           </property>
+         </item>
+         <item>
+           <property name="text">
+             <string>Any Maximization</string>
+           </property>
          </item>
          <item>
           <property name="text">
