@@ -1,10 +1,15 @@
+V0.7.4
+---------
+
+* Reverting fix for glitches (issue #47) as it does not work consistently
+
 V0.7.3
 ---------
 
 * Hovering symbols at unison (mac Sierra style only for now)
 * Fixed window outline adjustment
 * Better support when alpha is disabled
-* Temptative fix for glitches (issue #47)
+* Tentative fix for glitches (issue #47)
 
 V0.7.2
 ---------
