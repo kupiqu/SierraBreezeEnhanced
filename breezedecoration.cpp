@@ -403,10 +403,10 @@ namespace Breeze
         auto s = settings();
         auto c = client().data();
         const bool maximized = isMaximized();
-        int width =  maximized ? c->width() : c->width() - 2*s->largeSpacing()*Metrics::TitleBar_SideMargin;
-        int height = maximized ? borderTop() : borderTop() - s->smallSpacing()*Metrics::TitleBar_TopMargin;
-        int x = maximized ? 0 : s->largeSpacing()*Metrics::TitleBar_SideMargin;
-        int y = maximized ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
+        const int width =  maximized ? c->width() : c->width() - 2*s->largeSpacing()*Metrics::TitleBar_SideMargin;
+        const int height = maximized ? borderTop() : borderTop() - s->smallSpacing()*Metrics::TitleBar_TopMargin;
+        const int x = maximized ? 0 : s->largeSpacing()*Metrics::TitleBar_SideMargin;
+        const int y = maximized ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
         setTitleBar(QRect(x, y, width, height));
     }
 
@@ -613,9 +613,9 @@ namespace Breeze
         auto s = settings();
 
         // left, right and bottom borders
-        int left   = isLeftEdge() ? 0 : borderSize();
-        int right  = isRightEdge() ? 0 : borderSize();
-        int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize(true);
+        const int left   = isLeftEdge() ? 0 : borderSize();
+        const int right  = isRightEdge() ? 0 : borderSize();
+        const int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize(true);
 
         int top = 0;
         if( hideTitleBar() ) top = bottom;
@@ -638,7 +638,7 @@ namespace Breeze
         setBorders(QMargins(left, top, right, bottom));
 
         // extended sizes
-        int extSize = s->largeSpacing();
+        const int extSize = s->largeSpacing();
         int extSides = 0;
         int extBottom = 0;
         if( hasNoBorders() )
@@ -670,7 +670,7 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::updateButtonsGeometry()
     {
-        auto s = settings();
+        const auto s = settings();
 
         // adjust button position
         const int bHeight = captionHeight() + (isTopEdge() ? s->smallSpacing()*Metrics::TitleBar_TopMargin:0);
@@ -750,6 +750,7 @@ namespace Breeze
         {
             painter->fillRect(rect(), Qt::transparent);
             painter->save();
+            painter->setRenderHint(QPainter::Antialiasing);
             painter->setBrush( titleBarColor );
 
             // clip away the top part
@@ -757,14 +758,17 @@ namespace Breeze
 
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
-            painter->drawRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            if( s->isAlphaChannelSupported() )
+                painter->drawRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            else
+                painter->drawRect( rect() );
 
             painter->restore();
         }
 
         paintTitleBar(painter, repaintRegion);
 
-        if ( hasBorders() ) // && !s->isAlphaChannelSupported() )
+        if ( hasBorders() )
         {
             painter->save();
             // painter->setRenderHint(QPainter::Antialiasing, false);
@@ -772,7 +776,10 @@ namespace Breeze
 
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
-            painter->drawRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            if( s->isAlphaChannelSupported() )
+              painter->drawRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            else
+              painter->drawRect( rect() );
 
             painter->restore();
         }
