@@ -749,7 +749,7 @@ namespace Breeze
 
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
-            painter->drawRoundedRect(rect().adjusted( 0, 0, -1, -1 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            painter->drawRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
             painter->restore();
         }
@@ -764,7 +764,7 @@ namespace Breeze
 
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
-            painter->drawRoundedRect(rect().adjusted( 0, 0, -1, -1 ), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            painter->drawRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
             painter->restore();
         }
