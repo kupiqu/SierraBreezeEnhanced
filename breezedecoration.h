@@ -42,6 +42,7 @@ namespace KDecoration2
 namespace Breeze
 {
     class SizeGrip;
+    class Button;
     class Decoration : public KDecoration2::Decoration
     {
         Q_OBJECT
@@ -110,10 +111,10 @@ namespace Breeze
         { return m_buttonHovered; }
 
         signals:
-        void buttonHoveredChanged ();
+        void buttonHoveredChanged ( Button *b );
 
         public Q_SLOTS:
-        void setButtonHovered ( bool value );
+        void setButtonHovered ( bool value, Button *b );
         //@}
 
 
