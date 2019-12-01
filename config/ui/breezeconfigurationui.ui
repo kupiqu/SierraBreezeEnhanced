@@ -332,16 +332,16 @@
         </widget>
        </item>
        <item row="6" column="1" colspan="10">
+         <widget class="QCheckBox" name="unisonHovering">
+           <property name="text">
+             <string>Unison hovering</string>
+           </property>
+         </widget>
+       </item>
+       <item row="7" column="1" colspan="10">
         <widget class="QCheckBox" name="matchColorForTitleBar">
          <property name="text">
           <string>Match Title Bar to Window color</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="1" colspan="10">
-        <widget class="QCheckBox" name="outlineCloseButton">
-         <property name="text">
-          <string>Draw a circle around close button (Plasma style only)</string>
          </property>
         </widget>
        </item>
@@ -501,6 +501,9 @@
           <widget class="QLabel" name="cornerRadiusLabel">
            <property name="text">
             <string>Corner radius:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -859,13 +862,15 @@
  </customwidgets>
  <tabstops>
   <tabstop>titleAlignment</tabstop>
-  <tabstop>hideTitleBar</tabstop>
   <tabstop>buttonSize</tabstop>
   <tabstop>buttonStyle</tabstop>
   <tabstop>btnSpacingSpinBox</tabstop>
-  <tabstop>outlineCloseButton</tabstop>
-  <tabstop>cornerRadiusSpinBox</tabstop>
+  <tabstop>buttonPadding</tabstop>
+  <tabstop>hideTitleBar</tabstop>
+  <tabstop>matchColorForTitleBar</tabstop>
+  <tabstop>unisonHovering</tabstop>
   <tabstop>drawBorderOnMaximizedWindows</tabstop>
+  <tabstop>cornerRadiusSpinBox</tabstop>
   <tabstop>drawBackgroundGradient</tabstop>
   <tabstop>drawSizeGrip</tabstop>
   <tabstop>drawTitleBarSeparator</tabstop>

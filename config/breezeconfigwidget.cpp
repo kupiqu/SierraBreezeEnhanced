@@ -50,7 +50,7 @@ namespace Breeze
         connect( m_ui.buttonSize, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.btnSpacingSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
         connect( m_ui.buttonPadding, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
-        connect( m_ui.outlineCloseButton, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.unisonHovering, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.cornerRadiusSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
         connect( m_ui.drawBorderOnMaximizedWindows, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawSizeGrip, SIGNAL(clicked()), SLOT(updateChanged()) );
@@ -99,7 +99,7 @@ namespace Breeze
         m_ui.buttonSize->setCurrentIndex( m_internalSettings->buttonSize() );
         m_ui.btnSpacingSpinBox->setValue( m_internalSettings->buttonSpacing() );
         m_ui.buttonPadding->setValue( m_internalSettings->buttonPadding() );
-        m_ui.outlineCloseButton->setChecked( m_internalSettings->outlineCloseButton() );
+        m_ui.unisonHovering->setChecked( m_internalSettings->unisonHovering() );
         m_ui.cornerRadiusSpinBox->setValue( m_internalSettings->cornerRadius() );
         m_ui.drawBorderOnMaximizedWindows->setChecked( m_internalSettings->drawBorderOnMaximizedWindows() );
         m_ui.drawSizeGrip->setChecked( m_internalSettings->drawSizeGrip() );
@@ -175,7 +175,7 @@ namespace Breeze
         m_internalSettings->setButtonSize( m_ui.buttonSize->currentIndex() );
         m_internalSettings->setButtonSpacing( m_ui.btnSpacingSpinBox->value() );
         m_internalSettings->setButtonPadding( m_ui.buttonPadding->value() );
-        m_internalSettings->setOutlineCloseButton( m_ui.outlineCloseButton->isChecked() );
+        m_internalSettings->setUnisonHovering( m_ui.unisonHovering->isChecked() );
         m_internalSettings->setCornerRadius( m_ui.cornerRadiusSpinBox->value() );
         m_internalSettings->setDrawBorderOnMaximizedWindows( m_ui.drawBorderOnMaximizedWindows->isChecked() );
         m_internalSettings->setDrawSizeGrip( m_ui.drawSizeGrip->isChecked() );
@@ -262,6 +262,7 @@ namespace Breeze
         m_ui.buttonSize->setCurrentIndex( m_internalSettings->buttonSize() );
         m_ui.btnSpacingSpinBox->setValue( m_internalSettings->buttonSpacing() );
         m_ui.buttonPadding->setValue( m_internalSettings->buttonPadding() );
+        m_ui.unisonHovering->setChecked( m_internalSettings->unisonHovering() );
         m_ui.cornerRadiusSpinBox->setValue( m_internalSettings->cornerRadius() );
         m_ui.drawBorderOnMaximizedWindows->setChecked( m_internalSettings->drawBorderOnMaximizedWindows() );
         m_ui.drawSizeGrip->setChecked( m_internalSettings->drawSizeGrip() );
@@ -328,7 +329,7 @@ namespace Breeze
         else if( m_ui.buttonSize->currentIndex() != m_internalSettings->buttonSize() ) modified = true;
         else if( m_ui.btnSpacingSpinBox->value() != m_internalSettings->buttonSpacing() ) modified = true;
         else if ( m_ui.buttonPadding->value() != m_internalSettings->buttonPadding() ) modified = true;
-        else if( m_ui.outlineCloseButton->isChecked() != m_internalSettings->outlineCloseButton() ) modified = true;
+        else if( m_ui.unisonHovering->isChecked() != m_internalSettings->unisonHovering() ) modified = true;
         else if( m_ui.cornerRadiusSpinBox->value() != m_internalSettings->cornerRadius() ) modified = true;
         else if( m_ui.drawBorderOnMaximizedWindows->isChecked() !=  m_internalSettings->drawBorderOnMaximizedWindows() ) modified = true;
         else if( m_ui.drawSizeGrip->isChecked() !=  m_internalSettings->drawSizeGrip() ) modified = true;

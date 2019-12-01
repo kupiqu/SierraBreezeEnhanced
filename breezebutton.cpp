@@ -576,20 +576,17 @@ namespace Breeze
         QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
         QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor titleBarColor (d->titleBarColor());
 
         // symbols color
 
-        QColor symbolColor( this->autoColor( inactiveWindow, true, false, isMatchTitleBarColor, darkSymbolColor, lightSymbolColor ) );
+        QColor symbolColor( this->autoColor( inactiveWindow, true, false, darkSymbolColor, lightSymbolColor ) );
 
         // symbols pen
 
         QPen symbol_pen( symbolColor );
         symbol_pen.setJoinStyle( Qt::MiterJoin );
         symbol_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
-
-        bool hovered = isHovered() || d->buttonHovered();
 
         switch( type() )
         {
@@ -616,7 +613,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( hovered )
+                if ( this->hovered() )
                 {
                   painter->setPen( symbol_pen );
                   // it's a cross
@@ -648,7 +645,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( hovered )
+                if ( this->hovered() )
                 {
                   painter->setPen( Qt::NoPen );
 
@@ -703,7 +700,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( hovered )
+                if ( this->hovered() )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawLine( QPointF( 5, 9 ), QPointF( 13, 9 ) );
@@ -738,7 +735,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( hovered || isChecked() )
+                if ( this->hovered() || isChecked() )
                 {
                   painter->setPen( Qt::NoPen );
                   painter->setBrush(QBrush(symbolColor));
@@ -786,7 +783,7 @@ namespace Breeze
                     painter->fillPath(path, QBrush(symbolColor));
 
                 }
-                else if ( hovered ) {
+                else if ( this->hovered() ) {
                     painter->setPen( symbol_pen );
                     painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 6 ) );
                     painter->setPen( Qt::NoPen );
@@ -827,7 +824,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( hovered || isChecked() )
+                if ( this->hovered() || isChecked() )
                 {
                   painter->setPen( Qt::NoPen );
 
@@ -868,7 +865,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( hovered || isChecked() )
+                if ( this->hovered() || isChecked() )
                 {
                   painter->setPen( Qt::NoPen );
 
@@ -937,7 +934,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( hovered || isChecked() )
+                if ( this->hovered() || isChecked() )
                 {
                   painter->setPen( symbol_pen );
                   QPainterPath path;
@@ -978,12 +975,11 @@ namespace Breeze
         QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
         QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor titleBarColor (d->titleBarColor());
 
         // symbols color
 
-        QColor symbolColor( this->autoColor( inactiveWindow, true, false, isMatchTitleBarColor, darkSymbolColor, lightSymbolColor ) );
+        QColor symbolColor( this->autoColor( inactiveWindow, true, false, darkSymbolColor, lightSymbolColor ) );
 
         // symbols pen
 
@@ -1016,7 +1012,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() )
+                if ( this->hovered() )
                 {
                   painter->setPen( symbol_pen );
                   // it's a cross
@@ -1048,7 +1044,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() )
+                if ( this->hovered() )
                 {
 
                   painter->setPen( symbol_pen );
@@ -1096,7 +1092,7 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() )
+                if ( this->hovered() )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawLine( QPointF( 5, 9 ), QPointF( 13, 9 ) );
@@ -1131,7 +1127,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() && !isChecked() )
+                if ( this->hovered() && !isChecked() )
                 {
                   painter->setPen( symbol_pen );
 
@@ -1196,7 +1192,7 @@ namespace Breeze
                   painter->setBrush(QBrush(symbolColor));
                   painter->drawEllipse( QRectF( 8, 6, 2, 2 ) );
                 }
-                else if ( isHovered() )
+                else if ( this->hovered() )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawLine( QPointF( 4, 6 ), QPointF( 14, 6 ) );
@@ -1235,7 +1231,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() )
+                if ( this->hovered() || isChecked() )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawPolyline( QVector<QPointF>{
@@ -1274,7 +1270,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() )
+                if ( this->hovered() || isChecked() )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawPolyline( QVector<QPointF>{
@@ -1341,7 +1337,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() )
+                if ( this->hovered() || isChecked() )
                 {
                   painter->setPen( symbol_pen );
                   int startAngle = 260 * 16;
@@ -1384,12 +1380,11 @@ namespace Breeze
         QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
         QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor titleBarColor (d->titleBarColor());
 
         // symbols color
 
-        QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, isMatchTitleBarColor, darkSymbolColor, lightSymbolColor ) );
+        QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, darkSymbolColor, lightSymbolColor ) );
 
         // symbols pen
 
@@ -1411,7 +1406,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1434,7 +1429,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( symbol_pen );
                   // it's a cross
@@ -1455,7 +1450,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1479,7 +1474,7 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( Qt::NoPen );
 
@@ -1523,7 +1518,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1546,7 +1541,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawLine( QPointF( 5, 9 ), QPointF( 13, 9 ) );
@@ -1561,7 +1556,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1592,7 +1587,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( Qt::NoPen );
                   painter->setBrush(QBrush(symbolColor));
@@ -1608,7 +1603,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1651,7 +1646,7 @@ namespace Breeze
                     painter->fillPath(path, QBrush(symbolColor));
 
                 }
-                else if ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) {
+                else if ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) {
                     painter->setPen( symbol_pen );
                     painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 6 ) );
                     painter->setPen( Qt::NoPen );
@@ -1672,7 +1667,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1703,7 +1698,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( Qt::NoPen );
 
@@ -1724,7 +1719,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1755,7 +1750,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( Qt::NoPen );
 
@@ -1804,7 +1799,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1835,7 +1830,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || isChecked() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( symbol_pen );
                   QPainterPath path;
@@ -1878,12 +1873,11 @@ namespace Breeze
         QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
         QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor titleBarColor (d->titleBarColor());
 
         // symbols color
 
-        QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, isMatchTitleBarColor, darkSymbolColor, lightSymbolColor ) );
+        QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, darkSymbolColor, lightSymbolColor ) );
 
         // symbols pen
 
@@ -1905,7 +1899,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1928,7 +1922,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( symbol_pen );
                   // it's a cross
@@ -1949,7 +1943,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -1972,7 +1966,7 @@ namespace Breeze
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
-                if ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
 
                   painter->setPen( symbol_pen );
@@ -2008,7 +2002,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && isHovered() )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -2033,7 +2027,7 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawLine( QPointF( 5, 9 ), QPointF( 13, 9 ) );
@@ -2048,7 +2042,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -2079,7 +2073,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( !isChecked() && ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) )
+                if ( !isChecked() && ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) )
                 {
                   painter->setPen( symbol_pen );
 
@@ -2092,7 +2086,7 @@ namespace Breeze
                   painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
                   painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
                 }
-                else if ( isChecked() && ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) )
+                else if ( isChecked() && ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) )
                 {
                   painter->setPen( symbol_pen );
 
@@ -2116,7 +2110,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -2155,7 +2149,7 @@ namespace Breeze
                   painter->setBrush(QBrush(symbolColor));
                   painter->drawEllipse( QRectF( 8, 6, 2, 2 ) );
                 }
-                else if ( isHovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                else if ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawLine( QPointF( 4, 6 ), QPointF( 14, 6 ) );
@@ -2174,7 +2168,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -2205,7 +2199,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawPolyline( QVector<QPointF>{
@@ -2224,7 +2218,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -2255,7 +2249,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( symbol_pen );
                   painter->drawPolyline( QVector<QPointF>{
@@ -2302,7 +2296,7 @@ namespace Breeze
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
-                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( isHovered() || isChecked() ) )
+                if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
                   // ring
                   painter->setBrush( Qt::NoBrush );
@@ -2333,7 +2327,7 @@ namespace Breeze
                 }
                 painter->setBrush( Qt::NoBrush );
 
-                if ( isHovered() || isChecked() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
+                if ( this->hovered() || isChecked() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
                 {
                   painter->setPen( symbol_pen );
                   int startAngle = 260 * 16;
@@ -2366,15 +2360,12 @@ namespace Breeze
         painter->scale( width/20, width/20 );
         painter->translate( 1, 1 );
 
-        auto d = qobject_cast<Decoration*>( decoration() );
-        bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
-
         QColor darkSymbolColor = QColor(34, 45, 50);
         QColor lightSymbolColor = QColor(250, 251, 252);
         QColor symbolColor = darkSymbolColor;
 
-        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        auto d = qobject_cast<Decoration*>( decoration() );
+        QColor titleBarColor (d->titleBarColor());
 
         // symbols pen
 
@@ -2720,15 +2711,12 @@ namespace Breeze
         painter->scale( width/20, width/20 );
         painter->translate( 1, 1 );
 
-        auto d = qobject_cast<Decoration*>( decoration() );
-        bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
-
         QColor darkSymbolColor = QColor(34, 45, 50);
         QColor lightSymbolColor = QColor(250, 251, 252);
         QColor symbolColor = darkSymbolColor;
 
-        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        auto d = qobject_cast<Decoration*>( decoration() );
+        QColor titleBarColor (d->titleBarColor());
 
         // symbols pen
 
@@ -2803,6 +2791,7 @@ namespace Breeze
             case DecorationButtonType::Minimize:
             {
                 QColor button_color = QColor(223, 192, 76);
+
                 button_color.setAlpha( button_color.alpha()*m_opacity );
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
@@ -3076,10 +3065,7 @@ namespace Breeze
         QColor lightSymbolColor = QColor(250, 251, 252);
 
         auto d = qobject_cast<Decoration*>( decoration() );
-        bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
-
-        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor titleBarColor (d->titleBarColor());
         uint r = qRed(titleBarColor.rgb());
         uint g = qGreen(titleBarColor.rgb());
         uint b = qBlue(titleBarColor.rgb());
@@ -3228,7 +3214,7 @@ namespace Breeze
           button_color.setAlpha( 255 );
           symbolBgdColor.setAlpha( 255 );
           QColor mycolor = symbolColor;
-          if ( isChecked() && !isHovered() )
+          if ( isChecked() && !this->hovered() )
             mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
           else
             mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
@@ -3263,7 +3249,7 @@ namespace Breeze
           button_color.setAlpha( 255 );
           symbolBgdColor.setAlpha( 255 );
           QColor mycolor = symbolColor;
-          if ( isChecked() && !isHovered() )
+          if ( isChecked() && !this->hovered() )
             mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
           else
             mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
@@ -3319,7 +3305,7 @@ namespace Breeze
           button_color.setAlpha( 255 );
           symbolBgdColor.setAlpha( 255 );
           QColor mycolor = symbolColor;
-          if ( isChecked() && !isHovered() )
+          if ( isChecked() && !this->hovered() )
             mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
           else
             mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
@@ -3359,7 +3345,7 @@ namespace Breeze
           button_color.setAlpha( 255 );
           symbolBgdColor.setAlpha( 255 );
           QColor mycolor = symbolColor;
-          if ( isChecked() && !isHovered() )
+          if ( isChecked() && !this->hovered() )
             mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
           else
             mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
@@ -3447,10 +3433,7 @@ namespace Breeze
         QColor lightSymbolColor = QColor(250, 251, 252);
 
         auto d = qobject_cast<Decoration*>( decoration() );
-        bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
-
-        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor titleBarColor (d->titleBarColor());
         uint r = qRed(titleBarColor.rgb());
         uint g = qGreen(titleBarColor.rgb());
         uint b = qBlue(titleBarColor.rgb());
@@ -3590,7 +3573,7 @@ namespace Breeze
                 button_color.setAlpha( 255 );
                 symbolBgdColor.setAlpha( 255 );
                 QColor mycolor = symbolColor;
-                if ( isChecked() && !isHovered() )
+                if ( isChecked() && !this->hovered() )
                   mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
                 else
                   mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
@@ -3646,7 +3629,7 @@ namespace Breeze
                 button_color.setAlpha( 255 );
                 symbolBgdColor.setAlpha( 255 );
                 QColor mycolor = symbolColor;
-                if ( isChecked() && !isHovered() )
+                if ( isChecked() && !this->hovered() )
                   mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
                 else
                   mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
@@ -3691,7 +3674,7 @@ namespace Breeze
                 button_color.setAlpha( 255 );
                 symbolBgdColor.setAlpha( 255 );
                 QColor mycolor = symbolColor;
-                if ( isChecked() && !isHovered() )
+                if ( isChecked() && !this->hovered() )
                   mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
                 else
                   mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
@@ -3729,7 +3712,7 @@ namespace Breeze
                 button_color.setAlpha( 255 );
                 symbolBgdColor.setAlpha( 255 );
                 QColor mycolor = symbolColor;
-                if ( isChecked() && !isHovered() )
+                if ( isChecked() && !this->hovered() )
                   mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
                 else
                   mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
@@ -3822,19 +3805,13 @@ namespace Breeze
     QColor Button::foregroundColor() const
     {
         auto d = qobject_cast<Decoration*>( decoration() );
-        bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
-        QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-        QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+        QColor titleBarColor ( d->titleBarColor() );
 
         if( !d ) {
 
             return QColor();
 
         } else if( isPressed() ) {
-
-            return titleBarColor;
-
-        } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
 
             return titleBarColor;
 
@@ -3846,7 +3823,7 @@ namespace Breeze
 
             return KColorUtils::mix( d->fontColor(), titleBarColor, m_opacity );
 
-        } else if( isHovered() ) {
+        } else if( this->hovered() ) {
 
             return titleBarColor;
 
@@ -3882,18 +3859,9 @@ namespace Breeze
 
             if( type() == DecorationButtonType::Close )
             {
-                if( d->internalSettings()->outlineCloseButton() )
-                {
-
-                    return KColorUtils::mix( d->fontColor(), c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter(), m_opacity );
-
-                } else {
-
-                    QColor color( c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter() );
-                    color.setAlpha( color.alpha()*m_opacity );
-                    return color;
-
-                }
+                QColor color( c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter() );
+                color.setAlpha( color.alpha()*m_opacity );
+                return color;
 
             } else {
 
@@ -3903,14 +3871,10 @@ namespace Breeze
 
             }
 
-        } else if( isHovered() ) {
+        } else if( this->hovered() ) {
 
             if( type() == DecorationButtonType::Close ) return c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter();
             else return d->fontColor();
-
-        } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
-
-            return d->fontColor();
 
         } else {
 
@@ -3921,7 +3885,7 @@ namespace Breeze
     }
 
     //__________________________________________________________________
-    QColor Button::autoColor( const bool inactiveWindow, const bool useActiveButtonStyle, const bool useInactiveButtonStyle, const bool isMatchTitleBarColor, const QColor darkSymbolColor, const QColor lightSymbolColor ) const
+    QColor Button::autoColor( const bool inactiveWindow, const bool useActiveButtonStyle, const bool useInactiveButtonStyle, const QColor darkSymbolColor, const QColor lightSymbolColor ) const
     {
         QColor col;
 
@@ -3930,9 +3894,7 @@ namespace Breeze
         else
         {
             auto d = qobject_cast<Decoration*>( decoration() );
-
-            QColor matchedTitleBarColor(d->client().data()->palette().color(QPalette::Window));
-            QColor titleBarColor ( isMatchTitleBarColor ? matchedTitleBarColor : d->titleBarColor() );
+            QColor titleBarColor ( d->titleBarColor() );
 
             uint r = qRed(titleBarColor.rgb());
             uint g = qGreen(titleBarColor.rgb());
@@ -3948,6 +3910,13 @@ namespace Breeze
                 col = lightSymbolColor;
         }
         return col;
+    }
+
+    //__________________________________________________________________
+    bool Button::hovered() const
+    {
+      auto d = qobject_cast<Decoration*>( decoration() );
+      return isHovered() || ( d->buttonHovered() && d->internalSettings()->unisonHovering() );
     }
 
     //________________________________________________________________
