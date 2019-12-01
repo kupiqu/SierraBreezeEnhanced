@@ -393,6 +393,7 @@ namespace Breeze
         connect(c, &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateButtonsGeometry);
         connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateButtonsGeometry);
 
+        update();
         createButtons();
         createShadow();
     }
