@@ -771,9 +771,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -824,9 +828,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -865,9 +873,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -934,9 +946,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1133,9 +1149,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1190,9 +1210,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1237,9 +1261,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1276,9 +1304,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1343,9 +1375,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1593,9 +1629,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1640,9 +1680,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1704,9 +1748,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1756,9 +1804,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -1836,9 +1888,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2079,9 +2135,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2147,9 +2207,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2205,9 +2269,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2255,9 +2323,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2333,9 +2405,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2495,9 +2571,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2528,9 +2608,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2581,9 +2665,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2618,9 +2706,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2682,9 +2774,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2838,9 +2934,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2891,9 +2991,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2933,9 +3037,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -2968,9 +3076,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -3030,9 +3142,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -3576,9 +3692,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -3632,9 +3752,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -3677,9 +3801,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -3715,9 +3843,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
@@ -3762,9 +3894,13 @@ namespace Breeze
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, r, r );
                 }
-                else {
+                else if ( d->internalSettings()->animationsEnabled() ) {
                   QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                   painter->drawEllipse( c, 9, 9 );
+                }
+                else {
+                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                  painter->drawEllipse( c, 7, 7 );
                 }
                 painter->setBrush( Qt::NoBrush );
 
