@@ -580,7 +580,13 @@ namespace Breeze
 
         // symbols color
 
-        QColor symbolColor( this->autoColor( inactiveWindow, true, false, darkSymbolColor, lightSymbolColor ) );
+        QColor symbolColor;
+        if ( inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+            symbolColor = lightSymbolColor;
+        else if ( inactiveWindow && qGray(titleBarColor.rgb()) > 128 )
+            symbolColor = darkSymbolColor;
+        else
+            symbolColor = this->autoColor( false, true, false, darkSymbolColor, lightSymbolColor );
 
         // symbols pen
 
@@ -979,7 +985,13 @@ namespace Breeze
 
         // symbols color
 
-        QColor symbolColor( this->autoColor( inactiveWindow, true, false, darkSymbolColor, lightSymbolColor ) );
+        QColor symbolColor;
+        if ( inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+            symbolColor = lightSymbolColor;
+        else if ( inactiveWindow && qGray(titleBarColor.rgb()) > 128 )
+            symbolColor = darkSymbolColor;
+        else
+            symbolColor = this->autoColor( false, true, false, darkSymbolColor, lightSymbolColor );
 
         // symbols pen
 
