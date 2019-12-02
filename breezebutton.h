@@ -136,6 +136,11 @@ namespace Breeze
         bool hovered() const;
         //@}
 
+        //*@button radius
+        //@{
+        qreal buttonRadius() const;
+        //@}
+
         Flag m_flag = FlagNone;
 
         //* active state change animation

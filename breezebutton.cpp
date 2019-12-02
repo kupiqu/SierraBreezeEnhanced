@@ -614,8 +614,7 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -646,8 +645,7 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -701,8 +699,7 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -729,16 +726,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() )
@@ -765,20 +755,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( isChecked() )
@@ -822,20 +801,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() )
@@ -867,20 +835,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() )
@@ -940,20 +897,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() )
@@ -1035,8 +981,7 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -1067,8 +1012,7 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -1114,8 +1058,7 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -1143,20 +1086,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() && !isChecked() )
@@ -1204,20 +1136,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( isChecked() )
@@ -1255,20 +1176,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() )
@@ -1298,20 +1208,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() )
@@ -1369,20 +1268,9 @@ namespace Breeze
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() )
@@ -1472,8 +1360,7 @@ namespace Breeze
                   painter->setBrush( button_color );
                   painter->setPen( button_pen );
                 }
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -1516,8 +1403,7 @@ namespace Breeze
                   painter->setBrush( button_color );
                   painter->setPen( button_pen );
                 }
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -1584,8 +1470,7 @@ namespace Breeze
                   painter->setBrush( button_color );
                   painter->setPen( button_pen );
                 }
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -1623,20 +1508,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
@@ -1674,20 +1548,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if (isChecked())
@@ -1742,20 +1605,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
@@ -1798,20 +1650,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
@@ -1882,20 +1723,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
@@ -1985,8 +1815,7 @@ namespace Breeze
                   painter->setBrush( button_color );
                   painter->setPen( button_pen );
                 }
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -2029,8 +1858,7 @@ namespace Breeze
                   painter->setBrush( button_color );
                   painter->setPen( button_pen );
                 }
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -2089,8 +1917,7 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -2129,20 +1956,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( !isChecked() && ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) )
@@ -2201,20 +2017,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if (isChecked())
@@ -2263,20 +2068,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
@@ -2317,20 +2111,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() ||  ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
@@ -2399,20 +2182,9 @@ namespace Breeze
                   painter->setPen( button_pen );
                 }
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 if ( this->hovered() || isChecked() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle )
@@ -2471,8 +2243,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -2495,8 +2266,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -2541,8 +2311,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -2565,20 +2334,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -2602,20 +2360,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -2659,20 +2406,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -2700,20 +2436,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -2768,20 +2493,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -2842,8 +2556,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -2866,8 +2579,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -2904,8 +2616,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -2928,20 +2639,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -2985,20 +2685,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -3031,20 +2720,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -3070,20 +2748,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -3136,20 +2803,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -3598,8 +3254,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -3623,8 +3278,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -3661,8 +3315,7 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                qreal r = static_cast<qreal>(7)
-                          + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+                qreal r = this->buttonRadius();
                 QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
@@ -3686,20 +3339,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -3746,20 +3388,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -3795,20 +3426,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -3837,20 +3457,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -3888,20 +3497,9 @@ namespace Breeze
                 painter->setPen( Qt::NoPen );
                 painter->setBrush( button_color );
 
-                if ( !isChecked() ) {
-                  qreal r = static_cast<qreal>(7)
-                            + static_cast<qreal>(2) * m_animation->currentValue().toReal();
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, r, r );
-                }
-                else if ( d->internalSettings()->animationsEnabled() ) {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 9, 9 );
-                }
-                else {
-                  QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
-                  painter->drawEllipse( c, 7, 7 );
-                }
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
                 button_color.setAlpha( 255 );
@@ -4031,6 +3629,24 @@ namespace Breeze
         }
 
     }
+
+    //__________________________________________________________________
+    qreal Button::buttonRadius() const
+    {
+        auto d = qobject_cast<Decoration*>( decoration() );
+
+        if ( !isChecked() ) {
+          return static_cast<qreal>(7)
+                    + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+        }
+        else if ( d->internalSettings()->animationsEnabled() ) {
+          return static_cast<qreal>(9);
+        }
+        else {
+          return static_cast<qreal>(7);
+        }
+    }
+
 
     //__________________________________________________________________
     QColor Button::autoColor( const bool inactiveWindow, const bool useActiveButtonStyle, const bool useInactiveButtonStyle, const QColor darkSymbolColor, const QColor lightSymbolColor ) const
