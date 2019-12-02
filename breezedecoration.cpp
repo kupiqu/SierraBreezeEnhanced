@@ -295,7 +295,9 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::setButtonHovered( bool value, Button *b )
     {
-        if( m_buttonHovered == value ) return;
+        if (value) m_lastHoveredButton = b;
+        if( m_buttonHovered == value || (!value && m_lastHoveredButton != b) ) return;
+
         m_buttonHovered = value;
         emit buttonHoveredChanged(b);
     }
