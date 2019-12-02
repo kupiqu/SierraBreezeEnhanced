@@ -108,6 +108,7 @@ namespace Breeze
         //*@Decoration has a hovered button
         //@{
         bool m_buttonHovered = false;
+        Button *m_lastHoveredButton = nullptr;
         bool buttonHovered() const
         { return m_buttonHovered; }
 
