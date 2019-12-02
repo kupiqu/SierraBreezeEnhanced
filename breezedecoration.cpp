@@ -217,30 +217,44 @@ namespace Breeze
         QColor outlineColor( this->outlineColor() );
 
         auto c( client().data() );
-        if ( drawBackgroundGradient() && c->isActive() )
+        if ( drawBackgroundGradient() ) // && c->isActive() )
         {
-            if ( qGray(titleBarColor.rgb()) > 69 ) {
-                if ( outlineColor.isValid() )
-                    titleBarColor = titleBarColor.darker(115);
+            if ( c->isActive() )
+            {
+                if ( qGray(titleBarColor.rgb()) > 69 ) {
+                    if ( outlineColor.isValid() )
+                        titleBarColor = titleBarColor.darker(115);
+                }
+                else {
+                    if ( outlineColor.isValid() )
+                        titleBarColor = titleBarColor.darker(180);
+                }
             }
-            else {
-                if ( outlineColor.isValid() )
-                    titleBarColor = titleBarColor.darker(180);
-            }
-        }
-        else if ( outlineColor.isValid() && !c->isActive() )
-        {
-            if ( qGray(titleBarColor.rgb()) > 69 )
-                titleBarColor = titleBarColor.darker(110);
             else
-                titleBarColor = titleBarColor.darker(130);
+            {
+                if ( qGray(titleBarColor.rgb()) > 69 ) {
+                    if ( outlineColor.isValid() )
+                        titleBarColor = titleBarColor.darker(110);
+                }
+                else {
+                    if ( outlineColor.isValid() )
+                        titleBarColor = titleBarColor.darker(130);
+                }
+            }
         }
-        else if ( outlineColor.isValid() )
+        else if ( outlineColor.isValid() && c->isActive() )
         {
             if ( qGray(titleBarColor.rgb()) > 69 )
                 titleBarColor = titleBarColor.darker(115);
             else
                 titleBarColor = titleBarColor.darker(150);
+        }
+        else if ( outlineColor.isValid() )
+        {
+            if ( qGray(titleBarColor.rgb()) > 69 )
+                titleBarColor = titleBarColor.darker(110);
+            else
+                titleBarColor = titleBarColor.darker(130);
         }
         return titleBarColor;
     }
@@ -802,10 +816,12 @@ namespace Breeze
         painter->setPen(Qt::NoPen);
 
         // render a linear gradient on title area
-        if ( drawBackgroundGradient() && c->isActive() )
+        if ( drawBackgroundGradient() )
         {
             QLinearGradient gradient( 0, 0, 0, titleRect.height() );
-              int b = m_internalSettings->gradientOverride() > -1 ? m_internalSettings->gradientOverride() : m_internalSettings->backgroundGradientIntensity();
+            int b = m_internalSettings->gradientOverride() > -1 ? m_internalSettings->gradientOverride() : m_internalSettings->backgroundGradientIntensity();
+            if ( !c->isActive() )
+                 b *= 0.5;
             if ( qGray(titleBarColor.rgb()) > 69 )
                 b =  qBound(0, b, 100);
             else
