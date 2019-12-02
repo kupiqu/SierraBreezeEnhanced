@@ -1095,14 +1095,26 @@ namespace Breeze
                 {
                   painter->setPen( symbol_pen );
 
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
-                  painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
-                  painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
+                  if ( isHovered() && d->internalSettings()->animationsEnabled() ){
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
+                    painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
 
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
-                  painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
+                    painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                  }
+                  else {
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 13.5, 5 ) );
+                    painter->drawLine( QPointF( 13.5, 5 ), QPointF( 13.5, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 13.5, 13 ) );
+
+                    painter->drawLine( QPointF( 4.5, 5 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 4.5, 5 ), QPointF( 6, 5 ) );
+                    painter->drawLine( QPointF( 4.5, 13 ), QPointF( 6, 13 ) );
+                  }
                 }
                 else if ( isChecked() )
                 {
@@ -1278,10 +1290,12 @@ namespace Breeze
                   painter->setPen( symbol_pen );
                   int startAngle = 260 * 16;
                   int spanAngle = 280 * 16;
-                  painter->drawArc( QRectF( 5, 3, 8, 8), startAngle, spanAngle );
+                  painter->drawArc( QRectF( 6, 4, 6, 6), startAngle, spanAngle );
 
                   painter->setBrush(QBrush(symbolColor));
-                  painter->drawEllipse( QRectF( 8, 14, 2, 2 ) );
+                  r = static_cast<qreal>(1);
+                  c = QPointF (static_cast<qreal>(9), static_cast<qreal>(13));
+                  painter->drawEllipse( c, r, r );
                 }
                 break;
             }
@@ -1965,14 +1979,26 @@ namespace Breeze
                 {
                   painter->setPen( symbol_pen );
 
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
-                  painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
-                  painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
+                  if ( isHovered() && d->internalSettings()->animationsEnabled() ){
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
+                    painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
 
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
-                  painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
+                    painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                  }
+                  else {
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 13.5, 5 ) );
+                    painter->drawLine( QPointF( 13.5, 5 ), QPointF( 13.5, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 13.5, 13 ) );
+
+                    painter->drawLine( QPointF( 4.5, 5 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 4.5, 5 ), QPointF( 6, 5 ) );
+                    painter->drawLine( QPointF( 4.5, 13 ), QPointF( 6, 13 ) );
+                  }
                 }
                 else if ( isChecked() && ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) )
                 {
@@ -2192,10 +2218,12 @@ namespace Breeze
                   painter->setPen( symbol_pen );
                   int startAngle = 260 * 16;
                   int spanAngle = 280 * 16;
-                  painter->drawArc( QRectF( 5, 3, 8, 8), startAngle, spanAngle );
+                  painter->drawArc( QRectF( 6, 4, 6, 6), startAngle, spanAngle );
 
                   painter->setBrush(QBrush(symbolColor));
-                  painter->drawEllipse( QRectF( 8, 14, 2, 2 ) );
+                  r = static_cast<qreal>(1);
+                  c = QPointF (static_cast<qreal>(9), static_cast<qreal>(13));
+                  painter->drawEllipse( c, r, r );
                 }
                 break;
             }
@@ -2544,7 +2572,7 @@ namespace Breeze
 
         QPen symbol_pen( symbolColor );
         symbol_pen.setJoinStyle( Qt::MiterJoin );
-        symbol_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+        symbol_pen.setWidthF( 1.2*qMax((qreal)1.0, 20/width ) );
 
         switch( type() )
         {
@@ -2651,7 +2679,6 @@ namespace Breeze
                 symbol_pen.setColor(mycolor);
                 painter->setPen( symbol_pen );
 
-                // it's a triangle with a dash
                 if (isChecked())
                 {
                   painter->drawLine( QPointF( 5, 5 ), QPointF( 11, 5 ) );
@@ -2665,14 +2692,26 @@ namespace Breeze
                   painter->drawLine( QPointF( 7, 13 ), QPointF( 13, 13 ) );
                 }
                 else {
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
-                  painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
-                  painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
+                  if ( isHovered() && d->internalSettings()->animationsEnabled() ){
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
+                    painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
 
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
-                  painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
+                    painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                  }
+                  else {
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 13.5, 5 ) );
+                    painter->drawLine( QPointF( 13.5, 5 ), QPointF( 13.5, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 13.5, 13 ) );
+
+                    painter->drawLine( QPointF( 4.5, 5 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 4.5, 5 ), QPointF( 6, 5 ) );
+                    painter->drawLine( QPointF( 4.5, 13 ), QPointF( 6, 13 ) );
+                  }
                 }
                 break;
             }
@@ -2817,10 +2856,12 @@ namespace Breeze
                 painter->setPen( symbol_pen );
                 int startAngle = 260 * 16;
                 int spanAngle = 280 * 16;
-                painter->drawArc( QRectF( 5, 3, 8, 8), startAngle, spanAngle );
+                painter->drawArc( QRectF( 6, 4, 6, 6), startAngle, spanAngle );
 
                 painter->setBrush(QBrush(symbolColor));
-                painter->drawEllipse( QRectF( 8, 14, 2, 2 ) );
+                r = static_cast<qreal>(1);
+                c = QPointF (static_cast<qreal>(9), static_cast<qreal>(13));
+                painter->drawEllipse( c, r, r );
 
                 break;
             }
@@ -3242,7 +3283,7 @@ namespace Breeze
 
         QPen symbol_pen( symbolColor );
         symbol_pen.setJoinStyle( Qt::MiterJoin );
-        symbol_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+        symbol_pen.setWidthF( 1.2*qMax((qreal)1.0, 20/width ) );
 
         switch( type() )
         {
@@ -3354,7 +3395,6 @@ namespace Breeze
                 symbol_pen.setColor(mycolor);
                 painter->setPen( symbol_pen );
 
-                // it's a triangle with a dash
                 if (isChecked())
                 {
                   painter->drawLine( QPointF( 5, 5 ), QPointF( 11, 5 ) );
@@ -3368,14 +3408,26 @@ namespace Breeze
                   painter->drawLine( QPointF( 7, 13 ), QPointF( 13, 13 ) );
                 }
                 else {
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
-                  painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
-                  painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
+                  if ( isHovered() && d->internalSettings()->animationsEnabled() ){
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
+                    painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
 
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
-                  painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
+                    painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                  }
+                  else {
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 13.5, 5 ) );
+                    painter->drawLine( QPointF( 13.5, 5 ), QPointF( 13.5, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 13.5, 13 ) );
+
+                    painter->drawLine( QPointF( 4.5, 5 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 4.5, 5 ), QPointF( 6, 5 ) );
+                    painter->drawLine( QPointF( 4.5, 13 ), QPointF( 6, 13 ) );
+                  }
                 }
                 break;
             }
@@ -3513,10 +3565,12 @@ namespace Breeze
                 painter->setPen( symbol_pen );
                 int startAngle = 260 * 16;
                 int spanAngle = 280 * 16;
-                painter->drawArc( QRectF( 5, 3, 8, 8), startAngle, spanAngle );
+                painter->drawArc( QRectF( 6, 4, 6, 6), startAngle, spanAngle );
 
                 painter->setBrush(QBrush(symbolColor));
-                painter->drawEllipse( QRectF( 8, 14, 2, 2 ) );
+                r = static_cast<qreal>(1);
+                c = QPointF (static_cast<qreal>(9), static_cast<qreal>(13));
+                painter->drawEllipse( c, r, r );
 
                 break;
             }
