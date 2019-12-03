@@ -10,10 +10,12 @@ Sierra Breeze Enhanced started as a fork of Breeze Enhanced decoration. It has t
  * Option to make all button symbols to appear at unison on hovering (Note: it does not apply to symbol themes).
  * Titlebar style options: SBE own style of Line Separation between Titlebar and Window / Match Titlebar color to Window color / Hide Titlebar under certain circumstances (Never/Maximization/Any Maximization (including H/V)/Always) / Gradient Adjustments / Opacity Adjustments / Font Adjustments.
  * Specific Shadow settings for inactive windows
+ 
+ ![SBE Settings](screenshots/SBE_settings.png?raw=true "SBE Settings")
 
 ## Credits:
 
-Breeze, Sierra Breeze and Breeze Enhanced for obvious reasons.
+Breeze, Sierra Breeze and Breeze Enhanced for obvious reasons :)
 
 ## Build dependencies
 
@@ -85,7 +87,7 @@ cd build
 sudo make uninstall
 ```
 
-## Screenshot of SBE Sierra theme (or How it All started...):
+## Screenshot of SBE Sierra theme (or How it All started...)
 
 ![Active Buttons](screenshots/ActiveButtons.gif?raw=true "Active Buttons")
 ![Inactive Buttons](screenshots/InactiveButtons.gif?raw=true "Inactive Buttons")
