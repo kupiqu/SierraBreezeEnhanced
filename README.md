@@ -17,6 +17,9 @@ Sierra Breeze Enhanced started as a fork of Breeze Enhanced decoration. It has t
 
 ![Active Buttons](screenshots/ActiveButtons.gif?raw=true "Active Buttons")
 ![Inactive Buttons](screenshots/InactiveButtons.gif?raw=true "Inactive Buttons")
+
+## Screenshot of Sierra Breeze Enhanced settings
+
 ![SBE Settings](screenshots/SBE_settings.png?raw=true "SBE Settings")
 
 
