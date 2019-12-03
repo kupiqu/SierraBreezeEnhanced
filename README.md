@@ -13,12 +13,15 @@ Sierra Breeze Enhanced started as a fork of Breeze Enhanced decoration. It has t
  * Specific Shadow settings for inactive windows
  
  
-## Screenshot of SBE Sierra theme (or How it All started...)
+### Screenshot of SBE Sierra theme (or How it All started...)
+
 
 ![Active Buttons](screenshots/ActiveButtons.gif?raw=true "Active Buttons")
 ![Inactive Buttons](screenshots/InactiveButtons.gif?raw=true "Inactive Buttons")
 
-## Screenshot of Sierra Breeze Enhanced settings
+
+### Screenshot of Settings
+
 
 ![SBE Settings](screenshots/SBE_settings.png?raw=true "SBE Settings")
 
