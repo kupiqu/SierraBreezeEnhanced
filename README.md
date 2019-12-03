@@ -28,7 +28,7 @@ Sierra Breeze Enhanced started as a fork of Breeze Enhanced decoration. It has t
 
 ## Installation
 
-After the intallation, restart KWin by logging out and in. Then, Sierra Breeze Enhanced will appear in *System Settings &rarr; Application Style &rarr; Window Decorations*.
+Please note that after installing, you need to restart KWin by executing either `kwin_x11 --replace` or `kwin_wayland --replace` in krunner (depending on whether your session runs upon X11 or Wayland). Alternatively, restarting the KDE session is obviously also an option. Then, Sierra Breeze Enhanced will appear in *System Settings &rarr; Application Style &rarr; Window Decorations*.
 
 ### Method 1: Install prebuilt packages
 - Ubuntu:
