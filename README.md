@@ -1,20 +1,19 @@
-# SierraBreezeEnhanced
+# Sierra Breeze Enhanced
 
 ## Overview
 
-SierraBreezeEnhanced is a fork of BreezeEnhanced decoration with the following changes:
+Sierra Breeze Enhanced started as a fork of Breeze Enhanced decoration. It has the following main features:
 
- * non-gray colors do not change.
- * active window: show symbol on hovering.
- * inactive window: always show symbol, show ring color on hovering.
- * application menu button is considered special and stays as in vanilla breeze.
- * no more option for non macOS-like buttons as it doesn't apply anymore.
- * added, however, an option to either choose active vs. inactive style (default), always active style (also for non-active windows), or inactive style (also for the active window).
- * horizontal padding to better adjust the button position in case of use of rounded corners.
+ * Button style options: Plasma / Gnome / macOS Sierra / macOS Dark Aurorae / SBE Sierra themes / SBE Dark Aurorae themes / Color Symbols themes / Monochrome Symbols themes (Note: the application menu button is considered special and does not change).
+ * Button spacing and padding Options.
+ * Button hovering animation.
+ * Option to make all button symbols to appear at unison on hovering (Note: it does not apply to symbol themes).
+ * Titlebar style options: SBE own style of Line Separation between Titlebar and Window / Match Titlebar color to Window color / Hide Titlebar under certain circumstances (Never/Maximization/Any Maximization (including H/V)/Always) / Gradient Adjustments / Opacity Adjustments / Font Adjustments.
+ * Specific Shadow settings for inactive windows
 
 ## Credits:
 
-SierraBreezeEnhanced is strongly based on BreezeEnhanced and SierraBreeze.
+Breeze, Sierra Breeze and Breeze Enhanced for obvious reasons.
 
 ## Build dependencies
 
@@ -46,7 +45,7 @@ cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DKDE_INSTALL_LI
 make
 sudo make install
 ```
-After the intallation, restart KWin by logging out and in. Then, SierraBreezeEnhanced will appear in *System Settings &rarr; Application Style &rarr; Window Decorations*.
+After the intallation, restart KWin by logging out and in. Then, Sierra Breeze Enhanced will appear in *System Settings &rarr; Application Style &rarr; Window Decorations*.
 
 Alternatively install from script (which does the above):
 ```sh
@@ -86,7 +85,7 @@ cd build
 sudo make uninstall
 ```
 
-## Screenshots:
+## Screenshot of SBE Sierra theme (or How it All started...):
 
 ![Active Buttons](screenshots/ActiveButtons.gif?raw=true "Active Buttons")
 ![Inactive Buttons](screenshots/InactiveButtons.gif?raw=true "Inactive Buttons")
