@@ -28,14 +28,16 @@ Sierra Breeze Enhanced started as a fork of Breeze Enhanced decoration. It has t
 
 ## Installation
 
+After the intallation, restart KWin by logging out and in. Then, Sierra Breeze Enhanced will appear in *System Settings &rarr; Application Style &rarr; Window Decorations*.
+
 ### Method 1: Install prebuilt packages
-- Ubuntu PPA:
+- Ubuntu:
 ```sh
 sudo add-apt-repository ppa:krisives/sierrabreezeenhanced
 sudo apt update
 sudo apt install sierrabreezeenhanced
 ```
-- openSUSE package:
+- openSUSE:
 ```sh
 sudo zypper ar obs://home:trmdi trmdi
 sudo zypper in SierraBreezeEnhanced
@@ -61,19 +63,18 @@ sudo dnf install "cmake(Qt5Core)" "cmake(Qt5Gui)" "cmake(Qt5DBus)" "cmake(Qt5X11
 ```
 
 #### Step 2: Then compile and install
+- Install from script:
+```sh
+chmod +x install.sh
+./install.sh
+```
+- Or more manually:
 Open a terminal inside the source directory and do:
 ```sh
 mkdir build && cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DKDE_INSTALL_LIBDIR=lib -DBUILD_TESTING=OFF -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
 make
 sudo make install
-```
-After the intallation, restart KWin by logging out and in. Then, Sierra Breeze Enhanced will appear in *System Settings &rarr; Application Style &rarr; Window Decorations*.
-
-Alternatively install from script (which does the above):
-```sh
-chmod +x install.sh
-./install.sh
 ```
 
 
