@@ -93,5 +93,5 @@ sudo make uninstall
 ```
 
 
-## Credits:
+## Credits
 Breeze, Sierra Breeze and Breeze Enhanced for obvious reasons :)
