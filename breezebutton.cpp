@@ -1212,14 +1212,23 @@ namespace Breeze
                 {
                   painter->setPen( symbol_pen );
 
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
-                  painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
-                  painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
+                  if ( !isHovered() && d->internalSettings()->animationsEnabled() ) {
+                    painter->drawLine( QPointF( 5, 5 ), QPointF( 13, 5 ) );
+                    painter->drawLine( QPointF( 13, 5 ), QPointF( 13, 13 ) );
+                    painter->drawLine( QPointF( 5, 5 ), QPointF( 5, 13 ) );
+                    painter->drawLine( QPointF( 5, 13 ), QPointF( 13, 13 ) );
+                  }
+                  else {
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
+                    painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
 
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
-                  painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
+                    painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                  }
+
                 }
                 else if ( isChecked() )
                 {
@@ -2150,14 +2159,22 @@ namespace Breeze
                 {
                   painter->setPen( symbol_pen );
 
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
-                  painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
-                  painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
-                  painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
+                  if ( !isHovered() && d->internalSettings()->animationsEnabled() ) {
+                    painter->drawLine( QPointF( 5, 5 ), QPointF( 13, 5 ) );
+                    painter->drawLine( QPointF( 13, 5 ), QPointF( 13, 13 ) );
+                    painter->drawLine( QPointF( 5, 5 ), QPointF( 5, 13 ) );
+                    painter->drawLine( QPointF( 5, 13 ), QPointF( 13, 13 ) );
+                  }
+                  else {
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
+                    painter->drawLine( QPointF( 15, 5 ), QPointF( 15, 13 ) );
+                    painter->drawLine( QPointF( 7, 5 ), QPointF( 7, 13 ) );
+                    painter->drawLine( QPointF( 7, 13 ), QPointF( 15, 13 ) );
 
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
-                  painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
-                  painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 3, 13 ) );
+                    painter->drawLine( QPointF( 3, 5 ), QPointF( 4.5, 5 ) );
+                    painter->drawLine( QPointF( 3, 13 ), QPointF( 4.5, 13 ) );
+                  }
                 }
                 else if ( isChecked() && ( this->hovered() || ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) )
                 {
