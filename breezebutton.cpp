@@ -400,90 +400,149 @@ namespace Breeze
         painter->scale( width/20, width/20 );
         painter->translate( 1, 1 );
 
+        auto d = qobject_cast<Decoration*>( decoration() );
+
         // render background
-        QColor backgroundColor( this->backgroundColor() );
+        QColor backgroundColor;
+        if ( isChecked() || this->hovered() || isHovered() )
+            backgroundColor = d->titleBarColor();
+        else
+            backgroundColor = QColor();
+
         if( backgroundColor.isValid() )
         {
-            painter->setPen( Qt::NoPen );
-            painter->setBrush( backgroundColor );
-            painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
+          if ( qGray(backgroundColor.rgb()) > 69 ) {
+            painter->setPen(backgroundColor.darker(150));
+
+            QLinearGradient gradient( 0, 0, 0, width );
+            int b = 10;
+            if ( isChecked() && isHovered() ) {
+              backgroundColor = backgroundColor.darker(115);
+              gradient.setColorAt(0.0, backgroundColor.lighter( 100 + 2*b ));
+              gradient.setColorAt(1.0, backgroundColor);
+            }
+            else if ( isChecked() ) {
+              backgroundColor = backgroundColor.darker(115);
+              gradient.setColorAt(0.0, backgroundColor.lighter( 100 + b ));
+              gradient.setColorAt(1.0, backgroundColor);
+            }
+            else if ( this->hovered() ) {
+              backgroundColor = backgroundColor.darker(115);
+              gradient.setColorAt(0.0, backgroundColor.lighter( 100 + 3*b ));
+              gradient.setColorAt(1.0, backgroundColor);
+            }
+            painter->setBrush(gradient);
+            painter->drawRoundedRect( QRectF( -1, -1, 19, 19 ), 1, 1);
+          }
+          else{
+            painter->setPen(backgroundColor.lighter(180));
+
+            QLinearGradient gradient( 0, 0, 0, width );
+            int b = 40;
+            if ( isChecked() && isHovered() ) {
+              backgroundColor = backgroundColor.lighter(130);
+              gradient.setColorAt(0.0, backgroundColor.lighter( 100 + b ));
+              gradient.setColorAt(1.0, backgroundColor.darker ( 120));
+            }
+            else if ( isChecked() ) {
+              backgroundColor = backgroundColor.lighter(110);
+              gradient.setColorAt(0.0, backgroundColor.lighter( 100 + b ));
+              gradient.setColorAt(1.0, backgroundColor.darker ( 120 ));
+            }
+            else if ( this->hovered() ) {
+              backgroundColor = backgroundColor.lighter(150);
+              gradient.setColorAt(0.0, backgroundColor.lighter( 100 + b ));
+              gradient.setColorAt(1.0, backgroundColor.darker ( 120 ));
+            }
+            painter->setBrush(gradient);
+            painter->drawRoundedRect( QRectF( -1, -1, 19, 19 ), 1, 1);
+          }
         }
 
         // render mark
-        QColor foregroundColor( this->foregroundColor() );
+        QColor foregroundColor = d->fontColor();
         if( foregroundColor.isValid() )
         {
-
             // setup painter
             QPen pen( foregroundColor );
             pen.setJoinStyle( Qt::MiterJoin );
-            pen.setWidthF( 1.2*qMax((qreal)1.0, 20/width ) );
-
-            painter->setPen( pen );
-            painter->setBrush( Qt::NoBrush );
+            pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
 
             switch( type() )
             {
 
                 case DecorationButtonType::Close:
                 {
-                    painter->drawLine( QPointF( 5, 5 ), QPointF( 13, 13 ) );
-                    painter->drawLine( 13, 5, 5, 13 );
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
+
+                    painter->drawLine( QPointF( 6.5, 6.5 ), QPointF( 11.5, 11.5 ) );
+                    painter->drawLine( QPointF( 11.5, 6.5 ), QPointF( 6.5, 11.5 ) );
                     break;
                 }
 
                 case DecorationButtonType::Maximize:
                 {
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
+
                     if( isChecked() )
-                        painter->drawRect( 7, 7, 4, 4 );
+                        painter->drawRect(QRectF(7.5, 7.5, 3, 3));
                     else
-                        painter->drawRect( 5, 5, 8, 8 );
+                        painter->drawRect(QRectF(6.5, 6.5, 5, 5));
                     break;
                 }
 
                 case DecorationButtonType::Minimize:
                 {
-                    painter->drawLine( QPointF( 5, 12 ), QPointF( 12, 12 ) );
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
+
+                    painter->drawLine( QPointF( 6.5, 11.5 ), QPointF( 11.5, 11.5 ) );
                     break;
                 }
 
                 case DecorationButtonType::OnAllDesktops:
                 {
+
                     painter->setPen( Qt::NoPen );
                     painter->setBrush( foregroundColor );
 
                     QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
                     if( isChecked()) {
-                        painter->drawEllipse( c, 9.0, 9.0 );
-                        painter->setBrush( backgroundColor );
+                        painter->drawEllipse( c, 1.0, 1.0 );
+                    }
+                    else {
                         painter->drawEllipse( c, 2.0, 2.0 );
                     }
-                    else
-                        painter->drawEllipse( c, 4.0, 4.0 );
                     break;
                 }
 
                 case DecorationButtonType::Shade:
                 {
 
+                    painter->setPen( pen );
+
                     if (isChecked())
                     {
 
-                        painter->drawLine( 5, 6, 13, 6 );
+                        painter->drawLine( 6, 12.5, 12, 12.5 );
+
                         QPainterPath path;
-                        path.moveTo(9, 13);
-                        path.lineTo(4, 9);
-                        path.lineTo(14, 9);
+                        path.moveTo(9, 12.5);
+                        path.lineTo(5, 6.5);
+                        path.lineTo(13, 6.5);
                         painter->fillPath(path, QBrush(foregroundColor));
 
 
                     } else {
 
-                        painter->drawLine( 5, 6, 13, 6 );
+                        painter->drawLine( 6, 7.5, 12, 7.5 );
+
                         QPainterPath path;
-                        path.moveTo(9, 9);
-                        path.lineTo(4, 13);
-                        path.lineTo(14, 13);
+                        path.moveTo(9, 7.5);
+                        path.lineTo(5, 12.5);
+                        path.lineTo(13, 12.5);
                         painter->fillPath(path, QBrush(foregroundColor));
 
                     }
@@ -496,12 +555,11 @@ namespace Breeze
                 {
 
                     painter->setPen( Qt::NoPen );
-                    painter->setBrush( foregroundColor );
 
                     QPainterPath path;
-                    path.moveTo(9, 14);
-                    path.lineTo(4, 6);
-                    path.lineTo(14, 6);
+                    path.moveTo(9, 11.5);
+                    path.lineTo(5, 6.5);
+                    path.lineTo(13, 6.5);
                     painter->fillPath(path, QBrush(foregroundColor));
 
                     break;
@@ -512,12 +570,11 @@ namespace Breeze
                 {
 
                     painter->setPen( Qt::NoPen );
-                    painter->setBrush( foregroundColor );
 
                     QPainterPath path;
-                    path.moveTo(9, 5);
-                    path.lineTo(4, 13);
-                    path.lineTo(14, 13);
+                    path.moveTo(9, 6.5);
+                    path.lineTo(5, 11.5);
+                    path.lineTo(13, 11.5);
                     painter->fillPath(path, QBrush(foregroundColor));
 
                     break;
@@ -526,21 +583,27 @@ namespace Breeze
 
                 case DecorationButtonType::ApplicationMenu:
                 {
-                    painter->drawLine( QPointF( 3.5, 5 ), QPointF( 14.5, 5 ) );
-                    painter->drawLine( QPointF( 3.5, 9 ), QPointF( 14.5, 9 ) );
-                    painter->drawLine( QPointF( 3.5, 13 ), QPointF( 14.5, 13 ) );
+                    painter->setPen( pen );
+                    painter->setBrush( Qt::NoBrush );
+
+                    painter->drawLine( QPointF( 6.5, 6.5 ), QPointF( 11.5, 6.5 ) );
+                    painter->drawLine( QPointF( 6.5, 9 ), QPointF( 11.5, 9 ) );
+                    painter->drawLine( QPointF( 6.5, 11.5 ), QPointF( 11.5, 11.5 ) );
                     break;
                 }
 
                 case DecorationButtonType::ContextHelp:
                 {
-                    QPainterPath path;
-                    path.moveTo( 5, 6 );
-                    path.arcTo( QRectF( 5, 3.5, 8, 5 ), 180, -180 );
-                    path.cubicTo( QPointF(12.5, 9.5), QPointF( 9, 7.5 ), QPointF( 9, 11.5 ) );
-                    painter->drawPath( path );
+                    painter->setPen( pen );
 
-                    painter->drawPoint( 9, 15 );
+                    int startAngle = 260 * 16;
+                    int spanAngle = 280 * 16;
+                    painter->drawArc( QRectF( 7, 5.5, 4, 4), startAngle, spanAngle );
+
+                    painter->setBrush( foregroundColor );
+
+                    QPointF c = QPointF (static_cast<qreal>(9), static_cast<qreal>(12));
+                    painter->drawEllipse( c, 0.5, 0.5 );
 
                     break;
                 }
@@ -3635,7 +3698,7 @@ namespace Breeze
 
     }
 
-    //__________________________________________________________________
+        //__________________________________________________________________
     QColor Button::backgroundColor() const
     {
         auto d = qobject_cast<Decoration*>( decoration() );
@@ -3752,7 +3815,7 @@ namespace Breeze
     {
 
         auto d = qobject_cast<Decoration*>(decoration());
-        if( !(d && d->internalSettings()->animationsEnabled() ) ) return;
+        if( !d || !d->internalSettings()->animationsEnabled() || (d->internalSettings()->buttonStyle() == 1) ) return;
 
         QAbstractAnimation::Direction dir = hovered ? QPropertyAnimation::Forward : QPropertyAnimation::Backward;
         if( m_animation->state() == QPropertyAnimation::Running && m_animation->direction() != dir )
