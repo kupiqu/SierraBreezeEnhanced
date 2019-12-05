@@ -1217,6 +1217,9 @@ namespace Breeze
                     painter->drawLine( QPointF( 13, 5 ), QPointF( 13, 13 ) );
                     painter->drawLine( QPointF( 5, 5 ), QPointF( 5, 13 ) );
                     painter->drawLine( QPointF( 5, 13 ), QPointF( 13, 13 ) );
+
+                    painter->setBrush(QBrush(symbolColor));
+                    painter->drawEllipse( c, 0.5, 0.5 );
                   }
                   else {
                     painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
@@ -2164,6 +2167,9 @@ namespace Breeze
                     painter->drawLine( QPointF( 13, 5 ), QPointF( 13, 13 ) );
                     painter->drawLine( QPointF( 5, 5 ), QPointF( 5, 13 ) );
                     painter->drawLine( QPointF( 5, 13 ), QPointF( 13, 13 ) );
+
+                    painter->setBrush(QBrush(symbolColor));
+                    painter->drawEllipse( c, 0.5, 0.5 );
                   }
                   else {
                     painter->drawLine( QPointF( 7, 5 ), QPointF( 15, 5 ) );
