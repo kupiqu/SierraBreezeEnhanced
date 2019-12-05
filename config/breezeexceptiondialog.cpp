@@ -62,7 +62,7 @@ namespace Breeze
         connect( m_ui.drawTitleBarSeparator, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawBackgroundGradient, SIGNAL(clicked()), SLOT(updateChanged()) );
         m_ui.gradientOverrideLabelSpinBox->setSpecialValueText(tr("None"));
-        connect( m_ui.opacityOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
+        connect( m_ui.gradientOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
         connect( m_ui.opaqueTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
         m_ui.opacityOverrideLabelSpinBox->setSpecialValueText(tr("None"));
         connect( m_ui.opacityOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );

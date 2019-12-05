@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>843</width>
-    <height>807</height>
+    <height>814</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -61,9 +61,9 @@
           </property>
          </item>
          <item>
-           <property name="text">
-             <string>SBE Sierra Active</string>
-           </property>
+          <property name="text">
+           <string>SBE Sierra Active</string>
+          </property>
          </item>
          <item>
           <property name="text">
@@ -81,9 +81,9 @@
           </property>
          </item>
          <item>
-           <property name="text">
-             <string>SBE Dark Aurorae Inactive</string>
-           </property>
+          <property name="text">
+           <string>SBE Dark Aurorae Inactive</string>
+          </property>
          </item>
          <item>
           <property name="text">
@@ -91,19 +91,19 @@
           </property>
          </item>
          <item>
-           <property name="text">
-             <string>Dark Aurorae Color Symbols</string>
-           </property>
+          <property name="text">
+           <string>Dark Aurorae Color Symbols</string>
+          </property>
          </item>
          <item>
-           <property name="text">
-             <string>Sierra Monochrome Symbols</string>
-           </property>
+          <property name="text">
+           <string>Sierra Monochrome Symbols</string>
+          </property>
          </item>
          <item>
-           <property name="text">
-             <string>Dark Aurorae Monochrome Symbols</string>
-           </property>
+          <property name="text">
+           <string>Dark Aurorae Monochrome Symbols</string>
+          </property>
          </item>
         </widget>
        </item>
@@ -241,28 +241,26 @@
          </property>
         </widget>
        </item>
-
-         <item row="25" column="1">
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Background opacity:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="25" column="8">
-          <widget class="QSpinBox" name="opacitySpinBox">
-           <property name="suffix">
-            <string> %</string>
-           </property>
-           <property name="maximum">
-            <number>100</number>
-           </property>
-          </widget>
-         </item>
-
+       <item row="25" column="1">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Background opacity:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="25" column="8">
+        <widget class="QSpinBox" name="opacitySpinBox">
+         <property name="suffix">
+          <string> %</string>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
        <item row="22" column="1" colspan="10">
         <widget class="QCheckBox" name="drawSizeGrip">
          <property name="text">
@@ -295,20 +293,20 @@
         </widget>
        </item>
        <item row="5" column="1" alignment="Qt::AlignLeft">
-         <widget class="QLabel" name="label_14">
-           <property name="text">
-             <string>Hide window title bar:</string>
-           </property>
-           <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-           <property name="buddy">
-             <cstring>hideTitleBar</cstring>
-           </property>
-         </widget>
+        <widget class="QLabel" name="label_14">
+         <property name="text">
+          <string>Hide window title bar:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>hideTitleBar</cstring>
+         </property>
+        </widget>
        </item>
        <item row="5" column="8">
-         <widget class="QComboBox" name="hideTitleBar">
+        <widget class="QComboBox" name="hideTitleBar">
          <item>
           <property name="text">
            <string>Never</string>
@@ -320,9 +318,9 @@
           </property>
          </item>
          <item>
-           <property name="text">
-             <string>Any Maximization</string>
-           </property>
+          <property name="text">
+           <string>Any Maximization</string>
+          </property>
          </item>
          <item>
           <property name="text">
@@ -332,11 +330,11 @@
         </widget>
        </item>
        <item row="7" column="1" colspan="10">
-         <widget class="QCheckBox" name="unisonHovering">
-           <property name="text">
-             <string>Unison hovering</string>
-           </property>
-         </widget>
+        <widget class="QCheckBox" name="unisonHovering">
+         <property name="text">
+          <string>Unison hovering</string>
+         </property>
+        </widget>
        </item>
        <item row="8" column="1" colspan="10">
         <widget class="QCheckBox" name="matchColorForTitleBar">
@@ -359,53 +357,49 @@
          </property>
         </widget>
        </item>
-
-         <item row="13" column="1">
-          <widget class="QLabel" name="label_7">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Gradient intensity:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="8">
-          <widget class="QSpinBox" name="gradientSpinBox">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="suffix">
-            <string> %</string>
-           </property>
-           <property name="maximum">
-            <number>100</number>
-           </property>
-          </widget>
-         </item>
-
-
-         <item row="3" column="1">
-          <widget class="QLabel" name="btnSpacingLabel">
-           <property name="text">
-            <string>Button spacing:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="8">
-          <widget class="QSpinBox" name="btnSpacingSpinBox">
-           <property name="suffix">
-            <string> px</string>
-           </property>
-           <property name="prefix">
-            <string/>
-           </property>
-          </widget>
-         </item>
-
+       <item row="13" column="1">
+        <widget class="QLabel" name="label_7">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Gradient intensity:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="8">
+        <widget class="QSpinBox" name="gradientSpinBox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="suffix">
+          <string> %</string>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="btnSpacingLabel">
+         <property name="text">
+          <string>Button spacing:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="8">
+        <widget class="QSpinBox" name="btnSpacingSpinBox">
+         <property name="suffix">
+          <string> px</string>
+         </property>
+         <property name="prefix">
+          <string/>
+         </property>
+        </widget>
+       </item>
        <item row="26" column="1" colspan="9">
         <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0,0,0,0,0">
          <item row="3" column="0" colspan="7" alignment="Qt::AlignLeft">
@@ -433,7 +427,7 @@
                <string>Size:</string>
               </property>
               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -443,7 +437,7 @@
                <string>Weight:</string>
               </property>
               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -496,25 +490,23 @@
          </item>
         </layout>
        </item>
-
-         <item row="6" column="1">
-          <widget class="QLabel" name="cornerRadiusLabel">
-           <property name="text">
-            <string>Corner radius:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="8">
-          <widget class="QSpinBox" name="cornerRadiusSpinBox">
-           <property name="suffix">
-            <string> px</string>
-           </property>
-           <property name="prefix">
-            <string/>
-           </property>
-          </widget>
-         </item>
-
+       <item row="6" column="1">
+        <widget class="QLabel" name="cornerRadiusLabel">
+         <property name="text">
+          <string>Corner radius:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="8">
+        <widget class="QSpinBox" name="cornerRadiusSpinBox">
+         <property name="suffix">
+          <string> px</string>
+         </property>
+         <property name="prefix">
+          <string/>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
@@ -858,6 +850,7 @@
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>tabWidget</tabstop>
   <tabstop>titleAlignment</tabstop>
   <tabstop>buttonSize</tabstop>
   <tabstop>buttonStyle</tabstop>
@@ -873,6 +866,12 @@
   <tabstop>drawTitleBarSeparator</tabstop>
   <tabstop>opaqueTitleBar</tabstop>
   <tabstop>animationsEnabled</tabstop>
+  <tabstop>shadowSize</tabstop>
+  <tabstop>shadowStrength</tabstop>
+  <tabstop>shadowColor</tabstop>
+  <tabstop>shadowSizeInactiveWindows</tabstop>
+  <tabstop>shadowStrengthInactiveWindows</tabstop>
+  <tabstop>shadowColorInactiveWindows</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -883,12 +882,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>34</x>
-     <y>194</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>84</x>
-     <y>221</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -899,12 +898,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>108</x>
-     <y>194</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>141</x>
-     <y>229</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -915,12 +914,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>166</x>
-     <y>188</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -931,12 +930,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>64</x>
-     <y>57</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -947,12 +946,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>166</x>
-     <y>188</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -963,12 +962,12 @@
    <slot>setDisabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>64</x>
-     <y>57</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -979,12 +978,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>166</x>
-     <y>188</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -995,12 +994,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>64</x>
-     <y>57</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -1011,12 +1010,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>166</x>
-     <y>188</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -1027,12 +1026,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>64</x>
-     <y>57</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -1043,12 +1042,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>166</x>
-     <y>188</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -1059,12 +1058,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>160</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>64</x>
-     <y>57</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>

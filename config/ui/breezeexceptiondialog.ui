@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>539</width>
-    <height>567</height>
+    <width>553</width>
+    <height>572</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -143,14 +143,14 @@
        </widget>
       </item>
       <item row="1" column="0">
-        <widget class="QLabel" name="hideTitleBarCheckBox">
-          <property name="text">
-            <string>Hide window title bar:</string>
-          </property>
-        </widget>
+       <widget class="QLabel" name="hideTitleBarCheckBox">
+        <property name="text">
+         <string>Hide window title bar:</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="1" colspan="2">
-        <widget class="QComboBox" name="hideTitleBar">
+       <widget class="QComboBox" name="hideTitleBar">
         <item>
          <property name="text">
           <string>Never</string>
@@ -162,9 +162,9 @@
          </property>
         </item>
         <item>
-          <property name="text">
-            <string>Any Maximization</string>
-          </property>
+         <property name="text">
+          <string>Any Maximization</string>
+         </property>
         </item>
         <item>
          <property name="text">
@@ -250,11 +250,11 @@
        </layout>
       </item>
       <item row="5" column="0">
-        <widget class="QCheckBox" name="drawTitleBarSeparator">
-          <property name="text">
-            <string>Draw separator between Title Bar and Window</string>
-          </property>
-        </widget>
+       <widget class="QCheckBox" name="drawTitleBarSeparator">
+        <property name="text">
+         <string>Draw separator between Title Bar and Window</string>
+        </property>
+       </widget>
       </item>
       <item row="6" column="0">
        <widget class="QCheckBox" name="opaqueTitleBar">
@@ -320,25 +320,12 @@
        </layout>
       </item>
       <item row="8" column="0">
-￼	       <widget class="QCheckBox" name="isDialog">
-￼	        <property name="text">
-￼	         <string>Only for dialogs</string>
-￼	        </property>
-￼	       </widget>
-￼	      </item>
-￼	      <!--<item row="9" column="0" colspan="2">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+       <widget class="QCheckBox" name="isDialog">
+        <property name="text">
+         <string>Only for dialogs</string>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>-->
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -411,12 +398,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>104</x>
-     <y>202</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>82</x>
-     <y>229</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
@@ -427,12 +414,12 @@
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>104</x>
-     <y>202</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
-     <x>166</x>
-     <y>229</y>
+     <x>20</x>
+     <y>20</y>
     </hint>
    </hints>
   </connection>
