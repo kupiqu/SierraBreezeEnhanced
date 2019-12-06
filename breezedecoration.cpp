@@ -399,7 +399,7 @@ namespace Breeze
         );
 
         connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateAnimationState);
-        connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::createShadow);
+        connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateShadow);
         connect(c, &KDecoration2::DecoratedClient::widthChanged, this, &Decoration::updateTitleBar);
         connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateTitleBar);
         //connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::setOpaque);
@@ -410,7 +410,7 @@ namespace Breeze
         connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateButtonsGeometry);
 
         createButtons();
-        createShadow();
+        updateShadow();
     }
 
     //________________________________________________________________
@@ -447,26 +447,35 @@ namespace Breeze
     void Decoration::updateShadow()
     {
         auto c = client().data();
-        CompositeShadowParams params;
+
         if ( !g_specificShadowsInactiveWindows || c->isActive() )
-            params = lookupShadowParams(g_shadowSizeEnum);
+          updateActiveShadow();
         else
-            params = lookupShadowParamsInactiveWindows(g_shadowSizeEnumInactiveWindows);
+          updateInactiveShadow();
+
+        setShadow(g_sShadow);
+    }
+
+    //________________________________________________________________
+    void Decoration::updateActiveShadow() {
+
+        CompositeShadowParams params;
+        params = lookupShadowParams(g_shadowSizeEnum);
 
         if ( params.isNone() ) {
-            g_sShadow.clear();
-            setShadow(g_sShadow);
-            return;
+          g_sShadow.clear();
+          setShadow(g_sShadow);
+          return;
         }
 
         auto withOpacity = [](const QColor &color, qreal opacity) -> QColor {
-            QColor c(color);
-            c.setAlphaF(opacity);
-            return c;
+          QColor c(color);
+          c.setAlphaF(opacity);
+          return c;
         };
 
         const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(params.shadow1.radius)
-            .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
+        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
 
         BoxShadowRenderer shadowRenderer;
         shadowRenderer.setBorderRadius(m_internalSettings->cornerRadius() + 0.5);
@@ -497,65 +506,104 @@ namespace Breeze
             outerRect.bottom() - boxRect.bottom() - Metrics::Shadow_Overlap + params.offset.y());
         const QRect innerRect = outerRect - padding;
 
-        if ( !g_specificShadowsInactiveWindows || c->isActive() ) {
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(Qt::black);
+        painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+        painter.drawRoundedRect(
+            innerRect,
+            m_internalSettings->cornerRadius() + 0.5,
+            m_internalSettings->cornerRadius() + 0.5);
 
-            const qreal strength = static_cast<qreal>(g_shadowStrength) / 255.0;
-            shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,
-                withOpacity(g_shadowColor, params.shadow1.opacity * strength));
-            shadowRenderer.addShadow(params.shadow2.offset, params.shadow2.radius,
-                withOpacity(g_shadowColor, params.shadow2.opacity * strength));
+        // Draw outline.
+        painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
+        painter.setBrush(Qt::NoBrush);
+        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        painter.drawRoundedRect(
+            innerRect,
+            m_internalSettings->cornerRadius() - 0.5,
+            m_internalSettings->cornerRadius() - 0.5);
 
-            painter.setPen(Qt::NoPen);
-            painter.setBrush(Qt::black);
-            painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
-            painter.drawRoundedRect(
-                innerRect,
-                m_internalSettings->cornerRadius() + 0.5,
-                m_internalSettings->cornerRadius() + 0.5);
-
-            // Draw outline.
-            painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
-            painter.setBrush(Qt::NoBrush);
-            painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-            painter.drawRoundedRect(
-                innerRect,
-                m_internalSettings->cornerRadius() - 0.5,
-                m_internalSettings->cornerRadius() - 0.5);
-
-        }
-        else {
-
-            const qreal strength = static_cast<qreal>(g_shadowStrengthInactiveWindows) / 255.0;
-            shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,
-                withOpacity(g_shadowColorInactiveWindows, params.shadow1.opacity * strength));
-            shadowRenderer.addShadow(params.shadow2.offset, params.shadow2.radius,
-                withOpacity(g_shadowColorInactiveWindows, params.shadow2.opacity * strength));
-
-            painter.setPen(Qt::NoPen);
-            painter.setBrush(Qt::black);
-            painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
-            painter.drawRoundedRect(
-                innerRect,
-                m_internalSettings->cornerRadius() + 0.5,
-                m_internalSettings->cornerRadius() + 0.5);
-
-            // Draw outline.
-            painter.setPen(withOpacity(g_shadowColorInactiveWindows, 0.2 * strength));
-            painter.setBrush(Qt::NoBrush);
-            painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-            painter.drawRoundedRect(
-                innerRect,
-                m_internalSettings->cornerRadius() - 0.5,
-                m_internalSettings->cornerRadius() - 0.5);
-        }
         painter.end();
 
         g_sShadow = QSharedPointer<KDecoration2::DecorationShadow>::create();
         g_sShadow->setPadding(padding);
         g_sShadow->setInnerShadowRect(QRect(outerRect.center(), QSize(1, 1)));
         g_sShadow->setShadow(shadowTexture);
+    }
 
-        setShadow(g_sShadow);
+    //________________________________________________________________
+    void Decoration::updateInactiveShadow() {
+
+        CompositeShadowParams params;
+        params = lookupShadowParamsInactiveWindows(g_shadowSizeEnumInactiveWindows);
+
+        if ( params.isNone() ) {
+          g_sShadow.clear();
+          setShadow(g_sShadow);
+          return;
+        }
+
+        auto withOpacity = [](const QColor &color, qreal opacity) -> QColor {
+          QColor c(color);
+          c.setAlphaF(opacity);
+          return c;
+        };
+
+        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(params.shadow1.radius)
+        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
+
+        BoxShadowRenderer shadowRenderer;
+        shadowRenderer.setBorderRadius(m_internalSettings->cornerRadius() + 0.5);
+        shadowRenderer.setBoxSize(boxSize);
+        shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
+
+        const qreal strength = static_cast<qreal>(g_shadowStrengthInactiveWindows) / 255.0;
+        shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,
+            withOpacity(g_shadowColorInactiveWindows, params.shadow1.opacity * strength));
+        shadowRenderer.addShadow(params.shadow2.offset, params.shadow2.radius,
+            withOpacity(g_shadowColorInactiveWindows, params.shadow2.opacity * strength));
+
+        QImage shadowTexture = shadowRenderer.render();
+
+        QPainter painter(&shadowTexture);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        const QRect outerRect = shadowTexture.rect();
+
+        QRect boxRect(QPoint(0, 0), boxSize);
+        boxRect.moveCenter(outerRect.center());
+
+        // Mask out inner rect.
+        const QMargins padding = QMargins(
+            boxRect.left() - outerRect.left() - Metrics::Shadow_Overlap - params.offset.x(),
+            boxRect.top() - outerRect.top() - Metrics::Shadow_Overlap - params.offset.y(),
+            outerRect.right() - boxRect.right() - Metrics::Shadow_Overlap + params.offset.x(),
+            outerRect.bottom() - boxRect.bottom() - Metrics::Shadow_Overlap + params.offset.y());
+        const QRect innerRect = outerRect - padding;
+
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(Qt::black);
+        painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+        painter.drawRoundedRect(
+            innerRect,
+            m_internalSettings->cornerRadius() + 0.5,
+            m_internalSettings->cornerRadius() + 0.5);
+
+        // Draw outline.
+        painter.setPen(withOpacity(g_shadowColorInactiveWindows, 0.2 * strength));
+        painter.setBrush(Qt::NoBrush);
+        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        painter.drawRoundedRect(
+            innerRect,
+            m_internalSettings->cornerRadius() - 0.5,
+            m_internalSettings->cornerRadius() - 0.5);
+
+        painter.end();
+
+        g_sShadow = QSharedPointer<KDecoration2::DecorationShadow>::create();
+        g_sShadow->setPadding(padding);
+        g_sShadow->setInnerShadowRect(QRect(outerRect.center(), QSize(1, 1)));
+        g_sShadow->setShadow(shadowTexture);
     }
 
     //________________________________________________________________
@@ -620,6 +668,7 @@ namespace Breeze
         // size grip
         if( hasNoBorders() && m_internalSettings->drawSizeGrip() ) createSizeGrip();
         else deleteSizeGrip();
+
     }
 
     //________________________________________________________________
@@ -962,15 +1011,7 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::createShadow()
     {
-        if ( !g_sShadow
-                || g_shadowSizeEnum != m_internalSettings->shadowSize()
-                || g_shadowStrength != m_internalSettings->shadowStrength()
-                || g_shadowColor != m_internalSettings->shadowColor()
-                || g_specificShadowsInactiveWindows != m_internalSettings->specificShadowsInactiveWindows()
-                || g_shadowSizeEnumInactiveWindows != m_internalSettings->shadowSizeInactiveWindows()
-                || g_shadowStrengthInactiveWindows != m_internalSettings->shadowStrengthInactiveWindows()
-                || g_shadowColorInactiveWindows != m_internalSettings->shadowColorInactiveWindows() )
-        {
+        if ( !g_sShadow ) {
             g_shadowSizeEnum = m_internalSettings->shadowSize();
             g_shadowStrength = m_internalSettings->shadowStrength();
             g_shadowColor = m_internalSettings->shadowColor();
@@ -979,6 +1020,24 @@ namespace Breeze
             g_shadowStrengthInactiveWindows = m_internalSettings->shadowStrengthInactiveWindows();
             g_shadowColorInactiveWindows = m_internalSettings->shadowColorInactiveWindows();
         }
+        else if ( g_shadowSizeEnum != m_internalSettings->shadowSize()
+                  || g_shadowStrength != m_internalSettings->shadowStrength()
+                  || g_shadowColor != m_internalSettings->shadowColor() ) {
+            g_shadowSizeEnum = m_internalSettings->shadowSize();
+            g_shadowStrength = m_internalSettings->shadowStrength();
+            g_shadowColor = m_internalSettings->shadowColor();
+        }
+        else if ( g_specificShadowsInactiveWindows != m_internalSettings->specificShadowsInactiveWindows()
+                  || g_shadowSizeEnumInactiveWindows != m_internalSettings->shadowSizeInactiveWindows()
+                  || g_shadowStrengthInactiveWindows != m_internalSettings->shadowStrengthInactiveWindows()
+                  || g_shadowColorInactiveWindows != m_internalSettings->shadowColorInactiveWindows() ) {
+            g_specificShadowsInactiveWindows = m_internalSettings->specificShadowsInactiveWindows();
+            g_shadowSizeEnumInactiveWindows = m_internalSettings->shadowSizeInactiveWindows();
+            g_shadowStrengthInactiveWindows = m_internalSettings->shadowStrengthInactiveWindows();
+            g_shadowColorInactiveWindows = m_internalSettings->shadowColorInactiveWindows();
+        }
+        else
+          return;
 
         updateShadow();
     }
