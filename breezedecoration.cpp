@@ -399,7 +399,7 @@ namespace Breeze
         );
 
         connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateAnimationState);
-        connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateShadow);
+        connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::createShadow);
         connect(c, &KDecoration2::DecoratedClient::widthChanged, this, &Decoration::updateTitleBar);
         connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateTitleBar);
         //connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::setOpaque);
@@ -410,7 +410,7 @@ namespace Breeze
         connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateButtonsGeometry);
 
         createButtons();
-        updateShadow();
+        createShadow();
     }
 
     //________________________________________________________________
@@ -452,8 +452,6 @@ namespace Breeze
           updateActiveShadow();
         else
           updateInactiveShadow();
-
-        setShadow(g_sShadow);
     }
 
     //________________________________________________________________
@@ -529,6 +527,8 @@ namespace Breeze
         g_sShadow->setPadding(padding);
         g_sShadow->setInnerShadowRect(QRect(outerRect.center(), QSize(1, 1)));
         g_sShadow->setShadow(shadowTexture);
+
+        setShadow(g_sShadow);
     }
 
     //________________________________________________________________
@@ -604,6 +604,8 @@ namespace Breeze
         g_sShadow->setPadding(padding);
         g_sShadow->setInnerShadowRect(QRect(outerRect.center(), QSize(1, 1)));
         g_sShadow->setShadow(shadowTexture);
+
+        setShadow(g_sShadow);
     }
 
     //________________________________________________________________
@@ -663,7 +665,7 @@ namespace Breeze
         recalculateBorders();
 
         // shadow
-        createShadow();
+        // createShadow();
 
         // size grip
         if( hasNoBorders() && m_internalSettings->drawSizeGrip() ) createSizeGrip();
@@ -1019,6 +1021,8 @@ namespace Breeze
             g_shadowSizeEnumInactiveWindows = m_internalSettings->shadowSizeInactiveWindows();
             g_shadowStrengthInactiveWindows = m_internalSettings->shadowStrengthInactiveWindows();
             g_shadowColorInactiveWindows = m_internalSettings->shadowColorInactiveWindows();
+
+            updateShadow();
         }
         else if ( g_shadowSizeEnum != m_internalSettings->shadowSize()
                   || g_shadowStrength != m_internalSettings->shadowStrength()
@@ -1026,6 +1030,8 @@ namespace Breeze
             g_shadowSizeEnum = m_internalSettings->shadowSize();
             g_shadowStrength = m_internalSettings->shadowStrength();
             g_shadowColor = m_internalSettings->shadowColor();
+
+            updateActiveShadow();
         }
         else if ( g_specificShadowsInactiveWindows != m_internalSettings->specificShadowsInactiveWindows()
                   || g_shadowSizeEnumInactiveWindows != m_internalSettings->shadowSizeInactiveWindows()
@@ -1035,11 +1041,11 @@ namespace Breeze
             g_shadowSizeEnumInactiveWindows = m_internalSettings->shadowSizeInactiveWindows();
             g_shadowStrengthInactiveWindows = m_internalSettings->shadowStrengthInactiveWindows();
             g_shadowColorInactiveWindows = m_internalSettings->shadowColorInactiveWindows();
+
+            updateActiveShadow();
         }
         else
-          return;
-
-        updateShadow();
+          updateShadow();
     }
 
     //_________________________________________________________________
