@@ -45,6 +45,7 @@
 #include <QPainter>
 #include <QTextStream>
 #include <QTimer>
+#include <QDebug>
 
 #if BREEZE_HAVE_X11
 #include <QX11Info>
@@ -346,13 +347,33 @@ namespace Breeze
     }
 
     //________________________________________________________________
-    void Decoration::setButtonHovered( bool value, Button *b )
+    void Decoration::setButtonHovered( bool value )
     {
-        if (value) m_lastHoveredButton = b;
-        if( m_buttonHovered == value || (!value && m_lastHoveredButton != b) ) return;
-
+        if (m_buttonHovered == value) {
+            return;
+        }
         m_buttonHovered = value;
-        emit buttonHoveredChanged(b);
+        emit buttonHoveredChanged();
+    }
+
+    //________________________________________________________________
+    void Decoration::hoverMoveEvent(QHoverEvent *event)
+    {
+        const bool groupContains = m_leftButtons->geometry().contains(event->posF()) || m_rightButtons->geometry().contains(event->posF());
+        bool buttonContains = m_buttonHovered;
+
+        if (groupContains && !m_buttonHovered) {
+            for (KDecoration2::DecorationButton *button: m_leftButtons->buttons()+m_rightButtons->buttons()) {
+                if (button->contains(event->posF())) {
+                    buttonContains = true;
+                    break;
+                }
+            }
+        }
+
+        setButtonHovered(groupContains && buttonContains);
+
+        KDecoration2::Decoration::hoverMoveEvent(event);
     }
 
     //________________________________________________________________

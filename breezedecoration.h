@@ -108,15 +108,17 @@ namespace Breeze
         //*@Decoration has a hovered button
         //@{
         bool m_buttonHovered = false;
-        Button *m_lastHoveredButton = nullptr;
         bool buttonHovered() const
         { return m_buttonHovered; }
 
         signals:
-        void buttonHoveredChanged ( Button *b );
+        void buttonHoveredChanged();
 
         public Q_SLOTS:
-        void setButtonHovered ( bool value, Button *b );
+        void setButtonHovered(bool value);
+
+        protected:
+        void hoverMoveEvent(QHoverEvent *event) override;
         //@}
 
 
