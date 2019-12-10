@@ -395,7 +395,7 @@ namespace Breeze
         connect(s.data(), &KDecoration2::DecorationSettings::borderSizeChanged, this, &Decoration::recalculateBorders);
 
         // a change in font might cause the borders to change
-        recalculateBorders();
+        connect(s.data(), &KDecoration2::DecorationSettings::fontChanged, this, &Decoration::recalculateBorders); // recalculateBorders();
         connect(s.data(), &KDecoration2::DecorationSettings::spacingChanged, this, &Decoration::recalculateBorders);
 
         // buttons
@@ -710,8 +710,7 @@ namespace Breeze
         if( hideTitleBar() ) top = bottom;
         else {
 
-            QFont f; f.fromString(m_internalSettings->titleBarFont());
-            QFontMetrics fm(f);
+            QFontMetrics fm(s->font());
             top += qMax(fm.height(), buttonHeight() );
 
             // padding below
@@ -940,12 +939,8 @@ namespace Breeze
 
         if( !hideTitleBar() ) {
           // draw caption
-          QFont f; f.fromString(m_internalSettings->titleBarFont());
-          // KDE needs this FIXME: Why?
-          QFontDatabase fd; f.setStyleName(fd.styleString(f));
-          painter->setFont(f);
+          painter->setFont(s->font());
           painter->setPen( fontColor() );
-
           const auto cR = captionRect();
           const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
           painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
@@ -1011,9 +1006,7 @@ namespace Breeze
 
                     // full caption rect
                     const QRect fullRect = QRect( 0, yOffset, size().width(), captionHeight() );
-                    QFont f; f.fromString(m_internalSettings->titleBarFont());
-                    QFontMetrics fm(f);
-                    QRect boundingRect( fm.boundingRect( c->caption()) );
+                    QRect boundingRect( settings()->fontMetrics().boundingRect( c->caption()).toRect() );
 
                     // text bounding rect
                     boundingRect.setTop( yOffset );

@@ -8,8 +8,8 @@ X-KDE-Library=org.kde.kdecoration2/sierrabreezeenhanced
 X-KDE-PluginKeyword=kcmodule
 X-KDE-ParentApp=kcontrol
 X-KDE-Weight=60
-X-KDE-PluginInfo-Name=SierraBreezeEnhanced
+X-KDE-PluginInfo-Name=Sierra Breeze Enhanced
 
-Name=SierraBreezeEnhanced
+Name=Sierra Breeze Enhanced
 Comment=Modify the appearance of window decorations
 X-KDE-Keywords=sierrabreezeenhanced,decoration

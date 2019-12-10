@@ -1,9 +1,20 @@
+V0.8.5
+---------
+
+* removed redundant font settings (see issue #57)
+* improved unison hovering communication with window buttons applet (contributed by @trmdi, thanks!)
+
 V0.8.4
 ---------
 
 * improved unison hovering (contributed by @trmdi, thanks!)
 * minor shadow adjustments
 * minor ui fix
+
+V0.8.3
+---------
+
+* Further minor tweak of Dark Aurorae macOS and SBE themes under indirect unison hovering when animation is enabled
 
 V0.8.3
 ---------
