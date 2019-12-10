@@ -359,19 +359,20 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::hoverMoveEvent(QHoverEvent *event)
     {
-        const bool groupContains = m_leftButtons->geometry().contains(event->posF()) || m_rightButtons->geometry().contains(event->posF());
-        bool buttonContains = m_buttonHovered;
+        if (objectName() != "applet-window-buttons") {
+            const bool groupContains = m_leftButtons->geometry().contains(event->posF()) || m_rightButtons->geometry().contains(event->posF());
+            bool buttonContains = m_buttonHovered;
 
-        if (groupContains && !m_buttonHovered) {
-            for (KDecoration2::DecorationButton *button: m_leftButtons->buttons()+m_rightButtons->buttons()) {
-                if (button->contains(event->posF())) {
-                    buttonContains = true;
-                    break;
+            if (groupContains && !m_buttonHovered) {
+                for (KDecoration2::DecorationButton *button: m_leftButtons->buttons()+m_rightButtons->buttons()) {
+                    if (button->contains(event->posF())) {
+                        buttonContains = true;
+                        break;
+                    }
                 }
             }
+            setButtonHovered(groupContains && buttonContains);
         }
-
-        setButtonHovered(groupContains && buttonContains);
 
         KDecoration2::Decoration::hoverMoveEvent(event);
     }
