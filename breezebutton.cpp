@@ -56,7 +56,12 @@ namespace Breeze
         connect(decoration->settings().data(), &KDecoration2::DecorationSettings::reconfigured, this, &Button::reconfigure);
         connect( this, &KDecoration2::DecorationButton::hoveredChanged, this, &Button::updateAnimationState );
 
-        connect (decoration, &Decoration::buttonHoveredChanged, [&](){ update(); });
+        if (decoration->objectName() == "applet-window-buttons") {
+            connect( this, &Button::hoveredChanged, [=](bool hovered){
+                    decoration->setButtonHovered(hovered);
+                    });
+        }
+        connect(decoration, &Decoration::buttonHoveredChanged, [&](){ update(); });
 
         reconfigure();
 
