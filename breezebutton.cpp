@@ -61,7 +61,7 @@ namespace Breeze
                     decoration->setButtonHovered(hovered);
                     });
         }
-        connect(decoration, &Decoration::buttonHoveredChanged, [&](){ update(); });
+        connect(decoration, SIGNAL(buttonHoveredChanged()), this, SLOT(update()));
 
         reconfigure();
 
