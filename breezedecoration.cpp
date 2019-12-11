@@ -361,12 +361,7 @@ namespace Breeze
     {
         if (objectName() != "applet-window-buttons") {
             const bool groupContains = m_leftButtons->geometry().contains(event->posF()) || m_rightButtons->geometry().contains(event->posF());
-            bool buttonContains = m_buttonHovered;
-
-            if (groupContains && !m_buttonHovered)
-                buttonContains = true;
-
-            setButtonHovered(groupContains && buttonContains);
+            setButtonHovered(groupContains);
         }
 
         KDecoration2::Decoration::hoverMoveEvent(event);
