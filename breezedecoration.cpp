@@ -365,10 +365,8 @@ namespace Breeze
 
             if (groupContains && !m_buttonHovered) {
                 for (KDecoration2::DecorationButton *button: m_leftButtons->buttons()+m_rightButtons->buttons()) {
-                    if (button->contains(event->posF())) {
-                        buttonContains = true;
-                        break;
-                    }
+                    buttonContains = true;
+                    break;
                 }
             }
             setButtonHovered(groupContains && buttonContains);
