@@ -1047,7 +1047,7 @@ namespace Breeze
             g_shadowStrengthInactiveWindows = m_internalSettings->shadowStrengthInactiveWindows();
             g_shadowColorInactiveWindows = m_internalSettings->shadowColorInactiveWindows();
 
-            updateActiveShadow();
+            updateInactiveShadow();
         }
         else
           updateShadow();
