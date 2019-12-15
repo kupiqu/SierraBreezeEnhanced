@@ -677,7 +677,7 @@ namespace Breeze
         recalculateBorders();
 
         // shadow
-        // createShadow();
+        createShadow();
 
         // size grip
         if( hasNoBorders() && m_internalSettings->drawSizeGrip() ) createSizeGrip();
