@@ -61,9 +61,12 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLabel" name="btnSpacingLabel">
+        <widget class="QLabel" name="buttonSpacingLabel">
          <property name="text">
           <string>Button spacing:</string>
+         </property>
+         <property name="buddy">
+           <cstring>buttonSpacing</cstring>
          </property>
         </widget>
        </item>
@@ -132,7 +135,7 @@
         </widget>
        </item>
        <item row="3" column="2">
-        <widget class="QSpinBox" name="btnSpacingSpinBox">
+        <widget class="QSpinBox" name="buttonSpacing">
          <property name="suffix">
           <string> px</string>
          </property>
@@ -163,7 +166,7 @@
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
          <property name="buddy">
-          <cstring>buttonSpacing</cstring>
+          <cstring>buttonPadding</cstring>
          </property>
         </widget>
        </item>
@@ -751,7 +754,7 @@
   <tabstop>titleAlignment</tabstop>
   <tabstop>buttonSize</tabstop>
   <tabstop>buttonStyle</tabstop>
-  <tabstop>btnSpacingSpinBox</tabstop>
+  <tabstop>buttonSpacing</tabstop>
   <tabstop>buttonPadding</tabstop>
   <tabstop>hideTitleBar</tabstop>
   <tabstop>matchColorForTitleBar</tabstop>
