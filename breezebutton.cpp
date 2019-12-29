@@ -24,6 +24,7 @@
 #include <KColorUtils>
 
 #include <QPainter>
+#include <QVariantAnimation>
 
 namespace Breeze
 {
@@ -36,15 +37,17 @@ namespace Breeze
     //__________________________________________________________________
     Button::Button(DecorationButtonType type, Decoration* decoration, QObject* parent)
         : DecorationButton(type, decoration, parent)
-        , m_animation( new QPropertyAnimation( this ) )
+        , m_animation( new QVariantAnimation( this ) )
     {
 
         // setup animation
-        m_animation->setStartValue( 0 );
+        // It is important start and end value are of the same type, hence 0.0 and not just 0
+        m_animation->setStartValue( 0.0 );
         m_animation->setEndValue( 1.0 );
-        m_animation->setTargetObject( this );
-        m_animation->setPropertyName( "opacity" );
         m_animation->setEasingCurve( QEasingCurve::InOutQuad );
+        connect(m_animation, &QVariantAnimation::valueChanged, this, [this](const QVariant &value) {
+            setOpacity(value.toReal());
+        });
 
         // setup default geometry
         const int height = decoration->buttonHeight();
@@ -215,7 +218,7 @@ namespace Breeze
             QPen pen( foregroundColor );
             pen.setCapStyle( Qt::RoundCap );
             pen.setJoinStyle( Qt::MiterJoin );
-            pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
+            pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
             painter->setPen( pen );
             painter->setBrush( Qt::NoBrush );
@@ -465,7 +468,7 @@ namespace Breeze
             // setup painter
             QPen pen( foregroundColor );
             pen.setJoinStyle( Qt::MiterJoin );
-            pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+            pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
             switch( type() )
             {
@@ -682,9 +685,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -716,9 +719,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -773,9 +776,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -803,9 +806,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -835,9 +838,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -884,9 +887,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -921,9 +924,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -986,9 +989,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -1082,9 +1085,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -1116,9 +1119,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -1165,9 +1168,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -1196,9 +1199,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -1261,9 +1264,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -1304,9 +1307,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -1339,9 +1342,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -1402,9 +1405,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 painter->setBrush( button_color );
                 painter->setPen( button_pen );
 
@@ -1492,9 +1495,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
@@ -1538,9 +1541,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
@@ -1608,9 +1611,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
@@ -1648,9 +1651,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -1691,9 +1694,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -1751,9 +1754,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -1799,9 +1802,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -1875,9 +1878,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -1980,9 +1983,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
@@ -2026,9 +2029,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
@@ -2087,9 +2090,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && this->hovered() )
                 {
@@ -2129,9 +2132,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -2204,9 +2207,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -2258,9 +2261,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -2304,9 +2307,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -2378,9 +2381,9 @@ namespace Breeze
                 QPen button_pen( qGray(titleBarColor.rgb()) < 100 ? button_color.lighter(115) : button_color.darker(150) );
                 button_pen.setJoinStyle( Qt::MiterJoin );
                 if ( d->internalSettings()->animationsEnabled() )
-                  button_pen.setWidthF( 1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
                 else
-                  button_pen.setWidthF( 9./7.*1.0*qMax((qreal)1.0, 20/width ) );
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
 
                 if ( ( ( inactiveWindow && !useActiveButtonStyle ) || useInactiveButtonStyle ) && ( this->hovered() || isChecked() ) )
                 {
@@ -3788,7 +3791,7 @@ namespace Breeze
 
             return titleBarColor;
 
-        } else if( m_animation->state() == QPropertyAnimation::Running ) {
+        } else if( m_animation->state() == QAbstractAnimation::Running ) {
 
             return KColorUtils::mix( d->fontColor(), titleBarColor, m_opacity );
 
@@ -3824,7 +3827,7 @@ namespace Breeze
 
             return d->fontColor();
 
-        } else if( m_animation->state() == QPropertyAnimation::Running ) {
+        } else if( m_animation->state() == QAbstractAnimation::Running ) {
 
             if( type() == DecorationButtonType::Close )
             {
@@ -3918,11 +3921,11 @@ namespace Breeze
         auto d = qobject_cast<Decoration*>(decoration());
         if( !d || !d->internalSettings()->animationsEnabled() || (d->internalSettings()->buttonStyle() == 1) ) return;
 
-        QAbstractAnimation::Direction dir = hovered ? QPropertyAnimation::Forward : QPropertyAnimation::Backward;
-        if( m_animation->state() == QPropertyAnimation::Running && m_animation->direction() != dir )
+        QAbstractAnimation::Direction dir = hovered ? QAbstractAnimation::Forward : QAbstractAnimation::Backward;
+        if( m_animation->state() == QAbstractAnimation::Running && m_animation->direction() != dir )
             m_animation->stop();
         m_animation->setDirection( dir );
-        if( m_animation->state() != QPropertyAnimation::Running ) m_animation->start();
+        if( m_animation->state() != QAbstractAnimation::Running ) m_animation->start();
 
     }
 

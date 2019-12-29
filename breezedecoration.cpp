@@ -45,7 +45,8 @@
 #include <QPainter>
 #include <QTextStream>
 #include <QTimer>
-#include <QDebug>
+#include <QVariantAnimation>
+// #include <QDebug>
 
 #if BREEZE_HAVE_X11
 #include <QX11Info>
@@ -183,7 +184,7 @@ namespace Breeze
     //________________________________________________________________
     Decoration::Decoration(QObject *parent, const QVariantList &args)
         : KDecoration2::Decoration(parent, args)
-        , m_animation( new QPropertyAnimation( this ) )
+        , m_animation( new QVariantAnimation( this ) )
     {
         g_sDecoCount++;
     }
@@ -288,7 +289,7 @@ namespace Breeze
             outlineColor = titleBarColor.lighter(140);
         }
 
-        if( m_animation->state() == QPropertyAnimation::Running )
+        if( m_animation->state() == QAbstractAnimation::Running )
         {
             // QColor outlineColor( c->palette().color( QPalette::Highlight ) );
             outlineColor.setAlpha( outlineColor.alpha()*m_opacity );
@@ -306,7 +307,7 @@ namespace Breeze
         QColor titleBarColor;
 
         if ( !matchColorForTitleBar() ) {
-            if( m_animation->state() == QPropertyAnimation::Running )
+            if( m_animation->state() == QAbstractAnimation::Running )
             {
                 titleBarColor = KColorUtils::mix(
                     c->color( ColorGroup::Inactive, ColorRole::TitleBar ),
@@ -373,11 +374,13 @@ namespace Breeze
         auto c = client().data();
 
         // active state change animation
-        m_animation->setStartValue( 0 );
+        // It is important start and end value are of the same type, hence 0.0 and not just 0
+        m_animation->setStartValue( 0.0 );
         m_animation->setEndValue( 1.0 );
-        m_animation->setTargetObject( this );
-        m_animation->setPropertyName( "opacity" );
         m_animation->setEasingCurve( QEasingCurve::InOutQuad );
+        connect(m_animation, &QVariantAnimation::valueChanged, this, [this](const QVariant &value) {
+            setOpacity(value.toReal());
+        });
 
         reconfigure();
         updateTitleBar();
@@ -445,8 +448,8 @@ namespace Breeze
         {
 
             auto c = client().data();
-            m_animation->setDirection( c->isActive() ? QPropertyAnimation::Forward : QPropertyAnimation::Backward );
-            if( m_animation->state() != QPropertyAnimation::Running ) m_animation->start();
+            m_animation->setDirection( c->isActive() ? QAbstractAnimation::Forward : QAbstractAnimation::Backward );
+            if( m_animation->state() != QAbstractAnimation::Running ) m_animation->start();
 
         } else {
 

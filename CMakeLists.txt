@@ -1,6 +1,6 @@
 
 project(sierrabreezeenhanced)
-set(PROJECT_VERSION "0.8.8")
+set(PROJECT_VERSION "0.8.9")
 set(PROJECT_VERSION_MAJOR 0)
 
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
@@ -34,7 +34,7 @@ find_package(Qt5 CONFIG REQUIRED COMPONENTS DBus)
 find_package(XCB COMPONENTS XCB)
 set_package_properties(XCB PROPERTIES
   DESCRIPTION "X protocol C-language Binding"
-  URL "http://xcb.freedesktop.org"
+  URL "https://xcb.freedesktop.org/"
   TYPE OPTIONAL
   PURPOSE "Required to pass style properties to native Windows on X11 Platform"
 )
