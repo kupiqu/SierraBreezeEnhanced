@@ -52,7 +52,7 @@ namespace Breeze
         // setup
         m_ui.setupUi( this );
 
-        connect( m_ui.buttonBox->button( QDialogButtonBox::Cancel ), SIGNAL(clicked()), this, SLOT(close()) );
+        connect( m_ui.buttonBox->button( QDialogButtonBox::Cancel ), &QAbstractButton::clicked, this, &QWidget::close );
         m_ui.windowClassCheckBox->setChecked( true );
 
 #if BREEZE_HAVE_X11
@@ -127,7 +127,7 @@ namespace Breeze
         if( o != m_grabber ) return false;
         if( e->type() != QEvent::MouseButtonRelease ) return false;
 
-        // need to explicitely release cursor for Qt5
+        // need to explicitly release cursor for Qt5
         qApp->restoreOverrideCursor();
 
         // delete old m_grabber

@@ -162,7 +162,7 @@ namespace Breeze
             case Qt::RightButton:
             {
                 hide();
-                QTimer::singleShot(5000, this, SLOT(show()));
+                QTimer::singleShot(5000, this, &QWidget::show);
                 break;
             }
 
@@ -181,7 +181,7 @@ namespace Breeze
 
         }
 
-        
+
     }
 
     //_______________________________________________________________________________

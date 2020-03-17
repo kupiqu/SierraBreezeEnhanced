@@ -46,7 +46,6 @@
 #include <QTextStream>
 #include <QTimer>
 #include <QVariantAnimation>
-// #include <QDebug>
 
 #if BREEZE_HAVE_X11
 #include <QX11Info>

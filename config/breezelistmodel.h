@@ -282,7 +282,7 @@ namespace Breeze
        }
 
         //! return all values
-        const List& get() const
+        const List& get( void ) const
         { return _values; }
 
         //! return value for given index
