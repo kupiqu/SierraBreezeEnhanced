@@ -47,7 +47,7 @@ namespace Breeze
         m_checkboxes.insert( BorderSize, m_ui.borderSizeCheckBox );
 
         // detect window properties
-        connect( m_ui.detectDialogButton, &QAbstractButton::clicked, this, &QWidget::close );
+        connect( m_ui.detectDialogButton, &QAbstractButton::clicked, this, &ExceptionDialog::selectWindowProperties );
 
         // connections
         connect( m_ui.exceptionType, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
@@ -58,15 +58,15 @@ namespace Breeze
         { connect( iter.value(), &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged ); }
 
         connect( m_ui.hideTitleBar, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
-        connect( m_ui.matchColorForTitleBar, &QAbstractButton::clicked, this, &QWidget::close );
-        connect( m_ui.drawTitleBarSeparator, &QAbstractButton::clicked, this, &QWidget::close );
-        connect( m_ui.drawBackgroundGradient, &QAbstractButton::clicked, this, &QWidget::close );
+        connect( m_ui.matchColorForTitleBar, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
+        connect( m_ui.drawTitleBarSeparator, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
+        connect( m_ui.drawBackgroundGradient, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
         m_ui.gradientOverrideLabelSpinBox->setSpecialValueText(tr("None"));
         connect( m_ui.gradientOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
-        connect( m_ui.opaqueTitleBar, &QAbstractButton::clicked, this, &QWidget::close );
+        connect( m_ui.opaqueTitleBar, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
         m_ui.opacityOverrideLabelSpinBox->setSpecialValueText(tr("None"));
         connect( m_ui.opacityOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
-        connect( m_ui.isDialog, &QAbstractButton::clicked, this, &QWidget::close );
+        connect( m_ui.isDialog, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
 
         // hide detection dialog on non X11 platforms
         #if BREEZE_HAVE_X11
