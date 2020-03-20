@@ -1,3 +1,12 @@
+V0.9RC
+---------
+
+* Added option for button horizontal offset
+
+* Enhanced resizing area now applies to SBE's tiny border, i.e., the 1 px outline border
+
+* Grip option now applies to to SBE's tiny border, i.e., the 1 px outline border
+
 V0.8.12
 ---------
 

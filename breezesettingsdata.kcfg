@@ -129,6 +129,10 @@
        <default>4</default>
     </entry>
 
+    <entry name="ButtonHOffset" type = "Int">
+      <default>0</default>
+    </entry>
+
     <!-- hide title bar -->
     <entry name="HideTitleBar" type = "Enum">
       <choices>

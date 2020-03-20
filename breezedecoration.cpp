@@ -217,7 +217,7 @@ namespace Breeze
         QColor titleBarColor( this->rawTitleBarColor() );
         QColor outlineColor( this->outlineColor() );
 
-        auto c( client().data() );
+        auto c( client().toStrongRef().data() );
         if ( drawBackgroundGradient() ) // && c->isActive() )
         {
             if ( c->isActive() )
@@ -274,7 +274,7 @@ namespace Breeze
         qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
 
         QColor outlineColor;
-        auto c( client().data() );
+        auto c( client().toStrongRef().data() );
         if ( c->isActive() ) {
           if ( colorConditional > 69 ) // 255 -186
             outlineColor = titleBarColor.darker(140);
@@ -302,7 +302,7 @@ namespace Breeze
     //________________________________________________________________
     QColor Decoration::rawTitleBarColor() const
     {
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
         QColor titleBarColor;
 
         if ( !matchColorForTitleBar() ) {
@@ -324,7 +324,7 @@ namespace Breeze
     //________________________________________________________________
     QColor Decoration::fontColor() const
     {
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
 
         QColor darkTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(81, 102, 107) : QColor(34, 45, 50) );
         QColor lightTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(192, 193, 194) : QColor(250, 251, 252) );
@@ -370,7 +370,7 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::init()
     {
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
 
         // active state change animation
         // It is important start and end value are of the same type, hence 0.0 and not just 0
@@ -431,7 +431,7 @@ namespace Breeze
     void Decoration::updateTitleBar()
     {
         auto s = settings();
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
         const bool maximized = isMaximized();
         const int width =  maximized ? c->width() : c->width() - 2*s->largeSpacing()*Metrics::TitleBar_SideMargin;
         const int height = maximized ? borderTop() : borderTop() - s->smallSpacing()*Metrics::TitleBar_TopMargin;
@@ -446,7 +446,7 @@ namespace Breeze
         if( m_internalSettings->animationsEnabled() )
         {
 
-            auto c = client().data();
+            auto c = client().toStrongRef().data();
             m_animation->setDirection( c->isActive() ? QAbstractAnimation::Forward : QAbstractAnimation::Backward );
             if( m_animation->state() != QAbstractAnimation::Running ) m_animation->start();
 
@@ -460,7 +460,7 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::updateShadow()
     {
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
 
         if ( !g_specificShadowsInactiveWindows || c->isActive() )
           updateActiveShadow();
@@ -625,7 +625,7 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::updateSizeGripVisibility()
     {
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
         if( m_sizeGrip )
         { m_sizeGrip->setVisible( c->isResizeable() && !isMaximized() && !c->isShaded() ); }
     }
@@ -682,7 +682,7 @@ namespace Breeze
         createShadow();
 
         // size grip
-        if( hasNoBorders() && m_internalSettings->drawSizeGrip() ) createSizeGrip();
+        if( borderSize() <= 1 && m_internalSettings->drawSizeGrip() ) createSizeGrip();
         else deleteSizeGrip();
 
     }
@@ -690,7 +690,7 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::recalculateBorders()
     {
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
         auto s = settings();
 
         // left, right and bottom borders
@@ -721,7 +721,7 @@ namespace Breeze
         const int extSize = s->largeSpacing();
         int extSides = 0;
         int extBottom = 0;
-        if( hasNoBorders() )
+        if( borderSize() <= 1 )
         {
             if( !isMaximizedHorizontally() ) extSides = extSize;
             if( !isMaximizedVertically() ) extBottom = extSize;
@@ -773,7 +773,7 @@ namespace Breeze
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = m_internalSettings->buttonPadding();
+            const int hPadding = m_internalSettings->buttonPadding() + m_internalSettings->buttonHOffset();
             if( isLeftEdge() )
             {
                 // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
@@ -798,7 +798,7 @@ namespace Breeze
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = m_internalSettings->buttonPadding();
+            const int hPadding = m_internalSettings->buttonPadding() + m_internalSettings->buttonHOffset();
             if( isRightEdge() )
             {
 
@@ -820,7 +820,7 @@ namespace Breeze
     void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     {
         // TODO: optimize based on repaintRegion
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
         auto s = settings();
 
         QColor titleBarColor = this->titleBarColor();
@@ -872,7 +872,7 @@ namespace Breeze
         const QRect titleRect(QPoint(0, 0), QSize(size().width(), borderTop()));
         if ( !titleRect.intersects(repaintRegion) ) return;
 
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
         QColor outlineColor( this->outlineColor() );
         QColor titleBarColor = this->titleBarColor();
 
@@ -969,7 +969,7 @@ namespace Breeze
         if( hideTitleBar() ) return qMakePair( QRect(), Qt::AlignCenter );
         else {
 
-            auto c = client().data();
+            auto c = client().toStrongRef().data();
             const int leftOffset = m_leftButtons->buttons().isEmpty() ?
                 Metrics::TitleBar_SideMargin*settings()->smallSpacing():
                 m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin*settings()->smallSpacing();
@@ -1066,7 +1066,7 @@ namespace Breeze
         if( !QX11Info::isPlatformX11() ) return;
 
         // access client
-        auto c = client().data();
+        auto c = client().toStrongRef().data();
         if( !c ) return;
 
         if( c->windowId() != 0 )
