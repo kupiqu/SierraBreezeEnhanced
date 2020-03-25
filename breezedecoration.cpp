@@ -719,20 +719,15 @@ namespace Breeze
 
         // extended sizes
         const int extSize = s->largeSpacing();
-        int extSides = 0;
-        int extBottom = 0;
+        int extHSides = 0;
+        int extVSides = 0;
         if( borderSize() <= 1 )
         {
-            if( !isMaximizedHorizontally() ) extSides = extSize;
-            if( !isMaximizedVertically() ) extBottom = extSize;
-
-        } else if( hasNoSideBorders() && !isMaximizedHorizontally() ) {
-
-            extSides = extSize;
-
+            if( !isMaximizedHorizontally() ) extHSides = extSize;
+            if( !isMaximizedVertically() ) extVSides = extSize;
         }
 
-        setResizeOnlyBorders(QMargins(extSides, 0, extSides, extBottom));
+        setResizeOnlyBorders(QMargins(extHSides, extVSides, extHSides, extVSides));
     }
 
     //________________________________________________________________
