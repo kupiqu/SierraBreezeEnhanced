@@ -44,8 +44,11 @@ sudo zypper in SierraBreezeEnhanced
 ```
 - Arch Linux:
 ```
-Use the AUR helper or install manually from
-https://aur.archlinux.org/packages/kwin-decoration-sierra-breeze-enhanced-git
+git clone https://aur.archlinux.org/kwin-decoration-sierra-breeze-enhanced-git.git
+cd kwin-decoration-sierra-breeze-enhanced-git
+makepkg -si
+cd ..
+rm -rf kwin-decoration-sierra-breeze-enhanced-git
 ```
 
 ### Method 2: Compile from source code
