@@ -42,6 +42,14 @@ sudo apt install sierrabreezeenhanced
 sudo zypper ar obs://home:trmdi trmdi
 sudo zypper in SierraBreezeEnhanced
 ```
+- Arch Linux:
+```
+git clone https://aur.archlinux.org/kwin-decoration-sierra-breeze-enhanced-git.git
+cd kwin-decoration-sierra-breeze-enhanced-git
+makepkg -si
+cd ..
+rm -rf kwin-decoration-sierra-breeze-enhanced-git
+```
 
 ### Method 2: Compile from source code
 *Compilation should not be done against versions of KWin < 5.14.*
