@@ -42,7 +42,8 @@ sudo apt install sierrabreezeenhanced
 sudo zypper ar obs://home:trmdi trmdi
 sudo zypper in SierraBreezeEnhanced
 ```
-
+- Arch Linux (from the AUR):
+Install the following, using an AUR helper or manually: https://aur.archlinux.org/packages/kwin-decoration-sierra-breeze-enhanced-git/
 ### Method 2: Compile from source code
 *Compilation should not be done against versions of KWin < 5.14.*
 
