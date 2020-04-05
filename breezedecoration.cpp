@@ -274,29 +274,12 @@ namespace Breeze
         qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
 
         QColor outlineColor;
-        auto c( client().toStrongRef().data() );
-        if ( c->isActive() ) {
-          if ( colorConditional > 69 ) // 255 -186
-            outlineColor = titleBarColor.darker(140);
-          else
-            outlineColor = titleBarColor.lighter(180);
-        }
-        else {
-          if ( colorConditional > 69 ) // 255 -186
-            outlineColor = titleBarColor.darker(120);
-          else
-            outlineColor = titleBarColor.lighter(140);
-        }
+        if ( colorConditional > 69 ) // 255 -186
+          outlineColor = titleBarColor.darker(140);
+        else
+          outlineColor = titleBarColor.lighter(180);
 
-        if( m_animation->state() == QAbstractAnimation::Running )
-        {
-            // QColor outlineColor( c->palette().color( QPalette::Highlight ) );
-            outlineColor.setAlpha( outlineColor.alpha()*m_opacity );
-            return outlineColor;
-        }
-        else return outlineColor;
-        // else if( c->isActive() ) return outlineColor; // c->palette().color( QPalette::Highlight );
-        // else return QColor();
+        return outlineColor;
     }
 
     //________________________________________________________________
@@ -911,15 +894,12 @@ namespace Breeze
         if( !c->isShaded() && !hideTitleBar() && outlineColor.isValid() )
         {
             // outline
-            // painter->setRenderHint( QPainter::Antialiasing, false );
+            painter->setRenderHint( QPainter::Antialiasing, false );
             painter->setBrush( Qt::NoBrush );
             QPen pen(outlineColor);
-            if ( c->isActive() )
-              pen.setWidthF( 2 );
-            else
-              pen.setWidthF( 1.5 );
+            pen.setWidth( 1 );
             painter->setPen( pen );
-            painter->drawLine( titleRect.bottomLeft() + QPoint(borderSize() + 1, 0), titleRect.bottomRight() - QPoint(borderSize(), 0) );
+            painter->drawLine( titleRect.bottomLeft() + QPoint(borderSize(), 0), titleRect.bottomRight() - QPoint(borderSize(), 0) );
         }
 
         painter->restore();
