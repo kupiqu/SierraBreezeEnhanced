@@ -864,10 +864,7 @@ namespace Breeze
             int b = m_internalSettings->gradientOverride() > -1 ? m_internalSettings->gradientOverride() : m_internalSettings->backgroundGradientIntensity();
             if ( !c->isActive() )
                  b *= 0.5;
-            if ( qGray(titleBarColor.rgb()) > 69 )
-                b =  qBound(0, b, 100);
-            else
-                b =  qBound(0, b, 100);
+            b =  qBound(0, b, 100);
             gradient.setColorAt(0.0, titleBarColor.lighter( 100 + b));
             gradient.setColorAt(1.0, titleBarColor);
             painter->setBrush(gradient);
