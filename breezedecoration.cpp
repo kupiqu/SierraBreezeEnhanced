@@ -228,7 +228,7 @@ namespace Breeze
                 }
                 else {
                     if ( outlineColor.isValid() )
-                        titleBarColor = titleBarColor.darker(180);
+                        titleBarColor = titleBarColor.lighter(115);
                 }
             }
             else
@@ -239,7 +239,7 @@ namespace Breeze
                 }
                 else {
                     if ( outlineColor.isValid() )
-                        titleBarColor = titleBarColor.darker(130);
+                        titleBarColor = titleBarColor.lighter(110);
                 }
             }
         }
@@ -248,14 +248,14 @@ namespace Breeze
             if ( qGray(titleBarColor.rgb()) > 69 )
                 titleBarColor = titleBarColor.darker(115);
             else
-                titleBarColor = titleBarColor.darker(150);
+                titleBarColor = titleBarColor.lighter(115);
         }
         else if ( outlineColor.isValid() )
         {
             if ( qGray(titleBarColor.rgb()) > 69 )
                 titleBarColor = titleBarColor.darker(110);
             else
-                titleBarColor = titleBarColor.darker(130);
+                titleBarColor = titleBarColor.lighter(110);
         }
         return titleBarColor;
     }
@@ -277,7 +277,7 @@ namespace Breeze
         if ( colorConditional > 69 ) // 255 -186
           outlineColor = titleBarColor.darker(140);
         else
-          outlineColor = titleBarColor.lighter(180);
+          outlineColor = titleBarColor.lighter(140);
 
         return outlineColor;
     }
@@ -867,7 +867,7 @@ namespace Breeze
             if ( qGray(titleBarColor.rgb()) > 69 )
                 b =  qBound(0, b, 100);
             else
-                b =  qBound(0, 2*b, 100);
+                b =  qBound(0, b, 100);
             gradient.setColorAt(0.0, titleBarColor.lighter( 100 + b));
             gradient.setColorAt(1.0, titleBarColor);
             painter->setBrush(gradient);
