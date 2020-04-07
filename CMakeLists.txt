@@ -1,6 +1,6 @@
 
 project(sierrabreezeenhanced)
-set(PROJECT_VERSION "0.9.3")
+set(PROJECT_VERSION "0.9.4")
 set(PROJECT_VERSION_MAJOR 0)
 
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
@@ -27,7 +27,7 @@ find_package(KDecoration2 REQUIRED)
 # old stuff
 add_definitions(-DTRANSLATION_DOMAIN="breeze_kwin_deco")
 
-find_package(KF5 REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n IconThemes)
 find_package(Qt5 CONFIG REQUIRED COMPONENTS DBus)
 
 ### XCB
@@ -108,6 +108,7 @@ target_link_libraries(sierrabreezeenhanced
         KF5::ConfigWidgets
         KF5::GuiAddons
         KF5::I18n
+        KF5::IconThemes
         KF5::WindowSystem)
 
 if(BREEZE_HAVE_X11)
