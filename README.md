@@ -51,6 +51,13 @@ cd ..
 rm -rf kwin-decoration-sierra-breeze-enhanced-git
 ```
 
+- Alpine Linux:
+``` shell
+sudo echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+sudo apk update
+sudo apk add sierrabreezeenhanced
+```
+
 ### Method 2: Compile from source code
 *Compilation should not be done against versions of KWin < 5.14.*
 
@@ -68,6 +75,11 @@ sudo pacman -S cmake extra-cmake-modules                    # Installation
 ``` shell
 sudo dnf install cmake extra-cmake-modules
 sudo dnf install "cmake(Qt5Core)" "cmake(Qt5Gui)" "cmake(Qt5DBus)" "cmake(Qt5X11Extras)" "cmake(KF5GuiAddons)" "cmake(KF5WindowSystem)" "cmake(KF5I18n)" "cmake(KDecoration2)" "cmake(KF5CoreAddons)" "cmake(KF5ConfigWidgets)"
+```
+
+- Alpine Linux
+``` shell
+sudo apk add extra-cmake-modules qt5-qtbase-dev kdecoration-dev kcoreaddons-dev kguiaddons-dev kconfigwidgets-dev kwindowsystem-dev ki18n-dev kiconthemes-dev
 ```
 
 #### Step 2: Then compile and install
