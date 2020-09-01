@@ -1,3 +1,9 @@
+V0.9.5
+---------
+
+* Upstream sync: Port away from deprecated Qt::MidButton
+* Upstream sync: use linear animations
+
 V0.9.4
 ---------
 

@@ -31,6 +31,7 @@
 
 #include <QPalette>
 #include <QVariant>
+#include <QVariantAnimation>
 
 class QVariantAnimation;
 

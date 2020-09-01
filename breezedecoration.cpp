@@ -45,7 +45,6 @@
 #include <QPainter>
 #include <QTextStream>
 #include <QTimer>
-#include <QVariantAnimation>
 
 #if BREEZE_HAVE_X11
 #include <QX11Info>
@@ -359,7 +358,8 @@ namespace Breeze
         // It is important start and end value are of the same type, hence 0.0 and not just 0
         m_animation->setStartValue( 0.0 );
         m_animation->setEndValue( 1.0 );
-        m_animation->setEasingCurve( QEasingCurve::InOutQuad );
+        // Linear to have the same easing as Breeze animations
+        m_animation->setEasingCurve( QEasingCurve::Linear );
         connect(m_animation, &QVariantAnimation::valueChanged, this, [this](const QVariant &value) {
             setOpacity(value.toReal());
         });

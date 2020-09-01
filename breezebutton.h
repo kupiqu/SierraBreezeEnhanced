@@ -27,6 +27,8 @@
 #include <QHash>
 #include <QImage>
 
+#include <QVariantAnimation>
+
 class QVariantAnimation;
 
 namespace Breeze
