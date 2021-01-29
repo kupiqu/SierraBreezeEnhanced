@@ -3097,17 +3097,25 @@ namespace Breeze
         QColor symbolColor;
         QColor symbolBgdColor;
 
-        // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-        // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-        // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-        qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-        if ( colorConditional > 186 || g > 186 ) {
-          symbolColor = darkSymbolColor;
-          symbolBgdColor = lightSymbolColor;
+        if (true) {
+            // render background
+            symbolBgdColor = this->backgroundColor();
+            // render mark
+            symbolColor = this->foregroundColor();
         }
         else {
-          symbolColor = lightSymbolColor;
-          symbolBgdColor = darkSymbolColor;
+            // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+            // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+            // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+            qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+            if ( colorConditional > 186 || g > 186 ) {
+              symbolColor = darkSymbolColor;
+              symbolBgdColor = lightSymbolColor;
+            }
+            else {
+              symbolColor = lightSymbolColor;
+              symbolBgdColor = darkSymbolColor;
+            }
         }
 
         // symbols pen
@@ -3465,17 +3473,25 @@ namespace Breeze
         QColor symbolColor;
         QColor symbolBgdColor;
 
-        // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-        // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-        // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-        qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-        if ( colorConditional > 186 || g > 186 ) {
-          symbolColor = darkSymbolColor;
-          symbolBgdColor = lightSymbolColor;
+        if (true) {
+            // render background
+            symbolBgdColor = this->backgroundColor();
+            // render mark
+            symbolColor = this->foregroundColor();
         }
         else {
-          symbolColor = lightSymbolColor;
-          symbolBgdColor = darkSymbolColor;
+            // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+            // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+            // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+            qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+            if ( colorConditional > 186 || g > 186 ) {
+              symbolColor = darkSymbolColor;
+              symbolBgdColor = lightSymbolColor;
+            }
+            else {
+              symbolColor = lightSymbolColor;
+              symbolBgdColor = darkSymbolColor;
+            }
         }
 
         // symbols pen
@@ -3499,10 +3515,12 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                button_color.setAlpha( 255 );
-                symbolBgdColor.setAlpha( 255 );
-                QColor mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
-                symbol_pen.setColor(mycolor);
+                if (false) {
+                    button_color.setAlpha( 255 );
+                    symbolBgdColor.setAlpha( 255 );
+                    QColor mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
+                    symbol_pen.setColor(mycolor);
+                }
                 painter->setPen( symbol_pen );
                 // it's a cross
                 painter->drawLine( QPointF( 5, 5 ), QPointF( 13, 13 ) );
@@ -3523,12 +3541,13 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                button_color.setAlpha( 255 );
-                symbolBgdColor.setAlpha( 255 );
-                QColor mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
-                symbol_pen.setColor(mycolor);
+                if (false) {
+                    button_color.setAlpha( 255 );
+                    symbolBgdColor.setAlpha( 255 );
+                    QColor mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
+                    symbol_pen.setColor(mycolor);
+                }
                 painter->setPen( symbol_pen );
-
                 // solid vs. open rectangle
                 if( isChecked() )
                 {
@@ -3560,10 +3579,12 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                button_color.setAlpha( 255 );
-                symbolBgdColor.setAlpha( 255 );
-                QColor mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
-                symbol_pen.setColor(mycolor);
+                if (false) {
+                    button_color.setAlpha( 255 );
+                    symbolBgdColor.setAlpha( 255 );
+                    QColor mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
+                    symbol_pen.setColor(mycolor);
+                }
                 painter->setPen( symbol_pen );
                 // it's a horizontal line
                 painter->drawLine( QPointF( 5, 9 ), QPointF( 13, 9 ) );
@@ -3584,16 +3605,17 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                button_color.setAlpha( 255 );
-                symbolBgdColor.setAlpha( 255 );
-                QColor mycolor = symbolColor;
-                if ( isChecked() && !this->hovered() )
-                  mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
-                else
-                  mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
-                symbol_pen.setColor(mycolor);
+                if (false) {
+                    button_color.setAlpha( 255 );
+                    symbolBgdColor.setAlpha( 255 );
+                    QColor mycolor = symbolColor;
+                    if ( isChecked() && !this->hovered() )
+                      mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
+                    else
+                      mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
+                    symbol_pen.setColor(mycolor);
+                }
                 painter->setPen( symbol_pen );
-
                 if (isChecked())
                 {
                   painter->drawLine( QPointF( 5, 5 ), QPointF( 11, 5 ) );
@@ -3632,14 +3654,20 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                button_color.setAlpha( 255 );
-                symbolBgdColor.setAlpha( 255 );
-                QColor mycolor = symbolColor;
-                if ( isChecked() && !this->hovered() )
-                  mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
-                else
-                  mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
-                symbol_pen.setColor(mycolor);
+                QColor mycolor;
+                if (true) {
+                    mycolor = symbolColor;
+                }
+                else {
+                    button_color.setAlpha( 255 );
+                    symbolBgdColor.setAlpha( 255 );
+                    mycolor = symbolColor;
+                    if ( isChecked() && !this->hovered() )
+                      mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
+                    else
+                      mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
+                    symbol_pen.setColor(mycolor);
+                }
                 painter->setPen( symbol_pen );
                 if (isChecked())
                 {
@@ -3670,14 +3698,16 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                button_color.setAlpha( 255 );
-                symbolBgdColor.setAlpha( 255 );
-                QColor mycolor = symbolColor;
-                if ( isChecked() && !this->hovered() )
-                  mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
-                else
-                  mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
-                symbol_pen.setColor(mycolor);
+                if (false) {
+                    button_color.setAlpha( 255 );
+                    symbolBgdColor.setAlpha( 255 );
+                    QColor mycolor = symbolColor;
+                    if ( isChecked() && !this->hovered() )
+                      mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
+                    else
+                      mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
+                    symbol_pen.setColor(mycolor);
+                }
                 painter->setPen( symbol_pen );
                 painter->drawPolyline( QVector<QPointF>{
                            QPointF( 4, 7 ),
@@ -3701,14 +3731,16 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                button_color.setAlpha( 255 );
-                symbolBgdColor.setAlpha( 255 );
-                QColor mycolor = symbolColor;
-                if ( isChecked() && !this->hovered() )
-                  mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
-                else
-                  mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
-                symbol_pen.setColor(mycolor);
+                if (false) {
+                    button_color.setAlpha( 255 );
+                    symbolBgdColor.setAlpha( 255 );
+                    QColor mycolor = symbolColor;
+                    if ( isChecked() && !this->hovered() )
+                      mycolor = this->mixColors(symbolBgdColor, button_color, m_opacity);
+                    else
+                      mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
+                    symbol_pen.setColor(mycolor);
+                }
                 painter->setPen( symbol_pen );
                 painter->drawPolyline( QVector<QPointF>{
                            QPointF( 4, 11 ),
@@ -3741,15 +3773,14 @@ namespace Breeze
                 painter->drawEllipse( c, r, r );
                 painter->setBrush( Qt::NoBrush );
 
-                button_color.setAlpha( 255 );
-                symbolBgdColor.setAlpha( 255 );
-                QColor mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
-                symbol_pen.setColor(mycolor);
+                if (false) {
+                    button_color.setAlpha( 255 );
+                    symbolBgdColor.setAlpha( 255 );
+                    QColor mycolor = this->mixColors(button_color, symbolBgdColor, m_opacity);
+                    symbol_pen.setColor(mycolor);
+                }
                 painter->setPen( symbol_pen );
-
                 // it's a question mark
-
-                painter->setPen( symbol_pen );
                 int startAngle = 260 * 16;
                 int spanAngle = 280 * 16;
                 painter->drawArc( QRectF( 6, 4, 6, 6), startAngle, spanAngle );
@@ -3894,20 +3925,24 @@ namespace Breeze
         else
         {
             auto d = qobject_cast<Decoration*>( decoration() );
-            QColor titleBarColor ( d->titleBarColor() );
+            if (true)
+                col = d->fontColor();
+            else {
+                QColor titleBarColor ( d->titleBarColor() );
 
-            uint r = qRed(titleBarColor.rgb());
-            uint g = qGreen(titleBarColor.rgb());
-            uint b = qBlue(titleBarColor.rgb());
+                uint r = qRed(titleBarColor.rgb());
+                uint g = qGreen(titleBarColor.rgb());
+                uint b = qBlue(titleBarColor.rgb());
 
-            // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-            // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-            // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-            qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-            if ( colorConditional > 186 || g > 186 )
-                col = darkSymbolColor;
-            else
-                col = lightSymbolColor;
+                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                if ( colorConditional > 186 || g > 186 )
+                    col = darkSymbolColor;
+                else
+                    col = lightSymbolColor;
+            }
         }
         return col;
     }
