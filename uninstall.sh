@@ -38,6 +38,7 @@ else
     if test -f "$ORIGINAL_DIR/build/install_manifest.txt"; then
         # Remove normally
         echo Found $ORIGINAL_DIR/build/install_manifest.txt
+        cd build &&
         uninstall
     else
         # If no install manifest found
