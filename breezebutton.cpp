@@ -191,6 +191,8 @@ namespace Breeze
                 drawIconSierraMonochromeSymbols( painter );
             else if ( d && d->internalSettings()->buttonStyle() == 13 )
                 drawIconDarkAuroraeMonochromeSymbols( painter );
+            else if ( d && d->internalSettings()->buttonStyle() == 14 )
+                drawIconMacBigSur( painter );
 
         }
 
@@ -632,6 +634,405 @@ namespace Breeze
 
     }
 
+    //__________________________________________________________________
+    void Button::drawIconMacBigSur( QPainter *painter ) const
+    {
+
+        painter->setRenderHints( QPainter::Antialiasing );
+
+        /*
+        scale painter so that its window matches QRect( -1, -1, 20, 20 )
+        this makes all further rendering and scaling simpler
+        all further rendering is preformed inside QRect( 0, 0, 18, 18 )
+        */
+        painter->translate( geometry().topLeft() );
+
+        const qreal width( m_iconSize.width() );
+        auto d = qobject_cast<Decoration*>( decoration() );
+        if ( d->internalSettings()->animationsEnabled() ) {
+          painter->scale( width/20, width/20 );
+          painter->translate( 1, 1 );
+        }
+        else {
+          painter->scale( 7./9.*width/20, 7./9.*width/20 );
+          painter->translate( 4, 4 );
+        }
+
+        bool inactiveWindow( d && !d->client().toStrongRef().data()->isActive() );
+        bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
+
+        QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+        QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+
+        QColor titleBarColor (d->titleBarColor());
+
+        // symbols color
+
+        QColor symbolColor;
+        if ( inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+            symbolColor = lightSymbolColor;
+        else if ( inactiveWindow && qGray(titleBarColor.rgb()) > 128 )
+            symbolColor = darkSymbolColor;
+        else
+            symbolColor = this->autoColor( false, true, false, darkSymbolColor, lightSymbolColor );
+
+        // symbols pen
+
+        QPen symbol_pen( symbolColor );
+        symbol_pen.setJoinStyle( Qt::MiterJoin );
+        if ( d->internalSettings()->animationsEnabled() )
+          symbol_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+        else
+          symbol_pen.setWidthF( 9./7.*1.7*qMax((qreal)1.0, 20/width ) );
+
+        switch( type() )
+        {
+
+            case DecorationButtonType::Close:
+            {
+                QColor button_color;
+                if ( !inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(238, 91, 90);
+                else if( !inactiveWindow )
+                  button_color = QColor(225, 83, 83);
+                else if ( qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(100, 100, 100);
+                else
+                  button_color = QColor(200, 200, 200);
+                QPen button_pen( qGray(titleBarColor.rgb()) < 69 ? button_color.lighter(115) : button_color.darker(115) );
+                button_pen.setJoinStyle( Qt::MiterJoin );
+                if ( d->internalSettings()->animationsEnabled() )
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                else
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                painter->setBrush( button_color );
+                painter->setPen( button_pen );
+
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
+                painter->setBrush( Qt::NoBrush );
+                if ( this->hovered() )
+                {
+                  painter->setPen( symbol_pen );
+                  // it's a cross
+                  painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 12 ) );
+                  painter->drawLine( QPointF( 6, 12 ), QPointF( 12, 6 ) );
+                }
+                break;
+            }
+
+            case DecorationButtonType::Maximize:
+            {
+                QColor button_color;
+                if ( !inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(68, 203, 69);
+                else if( !inactiveWindow )
+                  button_color = QColor(60, 203, 60);
+                else if ( qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(100, 100, 100);
+                else
+                  button_color = QColor(200, 200, 200);
+                QPen button_pen( qGray(titleBarColor.rgb()) < 69 ? button_color.lighter(115) : button_color.darker(115) );
+                button_pen.setJoinStyle( Qt::MiterJoin );
+                if ( d->internalSettings()->animationsEnabled() )
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                else
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                painter->setBrush( button_color );
+                painter->setPen( button_pen );
+
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
+                painter->setBrush( Qt::NoBrush );
+                if ( this->hovered() )
+                {
+                  painter->setPen( Qt::NoPen );
+
+                  // two triangles
+                  QPainterPath path1, path2;
+                  if( isChecked() )
+                  {
+                      path1.moveTo(8.5, 9.5);
+                      path1.lineTo(2.5, 9.5);
+                      path1.lineTo(8.5, 15.5);
+
+                      path2.moveTo(9.5, 8.5);
+                      path2.lineTo(15.5, 8.5);
+                      path2.lineTo(9.5, 2.5);
+                  }
+                  else
+                  {
+                      path1.moveTo(5, 13);
+                      path1.lineTo(11, 13);
+                      path1.lineTo(5, 7);
+
+                      path2.moveTo(13, 5);
+                      path2.lineTo(7, 5);
+                      path2.lineTo(13, 11);
+                  }
+
+                  painter->fillPath(path1, QBrush(symbolColor));
+                  painter->fillPath(path2, QBrush(symbolColor));
+                }
+                break;
+            }
+
+            case DecorationButtonType::Minimize:
+            {
+                QColor button_color;
+                if ( !inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(248, 187, 58);
+                else if( !inactiveWindow )
+                  button_color = QColor(217, 162, 51);
+                else if ( qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(100, 100, 100);
+                else
+                  button_color = QColor(200, 200, 200);
+                QPen button_pen( qGray(titleBarColor.rgb()) < 69 ? button_color.lighter(115) : button_color.darker(115) );
+                button_pen.setJoinStyle( Qt::MiterJoin );
+                if ( d->internalSettings()->animationsEnabled() )
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                else
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                painter->setBrush( button_color );
+                painter->setPen( button_pen );
+
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
+                painter->setBrush( Qt::NoBrush );
+                if ( this->hovered() )
+                {
+                  painter->setPen( symbol_pen );
+                  painter->drawLine( QPointF( 5, 9 ), QPointF( 13, 9 ) );
+                }
+                break;
+            }
+
+            case DecorationButtonType::OnAllDesktops:
+            {
+                QColor button_color;
+                if ( !inactiveWindow )
+                  button_color = QColor(125, 209, 200);
+                else if ( qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(100, 100, 100);
+                else
+                  button_color = QColor(200, 200, 200);
+                QPen button_pen( qGray(titleBarColor.rgb()) < 69 ? button_color.lighter(115) : button_color.darker(115) );
+                button_pen.setJoinStyle( Qt::MiterJoin );
+                if ( d->internalSettings()->animationsEnabled() )
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                else
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                painter->setBrush( button_color );
+                painter->setPen( button_pen );
+
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
+                painter->setBrush( Qt::NoBrush );
+
+                if ( this->hovered() || isChecked() )
+                {
+                  painter->setPen( Qt::NoPen );
+                  painter->setBrush(QBrush(symbolColor));
+                  painter->drawEllipse( QRectF( 6, 6, 6, 6 ) );
+                }
+                break;
+            }
+
+            case DecorationButtonType::Shade:
+            {
+                QColor button_color;
+                if ( !inactiveWindow )
+                  button_color = QColor(204, 176, 213);
+                else if ( qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(100, 100, 100);
+                else
+                  button_color = QColor(200, 200, 200);
+                QPen button_pen( qGray(titleBarColor.rgb()) < 69 ? button_color.lighter(115) : button_color.darker(115) );
+                button_pen.setJoinStyle( Qt::MiterJoin );
+                if ( d->internalSettings()->animationsEnabled() )
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                else
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                painter->setBrush( button_color );
+                painter->setPen( button_pen );
+
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
+                painter->setBrush( Qt::NoBrush );
+
+                if ( isChecked() )
+                {
+                    painter->setPen( symbol_pen );
+                    painter->drawLine( QPointF( 6, 12 ), QPointF( 12, 12 ) );
+                    painter->setPen( Qt::NoPen );
+                    QPainterPath path;
+                    path.moveTo(9, 11);
+                    path.lineTo(5, 6);
+                    path.lineTo(13, 6);
+                    painter->fillPath(path, QBrush(symbolColor));
+
+                }
+                else if ( this->hovered() ) {
+                    painter->setPen( symbol_pen );
+                    painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 6 ) );
+                    painter->setPen( Qt::NoPen );
+                    QPainterPath path;
+                    path.moveTo(9, 7);
+                    path.lineTo(5, 12);
+                    path.lineTo(13, 12);
+                    painter->fillPath(path, QBrush(symbolColor));
+                }
+                break;
+
+            }
+
+            case DecorationButtonType::KeepBelow:
+            {
+                QColor button_color;
+                if ( !inactiveWindow )
+                  button_color = QColor(255, 137, 241);
+                else if ( qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(100, 100, 100);
+                else
+                  button_color = QColor(200, 200, 200);
+                QPen button_pen( qGray(titleBarColor.rgb()) < 69 ? button_color.lighter(115) : button_color.darker(115) );
+                button_pen.setJoinStyle( Qt::MiterJoin );
+                if ( d->internalSettings()->animationsEnabled() )
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                else
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                painter->setBrush( button_color );
+                painter->setPen( button_pen );
+
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
+                painter->setBrush( Qt::NoBrush );
+
+                if ( this->hovered() || isChecked() )
+                {
+                  painter->setPen( Qt::NoPen );
+
+                  QPainterPath path;
+                  path.moveTo(9, 12);
+                  path.lineTo(5, 6);
+                  path.lineTo(13, 6);
+                  painter->fillPath(path, QBrush(symbolColor));
+                }
+                break;
+
+            }
+
+            case DecorationButtonType::KeepAbove:
+            {
+                QColor button_color;
+                if ( !inactiveWindow )
+                  button_color = QColor(135, 206, 249);
+                else if ( qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(100, 100, 100);
+                else
+                  button_color = QColor(200, 200, 200);
+                QPen button_pen( qGray(titleBarColor.rgb()) < 69 ? button_color.lighter(115) : button_color.darker(115) );
+                button_pen.setJoinStyle( Qt::MiterJoin );
+                if ( d->internalSettings()->animationsEnabled() )
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                else
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                painter->setBrush( button_color );
+                painter->setPen( button_pen );
+
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
+                painter->setBrush( Qt::NoBrush );
+
+                if ( this->hovered() || isChecked() )
+                {
+                  painter->setPen( Qt::NoPen );
+
+                  QPainterPath path;
+                  path.moveTo(9, 6);
+                  path.lineTo(5, 12);
+                  path.lineTo(13, 12);
+                  painter->fillPath(path, QBrush(symbolColor));
+                }
+                break;
+            }
+
+            case DecorationButtonType::ApplicationMenu:
+            {
+                QColor menuSymbolColor;
+
+                uint r = qRed(titleBarColor.rgb());
+                uint g = qGreen(titleBarColor.rgb());
+                uint b = qBlue(titleBarColor.rgb());
+                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                if ( colorConditional > 186 || g > 186 )
+                  menuSymbolColor = darkSymbolColor;
+                else
+                  menuSymbolColor = lightSymbolColor;
+
+                QPen menuSymbol_pen( menuSymbolColor );
+                menuSymbol_pen.setJoinStyle( Qt::MiterJoin );
+                menuSymbol_pen.setWidthF( 1.7*qMax((qreal)1.0, 20/width ) );
+
+                painter->setPen( menuSymbol_pen );
+
+                painter->drawLine( QPointF( 3.5, 5 ), QPointF( 14.5, 5 ) );
+                painter->drawLine( QPointF( 3.5, 9 ), QPointF( 14.5, 9 ) );
+                painter->drawLine( QPointF( 3.5, 13 ), QPointF( 14.5, 13 ) );
+
+                break;
+            }
+
+            case DecorationButtonType::ContextHelp:
+            {
+                QColor button_color;
+                if ( !inactiveWindow )
+                  button_color = QColor(102, 156, 246);
+                else if ( qGray(titleBarColor.rgb()) < 128 )
+                  button_color = QColor(100, 100, 100);
+                else
+                  button_color = QColor(200, 200, 200);
+                QPen button_pen( qGray(titleBarColor.rgb()) < 69 ? button_color.lighter(115) : button_color.darker(115) );
+                button_pen.setJoinStyle( Qt::MiterJoin );
+                if ( d->internalSettings()->animationsEnabled() )
+                  button_pen.setWidthF( PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                else
+                  button_pen.setWidthF( 9./7.*PenWidth::Symbol*qMax((qreal)1.0, 20/width ) );
+                painter->setBrush( button_color );
+                painter->setPen( button_pen );
+
+                qreal r = this->buttonRadius();
+                QPointF c(static_cast<qreal>(9), static_cast<qreal>(9));
+                painter->drawEllipse( c, r, r );
+                painter->setBrush( Qt::NoBrush );
+
+                if ( this->hovered() || isChecked() )
+                {
+                  painter->setPen( symbol_pen );
+                  QPainterPath path;
+                  path.moveTo( 6, 6 );
+                  path.arcTo( QRectF( 5.5, 4, 7.5, 4.5 ), 180, -180 );
+                  path.cubicTo( QPointF(11, 9), QPointF( 9, 6 ), QPointF( 9, 10 ) );
+                  painter->drawPath( path );
+                  painter->drawPoint( 9, 13 );
+                }
+                break;
+            }
+
+            default: break;
+        }
+    }
     //__________________________________________________________________
     void Button::drawIconMacSierra( QPainter *painter ) const
     {

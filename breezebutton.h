@@ -122,6 +122,7 @@ namespace Breeze
         void drawIconDarkAuroraeColorSymbols( QPainter *) const;
         void drawIconSierraMonochromeSymbols( QPainter *) const;
         void drawIconDarkAuroraeMonochromeSymbols( QPainter *) const;
+        void drawIconMacBigSur( QPainter *) const;
 
         //*@name colors
         //@{

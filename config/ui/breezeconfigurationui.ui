@@ -344,6 +344,11 @@
            <string>Dark Aurorae Monochrome Symbols</string>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>macOS big sur</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item row="7" column="2">

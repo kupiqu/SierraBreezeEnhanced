@@ -117,6 +117,7 @@
         <choice name="darkAuroraeColorSymbols" />
         <choice name="sierraMonochromeSymbols" />
         <choice name="darkAuroraeMonochromeSymbols" />
+        <choice name="macBigSur" />
       </choices>
       <default>macDarkAurorae</default>
     </entry>
