@@ -1,5 +1,6 @@
 # Sierra Breeze Enhanced
 
+**Discontinued** (no free time available). **Let me know if you'd like to help keeping SBE up**
 
 ## Overview
 
