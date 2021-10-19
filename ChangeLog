@@ -1,3 +1,8 @@
+V1.0.1
+---------
+
+* Match new Breeze upstream behavior introduced with Plasma 5.23+ (fixes issue #98; contributed by @DiabeticCrab, thanks!)
+
 V1.0.0
 ---------
 
