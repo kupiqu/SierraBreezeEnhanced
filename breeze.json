@@ -9,7 +9,6 @@
         ]
     },
     "org.kde.kdecoration2": {
-        "blur": true,
         "defaultTheme": "Sierra Breeze Enhanced",
         "kcmodule": true,
         "recommendedBorderSize": "Tiny"

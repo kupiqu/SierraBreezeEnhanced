@@ -32,6 +32,7 @@
 #include <QPalette>
 #include <QVariant>
 #include <QVariantAnimation>
+#include <QPainterPath>
 
 class QVariantAnimation;
 
@@ -132,6 +133,7 @@ namespace Breeze
         void updateTitleBar();
         void updateAnimationState();
         void updateSizeGripVisibility();
+        void updateBlur();
         void createShadow();
 
         private:
@@ -144,6 +146,7 @@ namespace Breeze
         void updateShadow();
         void updateActiveShadow();
         void updateInactiveShadow();
+        void calculateWindowAndTitleBarShapes(const bool windowShapeOnly=false);
 
         //*@name border size
         //@{
@@ -173,6 +176,14 @@ namespace Breeze
 
         //* active state change opacity
         qreal m_opacity = 0;
+
+        //* Rectangular area of titlebar without clipped corners
+        QRect m_titleRect;
+        
+        //* Exact titlebar path, with clipped rounded corners
+        std::shared_ptr<QPainterPath> m_titleBarPath = std::make_shared<QPainterPath>();
+        //* Exact window path, with clipped rounded corners
+        std::shared_ptr<QPainterPath> m_windowPath = std::make_shared<QPainterPath>();
     };
 
     bool Decoration::hasBorders() const

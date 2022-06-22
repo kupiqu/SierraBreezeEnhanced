@@ -57,7 +57,7 @@ K_PLUGIN_FACTORY_WITH_JSON(
     "breeze.json",
     registerPlugin<Breeze::Decoration>();
     registerPlugin<Breeze::Button>();
-    registerPlugin<Breeze::ConfigWidget>(QStringLiteral("kcmodule"));
+    registerPlugin<Breeze::ConfigWidget>();
 )
 
 namespace
@@ -368,10 +368,13 @@ namespace Breeze
         updateTitleBar();
         auto s = settings();
         connect(s.data(), &KDecoration2::DecorationSettings::borderSizeChanged, this, &Decoration::recalculateBorders);
+        connect(s.data(), &KDecoration2::DecorationSettings::borderSizeChanged, this, &Decoration::updateBlur); //for the case when a border with transparency
 
         // a change in font might cause the borders to change
         connect(s.data(), &KDecoration2::DecorationSettings::fontChanged, this, &Decoration::recalculateBorders); // recalculateBorders();
+        connect(s.data(), &KDecoration2::DecorationSettings::fontChanged, this, &Decoration::updateBlur); //for the case when a border with transparency
         connect(s.data(), &KDecoration2::DecorationSettings::spacingChanged, this, &Decoration::recalculateBorders);
+        connect(s.data(), &KDecoration2::DecorationSettings::spacingChanged, this, &Decoration::updateBlur); //for the case when a border with transparency
 
         // buttons
         connect(s.data(), &KDecoration2::DecorationSettings::spacingChanged, this, &Decoration::updateButtonsGeometryDelayed);
@@ -397,9 +400,11 @@ namespace Breeze
 
         connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateAnimationState);
         connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::createShadow);
+        connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateBlur);
         connect(c, &KDecoration2::DecoratedClient::widthChanged, this, &Decoration::updateTitleBar);
         connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateTitleBar);
         //connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::setOpaque);
+        connect(c, &KDecoration2::DecoratedClient::sizeChanged, this, &Decoration::updateBlur);
 
         connect(c, &KDecoration2::DecoratedClient::widthChanged, this, &Decoration::updateButtonsGeometry);
         connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateButtonsGeometry);
@@ -661,6 +666,8 @@ namespace Breeze
         // borders
         recalculateBorders();
 
+        updateBlur();
+
         // shadow
         createShadow();
 
@@ -719,6 +726,71 @@ namespace Breeze
         m_leftButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Left, this, &Button::create);
         m_rightButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Right, this, &Button::create);
         updateButtonsGeometry();
+    }
+
+    void Decoration::updateBlur()
+    {
+        // access client
+        auto c = client().toStrongRef();
+        Q_ASSERT(c);
+
+        //disable blur if the titlebar is opaque
+        if( (m_internalSettings->opaqueTitleBar() && c->isMaximized() )
+            || ( m_opacity == 100 && this->titleBarColor().alpha() == 255 )
+        ){ //opaque titlebar colours
+            setBlurRegion( QRegion() );
+        }
+        else { //transparent titlebar colours
+            calculateWindowAndTitleBarShapes(true); //refreshes m_windowPath
+            setBlurRegion( QRegion( m_windowPath->toFillPolygon().toPolygon()) ) ;
+        }
+    }
+
+    void Decoration::calculateWindowAndTitleBarShapes(const bool windowShapeOnly)
+    {
+        auto c = client().toStrongRef();
+        Q_ASSERT(c);
+        auto s = settings();
+        
+        if( !windowShapeOnly || c->isShaded() )
+        {
+            //set titleBar geometry and path
+            m_titleRect = QRect(QPoint(0, 0), QSize(size().width(), borderTop()));
+            m_titleBarPath->clear(); //clear the path for subsequent calls to this function
+            if( isMaximized() || !s->isAlphaChannelSupported() )
+            {
+                m_titleBarPath->addRect(m_titleRect);
+
+            } else if( c->isShaded() ) {
+                m_titleBarPath->addRoundedRect(m_titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+
+            } else {
+                QPainterPath clipRect;
+                clipRect.addRect(m_titleRect);
+
+                // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
+                m_titleBarPath->addRoundedRect(m_titleRect.adjusted(
+                    isLeftEdge() ? -m_internalSettings->cornerRadius():0,
+                    isTopEdge() ? -m_internalSettings->cornerRadius():0,
+                    isRightEdge() ? m_internalSettings->cornerRadius():0,
+                    m_internalSettings->cornerRadius()),
+                    m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+
+                *m_titleBarPath = m_titleBarPath->intersected(clipRect);
+            }
+        }
+        
+        //set windowPath
+        m_windowPath->clear(); //clear the path for subsequent calls to this function
+        if( !c->isShaded() )
+        {
+            if( s->isAlphaChannelSupported() && !isMaximized() ) m_windowPath->addRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            else m_windowPath->addRect( rect() );
+            
+        } else {
+            *m_windowPath = *m_titleBarPath;
+        }
+        
     }
 
     //________________________________________________________________
