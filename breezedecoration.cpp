@@ -818,12 +818,12 @@ namespace Breeze
         {
 
             // spacing (use our own spacing instead of s->smallSpacing()*Metrics::TitleBar_ButtonSpacing)
-            m_leftButtons->setSpacing(m_internalSettings->buttonSpacing());
+            m_leftButtons->setSpacing(s->smallSpacing()*m_internalSettings->buttonSpacing());
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = m_internalSettings->buttonPadding() + m_internalSettings->buttonHOffset();
+            const int hPadding = s->smallSpacing()*m_internalSettings->buttonPadding() + s->smallSpacing()*m_internalSettings->buttonHOffset();
             if( isLeftEdge() )
             {
                 // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
@@ -843,12 +843,12 @@ namespace Breeze
         {
 
             // spacing (use our own spacing instead of s->smallSpacing()*Metrics::TitleBar_ButtonSpacing)
-            m_rightButtons->setSpacing(m_internalSettings->buttonSpacing());
+            m_rightButtons->setSpacing(s->smallSpacing()*m_internalSettings->buttonSpacing());
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = m_internalSettings->buttonPadding() + m_internalSettings->buttonHOffset();
+            const int hPadding = s->smallSpacing()*m_internalSettings->buttonPadding() + m_internalSettings->buttonHOffset();
             if( isRightEdge() )
             {
 
