@@ -477,8 +477,10 @@ namespace Breeze
         const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(params.shadow1.radius)
         .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
 
+        const auto s = settings();
+
         BoxShadowRenderer shadowRenderer;
-        shadowRenderer.setBorderRadius(m_internalSettings->cornerRadius() + 0.5);
+        shadowRenderer.setBorderRadius(s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
         shadowRenderer.setBoxSize(boxSize);
         shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
 
@@ -511,8 +513,8 @@ namespace Breeze
         painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
         painter.drawRoundedRect(
             innerRect,
-            m_internalSettings->cornerRadius() + 0.5,
-            m_internalSettings->cornerRadius() + 0.5);
+            s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5),
+            s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
 
         // Draw outline.
         painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
@@ -520,8 +522,8 @@ namespace Breeze
         painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         painter.drawRoundedRect(
             innerRect,
-            m_internalSettings->cornerRadius() - 0.5,
-            m_internalSettings->cornerRadius() - 0.5);
+            s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
+            s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
 
         painter.end();
 
@@ -554,8 +556,10 @@ namespace Breeze
         const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(params.shadow1.radius)
         .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
 
+        const auto s = settings();
+
         BoxShadowRenderer shadowRenderer;
-        shadowRenderer.setBorderRadius(m_internalSettings->cornerRadius() + 0.5);
+        shadowRenderer.setBorderRadius(s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
         shadowRenderer.setBoxSize(boxSize);
         shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
 
@@ -588,8 +592,8 @@ namespace Breeze
         painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
         painter.drawRoundedRect(
             innerRect,
-            m_internalSettings->cornerRadius() + 0.5,
-            m_internalSettings->cornerRadius() + 0.5);
+            s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5),
+            s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
 
         // Draw outline.
         painter.setPen(withOpacity(g_shadowColorInactiveWindows, 0.2 * strength));
@@ -597,8 +601,8 @@ namespace Breeze
         painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         painter.drawRoundedRect(
             innerRect,
-            m_internalSettings->cornerRadius() - 0.5,
-            m_internalSettings->cornerRadius() - 0.5);
+            s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
+            s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
 
         painter.end();
 
@@ -762,7 +766,7 @@ namespace Breeze
                 m_titleBarPath->addRect(m_titleRect);
 
             } else if( c->isShaded() ) {
-                m_titleBarPath->addRoundedRect(m_titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+                m_titleBarPath->addRoundedRect(m_titleRect, s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
 
             } else {
                 QPainterPath clipRect;
@@ -770,11 +774,11 @@ namespace Breeze
 
                 // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
                 m_titleBarPath->addRoundedRect(m_titleRect.adjusted(
-                    isLeftEdge() ? -m_internalSettings->cornerRadius():0,
-                    isTopEdge() ? -m_internalSettings->cornerRadius():0,
-                    isRightEdge() ? m_internalSettings->cornerRadius():0,
-                    m_internalSettings->cornerRadius()),
-                    m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+                    isLeftEdge() ? -s->smallSpacing()*m_internalSettings->cornerRadius():0,
+                    isTopEdge() ? -s->smallSpacing()*m_internalSettings->cornerRadius():0,
+                    isRightEdge() ? s->smallSpacing()*m_internalSettings->cornerRadius():0,
+                    s->smallSpacing()*m_internalSettings->cornerRadius()),
+                    s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
 
                 *m_titleBarPath = m_titleBarPath->intersected(clipRect);
             }
@@ -784,7 +788,7 @@ namespace Breeze
         m_windowPath->clear(); //clear the path for subsequent calls to this function
         if( !c->isShaded() )
         {
-            if( s->isAlphaChannelSupported() && !isMaximized() ) m_windowPath->addRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+            if( s->isAlphaChannelSupported() && !isMaximized() ) m_windowPath->addRoundedRect(rect(), s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
             else m_windowPath->addRect( rect() );
             
         } else {
@@ -889,7 +893,7 @@ namespace Breeze
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
             if( s->isAlphaChannelSupported() )
-                painter->drawRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+                painter->drawRoundedRect(rect(), s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
             else
                 painter->drawRect( rect() );
 
@@ -907,7 +911,7 @@ namespace Breeze
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
             if( s->isAlphaChannelSupported() )
-              painter->drawRoundedRect(rect(), m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+              painter->drawRoundedRect(rect(), s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
             else
               painter->drawRect( rect() );
 
