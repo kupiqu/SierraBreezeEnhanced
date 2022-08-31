@@ -945,20 +945,22 @@ namespace Breeze
             painter->setBrush( titleBarColor );
 
         auto s = settings();
-        if( !s->isAlphaChannelSupported() )
-            painter->drawRect(titleRect);
-        else if ( !hasBorders() ) {
-            painter->setClipRect(titleRect, Qt::IntersectClip);
-            // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
-            painter->drawRoundedRect(titleRect.adjusted(
-                isLeftEdge() ? -m_internalSettings->cornerRadius():0,
-                isTopEdge() ? -m_internalSettings->cornerRadius():0,
-                isRightEdge() ? m_internalSettings->cornerRadius():0,
-                m_internalSettings->cornerRadius()),
-                m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
-        }
-        else
-            painter->drawRoundedRect(titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+//         // The following conditional creates a color dissonance when opacity is active between the titlebar and the borders.
+//         // I don't think it's needed anyway since version 1.1.0, but keeping this comment here for the case, this needs to be reverted.
+//         if( !s->isAlphaChannelSupported() )
+//             painter->drawRect(titleRect);
+//         else if ( !hasBorders() ) {
+//             painter->setClipRect(titleRect, Qt::IntersectClip);
+//             // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
+//             painter->drawRoundedRect(titleRect.adjusted(
+//                 isLeftEdge() ? -m_internalSettings->cornerRadius():0,
+//                 isTopEdge() ? -m_internalSettings->cornerRadius():0,
+//                 isRightEdge() ? m_internalSettings->cornerRadius():0,
+//                 m_internalSettings->cornerRadius()),
+//                 m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+//         }
+//         else
+//             painter->drawRoundedRect(titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
 
         if( !c->isShaded() && !hideTitleBar() && outlineColor.isValid() )
         {
