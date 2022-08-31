@@ -474,10 +474,10 @@ namespace Breeze
           return c;
         };
 
-        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(params.shadow1.radius)
-        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
-
         const auto s = settings();
+
+        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(s->smallSpacing()*params.shadow1.radius)
+        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(s->smallSpacing()*params.shadow2.radius));
 
         BoxShadowRenderer shadowRenderer;
         shadowRenderer.setBorderRadius(s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
@@ -553,10 +553,10 @@ namespace Breeze
           return c;
         };
 
-        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(params.shadow1.radius)
-        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
-
         const auto s = settings();
+
+        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(s->smallSpacing()*params.shadow1.radius)
+        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(s->smallSpacing()*params.shadow2.radius));
 
         BoxShadowRenderer shadowRenderer;
         shadowRenderer.setBorderRadius(s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
@@ -1053,34 +1053,32 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::createShadow()
     {
-        const auto s = settings();
-
         if ( !g_sShadow ) {
-            g_shadowSizeEnum = s->smallSpacing()*m_internalSettings->shadowSize();
+            g_shadowSizeEnum = m_internalSettings->shadowSize();
             g_shadowStrength = m_internalSettings->shadowStrength();
             g_shadowColor = m_internalSettings->shadowColor();
             g_specificShadowsInactiveWindows = m_internalSettings->specificShadowsInactiveWindows();
-            g_shadowSizeEnumInactiveWindows = s->smallSpacing()*m_internalSettings->shadowSizeInactiveWindows();
+            g_shadowSizeEnumInactiveWindows = m_internalSettings->shadowSizeInactiveWindows();
             g_shadowStrengthInactiveWindows = m_internalSettings->shadowStrengthInactiveWindows();
             g_shadowColorInactiveWindows = m_internalSettings->shadowColorInactiveWindows();
 
             updateShadow();
         }
-        else if ( g_shadowSizeEnum != s->smallSpacing()*m_internalSettings->shadowSize()
+        else if ( g_shadowSizeEnum != m_internalSettings->shadowSize()
                   || g_shadowStrength != m_internalSettings->shadowStrength()
                   || g_shadowColor != m_internalSettings->shadowColor() ) {
-            g_shadowSizeEnum = s->smallSpacing()*m_internalSettings->shadowSize();
+            g_shadowSizeEnum = m_internalSettings->shadowSize();
             g_shadowStrength = m_internalSettings->shadowStrength();
             g_shadowColor = m_internalSettings->shadowColor();
 
             updateActiveShadow();
         }
         else if ( g_specificShadowsInactiveWindows != m_internalSettings->specificShadowsInactiveWindows()
-                  || g_shadowSizeEnumInactiveWindows != s->smallSpacing()*m_internalSettings->shadowSizeInactiveWindows()
+                  || g_shadowSizeEnumInactiveWindows != m_internalSettings->shadowSizeInactiveWindows()
                   || g_shadowStrengthInactiveWindows != m_internalSettings->shadowStrengthInactiveWindows()
                   || g_shadowColorInactiveWindows != m_internalSettings->shadowColorInactiveWindows() ) {
             g_specificShadowsInactiveWindows = m_internalSettings->specificShadowsInactiveWindows();
-            g_shadowSizeEnumInactiveWindows = s->smallSpacing()*m_internalSettings->shadowSizeInactiveWindows();
+            g_shadowSizeEnumInactiveWindows = m_internalSettings->shadowSizeInactiveWindows();
             g_shadowStrengthInactiveWindows = m_internalSettings->shadowStrengthInactiveWindows();
             g_shadowColorInactiveWindows = m_internalSettings->shadowColorInactiveWindows();
 
