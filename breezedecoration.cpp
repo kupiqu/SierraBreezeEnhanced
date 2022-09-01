@@ -827,7 +827,7 @@ namespace Breeze
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + s->smallSpacing()*m_internalSettings->buttonHOffset();
+            const int hPadding = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset();
             if( isLeftEdge() )
             {
                 // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
@@ -852,7 +852,7 @@ namespace Breeze
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + m_internalSettings->buttonHOffset();
+            const int hPadding = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset();
             if( isRightEdge() )
             {
 
@@ -963,16 +963,18 @@ namespace Breeze
 
         auto s = settings();
         if( !hideTitleBar() ) {
-          // draw caption
-          painter->setFont(s->font());
-          painter->setPen( fontColor() );
-          const auto cR = captionRect();
-          const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
-          painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
-
           // draw all buttons
           m_leftButtons->paint(painter, repaintRegion);
           m_rightButtons->paint(painter, repaintRegion);
+
+          // draw caption
+
+          painter->setFont(s->font());
+          painter->setPen( fontColor() );
+
+          const auto cR = captionRect();
+          const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
+          painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
         }
     }
 
@@ -1002,13 +1004,14 @@ namespace Breeze
         if( hideTitleBar() ) return qMakePair( QRect(), Qt::AlignCenter );
         else {
 
+            auto s = settings();
             auto c = client().toStrongRef().data();
             const int leftOffset = m_leftButtons->buttons().isEmpty() ?
-                Metrics::TitleBar_SideMargin*settings()->smallSpacing():
+                Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset():
                 m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin*settings()->smallSpacing();
 
             const int rightOffset = m_rightButtons->buttons().isEmpty() ?
-                Metrics::TitleBar_SideMargin*settings()->smallSpacing() :
+                Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset() :
                 size().width() - m_rightButtons->geometry().x() + Metrics::TitleBar_SideMargin*settings()->smallSpacing();
 
             const int yOffset = settings()->smallSpacing()*Metrics::TitleBar_TopMargin;
