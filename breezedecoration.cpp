@@ -476,11 +476,11 @@ namespace Breeze
 
         const auto s = settings();
 
-        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(s->smallSpacing()*params.shadow1.radius)
-        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(s->smallSpacing()*params.shadow2.radius));
+        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(2*s->smallSpacing()*params.shadow1.radius)
+        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(2*s->smallSpacing()*params.shadow2.radius));
 
         BoxShadowRenderer shadowRenderer;
-        shadowRenderer.setBorderRadius(s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
+        shadowRenderer.setBorderRadius(0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
         shadowRenderer.setBoxSize(boxSize);
         shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
 
@@ -513,8 +513,8 @@ namespace Breeze
         painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
         painter.drawRoundedRect(
             innerRect,
-            s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5),
-            s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
+            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5),
+            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
 
         // Draw outline.
         painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
@@ -522,8 +522,8 @@ namespace Breeze
         painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         painter.drawRoundedRect(
             innerRect,
-            s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
-            s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
+            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
+            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
 
         painter.end();
 
@@ -555,11 +555,11 @@ namespace Breeze
 
         const auto s = settings();
 
-        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(s->smallSpacing()*params.shadow1.radius)
-        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(s->smallSpacing()*params.shadow2.radius));
+        const QSize boxSize = BoxShadowRenderer::calculateMinimumBoxSize(2*s->smallSpacing()*params.shadow1.radius)
+        .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(2*s->smallSpacing()*params.shadow2.radius));
 
         BoxShadowRenderer shadowRenderer;
-        shadowRenderer.setBorderRadius(s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
+        shadowRenderer.setBorderRadius(0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
         shadowRenderer.setBoxSize(boxSize);
         shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
 
@@ -592,8 +592,8 @@ namespace Breeze
         painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
         painter.drawRoundedRect(
             innerRect,
-            s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5),
-            s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
+            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5),
+            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
 
         // Draw outline.
         painter.setPen(withOpacity(g_shadowColorInactiveWindows, 0.2 * strength));
@@ -601,8 +601,8 @@ namespace Breeze
         painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
         painter.drawRoundedRect(
             innerRect,
-            s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
-            s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
+            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
+            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
 
         painter.end();
 
@@ -766,7 +766,7 @@ namespace Breeze
                 m_titleBarPath->addRect(m_titleRect);
 
             } else if( c->isShaded() ) {
-                m_titleBarPath->addRoundedRect(m_titleRect, s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
+                m_titleBarPath->addRoundedRect(m_titleRect, 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
 
             } else {
                 QPainterPath clipRect;
@@ -774,11 +774,11 @@ namespace Breeze
 
                 // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
                 m_titleBarPath->addRoundedRect(m_titleRect.adjusted(
-                    isLeftEdge() ? -s->smallSpacing()*m_internalSettings->cornerRadius():0,
-                    isTopEdge() ? -s->smallSpacing()*m_internalSettings->cornerRadius():0,
-                    isRightEdge() ? s->smallSpacing()*m_internalSettings->cornerRadius():0,
-                    s->smallSpacing()*m_internalSettings->cornerRadius()),
-                    s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
+                    isLeftEdge() ? -0.5*s->smallSpacing()*m_internalSettings->cornerRadius():0,
+                    isTopEdge() ? -0.5*s->smallSpacing()*m_internalSettings->cornerRadius():0,
+                    isRightEdge() ? 0.5*s->smallSpacing()*m_internalSettings->cornerRadius():0,
+                    0.5*s->smallSpacing()*m_internalSettings->cornerRadius()),
+                    0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
 
                 *m_titleBarPath = m_titleBarPath->intersected(clipRect);
             }
@@ -788,7 +788,7 @@ namespace Breeze
         m_windowPath->clear(); //clear the path for subsequent calls to this function
         if( !c->isShaded() )
         {
-            if( s->isAlphaChannelSupported() && !isMaximized() ) m_windowPath->addRoundedRect(rect(), s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
+            if( s->isAlphaChannelSupported() && !isMaximized() ) m_windowPath->addRoundedRect(rect(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
             else m_windowPath->addRect( rect() );
             
         } else {
@@ -822,12 +822,12 @@ namespace Breeze
         {
 
             // spacing (use our own spacing instead of s->smallSpacing()*Metrics::TitleBar_ButtonSpacing)
-            m_leftButtons->setSpacing(s->smallSpacing()*m_internalSettings->buttonSpacing());
+            m_leftButtons->setSpacing(0.5*s->smallSpacing()*m_internalSettings->buttonSpacing());
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = s->smallSpacing()*m_internalSettings->buttonPadding() + s->smallSpacing()*m_internalSettings->buttonHOffset();
+            const int hPadding = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + s->smallSpacing()*m_internalSettings->buttonHOffset();
             if( isLeftEdge() )
             {
                 // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
@@ -847,12 +847,12 @@ namespace Breeze
         {
 
             // spacing (use our own spacing instead of s->smallSpacing()*Metrics::TitleBar_ButtonSpacing)
-            m_rightButtons->setSpacing(s->smallSpacing()*m_internalSettings->buttonSpacing());
+            m_rightButtons->setSpacing(0.5*s->smallSpacing()*m_internalSettings->buttonSpacing());
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
             // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = s->smallSpacing()*m_internalSettings->buttonPadding() + m_internalSettings->buttonHOffset();
+            const int hPadding = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + m_internalSettings->buttonHOffset();
             if( isRightEdge() )
             {
 
@@ -893,7 +893,7 @@ namespace Breeze
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
             if( s->isAlphaChannelSupported() )
-                painter->drawRoundedRect(rect(), s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
+                painter->drawRoundedRect(rect(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
             else
                 painter->drawRect( rect() );
 
@@ -911,7 +911,7 @@ namespace Breeze
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
             if( s->isAlphaChannelSupported() )
-              painter->drawRoundedRect(rect(), s->smallSpacing()*m_internalSettings->cornerRadius(), s->smallSpacing()*m_internalSettings->cornerRadius());
+              painter->drawRoundedRect(rect(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
             else
               painter->drawRect( rect() );
 
