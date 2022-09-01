@@ -807,15 +807,19 @@ namespace Breeze
         const auto s = settings();
 
         // adjust button position
-        const int bHeight = captionHeight() + (isTopEdge() ? s->smallSpacing()*Metrics::TitleBar_TopMargin:0);
         const int bWidth = buttonHeight();
+        const int bHeight = bWidth + (isTopEdge() ? s->smallSpacing()*Metrics::TitleBar_TopMargin:0);
         const int verticalOffset = (isTopEdge() ? s->smallSpacing()*Metrics::TitleBar_TopMargin:0) + (captionHeight()-buttonHeight())/2;
         foreach( const QPointer<KDecoration2::DecorationButton>& button, m_leftButtons->buttons() + m_rightButtons->buttons() )
         {
             button.data()->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth, bHeight ) ) );
-            static_cast<Button*>( button.data() )->setOffset( QPointF( 0, verticalOffset ) );
             static_cast<Button*>( button.data() )->setIconSize( QSize( bWidth, bWidth ) );
         }
+
+        // padding
+        const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
+        const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
+        const int hMargin = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset();
 
         // left buttons
         if( !m_leftButtons->buttons().isEmpty() )
@@ -824,21 +828,17 @@ namespace Breeze
             // spacing (use our own spacing instead of s->smallSpacing()*Metrics::TitleBar_ButtonSpacing)
             m_leftButtons->setSpacing(0.5*s->smallSpacing()*m_internalSettings->buttonSpacing());
 
-            // padding
-            const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset();
             if( isLeftEdge() )
             {
                 // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
                 auto button = static_cast<Button*>( m_leftButtons->buttons().front().data() );
                 button->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth + hPadding, bHeight ) ) );
                 button->setFlag( Button::FlagFirstInList );
-                button->setHorizontalOffset( hPadding );
+                button->setHorizontalOffset( hMargin );
 
-                m_leftButtons->setPos(QPointF(0, vPadding));
+                m_leftButtons->setPos(QPointF(0, verticalOffset + vPadding));
 
-            } else m_leftButtons->setPos(QPointF(hPadding + borderLeft(), vPadding));
+            } else m_leftButtons->setPos(QPointF(hMargin + borderLeft(), verticalOffset + vPadding));
 
         }
 
@@ -849,10 +849,6 @@ namespace Breeze
             // spacing (use our own spacing instead of s->smallSpacing()*Metrics::TitleBar_ButtonSpacing)
             m_rightButtons->setSpacing(0.5*s->smallSpacing()*m_internalSettings->buttonSpacing());
 
-            // padding
-            const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            // const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-            const int hPadding = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset();
             if( isRightEdge() )
             {
 
@@ -860,9 +856,9 @@ namespace Breeze
                 button->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth + hPadding, bHeight ) ) );
                 button->setFlag( Button::FlagLastInList );
 
-                m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width(), vPadding));
+                m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - hMargin, verticalOffset + vPadding));
 
-            } else m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - hPadding - borderRight(), vPadding));
+            } else m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - hMargin - borderRight(), verticalOffset + vPadding));
 
         }
 
