@@ -149,6 +149,11 @@
       <default>false</default>
     </entry>
 
+    <!-- match colors -->
+    <entry name="SystemForegroundColor" type = "Bool">
+      <default>false</default>
+    </entry>
+
     <!-- unison hovering -->
     <entry name="UnisonHovering" type = "Bool">
       <default>true</default>

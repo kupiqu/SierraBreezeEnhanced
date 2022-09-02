@@ -103,6 +103,7 @@ namespace Breeze
         inline int titleBarAlpha() const;
         inline bool matchColorForTitleBar() const;
         inline bool drawBackgroundGradient() const;
+        inline bool systemForegroundColor() const;
         //@}
 
         //*@Decoration has a hovered button
@@ -242,6 +243,9 @@ namespace Breeze
 
     bool Decoration::drawBackgroundGradient() const
     { return m_internalSettings->drawBackgroundGradient(); }
+
+    bool Decoration::systemForegroundColor() const
+    { return m_internalSettings->systemForegroundColor(); }
 }
 
 #endif

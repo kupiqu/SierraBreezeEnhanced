@@ -181,13 +181,20 @@
        </widget>
       </item>
       <item row="3" column="0">
+        <widget class="QCheckBox" name="systemForegroundColor">
+          <property name="text">
+            <string>Use System Foreground Colors</string>
+          </property>
+        </widget>
+      </item>
+      <item row="4" column="0">
        <widget class="QCheckBox" name="drawBackgroundGradient">
         <property name="text">
          <string>Draw window background gradient</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="2">
+      <item row="5" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <spacer name="horizontalSpacer">
@@ -249,21 +256,21 @@
         </item>
        </layout>
       </item>
-      <item row="5" column="0">
+      <item row="6" column="0">
        <widget class="QCheckBox" name="drawTitleBarSeparator">
         <property name="text">
          <string>Draw separator between Title Bar and Window</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
+      <item row="7" column="0">
        <widget class="QCheckBox" name="opaqueTitleBar">
         <property name="text">
          <string>Opaque title bar</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="0" colspan="2">
+      <item row="8" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <spacer name="horizontalSpacer_3">
@@ -319,7 +326,7 @@
         </item>
        </layout>
       </item>
-      <item row="8" column="0">
+      <item row="9" column="0">
        <widget class="QCheckBox" name="isDialog">
         <property name="text">
          <string>Only for dialogs</string>

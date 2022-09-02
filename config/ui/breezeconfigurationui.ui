@@ -53,7 +53,7 @@
          </property>
         </widget>
        </item>
-       <item row="10" column="1" colspan="4">
+       <item row="11" column="1" colspan="4">
         <widget class="QCheckBox" name="drawBorderOnMaximizedWindows">
          <property name="text">
           <string>Allow resizing maximized windows from window edges</string>
@@ -120,7 +120,7 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="1" colspan="4">
+       <item row="12" column="1" colspan="4">
         <widget class="QCheckBox" name="drawBackgroundGradient">
          <property name="text">
           <string>Draw window background gradient</string>
@@ -432,6 +432,13 @@
           <string>Match Title Bar to Window color</string>
          </property>
         </widget>
+       </item>
+       <item row="10" column="1" colspan="4">
+         <widget class="QCheckBox" name="systemForegroundColor">
+           <property name="text">
+             <string>Use System Foreground Colors</string>
+           </property>
+         </widget>
        </item>
       </layout>
      </widget>
@@ -785,6 +792,7 @@
   <tabstop>buttonHOffset</tabstop>
   <tabstop>hideTitleBar</tabstop>
   <tabstop>matchColorForTitleBar</tabstop>
+  <tabstop>systemForegroundColor</tabstop>
   <tabstop>unisonHovering</tabstop>
   <tabstop>drawBorderOnMaximizedWindows</tabstop>
   <tabstop>cornerRadiusSpinBox</tabstop>

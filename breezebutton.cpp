@@ -667,12 +667,17 @@ namespace Breeze
         // symbols color
 
         QColor symbolColor;
-        if ( inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+        bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+        if (isSystemForegroundColor)
+          symbolColor = this->fontColor();
+        else {
+          if ( inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
             symbolColor = lightSymbolColor;
-        else if ( inactiveWindow && qGray(titleBarColor.rgb()) > 128 )
+          else if ( inactiveWindow && qGray(titleBarColor.rgb()) > 128 )
             symbolColor = darkSymbolColor;
-        else
+          else
             symbolColor = this->autoColor( false, true, false, darkSymbolColor, lightSymbolColor );
+        }
 
         // symbols pen
 
@@ -966,18 +971,22 @@ namespace Breeze
             case DecorationButtonType::ApplicationMenu:
             {
                 QColor menuSymbolColor;
-
-                uint r = qRed(titleBarColor.rgb());
-                uint g = qGreen(titleBarColor.rgb());
-                uint b = qBlue(titleBarColor.rgb());
-                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-                if ( colorConditional > 186 || g > 186 )
-                  menuSymbolColor = darkSymbolColor;
-                else
-                  menuSymbolColor = lightSymbolColor;
+                bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+                if (isSystemForegroundColor)
+                  menuSymbolColor = this->fontColor();
+                else {
+                  uint r = qRed(titleBarColor.rgb());
+                  uint g = qGreen(titleBarColor.rgb());
+                  uint b = qBlue(titleBarColor.rgb());
+                  // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                  // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                  // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                  qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                  if ( colorConditional > 186 || g > 186 )
+                    menuSymbolColor = darkSymbolColor;
+                  else
+                    menuSymbolColor = lightSymbolColor;
+                }
 
                 QPen menuSymbol_pen( menuSymbolColor );
                 menuSymbol_pen.setJoinStyle( Qt::MiterJoin );
@@ -1067,12 +1076,17 @@ namespace Breeze
         // symbols color
 
         QColor symbolColor;
-        if ( inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
-            symbolColor = lightSymbolColor;
-        else if ( inactiveWindow && qGray(titleBarColor.rgb()) > 128 )
-            symbolColor = darkSymbolColor;
-        else
-            symbolColor = this->autoColor( false, true, false, darkSymbolColor, lightSymbolColor );
+        bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+        if (isSystemForegroundColor)
+          symbolColor = this->fontColor();
+        else {
+          if ( inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+              symbolColor = lightSymbolColor;
+          else if ( inactiveWindow && qGray(titleBarColor.rgb()) > 128 )
+              symbolColor = darkSymbolColor;
+          else
+              symbolColor = this->autoColor( false, true, false, darkSymbolColor, lightSymbolColor );
+        }
 
         // symbols pen
 
@@ -1382,18 +1396,22 @@ namespace Breeze
             case DecorationButtonType::ApplicationMenu:
             {
                 QColor menuSymbolColor;
-
-                uint r = qRed(titleBarColor.rgb());
-                uint g = qGreen(titleBarColor.rgb());
-                uint b = qBlue(titleBarColor.rgb());
-                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-                if ( colorConditional > 186 || g > 186 )
+                bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+                if (isSystemForegroundColor)
+                  menuSymbolColor = this->fontColor();
+                else {
+                  uint r = qRed(titleBarColor.rgb());
+                  uint g = qGreen(titleBarColor.rgb());
+                  uint b = qBlue(titleBarColor.rgb());
+                  // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                  // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                  // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                  qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                  if ( colorConditional > 186 || g > 186 )
                     menuSymbolColor = darkSymbolColor;
-                else
+                  else
                     menuSymbolColor = lightSymbolColor;
+                }
 
                 QPen menuSymbol_pen( menuSymbolColor );
                 menuSymbol_pen.setJoinStyle( Qt::MiterJoin );
@@ -1486,7 +1504,12 @@ namespace Breeze
 
         // symbols color
 
-        QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, darkSymbolColor, lightSymbolColor ) );
+        QColor symbolColor;
+        bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+        if (isSystemForegroundColor)
+          symbolColor = this->fontColor();
+        else
+          symbolColor = this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, darkSymbolColor, lightSymbolColor );
 
         // symbols pen
 
@@ -1861,18 +1884,22 @@ namespace Breeze
             case DecorationButtonType::ApplicationMenu:
             {
                 QColor menuSymbolColor;
-
-                uint r = qRed(titleBarColor.rgb());
-                uint g = qGreen(titleBarColor.rgb());
-                uint b = qBlue(titleBarColor.rgb());
-                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-                if ( colorConditional > 186 || g > 186 )
-                  menuSymbolColor = darkSymbolColor;
-                else
-                  menuSymbolColor = lightSymbolColor;
+                bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+                if (isSystemForegroundColor)
+                  menuSymbolColor = this->fontColor();
+                else {
+                  uint r = qRed(titleBarColor.rgb());
+                  uint g = qGreen(titleBarColor.rgb());
+                  uint b = qBlue(titleBarColor.rgb());
+                  // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                  // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                  // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                  qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                  if ( colorConditional > 186 || g > 186 )
+                    menuSymbolColor = darkSymbolColor;
+                  else
+                    menuSymbolColor = lightSymbolColor;
+                }
 
                 QPen menuSymbol_pen( menuSymbolColor );
                 menuSymbol_pen.setJoinStyle( Qt::MiterJoin );
@@ -1974,7 +2001,12 @@ namespace Breeze
 
         // symbols color
 
-        QColor symbolColor( this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, darkSymbolColor, lightSymbolColor ) );
+        QColor symbolColor;
+        bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+        if (isSystemForegroundColor)
+          symbolColor = this->fontColor();
+        else
+          symbolColor = this->autoColor( inactiveWindow, useActiveButtonStyle, useInactiveButtonStyle, darkSymbolColor, lightSymbolColor );
 
         // symbols pen
 
@@ -2364,18 +2396,22 @@ namespace Breeze
             case DecorationButtonType::ApplicationMenu:
             {
                 QColor menuSymbolColor;
-
-                uint r = qRed(titleBarColor.rgb());
-                uint g = qGreen(titleBarColor.rgb());
-                uint b = qBlue(titleBarColor.rgb());
-                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-                if ( colorConditional > 186 || g > 186 )
+                bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+                if (isSystemForegroundColor)
+                  menuSymbolColor = this->fontColor();
+                else {
+                  uint r = qRed(titleBarColor.rgb());
+                  uint g = qGreen(titleBarColor.rgb());
+                  uint b = qBlue(titleBarColor.rgb());
+                  // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                  // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                  // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                  qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                  if ( colorConditional > 186 || g > 186 )
                     menuSymbolColor = darkSymbolColor;
-                else
+                  else
                     menuSymbolColor = lightSymbolColor;
+                }
 
                 QPen menuSymbol_pen( menuSymbolColor );
                 menuSymbol_pen.setJoinStyle( Qt::MiterJoin );
@@ -2459,12 +2495,30 @@ namespace Breeze
         painter->scale( width/20, width/20 );
         painter->translate( 1, 1 );
 
-        QColor darkSymbolColor = QColor(34, 45, 50);
-        QColor lightSymbolColor = QColor(250, 251, 252);
-        QColor symbolColor = darkSymbolColor;
-
         auto d = qobject_cast<Decoration*>( decoration() );
+
+        bool inactiveWindow( d && !d->client().toStrongRef().data()->isActive() );
+        bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
+
+        QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+        QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+
         QColor titleBarColor (d->titleBarColor());
+
+        // symbols color
+
+        QColor symbolColor;
+        bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+        if (isSystemForegroundColor)
+          symbolColor = this->fontColor();
+        else {
+          if ( inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+              symbolColor = lightSymbolColor;
+          else if ( inactiveWindow && qGray(titleBarColor.rgb()) > 128 )
+              symbolColor = darkSymbolColor;
+          else
+              symbolColor = this->autoColor( false, true, false, darkSymbolColor, lightSymbolColor );
+        }
 
         // symbols pen
 
@@ -2699,18 +2753,22 @@ namespace Breeze
             case DecorationButtonType::ApplicationMenu:
             {
                 QColor menuSymbolColor;
-
-                uint r = qRed(titleBarColor.rgb());
-                uint g = qGreen(titleBarColor.rgb());
-                uint b = qBlue(titleBarColor.rgb());
-                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-                if ( colorConditional > 186 || g > 186 )
+                bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+                if (isSystemForegroundColor)
+                  menuSymbolColor = this->fontColor();
+                else {
+                  uint r = qRed(titleBarColor.rgb());
+                  uint g = qGreen(titleBarColor.rgb());
+                  uint b = qBlue(titleBarColor.rgb());
+                  // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                  // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                  // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                  qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                  if ( colorConditional > 186 || g > 186 )
                     menuSymbolColor = darkSymbolColor;
-                else
+                  else
                     menuSymbolColor = lightSymbolColor;
+                }
 
                 QPen menuSymbol_pen( menuSymbolColor );
                 menuSymbol_pen.setJoinStyle( Qt::MiterJoin );
@@ -2772,12 +2830,30 @@ namespace Breeze
         painter->scale( width/20, width/20 );
         painter->translate( 1, 1 );
 
-        QColor darkSymbolColor = QColor(34, 45, 50);
-        QColor lightSymbolColor = QColor(250, 251, 252);
-        QColor symbolColor = darkSymbolColor;
-
         auto d = qobject_cast<Decoration*>( decoration() );
+
+        bool inactiveWindow( d && !d->client().toStrongRef().data()->isActive() );
+        bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
+
+        QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+        QColor lightSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+
         QColor titleBarColor (d->titleBarColor());
+
+        // symbols color
+
+        QColor symbolColor;
+        bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+        if (isSystemForegroundColor)
+          symbolColor = this->fontColor();
+        else {
+          if ( inactiveWindow && qGray(titleBarColor.rgb()) < 128 )
+              symbolColor = lightSymbolColor;
+          else if ( inactiveWindow && qGray(titleBarColor.rgb()) > 128 )
+              symbolColor = darkSymbolColor;
+          else
+              symbolColor = this->autoColor( false, true, false, darkSymbolColor, lightSymbolColor );
+        }
 
         // symbols pen
 
@@ -3008,18 +3084,22 @@ namespace Breeze
             case DecorationButtonType::ApplicationMenu:
             {
                 QColor menuSymbolColor;
-
-                uint r = qRed(titleBarColor.rgb());
-                uint g = qGreen(titleBarColor.rgb());
-                uint b = qBlue(titleBarColor.rgb());
-                // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-                // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-                // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-                qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-                if ( colorConditional > 186 || g > 186 )
+                bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+                if (isSystemForegroundColor)
+                  menuSymbolColor = this->fontColor();
+                else {
+                  uint r = qRed(titleBarColor.rgb());
+                  uint g = qGreen(titleBarColor.rgb());
+                  uint b = qBlue(titleBarColor.rgb());
+                  // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                  // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+                  // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+                  qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+                  if ( colorConditional > 186 || g > 186 )
                     menuSymbolColor = darkSymbolColor;
-                else
+                  else
                     menuSymbolColor = lightSymbolColor;
+                }
 
                 QPen menuSymbol_pen( menuSymbolColor );
                 menuSymbol_pen.setJoinStyle( Qt::MiterJoin );
@@ -3090,24 +3170,30 @@ namespace Breeze
 
         auto d = qobject_cast<Decoration*>( decoration() );
         QColor titleBarColor (d->titleBarColor());
-        uint r = qRed(titleBarColor.rgb());
-        uint g = qGreen(titleBarColor.rgb());
-        uint b = qBlue(titleBarColor.rgb());
 
         QColor symbolColor;
         QColor symbolBgdColor;
+        bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+        if (isSystemForegroundColor) {
+          symbolColor = this->foregroundColor();
+          symbolBgdColor = this->backgroundColor();
+        } else {
+          uint r = qRed(titleBarColor.rgb());
+          uint g = qGreen(titleBarColor.rgb());
+          uint b = qBlue(titleBarColor.rgb());
 
-        // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-        // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-        // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-        qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-        if ( colorConditional > 186 || g > 186 ) {
-          symbolColor = darkSymbolColor;
-          symbolBgdColor = lightSymbolColor;
-        }
-        else {
-          symbolColor = lightSymbolColor;
-          symbolBgdColor = darkSymbolColor;
+          // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+          // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+          // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+          qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+          if ( colorConditional > 186 || g > 186 ) {
+            symbolColor = darkSymbolColor;
+            symbolBgdColor = lightSymbolColor;
+          }
+          else {
+            symbolColor = lightSymbolColor;
+            symbolBgdColor = darkSymbolColor;
+          }
         }
 
         // symbols pen
@@ -3458,24 +3544,31 @@ namespace Breeze
 
         auto d = qobject_cast<Decoration*>( decoration() );
         QColor titleBarColor (d->titleBarColor());
-        uint r = qRed(titleBarColor.rgb());
-        uint g = qGreen(titleBarColor.rgb());
-        uint b = qBlue(titleBarColor.rgb());
 
         QColor symbolColor;
         QColor symbolBgdColor;
 
-        // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-        // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-        // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-        qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-        if ( colorConditional > 186 || g > 186 ) {
-          symbolColor = darkSymbolColor;
-          symbolBgdColor = lightSymbolColor;
-        }
-        else {
-          symbolColor = lightSymbolColor;
-          symbolBgdColor = darkSymbolColor;
+        bool isSystemForegroundColor( d && d->internalSettings()->systemForegroundColor() );
+        if (isSystemForegroundColor) {
+          symbolColor = this->foregroundColor();
+          symbolBgdColor = this->backgroundColor();
+        } else {
+          uint r = qRed(titleBarColor.rgb());
+          uint g = qGreen(titleBarColor.rgb());
+          uint b = qBlue(titleBarColor.rgb());
+
+          // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+          // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+          // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+          qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+          if ( colorConditional > 186 || g > 186 ) {
+            symbolColor = darkSymbolColor;
+            symbolBgdColor = lightSymbolColor;
+          }
+          else {
+            symbolColor = lightSymbolColor;
+            symbolBgdColor = darkSymbolColor;
+          }
         }
 
         // symbols pen
@@ -3786,6 +3879,24 @@ namespace Breeze
         return QColor::fromHsv( sh + dirh * progress * hr,
                                 ss + dirs * progress * sr,
                                 sv + dirv * progress * vr );
+    }
+
+    //__________________________________________________________________
+    QColor Button::fontColor() const
+    {
+        auto d = qobject_cast<Decoration*>( decoration() );
+        QColor titleBarColor ( d->titleBarColor() );
+
+        if( !d ) {
+
+            return QColor();
+
+        } else {
+
+            return d->fontColor();
+
+        }
+
     }
 
     //__________________________________________________________________

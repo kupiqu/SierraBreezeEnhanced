@@ -306,25 +306,38 @@ namespace Breeze
     //________________________________________________________________
     QColor Decoration::fontColor() const
     {
-        auto c = client().toStrongRef().data();
+         auto c = client().toStrongRef().data();
 
-        QColor darkTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(81, 102, 107) : QColor(34, 45, 50) );
-        QColor lightTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(192, 193, 194) : QColor(250, 251, 252) );
+         if (systemForegroundColor()) {
+             if( m_animation->state() == QAbstractAnimation::Running ) {
+                 return KColorUtils::mix(
+                        c->color( ColorGroup::Inactive, ColorRole::Foreground ),
+                        c->color( ColorGroup::Active, ColorRole::Foreground ),
+                        m_opacity );
+             }
+             else {
+                 return  c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground );
+             }
+        }
+        else {
+            QColor darkTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(81, 102, 107) : QColor(34, 45, 50) );
+            QColor lightTextColor( !c->isActive() && matchColorForTitleBar() ? QColor(192, 193, 194) : QColor(250, 251, 252) );
 
-        QColor titleBarColor = this->titleBarColor();
+            QColor titleBarColor = this->titleBarColor();
 
-        uint r = qRed(titleBarColor.rgb());
-        uint g = qGreen(titleBarColor.rgb());
-        uint b = qBlue(titleBarColor.rgb());
+            uint r = qRed(titleBarColor.rgb());
+            uint g = qGreen(titleBarColor.rgb());
+            uint b = qBlue(titleBarColor.rgb());
 
-        // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
-        // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
-        // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
-        qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
-        if ( colorConditional > 186 || g > 186 ) // ( colorConditional > 186 ) // if ( colorConditional > 150 )
-            return darkTextColor;
-        else
-            return lightTextColor;
+            // modified from https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+            // qreal titleBarLuminance = (0.2126 * static_cast<qreal>(r) + 0.7152 * static_cast<qreal>(g) + 0.0722 * static_cast<qreal>(b)) / 255.;
+            // if ( titleBarLuminance >  sqrt(1.05 * 0.05) - 0.05 )
+            qreal colorConditional = 0.299 * static_cast<qreal>(r) + 0.587 * static_cast<qreal>(g) + 0.114 * static_cast<qreal>(b);
+            if ( colorConditional > 186 || g > 186 ) // ( colorConditional > 186 ) // if ( colorConditional > 150 )
+                return darkTextColor;
+            else
+                return lightTextColor;
+        }
 
     }
 

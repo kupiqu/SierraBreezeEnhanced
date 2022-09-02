@@ -63,6 +63,7 @@ namespace Breeze
         connect( m_ui.drawTitleBarSeparator, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
         connect( m_ui.hideTitleBar, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.matchColorForTitleBar, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
+        connect( m_ui.systemForegroundColor, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
 
         // track animations changes
         connect( m_ui.animationsEnabled, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
@@ -110,6 +111,7 @@ namespace Breeze
         m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
         m_ui.hideTitleBar->setCurrentIndex( m_internalSettings->hideTitleBar() );
         m_ui.matchColorForTitleBar->setChecked( m_internalSettings->matchColorForTitleBar() );
+        m_ui.systemForegroundColor->setChecked( m_internalSettings->systemForegroundColor() );
 
         // load shadows
         if( m_internalSettings->shadowSize() <= InternalSettings::ShadowVeryLarge ) m_ui.shadowSize->setCurrentIndex( m_internalSettings->shadowSize() );
@@ -160,6 +162,7 @@ namespace Breeze
         m_internalSettings->setDrawTitleBarSeparator(m_ui.drawTitleBarSeparator->isChecked());
         m_internalSettings->setHideTitleBar( m_ui.hideTitleBar->currentIndex() );
         m_internalSettings->setMatchColorForTitleBar( m_ui.matchColorForTitleBar->isChecked() );
+        m_internalSettings->setSystemForegroundColor( m_ui.systemForegroundColor->isChecked() );
 
         m_internalSettings->setShadowSize( m_ui.shadowSize->currentIndex() );
         m_internalSettings->setShadowStrength( qRound( qreal(m_ui.shadowStrength->value()*255)/100 ) );
@@ -219,6 +222,7 @@ namespace Breeze
         m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
         m_ui.hideTitleBar->setCurrentIndex( m_internalSettings->hideTitleBar() );
         m_ui.matchColorForTitleBar->setChecked( m_internalSettings->matchColorForTitleBar() );
+        m_ui.systemForegroundColor->setChecked( m_internalSettings->systemForegroundColor() );
 
         m_ui.animationsEnabled->setChecked( m_internalSettings->animationsEnabled() );
         m_ui.animationsDuration->setValue( m_internalSettings->animationsDuration() );
@@ -265,6 +269,7 @@ namespace Breeze
         else if (m_ui.drawTitleBarSeparator->isChecked() != m_internalSettings->drawTitleBarSeparator()) modified = true;
         else if ( m_ui.hideTitleBar->currentIndex() != m_internalSettings->hideTitleBar() ) modified = true;
         else if ( m_ui.matchColorForTitleBar->isChecked() != m_internalSettings->matchColorForTitleBar() ) modified = true;
+        else if ( m_ui.systemForegroundColor->isChecked() != m_internalSettings->systemForegroundColor() ) modified = true;
 
         // animations
         else if( m_ui.animationsEnabled->isChecked() !=  m_internalSettings->animationsEnabled() ) modified = true;
