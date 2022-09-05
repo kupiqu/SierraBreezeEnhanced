@@ -129,7 +129,7 @@
        <default>4</default>
     </entry>
 
-    <entry name="ButtonHOffset" type = "Int">
+    <entry name="hOffset" type = "Int">
       <default>0</default>
     </entry>
 

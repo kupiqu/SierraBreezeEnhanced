@@ -832,7 +832,7 @@ namespace Breeze
         // padding
         const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
         const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
-        const int hMargin = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset();
+        const int hMargin = 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->hOffset();
 
         // left buttons
         if( !m_leftButtons->buttons().isEmpty() )
@@ -1016,12 +1016,12 @@ namespace Breeze
             auto s = settings();
             auto c = client().toStrongRef().data();
             const int leftOffset = m_leftButtons->buttons().isEmpty() ?
-                Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset():
-                m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset();
+                Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->hOffset() :
+                m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() ;
 
             const int rightOffset = m_rightButtons->buttons().isEmpty() ?
-                Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset() :
-                size().width() - m_rightButtons->geometry().x() + Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->buttonHOffset();
+                Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() + 0.5*s->smallSpacing()*m_internalSettings->hOffset() :
+                size().width() - m_rightButtons->geometry().x() + Metrics::TitleBar_SideMargin*settings()->smallSpacing() + 0.5*s->smallSpacing()*m_internalSettings->buttonPadding() ;
 
             const int yOffset = settings()->smallSpacing()*Metrics::TitleBar_TopMargin;
             const QRect maxRect( leftOffset, yOffset, size().width() - leftOffset - rightOffset, captionHeight() );
