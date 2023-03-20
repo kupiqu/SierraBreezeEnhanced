@@ -847,9 +847,8 @@ namespace Breeze
                 auto button = static_cast<Button*>( m_leftButtons->buttons().front().data() );
                 button->setGeometry( QRectF( QPoint( 0, 0 ), QSizeF( bWidth + hPadding, bHeight ) ) );
                 button->setFlag( Button::FlagFirstInList );
-                button->setHorizontalOffset( hMargin );
 
-                m_leftButtons->setPos(QPointF(0, verticalOffset + vPadding));
+                m_leftButtons->setPos(QPointF(hMargin, verticalOffset + vPadding));
 
             } else m_leftButtons->setPos(QPointF(hMargin + borderLeft(), verticalOffset + vPadding));
 
