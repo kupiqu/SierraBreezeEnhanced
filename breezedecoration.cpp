@@ -899,7 +899,7 @@ namespace Breeze
 
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
-            if( s->isAlphaChannelSupported() && !isMaximized())
+            if( s->isAlphaChannelSupported() && roundedTitleBar() )
                 painter->drawRoundedRect(rect(), 0.5 * s->smallSpacing() * m_internalSettings->cornerRadius(), 0.5 * s->smallSpacing() * m_internalSettings->cornerRadius());
             else
                 painter->drawRect( rect() );
@@ -917,7 +917,7 @@ namespace Breeze
 
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
-            if( s->isAlphaChannelSupported() && !isMaximized() )
+            if( s->isAlphaChannelSupported() && roundedTitleBar() )
               painter->drawRoundedRect(rect(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
             else
               painter->drawRect( rect() );
