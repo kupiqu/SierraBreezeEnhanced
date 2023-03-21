@@ -785,7 +785,7 @@ namespace Breeze
                 QPainterPath clipRect;
                 clipRect.addRect(m_titleRect);
 
-                // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
+                // the rect is made a bit larger to be able to clip away the rounded corners at the bottom and sides
                 m_titleBarPath->addRoundedRect(m_titleRect.adjusted(
                     isLeftEdge() ? -0.5*s->smallSpacing()*m_internalSettings->cornerRadius():0,
                     isTopEdge() ? -0.5*s->smallSpacing()*m_internalSettings->cornerRadius():0,
@@ -803,7 +803,6 @@ namespace Breeze
         {
             if( s->isAlphaChannelSupported() && !isMaximized() ) m_windowPath->addRoundedRect(rect(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
             else m_windowPath->addRect( rect() );
-            
         } else {
             *m_windowPath = *m_titleBarPath;
         }
@@ -906,9 +905,9 @@ namespace Breeze
                 border_pen1 = QPen( titleBarColor.darker( 125 ) );
 
             painter->setPen(border_pen1);
-            if( s->isAlphaChannelSupported() ) {
-                painter->drawRoundedRect(rect(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
-            } else {
+            if( s->isAlphaChannelSupported() && roundedTitleBar() )
+                painter->drawRoundedRect(rect(), 0.5 * s->smallSpacing() * m_internalSettings->cornerRadius(), 0.5 * s->smallSpacing() * m_internalSettings->cornerRadius());
+            else
                 painter->drawRect( rect() );
             }
 
@@ -925,7 +924,7 @@ namespace Breeze
 
             QPen border_pen1( titleBarColor.darker( 125 ) );
             painter->setPen(border_pen1);
-            if( s->isAlphaChannelSupported() )
+            if( s->isAlphaChannelSupported() && roundedTitleBar() )
               painter->drawRoundedRect(rect(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
             else
               painter->drawRect( rect() );
