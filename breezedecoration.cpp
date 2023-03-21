@@ -530,13 +530,13 @@ namespace Breeze
             0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
 
         // Draw outline.
-        painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
-        painter.setBrush(Qt::NoBrush);
-        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-        painter.drawRoundedRect(
-            innerRect,
-            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
-            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
+        // painter.setPen(withOpacity(g_shadowColor, 0.2 * strength));
+        // painter.setBrush(Qt::NoBrush);
+        // painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        // painter.drawRoundedRect(
+        //     innerRect,
+        //     0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
+        //     0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
 
         painter.end();
 
@@ -609,13 +609,13 @@ namespace Breeze
             0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() + 0.5));
 
         // Draw outline.
-        painter.setPen(withOpacity(g_shadowColorInactiveWindows, 0.2 * strength));
-        painter.setBrush(Qt::NoBrush);
-        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-        painter.drawRoundedRect(
-            innerRect,
-            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
-            0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
+        // painter.setPen(withOpacity(g_shadowColorInactiveWindows, 0.2 * strength));
+        // painter.setBrush(Qt::NoBrush);
+        // painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        // painter.drawRoundedRect(
+        //     innerRect,
+        //     0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5),
+        //     0.5*s->smallSpacing()*(m_internalSettings->cornerRadius() - 0.5));
 
         painter.end();
 
@@ -896,14 +896,21 @@ namespace Breeze
             painter->setBrush( titleBarColor );
 
             // clip away the top part
-            // if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
+            if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
 
-            QPen border_pen1( titleBarColor.darker( 125 ) );
-            painter->setPen(border_pen1);
-            if( s->isAlphaChannelSupported() )
-                painter->drawRoundedRect(rect(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
+            // When no borders set, outline will be drawn by shader
+            QPen border_pen1;
+            if(borderSize() == 0)
+                border_pen1 = QPen( titleBarColor );
             else
+                border_pen1 = QPen( titleBarColor.darker( 125 ) );
+
+            painter->setPen(border_pen1);
+            if( s->isAlphaChannelSupported() ) {
+                painter->drawRoundedRect(rect(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius(), 0.5*s->smallSpacing()*m_internalSettings->cornerRadius());
+            } else {
                 painter->drawRect( rect() );
+            }
 
             painter->restore();
         }
@@ -956,6 +963,24 @@ namespace Breeze
         else
             painter->setBrush( titleBarColor );
 
+        auto s = settings();
+        if( !s->isAlphaChannelSupported() )
+            painter->drawRect(titleRect);
+        else if ( !hasBorders() ) {
+            painter->setClipRect(titleRect, Qt::IntersectClip);
+            // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
+            QRect adjustetTitleRect = titleRect.adjusted(
+                isLeftEdge() ? -m_internalSettings->cornerRadius():0,
+                isTopEdge() ? -m_internalSettings->cornerRadius():0,
+                isRightEdge() ? m_internalSettings->cornerRadius():0,
+                m_internalSettings->cornerRadius());
+
+            painter->drawRoundedRect(adjustetTitleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+        }
+        else {
+            painter->drawRoundedRect(titleRect, m_internalSettings->cornerRadius(), m_internalSettings->cornerRadius());
+        }
+
         if( !c->isShaded() && !hideTitleBar() && outlineColor.isValid() )
         {
             // outline
@@ -969,7 +994,6 @@ namespace Breeze
 
         painter->restore();
 
-        auto s = settings();
         if( !hideTitleBar() ) {
           // draw all buttons
           m_leftButtons->paint(painter, repaintRegion);
