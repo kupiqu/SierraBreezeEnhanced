@@ -101,6 +101,7 @@ namespace Breeze
 
         inline bool hideTitleBar() const;
         inline int titleBarAlpha() const;
+        inline bool roundedTitleBar() const;
         inline bool matchColorForTitleBar() const;
         inline bool drawBackgroundGradient() const;
         inline bool systemForegroundColor() const;
@@ -237,6 +238,9 @@ namespace Breeze
         a =  qBound(0, a, 100);
         return qRound(static_cast<qreal>(a) * static_cast<qreal>(2.55));
     }
+
+    bool Decoration::roundedTitleBar() const
+    { return !((isMaximized() || isTopEdge() || isBottomEdge() || isRightEdge() || isLeftEdge()) && !m_internalSettings->roundedTitleBarOnMaximized()); }
 
     bool Decoration::matchColorForTitleBar() const
     { return m_internalSettings->matchColorForTitleBar(); }
