@@ -440,13 +440,6 @@
            </property>
          </widget>
        </item>
-       <item row="26" column="1" colspan="3">
-         <widget class="QCheckBox" name="roundedTitleBarOnMaximized">
-           <property name="text">
-             <string>Rounded title bar on maximized window</string>
-           </property>
-         </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
@@ -800,7 +793,6 @@
   <tabstop>hideTitleBar</tabstop>
   <tabstop>matchColorForTitleBar</tabstop>
   <tabstop>systemForegroundColor</tabstop>
-  <tabstop>roundedTitleBarOnMaximized</tabstop>
   <tabstop>unisonHovering</tabstop>
   <tabstop>drawBorderOnMaximizedWindows</tabstop>
   <tabstop>cornerRadiusSpinBox</tabstop>
