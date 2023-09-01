@@ -27,7 +27,7 @@ find_package(KDecoration2 REQUIRED)
 # old stuff
 add_definitions(-DTRANSLATION_DOMAIN="breeze_kwin_deco")
 
-find_package(KF5 REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n IconThemes)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets I18n IconThemes)
 find_package(Qt5 CONFIG REQUIRED COMPONENTS DBus)
 
 ### XCB
@@ -82,7 +82,6 @@ set(sierrabreezeenhanced_config_SRCS
 
 set(sierrabreezeenhanced_config_PART_FORMS
    config/ui/breezeconfigurationui.ui
-   config/ui/breezedetectwidget.ui
    config/ui/breezeexceptiondialog.ui
    config/ui/breezeexceptionlistwidget.ui
 )
@@ -108,8 +107,7 @@ target_link_libraries(sierrabreezeenhanced
         KF5::ConfigWidgets
         KF5::GuiAddons
         KF5::I18n
-        KF5::IconThemes
-        KF5::WindowSystem)
+        KF5::IconThemes)
 
 if(BREEZE_HAVE_X11)
   target_link_libraries(sierrabreezeenhanced

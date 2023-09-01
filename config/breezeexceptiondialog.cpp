@@ -27,10 +27,6 @@
 #include "breezedetectwidget.h"
 #include "config-breeze.h"
 
-#if BREEZE_HAVE_X11
-#include <QX11Info>
-#endif
-
 namespace Breeze
 {
 
@@ -68,13 +64,6 @@ namespace Breeze
         m_ui.opacityOverrideLabelSpinBox->setSpecialValueText(tr("None"));
         connect( m_ui.opacityOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
         connect( m_ui.isDialog, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
-
-        // hide detection dialog on non X11 platforms
-        #if BREEZE_HAVE_X11
-        if( !QX11Info::isPlatformX11() ) m_ui.detectDialogButton->hide();
-        #else
-        m_ui.detectDialogButton->hide();
-        #endif
     }
 
     //___________________________________________
@@ -177,7 +166,7 @@ namespace Breeze
             connect( m_detectDialog, &DetectDialog::detectionDone, this, &ExceptionDialog::readWindowProperties );
         }
 
-        m_detectDialog->detect(0);
+        m_detectDialog->detect();
 
     }
 
@@ -188,22 +177,19 @@ namespace Breeze
         if( valid )
         {
 
-            // type
-            m_ui.exceptionType->setCurrentIndex( m_detectDialog->exceptionType() );
-
             // window info
-            const KWindowInfo& info( m_detectDialog->windowInfo() );
+            const QVariantMap properties = m_detectDialog->properties();
 
-            switch( m_detectDialog->exceptionType() )
+            switch(m_ui.exceptionType->currentIndex())
             {
 
                 default:
                 case InternalSettings::ExceptionWindowClassName:
-                m_ui.exceptionEditor->setText( QString::fromUtf8( info.windowClassClass() ) );
+                m_ui.exceptionEditor->setText(properties.value(QStringLiteral("resourceClass")).toString());
                 break;
 
                 case InternalSettings::ExceptionWindowTitle:
-                m_ui.exceptionEditor->setText( info.name() );
+                m_ui.exceptionEditor->setText(properties.value(QStringLiteral("caption")).toString());
                 break;
 
             }
