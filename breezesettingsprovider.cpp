@@ -22,8 +22,6 @@
 
 #include "breezeexceptionlist.h"
 
-#include <KWindowInfo>
-
 #include <QRegularExpression>
 #include <QTextStream>
 
@@ -73,7 +71,7 @@ namespace Breeze
     {
 
         QString windowTitle;
-        QString className;
+        QString windowClass;
 
         // get the client
         const auto client = decoration->client().toStrongRef();
@@ -87,13 +85,13 @@ namespace Breeze
             // discard exceptions with empty exception pattern
             if( internalSettings->exceptionPattern().isEmpty() ) continue;
 
-            if (internalSettings->isDialog())
-            {
-              KWindowInfo info(client->windowId(), NET::WMWindowType);
-              if (info.valid() && info.windowType(NET::NormalMask | NET::DialogMask) != NET::Dialog) {
-                continue;
-              }
-            }
+            // if (internalSettings->isDialog())
+            // {
+            //   KWindowInfo info(client->windowId(), NET::WMWindowType);
+            //   if (info.valid() && info.windowType(NET::NormalMask | NET::DialogMask) != NET::Dialog) {
+            //     continue;
+            //   }
+            // }
 
             /*
             decide which value is to be compared
@@ -111,16 +109,7 @@ namespace Breeze
                 default:
                 case InternalSettings::ExceptionWindowClassName:
                 {
-                    if( className.isEmpty() )
-                    {
-                        // retrieve class name
-                        KWindowInfo info( client->windowId(), {}, NET::WM2WindowClass );
-                        QString window_className( QString::fromUtf8(info.windowClassName()) );
-                        QString window_class( QString::fromUtf8(info.windowClassClass()) );
-                        className = window_className + QStringLiteral(" ") + window_class;
-                    }
-
-                    value = className;
+                    value = windowClass.isEmpty() ? (windowClass = client->windowClass()) : windowClass;
                     break;
                 }
 
