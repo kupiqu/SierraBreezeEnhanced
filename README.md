@@ -69,6 +69,7 @@ sudo apt install build-essential libkf5config-dev libkdecorations2-dev libqt5x11
 ```
 - Arch Linux
 ``` shell
+sudo pacman -S base-devel # Required development packages
 sudo pacman -S kdecoration qt5-declarative qt5-x11extras    # Decoration
 sudo pacman -S cmake extra-cmake-modules                    # Installation
 ```
