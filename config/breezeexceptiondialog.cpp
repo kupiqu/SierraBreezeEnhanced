@@ -28,7 +28,7 @@
 #include "config-breeze.h"
 
 #if BREEZE_HAVE_X11
-#include <QX11Info>
+#include <QtGui/private/qtx11extras_p.h>
 #endif
 
 namespace Breeze
