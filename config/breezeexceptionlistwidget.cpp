@@ -31,6 +31,7 @@
 #include <QMessageBox>
 #include <QPointer>
 #include <QIcon>
+#include <QRegExp>
 
 //__________________________________________________________
 namespace Breeze

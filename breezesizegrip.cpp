@@ -27,7 +27,7 @@
 #include <QTimer>
 
 #if BREEZE_HAVE_X11
-#include <QX11Info>
+#include <QtGui/private/qtx11extras_p.h>
 #endif
 
 namespace Breeze
@@ -62,7 +62,7 @@ namespace Breeze
         updatePosition();
 
         // connections
-        auto c = decoration->client().toStrongRef().data();
+        auto c = decoration->client();
         connect( c, &KDecoration2::DecoratedClient::widthChanged, this, &SizeGrip::updatePosition );
         connect( c, &KDecoration2::DecoratedClient::heightChanged, this, &SizeGrip::updatePosition );
         connect( c, &KDecoration2::DecoratedClient::activeChanged, this, &SizeGrip::updateActiveState );
@@ -99,7 +99,7 @@ namespace Breeze
         #if BREEZE_HAVE_X11
 
         if( !QX11Info::isPlatformX11() ) return;
-        auto c = m_decoration.data()->client().toStrongRef().data();
+        auto c = m_decoration.data()->client();
 
         xcb_window_t windowId = c->windowId();
         if( windowId )
@@ -191,7 +191,7 @@ namespace Breeze
         #if BREEZE_HAVE_X11
         if( !QX11Info::isPlatformX11() ) return;
 
-        auto c = m_decoration.data()->client().toStrongRef().data();
+        auto c = m_decoration.data()->client();
         QPoint position(
             c->width() - GripSize - Offset,
             c->height() - GripSize - Offset );
@@ -213,7 +213,7 @@ namespace Breeze
         auto connection( QX11Info::connection() );
 
         // client
-        auto c = m_decoration.data()->client().toStrongRef().data();
+        auto c = m_decoration.data()->client();
 
         /*
         get root position matching position

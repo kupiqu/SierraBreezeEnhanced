@@ -8,9 +8,9 @@
             "org.kde.kdecoration2"
         ]
     },
+    "X-KDE-ConfigModule": "kcm_sierrabreezeenhanceddecoration",
     "org.kde.kdecoration2": {
         "defaultTheme": "Sierra Breeze Enhanced",
-        "kcmodule": true,
         "recommendedBorderSize": "Tiny"
     }
 }

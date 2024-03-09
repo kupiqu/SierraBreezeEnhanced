@@ -124,7 +124,7 @@ namespace Breeze
 
 
         public Q_SLOTS:
-        void init() override;
+        bool init() override;
 
         private Q_SLOTS:
         void reconfigure();
