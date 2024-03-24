@@ -8,8 +8,7 @@ set(breezedecoration_config_SRCS
     breezeitemmodel.cpp)
 ki18n_wrap_ui(
   breezedecoration_config_SRCS ui/breezeconfigurationui.ui
-  ui/breezeexceptiondialog.ui ui/breezeexceptionlistwidget.ui
-  ui/breezedetectwidget.ui)
+  ui/breezeexceptiondialog.ui ui/breezeexceptionlistwidget.ui)
 
 kcoreaddons_add_plugin(
   kcm_sierrabreezeenhanceddecoration SOURCES kcm_sierrabreezeenhanceddecoration

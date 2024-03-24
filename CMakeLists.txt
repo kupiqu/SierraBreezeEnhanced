@@ -95,7 +95,7 @@ set(sierrabreezeenhanced_config_SRCS
     config/breezeexceptionmodel.cpp config/breezeitemmodel.cpp)
 
 set(sierrabreezeenhanced_config_PART_FORMS
-    config/ui/breezeconfigurationui.ui config/ui/breezedetectwidget.ui
+    config/ui/breezeconfigurationui.ui
     config/ui/breezeexceptiondialog.ui config/ui/breezeexceptionlistwidget.ui)
 
 ki18n_wrap_ui(sierrabreezeenhanced_config_PART_FORMS_HEADERS
