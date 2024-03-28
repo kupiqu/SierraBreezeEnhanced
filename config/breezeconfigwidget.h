@@ -48,7 +48,7 @@ namespace Breeze
         public:
 
         //* constructor
-        explicit ConfigWidget( QWidget*, const QVariantList& );
+        explicit ConfigWidget( QObject *parent, const KPluginMetaData &data, const QVariantList& );
 
         //* destructor
         virtual ~ConfigWidget() = default;
@@ -66,11 +66,6 @@ namespace Breeze
 
         //* update changed state
         virtual void updateChanged();
-
-        protected:
-
-        //* set changed state
-        void setChanged( bool );
 
         private:
 

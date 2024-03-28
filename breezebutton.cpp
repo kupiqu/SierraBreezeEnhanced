@@ -57,8 +57,8 @@ namespace Breeze
         setIconSize(QSize( height, height ));
 
         // connections
-        connect(decoration->client().toStrongRef().data(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
-        connect(decoration->settings().data(), &KDecoration2::DecorationSettings::reconfigured, this, &Button::reconfigure);
+        connect(decoration->client(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
+        connect(decoration->settings().get(), &KDecoration2::DecorationSettings::reconfigured, this, &Button::reconfigure);
         connect( this, &KDecoration2::DecorationButton::hoveredChanged, this, &Button::updateAnimationState );
 
         if (decoration->objectName() == "applet-window-buttons") {
@@ -92,32 +92,32 @@ namespace Breeze
             {
 
                 case DecorationButtonType::Close:
-                b->setVisible( d->client().toStrongRef().data()->isCloseable() );
-                QObject::connect(d->client().toStrongRef().data(), &KDecoration2::DecoratedClient::closeableChanged, b, &Breeze::Button::setVisible );
+                b->setVisible( d->client()->isCloseable() );
+                QObject::connect(d->client(), &KDecoration2::DecoratedClient::closeableChanged, b, &Breeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::Maximize:
-                b->setVisible( d->client().toStrongRef().data()->isMaximizeable() );
-                QObject::connect(d->client().toStrongRef().data(), &KDecoration2::DecoratedClient::maximizeableChanged, b, &Breeze::Button::setVisible );
+                b->setVisible( d->client()->isMaximizeable() );
+                QObject::connect(d->client(), &KDecoration2::DecoratedClient::maximizeableChanged, b, &Breeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::Minimize:
-                b->setVisible( d->client().toStrongRef().data()->isMinimizeable() );
-                QObject::connect(d->client().toStrongRef().data(), &KDecoration2::DecoratedClient::minimizeableChanged, b, &Breeze::Button::setVisible );
+                b->setVisible( d->client()->isMinimizeable() );
+                QObject::connect(d->client(), &KDecoration2::DecoratedClient::minimizeableChanged, b, &Breeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::ContextHelp:
-                b->setVisible( d->client().toStrongRef().data()->providesContextHelp() );
-                QObject::connect(d->client().toStrongRef().data(), &KDecoration2::DecoratedClient::providesContextHelpChanged, b, &Breeze::Button::setVisible );
+                b->setVisible( d->client()->providesContextHelp() );
+                QObject::connect(d->client(), &KDecoration2::DecoratedClient::providesContextHelpChanged, b, &Breeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::Shade:
-                b->setVisible( d->client().toStrongRef().data()->isShadeable() );
-                QObject::connect(d->client().toStrongRef().data(), &KDecoration2::DecoratedClient::shadeableChanged, b, &Breeze::Button::setVisible );
+                b->setVisible( d->client()->isShadeable() );
+                QObject::connect(d->client(), &KDecoration2::DecoratedClient::shadeableChanged, b, &Breeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::Menu:
-                QObject::connect(d->client().toStrongRef().data(), &KDecoration2::DecoratedClient::iconChanged, b, [b]() { b->update(); });
+                QObject::connect(d->client(), &KDecoration2::DecoratedClient::iconChanged, b, [b]() { b->update(); });
                 break;
 
                 default: break;
@@ -154,17 +154,17 @@ namespace Breeze
             painter->translate( 0.1*width, 0.1*width );
             if (auto deco =  qobject_cast<Decoration*>(decoration())) {
               const QPalette activePalette = KIconLoader::global()->customPalette();
-              QPalette palette = decoration()->client().toStrongRef().data()->palette();
-              palette.setColor(QPalette::Foreground, deco->fontColor());
+              QPalette palette = decoration()->client()->palette();
+              palette.setColor(QPalette::WindowText, deco->fontColor());
               KIconLoader::global()->setCustomPalette(palette);
-              decoration()->client().toStrongRef().data()->icon().paint(painter, iconRect.toRect());
+              decoration()->client()->icon().paint(painter, iconRect.toRect());
               if (activePalette == QPalette()) {
                 KIconLoader::global()->resetPalette();
               }    else {
                 KIconLoader::global()->setCustomPalette(palette);
               }
             } else {
-              decoration()->client().toStrongRef().data()->icon().paint(painter, iconRect.toRect());
+              decoration()->client()->icon().paint(painter, iconRect.toRect());
             }
 
         } else {
@@ -656,7 +656,7 @@ namespace Breeze
           painter->translate( 4, 4 );
         }
 
-        bool inactiveWindow( d && !d->client().toStrongRef().data()->isActive() );
+        bool inactiveWindow( d && !d->client()->isActive() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
         QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
@@ -1065,7 +1065,7 @@ namespace Breeze
           painter->translate( 4, 4 );
         }
 
-        bool inactiveWindow( d && !d->client().toStrongRef().data()->isActive() );
+        bool inactiveWindow( d && !d->client()->isActive() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
         QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
@@ -1492,7 +1492,7 @@ namespace Breeze
           painter->translate( 4, 4 );
         }
 
-        bool inactiveWindow( d && !d->client().toStrongRef().data()->isActive() );
+        bool inactiveWindow( d && !d->client()->isActive() );
         bool useActiveButtonStyle( d && d->internalSettings()->buttonStyle() == 5 );
         bool useInactiveButtonStyle( d && d->internalSettings()->buttonStyle() == 6 );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
@@ -1989,7 +1989,7 @@ namespace Breeze
           painter->translate( 4, 4 );
         }
 
-        bool inactiveWindow( d && !d->client().toStrongRef().data()->isActive() );
+        bool inactiveWindow( d && !d->client()->isActive() );
         bool useActiveButtonStyle( d && d->internalSettings()->buttonStyle() == 8 );
         bool useInactiveButtonStyle( d && d->internalSettings()->buttonStyle() == 9 );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
@@ -2497,7 +2497,7 @@ namespace Breeze
 
         auto d = qobject_cast<Decoration*>( decoration() );
 
-        bool inactiveWindow( d && !d->client().toStrongRef().data()->isActive() );
+        bool inactiveWindow( d && !d->client()->isActive() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
         QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
@@ -2832,7 +2832,7 @@ namespace Breeze
 
         auto d = qobject_cast<Decoration*>( decoration() );
 
-        bool inactiveWindow( d && !d->client().toStrongRef().data()->isActive() );
+        bool inactiveWindow( d && !d->client()->isActive() );
         bool isMatchTitleBarColor( d && d->internalSettings()->matchColorForTitleBar() );
 
         QColor darkSymbolColor( ( inactiveWindow && isMatchTitleBarColor ) ? QColor(81, 102, 107) : QColor(34, 45, 50) );
@@ -3943,7 +3943,7 @@ namespace Breeze
 
         }
 
-        auto c = d->client().toStrongRef().data();
+        auto c = d->client();
         if( isPressed() ) {
 
             if( type() == DecorationButtonType::Close ) return c->color( ColorGroup::Warning, ColorRole::Foreground );
