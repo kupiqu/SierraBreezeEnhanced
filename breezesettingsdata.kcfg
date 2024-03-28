@@ -154,6 +154,11 @@
       <default>false</default>
     </entry>
 
+    <!-- rounded titlebar corner -->
+    <entry name="RoundedTitleBarOnMaximized" type = "Bool">
+      <default>true</default>
+    </entry>
+
     <!-- unison hovering -->
     <entry name="UnisonHovering" type = "Bool">
       <default>true</default>
