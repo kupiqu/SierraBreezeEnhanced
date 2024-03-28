@@ -1,6 +1,8 @@
 # Sierra Breeze Enhanced
 
-**Discontinued** (no free time available). **Let me know if you'd like to help keeping SBE up**
+**Ported to Plasma 6 (community mantained)**
+
+Be aware that this README file needs an update.
 
 ## Overview
 
@@ -60,9 +62,12 @@ sudo apk add sierrabreezeenhanced
 ```
 
 ### Method 2: Compile from source code
-*Compilation should not be done against versions of KWin < 5.14.*
+*Compilation should not be done against versions of KWin < 6.0.*
 
 #### Step 1: Build dependencies
+
+**Needs updating!!!**
+
 - Ubuntu
 ``` shell
 sudo apt install build-essential libkf5config-dev libkdecorations2-dev libqt5x11extras5-dev qtdeclarative5-dev extra-cmake-modules libkf5guiaddons-dev libkf5configwidgets-dev libkf5windowsystem-dev libkf5coreaddons-dev libkf5iconthemes-dev gettext cmake
