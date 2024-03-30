@@ -66,27 +66,25 @@ sudo apk add sierrabreezeenhanced
 
 #### Step 1: Build dependencies
 
-**Needs updating!!!**
-
 - Ubuntu
 ``` shell
-sudo apt install build-essential libkf5config-dev libkdecorations2-dev libqt5x11extras5-dev qtdeclarative5-dev extra-cmake-modules libkf5guiaddons-dev libkf5configwidgets-dev libkf5windowsystem-dev libkf5coreaddons-dev libkf5iconthemes-dev gettext cmake
+sudo apt install build-essential libkf6config-dev libkdecorations2-dev qtdeclarative6-dev extra-cmake-modules libkf6guiaddons-dev libkf6configwidgets-dev libkf6windowsystem-dev libkf6coreaddons-dev libkf6iconthemes-dev gettext cmake
 ```
 - Arch Linux
 ``` shell
 sudo pacman -S base-devel # Required development packages
-sudo pacman -S kdecoration qt5-declarative qt5-x11extras    # Decoration
+sudo pacman -S kdecoration qt6-declarative    # Decoration
 sudo pacman -S cmake extra-cmake-modules                    # Installation
 ```
 - Fedora
 ``` shell
-sudo dnf install cmake extra-cmake-modules kf5-kiconthemes-devel
-sudo dnf install "cmake(Qt5Core)" "cmake(Qt5Gui)" "cmake(Qt5DBus)" "cmake(Qt5X11Extras)" "cmake(KF5GuiAddons)" "cmake(KF5WindowSystem)" "cmake(KF5I18n)" "cmake(KDecoration2)" "cmake(KF5CoreAddons)" "cmake(KF5ConfigWidgets)"
+sudo dnf install cmake extra-cmake-modules kf6-kiconthemes-devel
+sudo dnf install "cmake(Qt6Core)" "cmake(Qt6Gui)" "cmake(Qt6DBus)" "cmake(KF6GuiAddons)" "cmake(KF6WindowSystem)" "cmake(KF6I18n)" "cmake(KDecoration2)" "cmake(KF6CoreAddons)" "cmake(KF6ConfigWidgets)"
 ```
 
 - Alpine Linux
 ``` shell
-sudo apk add extra-cmake-modules qt5-qtbase-dev kdecoration-dev kcoreaddons-dev kguiaddons-dev kconfigwidgets-dev kwindowsystem-dev ki18n-dev kiconthemes-dev
+sudo apk add extra-cmake-modules qt6-qtbase-dev kdecoration-dev kcoreaddons-dev kguiaddons-dev kconfigwidgets-dev kwindowsystem-dev ki18n-dev kiconthemes-dev
 ```
 
 #### Step 2: Then compile and install
