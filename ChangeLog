@@ -1,3 +1,15 @@
+V2.0.1
+--------
+
+* Update README and ChangeLog
+* Fixed CMakeLists Version
+
+
+V2.0.0
+--------
+
+* Ported to Plasma 6 (big thanks to @chiyuki0325 and @A1ca7raz)
+
 V1.3.3
 ---------
 
