@@ -84,7 +84,7 @@ sudo dnf install "cmake(Qt6Core)" "cmake(Qt6Gui)" "cmake(Qt6DBus)" "cmake(KF6Gui
 
 - Alpine Linux
 ``` shell
-sudo apk add extra-cmake-modules qt6-qtbase-dev kdecoration-dev kcoreaddons-dev kguiaddons-dev kconfigwidgets-dev kwindowsystem-dev ki18n-dev kiconthemes-dev
+sudo apk add extra-cmake-modules qt6-qtbase-dev qt6-qt5compat-dev kcmutils-dev kdecoration-dev kcoreaddons-dev kguiaddons-dev kconfigwidgets-dev kwindowsystem-dev ki18n-dev kiconthemes-dev
 ```
 
 #### Step 2: Then compile and install
