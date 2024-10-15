@@ -80,6 +80,7 @@ sudo pacman -S cmake extra-cmake-modules                    # Installation
 ``` shell
 sudo dnf install cmake extra-cmake-modules kf6-kiconthemes-devel
 sudo dnf install "cmake(Qt6Core)" "cmake(Qt6Gui)" "cmake(Qt6DBus)" "cmake(KF6GuiAddons)" "cmake(KF6WindowSystem)" "cmake(KF6I18n)" "cmake(KDecoration2)" "cmake(KF6CoreAddons)" "cmake(KF6ConfigWidgets)"
+sudo dnf install qt6-qt5compat-devel kf6-kcmutils-devel qt6-qtbase-private-devel
 ```
 
 - Alpine Linux
