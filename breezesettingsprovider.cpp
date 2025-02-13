@@ -74,7 +74,7 @@ namespace Breeze
         QString windowClass;
 
         // get the client
-        const auto client = decoration->client();
+        const auto client = decoration->window();
 
         foreach( auto internalSettings, m_exceptions )
         {

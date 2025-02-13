@@ -30,7 +30,7 @@ include(GenerateExportHeader)
 include(KDEClangFormat)
 # include(GtkUpdateIconCache)
 
-find_package(KDecoration2 REQUIRED)
+find_package(KDecoration3 REQUIRED)
 
 if(NOT WIN32 AND NOT APPLE)
   find_package(KF6KCMUtils ${KF6_MIN_VERSION})
@@ -111,7 +111,7 @@ target_link_libraries(
   sierrabreezeenhanced
   PUBLIC Qt6::Core Qt6::Gui Qt6::DBus Qt6::Core5Compat
   PRIVATE sierrabreezeenhancedcommon6
-          KDecoration2::KDecoration
+          KDecoration3::KDecoration
           KF6::IconThemes
           KF6::ConfigCore
           KF6::CoreAddons

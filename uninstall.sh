@@ -26,7 +26,7 @@ install_and_uninstall() {
     uninstall
     echo It is possible that some files left over at the following locations
     echo Please remove any files containing sierrabreezeenhanced in their name
-    echo - /usr/lib/qt/plugins/org.kde.kdecoration2/
+    echo - /usr/lib/qt/plugins/org.kde.kdecoration3/
     echo - /usr/share/kservices5/
     echo - /usr/lib/
 }
