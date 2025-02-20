@@ -59,10 +59,10 @@ namespace Breeze
         connect( m_ui.drawTitleBarSeparator, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
         connect( m_ui.drawBackgroundGradient, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
         m_ui.gradientOverrideLabelSpinBox->setSpecialValueText(tr("None"));
-        connect( m_ui.gradientOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
+        connect( m_ui.gradientOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [this](int /*i*/){updateChanged();} );
         connect( m_ui.opaqueTitleBar, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
         m_ui.opacityOverrideLabelSpinBox->setSpecialValueText(tr("None"));
-        connect( m_ui.opacityOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
+        connect( m_ui.opacityOverrideLabelSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [this](int /*i*/){updateChanged();} );
         connect( m_ui.isDialog, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged );
     }
 

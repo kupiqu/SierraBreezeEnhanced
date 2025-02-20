@@ -99,31 +99,31 @@ namespace Breeze
         #if BREEZE_HAVE_X11
 
         if( !QX11Info::isPlatformX11() ) return;
-        auto c = m_decoration.data()->window();
+        // auto c = m_decoration.data()->window();
 
-        xcb_window_t windowId = QX11Info::appRootWindow(); //FIXME: looking for client but don't know how
-        if( windowId )
-        {
+        // xcb_window_t windowId = QX11Info::appRootWindow(); //FIXME: looking for client but don't know how
+        // if( windowId )
+        // {
 
-            /*
-            find client's parent
-            we want the size grip to be at the same level as the client in the stack
-            */
-            xcb_window_t current = windowId;
-            auto connection = QX11Info::connection();
-            xcb_query_tree_cookie_t cookie = xcb_query_tree_unchecked( connection, current );
-            ScopedPointer<xcb_query_tree_reply_t> tree(xcb_query_tree_reply( connection, cookie, nullptr ) );
-            if( !tree.isNull() && tree->parent ) current = tree->parent;
+        //     /*
+        //     find client's parent
+        //     we want the size grip to be at the same level as the client in the stack
+        //     */
+        //     xcb_window_t current = windowId;
+        //     auto connection = QX11Info::connection();
+        //     xcb_query_tree_cookie_t cookie = xcb_query_tree_unchecked( connection, current );
+        //     ScopedPointer<xcb_query_tree_reply_t> tree(xcb_query_tree_reply( connection, cookie, nullptr ) );
+        //     if( !tree.isNull() && tree->parent ) current = tree->parent;
 
-            // reparent
-            xcb_reparent_window( connection, winId(), current, 0, 0 );
-            setWindowTitle( "Breeze::SizeGrip" );
+        //     // reparent
+        //     xcb_reparent_window( connection, winId(), current, 0, 0 );
+        //     setWindowTitle( "Breeze::SizeGrip" );
 
-        } else {
+        // } else {
 
-            hide();
+        //     hide();
 
-        }
+        // }
 
         #endif
     }
@@ -193,8 +193,8 @@ namespace Breeze
 
         auto c = m_decoration.data()->window();
         QPoint position(
-            c->width() - GripSize - Offset,
-            c->height() - GripSize - Offset );
+            c->width() - static_cast<double>(GripSize) - static_cast<double>(Offset),
+            c->height() - static_cast<double>(GripSize) - static_cast<double>(Offset) );
 
         quint32 values[2] = { quint32(position.x()), quint32(position.y()) };
         xcb_configure_window( QX11Info::connection(), winId(), XCB_CONFIG_WINDOW_X | XCB_CONFIG_WINDOW_Y, values );
@@ -213,7 +213,7 @@ namespace Breeze
         auto connection( QX11Info::connection() );
 
         // client
-        auto c = m_decoration.data()->window();
+        // auto c = m_decoration.data()->window(); // FIXME: need to find a way to get windowId
 
         /*
         get root position matching position

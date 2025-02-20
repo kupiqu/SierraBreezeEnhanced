@@ -1,12 +1,9 @@
 /*
- * Copyright (C) 2018 Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+ * SPDX-FileCopyrightText: 2018 Vlad Zahorodnii <vlad.zahorodnii@kde.org>
  *
  * The box blur implementation is based on AlphaBoxBlur from Firefox.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * SPDX-License-Identifier: GPL-2.0-or-later
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -27,7 +24,6 @@
 
 namespace Breeze
 {
-
 static inline int calculateBlurRadius(qreal stdDev)
 {
     // See https://www.w3.org/TR/SVG11/filters.html#feGaussianBlurElement
@@ -47,9 +43,8 @@ static inline QSize calculateBlurExtent(int radius)
     return QSize(blurRadius, blurRadius);
 }
 
-struct BoxLobes
-{
-    int left;  ///< how many pixels sample to the left
+struct BoxLobes {
+    int left; ///< how many pixels sample to the left
     int right; ///< how many pixels sample to the right
 };
 
@@ -93,11 +88,7 @@ static QVector<BoxLobes> computeLobes(int radius)
 
     Q_ASSERT(major + minor + final == blurRadius);
 
-    return {
-        {major, minor},
-        {minor, major},
-        {final, final}
-    };
+    return {{major, minor}, {minor, major}, {final, final}};
 }
 
 /**
@@ -113,8 +104,13 @@ static QVector<BoxLobes> computeLobes(int radius)
  * @param transposeInput Whether the input is transposed.
  * @param transposeOutput Whether the output should be transposed.
  **/
-static inline void boxBlurRowAlpha(const uint8_t *src, uint8_t *dst, int width, int horizontalStride,
-                                   int verticalStride, const BoxLobes &lobes, bool transposeInput,
+static inline void boxBlurRowAlpha(const uint8_t *src,
+                                   uint8_t *dst,
+                                   int width,
+                                   int horizontalStride,
+                                   int verticalStride,
+                                   const BoxLobes &lobes,
+                                   bool transposeInput,
                                    bool transposeOutput)
 {
     const int inputStep = transposeInput ? verticalStride : horizontalStride;
@@ -191,7 +187,7 @@ static inline void boxBlurAlpha(QImage &image, int radius, const QRect &rect = {
     const int pixelStride = image.depth() >> 3;
 
     const int bufferStride = qMax(width, height) * pixelStride;
-    QScopedPointer<uint8_t, QScopedPointerArrayDeleter<uint8_t> > buf(new uint8_t[2 * bufferStride]);
+    QScopedPointer<uint8_t, QScopedPointerArrayDeleter<uint8_t>> buf(new uint8_t[2 * bufferStride]);
     uint8_t *buf1 = buf.data();
     uint8_t *buf2 = buf1 + bufferStride;
 
@@ -242,19 +238,19 @@ static inline void mirrorTopLeftQuadrant(QImage &image)
     }
 }
 
-static void renderShadow(QPainter *painter, const QRect &rect, qreal borderRadius, const QPoint &offset, int radius, const QColor &color)
+static void renderShadow(QPainter *painter, const QRectF &rect, qreal borderRadius, const QPointF &offset, double radius, const QColor &color)
 {
-    const QSize inflation = calculateBlurExtent(radius);
-    const QSize size = rect.size() + 2 * inflation;
-
     const qreal dpr = painter->device()->devicePixelRatioF();
+    const QSize inflation = calculateBlurExtent(radius);
+    const QSize pixelSize = ((rect.size() + 2 * inflation) * dpr).toSize();
+    const QSizeF size = QSizeF(pixelSize) / dpr;
 
-    QImage shadow(size * dpr, QImage::Format_ARGB32_Premultiplied);
+    QImage shadow(pixelSize, QImage::Format_ARGB32_Premultiplied);
     shadow.setDevicePixelRatio(dpr);
     shadow.fill(Qt::transparent);
 
-    QRect boxRect(QPoint(0, 0), rect.size());
-    boxRect.moveCenter(QRect(QPoint(0, 0), size).center());
+    QRectF boxRect(QPoint(0, 0), rect.size());
+    boxRect.moveCenter(QRectF(QPoint(0, 0), size).center());
 
     const qreal xRadius = 2.0 * borderRadius / boxRect.width();
     const qreal yRadius = 2.0 * borderRadius / boxRect.height();
@@ -269,8 +265,8 @@ static void renderShadow(QPainter *painter, const QRect &rect, qreal borderRadiu
 
     // Because the shadow texture is symmetrical, that's enough to blur
     // only the top-left quadrant and then mirror it.
-    const QRect blurRect(0, 0, qCeil(shadow.width() * 0.5), qCeil(shadow.height() * 0.5));
-    const int scaledRadius = qRound(radius * dpr);
+    const QRect blurRect(0, 0, std::ceil(shadow.width() * 0.5), std::ceil(shadow.height() * 0.5));
+    const int scaledRadius = std::round(radius * dpr);
     boxBlurAlpha(shadow, scaledRadius, blurRect);
     mirrorTopLeftQuadrant(shadow);
 
@@ -281,13 +277,13 @@ static void renderShadow(QPainter *painter, const QRect &rect, qreal borderRadiu
     shadowPainter.end();
 
     // Actually, present the shadow.
-    QRect shadowRect = shadow.rect();
+    QRectF shadowRect = shadow.rect();
     shadowRect.setSize(shadowRect.size() / dpr);
     shadowRect.moveCenter(rect.center() + offset);
     painter->drawImage(shadowRect, shadow);
 }
 
-void BoxShadowRenderer::setBoxSize(const QSize &size)
+void BoxShadowRenderer::setBoxSize(const QSizeF &size)
 {
     m_boxSize = size;
 }
@@ -297,12 +293,7 @@ void BoxShadowRenderer::setBorderRadius(qreal radius)
     m_borderRadius = radius;
 }
 
-void BoxShadowRenderer::setDevicePixelRatio(qreal dpr)
-{
-    m_dpr = dpr;
-}
-
-void BoxShadowRenderer::addShadow(const QPoint &offset, int radius, const QColor &color)
+void BoxShadowRenderer::addShadow(const QPointF &offset, double radius, const QColor &color)
 {
     Shadow shadow = {};
     shadow.offset = offset;
@@ -317,21 +308,19 @@ QImage BoxShadowRenderer::render() const
         return {};
     }
 
-    QSize canvasSize;
-    for (const Shadow &shadow : qAsConst(m_shadows)) {
-        canvasSize = canvasSize.expandedTo(
-            calculateMinimumShadowTextureSize(m_boxSize, shadow.radius, shadow.offset));
+    QSizeF canvasSize;
+    for (const Shadow &shadow : std::as_const(m_shadows)) {
+        canvasSize = canvasSize.expandedTo(calculateMinimumShadowTextureSize(m_boxSize, shadow.radius, shadow.offset));
     }
 
-    QImage canvas(canvasSize * m_dpr, QImage::Format_ARGB32_Premultiplied);
-    canvas.setDevicePixelRatio(m_dpr);
+    QImage canvas(canvasSize.toSize(), QImage::Format_ARGB32_Premultiplied);
     canvas.fill(Qt::transparent);
 
-    QRect boxRect(QPoint(0, 0), m_boxSize);
-    boxRect.moveCenter(QRect(QPoint(0, 0), canvasSize).center());
+    QRectF boxRect(QPoint(0, 0), m_boxSize);
+    boxRect.moveCenter(QRect(QPoint(0, 0), canvas.size()).center());
 
     QPainter painter(&canvas);
-    for (const Shadow &shadow : qAsConst(m_shadows)) {
+    for (const Shadow &shadow : std::as_const(m_shadows)) {
         renderShadow(&painter, boxRect, m_borderRadius, shadow.offset, shadow.radius, shadow.color);
     }
     painter.end();
@@ -345,9 +334,9 @@ QSize BoxShadowRenderer::calculateMinimumBoxSize(int radius)
     return 2 * blurExtent + QSize(1, 1);
 }
 
-QSize BoxShadowRenderer::calculateMinimumShadowTextureSize(const QSize &boxSize, int radius, const QPoint &offset)
+QSizeF BoxShadowRenderer::calculateMinimumShadowTextureSize(const QSizeF &boxSize, double radius, const QPointF &offset)
 {
-    return boxSize + 2 * calculateBlurExtent(radius) + QSize(qAbs(offset.x()), qAbs(offset.y()));
+    return boxSize + 2 * calculateBlurExtent(radius) + QSizeF(std::abs(offset.x()), std::abs(offset.y()));
 }
 
 } // namespace Breeze

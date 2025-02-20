@@ -48,18 +48,18 @@ namespace Breeze
         // track ui changes
         connect( m_ui.titleAlignment, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.buttonSize, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
-        connect( m_ui.buttonSpacing, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
+        connect( m_ui.buttonSpacing, QOverload<int>::of(&QSpinBox::valueChanged), [this](int /*i*/){updateChanged();} );
         connect( m_ui.buttonPadding, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.hOffset, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.unisonHovering, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
-        connect( m_ui.cornerRadiusSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
+        connect( m_ui.cornerRadiusSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [this](int /*i*/){updateChanged();} );
         connect( m_ui.drawBorderOnMaximizedWindows, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
         connect( m_ui.drawSizeGrip, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
         connect( m_ui.opaqueTitleBar, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
         connect( m_ui.drawBackgroundGradient, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
         connect( m_ui.buttonStyle, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
-        connect( m_ui.opacitySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
-        connect( m_ui.gradientSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [=](int /*i*/){updateChanged();} );
+        connect( m_ui.opacitySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [this](int /*i*/){updateChanged();} );
+        connect( m_ui.gradientSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [this](int /*i*/){updateChanged();} );
         connect( m_ui.drawTitleBarSeparator, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
         connect( m_ui.hideTitleBar, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.matchColorForTitleBar, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );

@@ -512,7 +512,7 @@ namespace Breeze
         BoxShadowRenderer shadowRenderer;
         shadowRenderer.setBorderRadius(0.5 * s->smallSpacing() * (m_internalSettings->cornerRadius() + 0.5));
         shadowRenderer.setBoxSize(boxSize);
-        shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
+        
 
         const qreal strength = static_cast<qreal>(g_shadowStrength) / 255.0;
         shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,
@@ -594,7 +594,7 @@ namespace Breeze
         BoxShadowRenderer shadowRenderer;
         shadowRenderer.setBorderRadius(0.5 * s->smallSpacing() * (m_internalSettings->cornerRadius() + 0.5));
         shadowRenderer.setBoxSize(boxSize);
-        shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
+        
 
         const qreal strength = static_cast<qreal>(g_shadowStrengthInactiveWindows) / 255.0;
         shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,
@@ -883,9 +883,9 @@ namespace Breeze
         }
 
         // padding
-        const int vPadding = isTopEdge() ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
-        const int hPadding = s->smallSpacing() * Metrics::TitleBar_SideMargin;
-        const int hMargin = 0.5 * s->smallSpacing() * m_internalSettings->buttonPadding() + 0.5 * s->smallSpacing() * m_internalSettings->hOffset();
+        const double vPadding = isTopEdge() ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
+        const double hPadding = s->smallSpacing() * Metrics::TitleBar_SideMargin;
+        const double hMargin = 0.5 * s->smallSpacing() * m_internalSettings->buttonPadding() + 0.5 * s->smallSpacing() * m_internalSettings->hOffset();
 
         // left buttons
         if (!m_leftButtons->buttons().isEmpty())
@@ -1072,7 +1072,7 @@ namespace Breeze
     //________________________________________________________________
     int Decoration::buttonHeight() const
     {
-        const int baseSize = settings()->gridUnit();
+        const double baseSize = settings()->gridUnit();
         switch (m_internalSettings->buttonSize())
         {
         case InternalSettings::ButtonTiny:

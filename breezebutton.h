@@ -151,7 +151,7 @@ namespace Breeze
         QPointF m_offset;
 
         //* icon size
-        QSize m_iconSize;
+        QSizeF m_iconSize;
 
         //* active state change opacity
         qreal m_opacity = 0;
