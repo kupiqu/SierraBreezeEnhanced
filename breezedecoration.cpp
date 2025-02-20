@@ -512,7 +512,6 @@ namespace Breeze
         BoxShadowRenderer shadowRenderer;
         shadowRenderer.setBorderRadius(0.5 * s->smallSpacing() * (m_internalSettings->cornerRadius() + 0.5));
         shadowRenderer.setBoxSize(boxSize);
-        
 
         const qreal strength = static_cast<qreal>(g_shadowStrength) / 255.0;
         shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,
@@ -594,7 +593,6 @@ namespace Breeze
         BoxShadowRenderer shadowRenderer;
         shadowRenderer.setBorderRadius(0.5 * s->smallSpacing() * (m_internalSettings->cornerRadius() + 0.5));
         shadowRenderer.setBoxSize(boxSize);
-        
 
         const qreal strength = static_cast<qreal>(g_shadowStrengthInactiveWindows) / 255.0;
         shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,
@@ -789,7 +787,7 @@ namespace Breeze
     {
         m_leftButtons = new KDecoration3::DecorationButtonGroup(KDecoration3::DecorationButtonGroup::Position::Left, this, &Button::create);
         m_rightButtons = new KDecoration3::DecorationButtonGroup(KDecoration3::DecorationButtonGroup::Position::Right, this, &Button::create);
-        updateButtonsGeometry();
+        updateButtonsGeometryDelayed(); // Calling delayed function because borderTop() is signaling 0 initially.
     }
 
     void Decoration::updateBlur()
@@ -1092,7 +1090,14 @@ namespace Breeze
     //________________________________________________________________
     int Decoration::captionHeight() const
     {
-        return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing() * (Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin);
+        int border = borderTop();
+        // set border a minimum value if it is 0,
+        // to avoid buttons being overflowed 
+        if (border < settings()->smallSpacing() * (Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin))
+        {
+            border = settings()->smallSpacing() * (Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin);
+        }
+        return hideTitleBar() ? border : border - settings()->smallSpacing() * (Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin);
     }
 
     //________________________________________________________________
@@ -1202,10 +1207,10 @@ namespace Breeze
         //  Commenting out this condition as this property has been dropped since plasma 6.3.
         // if (c->windowId() != 0)
         // {
-            m_sizeGrip = new SizeGrip(this);
-            connect(c, &KDecoration3::DecoratedWindow::maximizedChanged, this, &Decoration::updateSizeGripVisibility);
-            connect(c, &KDecoration3::DecoratedWindow::shadedChanged, this, &Decoration::updateSizeGripVisibility);
-            connect(c, &KDecoration3::DecoratedWindow::resizeableChanged, this, &Decoration::updateSizeGripVisibility);
+        m_sizeGrip = new SizeGrip(this);
+        connect(c, &KDecoration3::DecoratedWindow::maximizedChanged, this, &Decoration::updateSizeGripVisibility);
+        connect(c, &KDecoration3::DecoratedWindow::shadedChanged, this, &Decoration::updateSizeGripVisibility);
+        connect(c, &KDecoration3::DecoratedWindow::resizeableChanged, this, &Decoration::updateSizeGripVisibility);
         // }
 #endif
     }
