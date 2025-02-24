@@ -62,7 +62,7 @@ sudo apk add sierrabreezeenhanced
 ```
 
 ### Method 2: Compile from source code
-*Compilation should not be done against versions of KWin < 6.\*
+*Compilation should NOT be done against versions of Plasma < 6.3\*
 
 #### Step 1: Build dependencies
 
