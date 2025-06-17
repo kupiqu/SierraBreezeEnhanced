@@ -1,8 +1,8 @@
 project(sierrabreezeenhanced)
-set(PROJECT_VERSION "3.5.0")
+set(PROJECT_VERSION "2.1.1")
 set(PROJECT_VERSION_MAJOR 0)
 
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5.0 FATAL_ERROR)
 
 include(WriteBasicConfigVersionFile)
 include(FeatureSummary)
