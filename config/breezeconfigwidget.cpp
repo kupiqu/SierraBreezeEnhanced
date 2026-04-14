@@ -52,6 +52,7 @@ namespace Breeze
         connect( m_ui.buttonPadding, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.hOffset, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.unisonHovering, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
+        connect( m_ui.roundedBottomCorners, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged);
         connect( m_ui.cornerRadiusSpinBox, QOverload<int>::of(&QSpinBox::valueChanged), [this](int /*i*/){updateChanged();} );
         connect( m_ui.drawBorderOnMaximizedWindows, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
         connect( m_ui.drawSizeGrip, &QAbstractButton::clicked, this, &ConfigWidget::updateChanged );
@@ -96,6 +97,7 @@ namespace Breeze
         m_ui.buttonSize->setCurrentIndex( m_internalSettings->buttonSize() );
         m_ui.buttonSpacing->setValue( m_internalSettings->buttonSpacing() );
         m_ui.buttonPadding->setValue( m_internalSettings->buttonPadding() );
+        m_ui.roundedBottomCorners->setChecked(m_internalSettings->roundedBottomCorners());
         m_ui.hOffset->setValue( m_internalSettings->hOffset() );
         m_ui.unisonHovering->setChecked( m_internalSettings->unisonHovering() );
         m_ui.cornerRadiusSpinBox->setValue( m_internalSettings->cornerRadius() );
@@ -147,6 +149,7 @@ namespace Breeze
         m_internalSettings->setButtonSize( m_ui.buttonSize->currentIndex() );
         m_internalSettings->setButtonSpacing( m_ui.buttonSpacing->value() );
         m_internalSettings->setButtonPadding( m_ui.buttonPadding->value() );
+        m_internalSettings->setRoundedBottomCorners(m_ui.roundedBottomCorners->isChecked());
         m_internalSettings->setHOffset( m_ui.hOffset->value() );
         m_internalSettings->setUnisonHovering( m_ui.unisonHovering->isChecked() );
         m_internalSettings->setCornerRadius( m_ui.cornerRadiusSpinBox->value() );
@@ -212,6 +215,7 @@ namespace Breeze
         m_ui.buttonSize->setCurrentIndex( m_internalSettings->buttonSize() );
         m_ui.buttonSpacing->setValue( m_internalSettings->buttonSpacing() );
         m_ui.buttonPadding->setValue( m_internalSettings->buttonPadding() );
+        m_ui.roundedBottomCorners->setChecked(m_internalSettings->roundedBottomCorners());
         m_ui.hOffset->setValue( m_internalSettings->hOffset() );
         m_ui.unisonHovering->setChecked( m_internalSettings->unisonHovering() );
         m_ui.cornerRadiusSpinBox->setValue( m_internalSettings->cornerRadius() );
@@ -256,6 +260,7 @@ namespace Breeze
         else if( m_ui.buttonSize->currentIndex() != m_internalSettings->buttonSize() ) modified = true;
         else if( m_ui.buttonSpacing->value() != m_internalSettings->buttonSpacing() ) modified = true;
         else if ( m_ui.buttonPadding->value() != m_internalSettings->buttonPadding() ) modified = true;
+        else if ( m_ui.roundedBottomCorners->isChecked() != m_internalSettings->roundedBottomCorners()) modified = true;
         else if ( m_ui.hOffset->value() != m_internalSettings->hOffset() ) modified = true;
         else if( m_ui.unisonHovering->isChecked() != m_internalSettings->unisonHovering() ) modified = true;
         else if( m_ui.cornerRadiusSpinBox->value() != m_internalSettings->cornerRadius() ) modified = true;
