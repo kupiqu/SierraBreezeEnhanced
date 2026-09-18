@@ -85,7 +85,7 @@ namespace Breeze
     //__________________________________________________________________
     Button *Button::create(DecorationButtonType type, KDecoration3::Decoration *decoration, QObject *parent)
     {
-        if (auto d = qobject_cast<Decoration*>(decoration))
+        if (auto d = qobject_cast<Decoration*>(decoration); d)
         {
             Button *b = new Button(type, d, parent);
             switch( type )
@@ -152,7 +152,7 @@ namespace Breeze
             const QRectF iconRect( geometry().topLeft(), 0.8*m_iconSize );
             const qreal width( m_iconSize.width() );
             painter->translate( 0.1*width, 0.1*width );
-            if (auto deco =  qobject_cast<Decoration*>(decoration())) {
+            if (auto deco =  qobject_cast<Decoration*>(decoration()); deco) {
               const QPalette activePalette = KIconLoader::global()->customPalette();
               QPalette palette = decoration()->window()->palette();
               palette.setColor(QPalette::WindowText, deco->fontColor());
@@ -421,7 +421,7 @@ namespace Breeze
 
         // render background
         QColor backgroundColor;
-        if ( isChecked() || this->hovered() || isHovered() )
+        if ( d && (isChecked() || this->hovered() || isHovered()) )
             backgroundColor = d->titleBarColor();
         else
             backgroundColor = QColor();
@@ -647,6 +647,8 @@ namespace Breeze
 
         const qreal width( m_iconSize.width() );
         auto d = qobject_cast<Decoration*>( decoration() );
+        if(!d) {return;}
+
         if ( d->internalSettings()->animationsEnabled() ) {
           painter->scale( width/20, width/20 );
           painter->translate( 1, 1 );
@@ -1056,6 +1058,8 @@ namespace Breeze
 
         const qreal width( m_iconSize.width() );
         auto d = qobject_cast<Decoration*>( decoration() );
+        if(!d) {return;}
+
         if ( d->internalSettings()->animationsEnabled() ) {
           painter->scale( width/20, width/20 );
           painter->translate( 1, 1 );
@@ -3884,17 +3888,10 @@ namespace Breeze
     //__________________________________________________________________
     QColor Button::fontColor() const
     {
-        auto d = qobject_cast<Decoration*>( decoration() );
-        QColor titleBarColor ( d->titleBarColor() );
-
-        if( !d ) {
-
-            return QColor();
-
+        if(auto d = qobject_cast<Decoration*>( decoration() ); !d){
+            return QColor{};
         } else {
-
             return d->fontColor();
-
         }
 
     }
@@ -3902,28 +3899,23 @@ namespace Breeze
     //__________________________________________________________________
     QColor Button::foregroundColor() const
     {
-        auto d = qobject_cast<Decoration*>( decoration() );
-        QColor titleBarColor ( d->titleBarColor() );
-
-        if( !d ) {
-
+        if(auto d = qobject_cast<Decoration*>( decoration() ); !d){
             return QColor();
-
         } else if( isPressed() ) {
 
-            return titleBarColor;
+            return d->titleBarColor();
 
         } else if( ( type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove || type() == DecorationButtonType::Shade ) && isChecked() ) {
 
-            return titleBarColor;
+            return d->titleBarColor();
 
         } else if( m_animation->state() == QAbstractAnimation::Running ) {
 
-            return KColorUtils::mix( d->fontColor(), titleBarColor, m_opacity );
+            return KColorUtils::mix( d->fontColor(), d->titleBarColor(), m_opacity );
 
         } else if( this->hovered() ) {
 
-            return titleBarColor;
+            return d->titleBarColor();
 
         } else {
 
@@ -3985,15 +3977,16 @@ namespace Breeze
     //__________________________________________________________________
     qreal Button::buttonRadius() const
     {
-        auto d = qobject_cast<Decoration*>( decoration() );
-
-        if ( d->internalSettings()->animationsEnabled() && ( !isChecked() || ( isChecked() && type() == DecorationButtonType::Maximize ) ) ) {
-          return static_cast<qreal>(7) + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+        if(auto d = qobject_cast<Decoration*>( decoration() ); d){
+            if ( d->internalSettings()->animationsEnabled() && ( !isChecked() || ( isChecked() && type() == DecorationButtonType::Maximize ) ) ) {
+              return static_cast<qreal>(7) + static_cast<qreal>(2) * m_animation->currentValue().toReal();
+            } else {
+            return static_cast<qreal>(9);
+            }
+        }else {
+          return qreal{};
         }
-        else
-          return static_cast<qreal>(9);
     }
-
 
     //__________________________________________________________________
     QColor Button::autoColor( const bool inactiveWindow, const bool useActiveButtonStyle, const bool useInactiveButtonStyle, const QColor darkSymbolColor, const QColor lightSymbolColor ) const
@@ -4005,6 +3998,7 @@ namespace Breeze
         else
         {
             auto d = qobject_cast<Decoration*>( decoration() );
+            if(!d){return QColor{};}
             QColor titleBarColor ( d->titleBarColor() );
 
             uint r = qRed(titleBarColor.rgb());
@@ -4027,6 +4021,8 @@ namespace Breeze
     bool Button::hovered() const
     {
       auto d = qobject_cast<Decoration*>( decoration() );
+      if(!d){return false;}
+
       return isHovered() || ( d->buttonHovered() && d->internalSettings()->unisonHovering() );
     }
 
